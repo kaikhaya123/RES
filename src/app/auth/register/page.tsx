@@ -370,7 +370,7 @@ export default function RegisterPage() {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={isLoading || (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && !captchaToken)}
+                disabled={isLoading || (!!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && !captchaToken)}
                 className="w-full py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-900 hover:shadow-lg transition transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none border border-white/20"
               >
                 {isLoading ? (
