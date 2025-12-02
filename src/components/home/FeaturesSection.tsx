@@ -52,7 +52,7 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gray-50 font-futura">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
@@ -70,59 +70,54 @@ export default function FeaturesSection() {
           </p>
         </motion.div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group"
-            >
-              <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full border border-gray-100">
-                {/* Icon */}
-                <div className={`w-28 h-28 bg-white rounded-xl flex items-center justify-center mb-6 transition-transform mx-auto`}>
-                  {feature.useAnimation ? (
-                    <div className="flex items-center justify-center w-full h-full">
-                      <DotLottieReact
-                        src={`/lottie files/${
-                          feature.animationType === 'brain' ? 'Funny brain.lottie' :
-                          feature.animationType === 'referral' ? 'referral.lottie' :
-                          feature.animationType === 'streaming' ? 'Live Streaming.lottie' :
-                          feature.animationType === 'champion' ? 'Champion.lottie' :
-                          feature.animationType === 'winner' ? 'Winner.lottie' :
-                          'Election concept Lottie JSON animation.lottie'
-                        }`}
-                        loop
-                        autoplay
-                        style={{ 
-                          width: '96px', 
-                          height: '96px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                        }}
-                      />
+        {/* Features List - horizontal layout inspired by design */}
+        <div className="max-w-6xl mx-auto space-y-12">
+          {features.map((feature, index) => {
+            const isEven = index % 2 === 0;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="w-full"
+              >
+                <div className={`flex flex-col md:flex-row items-center gap-6 md:gap-10 ${isEven ? '' : 'md:flex-row-reverse'}`}>
+                  {/* Lottie / Image box */}
+                  <div className="flex-shrink-0 w-full md:w-1/2">
+                    <div className="w-full h-44 md:h-40 bg-gray-200 rounded-lg flex items-center justify-center">
+                      <div className="w-48 h-28 md:w-64 md:h-36">
+                        <DotLottieReact
+                          src={`/lottie files/${
+                            feature.animationType === 'brain' ? 'Funny brain.lottie' :
+                            feature.animationType === 'referral' ? 'referral.lottie' :
+                            feature.animationType === 'streaming' ? 'Live Streaming.lottie' :
+                            feature.animationType === 'champion' ? 'Champion.lottie' :
+                            feature.animationType === 'winner' ? 'Winner.lottie' :
+                            'Election concept Lottie JSON animation.lottie'
+                          }`}
+                          loop
+                          autoplay
+                          style={{ width: '100%', height: '100%' }}
+                        />
+                      </div>
                     </div>
-                  ) : (
-                    feature.icon ? React.createElement(feature.icon, { className: "text-white", size: 48 }) : null
-                  )}
+                  </div>
+
+                  {/* Text content */}
+                  <div className="flex-1 text-center md:text-left md:w-1/2">
+                    <h3 className="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-3">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
                 </div>
-
-                {/* Title */}
-                <h3 className="text-2xl font-display font-bold text-gray-900 mb-3">
-                  {feature.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-gray-600 leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

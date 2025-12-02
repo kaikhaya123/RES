@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Fallback Futura font for sections that request it */
+.font-futura {
+	font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
+}
