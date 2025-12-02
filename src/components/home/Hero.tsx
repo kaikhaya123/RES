@@ -1,78 +1,60 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import RippleEffect from '@/components/ui/RippleEffect';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-white">
-      <div className="container mx-auto px-6 lg:px-12 py-20 relative z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          
-          {/* Left Column - First Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="relative w-full h-[400px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl"
-          >
-            <Image
-              src="/Images/college-students-different-ethnicities-cramming-min.jpg"
-              alt="Students collaborating"
-              fill
-              className="object-cover"
-              priority
-            />
-          </motion.div>
+    <section 
+      className="relative min-h-screen flex items-center overflow-hidden"
+      style={{
+        backgroundImage: "url('/Images/college-students-different-ethnicities-cramming-min.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* Background Image with subtle Ripple Effect (kept subtle to avoid distraction) */}
+      <RippleEffect
+        imageUrl="/Images/college-students-different-ethnicities-cramming-min.jpg"
+        intensity={0.18}
+        rippleCount={1}
+        rippleSize={90}
+        rippleInterval={4000}
+        interactive={false}
+        className="absolute inset-0 z-0"
+      />
+      
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/30 z-10"></div>
 
-          {/* Right Column - Second Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative w-full h-[400px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl"
-          >
-            <Image
-              src="/Images/college-students-different-ethnicities-cramming.jpg"
-              alt="Student competition"
-              fill
-              className="object-cover"
-              priority
-            />
-          </motion.div>
-
-        </div>
-
-        {/* Centered Content Below Images */}
-        <div className="mt-12 text-center max-w-4xl mx-auto">
+      <div className="container mx-auto px-6 lg:px-12 py-32 relative z-20">
+        <div className="max-w-4xl">
+          {/* Main Heading (short and powerful) */}
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-black mb-4 leading-tight tracking-tight"
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight tracking-tight drop-shadow-lg"
           >
             Roomza's Educated Secret
           </motion.h1>
 
+          {/* Short punchy subtitle + CTA */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-lg md:text-xl text-gray-700 font-medium max-w-xl mx-auto leading-snug mb-6"
+            transition={{ duration: 0.6, delay: 0.12 }}
+            className="text-lg md:text-xl text-white/95 font-medium max-w-xl leading-snug"
           >
             Vote. Compete. Win. Support students — real prizes, real impact.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-wrap gap-3 items-center justify-center"
-          >
-            <a href="/vote" className="inline-block bg-black hover:bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition">Vote Now</a>
-            <a href="/about" className="inline-block border-2 border-black text-black hover:bg-black hover:text-white px-5 py-3 rounded-lg transition">Learn How</a>
-            <div className="text-sm text-gray-600 ml-3">Join thousands — live shows & prizes</div>
-          </motion.div>
+          <div className="mt-6 flex flex-wrap gap-3 items-center">
+            <a href="/vote" className="inline-block bg-primary-600 hover:bg-primary-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg">Vote Now</a>
+            <a href="/about" className="inline-block border border-white/20 text-white/90 px-5 py-3 rounded-lg">Learn How</a>
+            <div className="text-sm text-white/80 ml-3">Join thousands — live shows & prizes</div>
+          </div>
         </div>
       </div>
     </section>
