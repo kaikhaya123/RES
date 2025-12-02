@@ -40,6 +40,18 @@ export default function FeaturesSection() {
   return (
     <section className="py-16 bg-white">
       <div className="max-w-6xl mx-auto px-4">
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-4">Why Join <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">R.E.S.?</span></h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">Experience the ultimate student competition platform with exciting features designed for maximum engagement and entertainment.</p>
+        </motion.div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
 
           {/* Left: stacked list */}

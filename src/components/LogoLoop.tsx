@@ -76,7 +76,8 @@ const useAnimationLoop = (
   seqHeight: number,
   isHovered: boolean,
   hoverSpeed: number | undefined,
-  isVertical: boolean
+  isVertical: boolean,
+  isMobile: boolean
 ) => {
   const rafRef = useRef<number | null>(null);
   const lastTimestampRef = useRef<number | null>(null);
@@ -86,6 +87,9 @@ const useAnimationLoop = (
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
+
+    // Apply a reduced animation intensity on mobile to save CPU and make motion subtler.
+    const mobileFactor = isMobile ? 0.45 : 1;
 
     const prefersReduced =
       typeof window !== 'undefined' &&
@@ -116,10 +120,12 @@ const useAnimationLoop = (
       const deltaTime = Math.max(0, timestamp - lastTimestampRef.current) / 1000;
       lastTimestampRef.current = timestamp;
 
+
       const target = isHovered && hoverSpeed !== undefined ? hoverSpeed : targetVelocity;
+      const effectiveTarget = target * mobileFactor;
 
       const easingFactor = 1 - Math.exp(-deltaTime / ANIMATION_CONFIG.SMOOTH_TAU);
-      velocityRef.current += (target - velocityRef.current) * easingFactor;
+      velocityRef.current += (effectiveTarget - velocityRef.current) * easingFactor;
 
       if (seqSize > 0) {
         let nextOffset = offsetRef.current + velocityRef.current * deltaTime;
@@ -203,6 +209,7 @@ export const LogoLoop = memo<LogoLoopProps>(
     const [seqHeight, setSeqHeight] = useState(0);
     const [copyCount, setCopyCount] = useState(ANIMATION_CONFIG.MIN_COPIES);
     const [isHovered, setIsHovered] = useState(false);
+    const [isMobile, setIsMobile] = useState<boolean>(false);
 
     const effectiveHoverSpeed = useMemo(() => {
       if (hoverSpeed !== undefined) return hoverSpeed;
@@ -289,7 +296,22 @@ export const LogoLoop = memo<LogoLoopProps>(
 
     useImageLoader(seqRef, updateDimensions, [logos, gap, logoHeight, isVertical]);
 
-    useAnimationLoop(trackRef, targetVelocity, seqWidth, seqHeight, isHovered, effectiveHoverSpeed, isVertical);
+    // detect mobile via matchMedia and update state
+    useEffect(() => {
+      if (typeof window === 'undefined' || !window.matchMedia) return;
+      const mq = window.matchMedia('(max-width: 767px)');
+      const handler = () => setIsMobile(mq.matches);
+      handler();
+      if (typeof mq.addEventListener === 'function') mq.addEventListener('change', handler);
+      else mq.addListener(handler as any);
+      return () => {
+        if (typeof mq.removeEventListener === 'function') mq.removeEventListener('change', handler);
+        else mq.removeListener(handler as any);
+      };
+    }, []);
+
+    // run animation loop; on mobile the hook will use a reduced speed multiplier
+    useAnimationLoop(trackRef, targetVelocity, seqWidth, seqHeight, isHovered, effectiveHoverSpeed, isVertical, isMobile);
 
     const cssVariables = useMemo(
       () => ({
