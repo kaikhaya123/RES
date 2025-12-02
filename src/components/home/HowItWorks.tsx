@@ -26,7 +26,7 @@ export default function HowItWorks() {
       title: 'Live Streaming',
       subtitle: 'REAL-TIME VIEWING',
       description: 'Live streaming across multiple social platforms allows viewers to follow contestant journeys and daily activities in real-time.',
-      image: '/Images/college-students-different-ethnicities-cramming.jpg',
+      image: '/Images/play-2935460_1280.png',
       link: '/stream',
       linkText: 'Watch live',
     },

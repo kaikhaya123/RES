@@ -430,6 +430,15 @@ export const LogoLoop = memo<LogoLoopProps>(
       [width, cssVariables, style, isVertical]
     );
 
+    // Development-only debug values for on-screen overlay
+    const debugEnabled = typeof process !== 'undefined' && process.env.NODE_ENV !== 'production' ? false : false;
+    const debugValues = {
+      seqWidth,
+      seqHeight,
+      copyCount,
+      containerWidth: containerRef.current?.clientWidth ?? 0
+    };
+
     return (
       <div
         ref={containerRef}
@@ -496,6 +505,14 @@ export const LogoLoop = memo<LogoLoopProps>(
         >
           {logoLists}
         </div>
+        {(!process || process.env.NODE_ENV !== 'production') && (
+          <div className="pointer-events-none fixed left-4 bottom-4 z-50 rounded bg-black/60 text-white text-xs font-mono p-2">
+            <div>seqWidth: {debugValues.seqWidth}</div>
+            <div>seqHeight: {debugValues.seqHeight}</div>
+            <div>copyCount: {debugValues.copyCount}</div>
+            <div>container: {debugValues.containerWidth}</div>
+          </div>
+        )}
       </div>
     );
   }
