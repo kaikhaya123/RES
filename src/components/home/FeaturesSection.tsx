@@ -48,8 +48,20 @@ export default function FeaturesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-4">Why Join <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">R.E.S.?</span></h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">Experience the ultimate student competition platform with exciting features designed for maximum engagement and entertainment.</p>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-gray-900 mb-4 leading-tight drop-shadow-lg">
+            Why Join
+            <span className="ml-3 bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">R.E.S.?</span>
+          </h2>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
+            className="mx-auto mt-2 w-32 h-1 origin-left rounded-full bg-gradient-to-r from-primary-500 to-accent-500"
+            style={{ transformOrigin: 'left center' }}
+          />
+
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mt-4">Experience the ultimate student competition platform with exciting features designed for maximum engagement and entertainment.</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
