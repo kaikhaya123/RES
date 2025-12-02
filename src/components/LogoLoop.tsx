@@ -93,7 +93,6 @@ const useAnimationLoop = (
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const seqSize = isVertical ? seqHeight : seqWidth;
-
     if (seqSize > 0) {
       offsetRef.current = ((offsetRef.current % seqSize) + seqSize) % seqSize;
       const transformValue = isVertical
@@ -323,7 +322,7 @@ export const LogoLoop = memo<LogoLoopProps>(
             height={item.height}
             alt={item.alt ?? ''}
             title={item.title}
-            loading="lazy"
+            loading={(item as any).loading ?? 'eager'}
             decoding="async"
             draggable={false}
           />
