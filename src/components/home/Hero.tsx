@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import RippleEffect from '@/components/ui/RippleEffect';
+import { HyperText } from '@/components/ui/hyper-text';
 
 export default function Hero() {
   return (
@@ -37,7 +38,13 @@ export default function Hero() {
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-lg"
           >
-            ROOMZA'S EDUCATED SECRET
+            <HyperText 
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white"
+              duration={1000}
+              animateOnLoad={true}
+            >
+              ROOMZA'S EDUCATED SECRET
+            </HyperText>
           </motion.h1>
 
           {/* Subtitle */}
