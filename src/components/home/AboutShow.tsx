@@ -173,6 +173,15 @@ export default function AboutShow() {
               >
                 {/* Placeholder for your image - replace src with actual image path */}
                 <div className="relative w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
+                  {/* Uncomment and use this when you add your image */}
+                  <Image
+                    src="/Images/download (9) (1).jpg"
+                    alt="R.E.S. Students"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                  
                   {/* Energy effect overlay */}
                   <motion.div
                     animate={{
@@ -186,26 +195,6 @@ export default function AboutShow() {
                     transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                     className="absolute inset-0 z-10"
                   />
-                  
-                  {/* Placeholder text - remove when adding actual image */}
-                  <div className="absolute inset-0 flex items-center justify-center z-20">
-                    <div className="text-center">
-                      <Users className="w-16 h-16 mx-auto mb-4 text-gray-400" />
-                      <p className="text-gray-500 font-black uppercase tracking-wider text-sm">
-                        Your Student<br />Image Here
-                      </p>
-                      <p className="text-gray-400 text-xs mt-2">2-3 students with energy</p>
-                    </div>
-                  </div>
-
-                  {/* Uncomment and use this when you add your image */}
-                  {/* <Image
-                    src="/Images/your-student-image.jpg"
-                    alt="R.E.S. Students"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  /> */}
                 </div>
 
                 {/* Motion blur effect frame */}

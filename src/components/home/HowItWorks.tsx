@@ -20,7 +20,7 @@ export default function HowItWorks() {
       title: 'Voting System',
       subtitle: 'PUBLIC ENGAGEMENT',
       description: 'Public votes for their favorite contestants up to 100 times daily. Vote counts determine weekly eliminations and final winners.',
-      image: '/Images/Men.jpg',
+      image: '/Images/download (10) (1).jpg',
       link: '/vote',
       linkText: 'VOTE NOW',
       color: 'from-zinc-900 to-stone-800'
@@ -29,7 +29,7 @@ export default function HowItWorks() {
       title: 'Live Streaming',
       subtitle: 'REAL-TIME VIEWING',
       description: 'Live streaming across multiple social platforms allows viewers to follow contestant journeys and daily activities in real-time.',
-      image: '/Images/live-stream-social.jpg',
+      image: '/Images/youtube-stream.png',
       link: '/stream',
       linkText: 'WATCH LIVE',
       color: 'from-neutral-900 to-gray-800'
