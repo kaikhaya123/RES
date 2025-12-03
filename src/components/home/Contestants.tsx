@@ -2,133 +2,193 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Heart, TrendingUp, MapPin } from 'lucide-react';
-import Image from 'next/image';
+import { Trophy, Users, ArrowRight, Calendar } from 'lucide-react';
 
 export default function Contestants() {
-  // Mock data - will be replaced with API call
-  const contestants = [
-    {
-      id: 1,
-      name: 'Thandi Mkhize',
-      institution: 'University of Pretoria',
-      province: 'Gauteng',
-      votes: 125430,
-      image: '/contestants/1.jpg',
-    },
-    {
-      id: 2,
-      name: 'Sipho Ndlovu',
-      institution: 'University of Cape Town',
-      province: 'Western Cape',
-      votes: 118750,
-      image: '/contestants/2.jpg',
-    },
-    {
-      id: 3,
-      name: 'Lerato Mokoena',
-      institution: 'University of KwaZulu-Natal',
-      province: 'KwaZulu-Natal',
-      votes: 112890,
-      image: '/contestants/3.jpg',
-    },
-    {
-      id: 4,
-      name: 'Mpho Ngwenya',
-      institution: 'Wits University',
-      province: 'Gauteng',
-      votes: 109340,
-      image: '/contestants/4.jpg',
-    },
+  const stats = [
+    { value: '0', label: 'Active Contestants', sublabel: 'Spots Opening Soon' },
+    { value: 'TBA', label: 'Competition Start', sublabel: 'Registration Coming Soon' },
+    { value: 'R50K+', label: 'Prize Pool', sublabel: 'Scholarships & Rewards' }
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
+    <section className="py-32 lg:py-40 bg-black text-white relative overflow-hidden">
+      {/* Background grid */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div className="absolute inset-0" style={{ 
+          backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
+          backgroundSize: '80px 80px'
+        }} />
+      </div>
+
+      <div className="container mx-auto px-6 lg:px-12 max-w-5xl relative">
+        {/* Header with decorative lines */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-24"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-4">
-            Meet Our <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">Top Contestants</span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Vote for your favorite students and help them win amazing prizes!
-          </p>
-          <Link
-            href="/contestants"
-            className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white font-medium rounded-lg hover:shadow-lg transition"
+          <div className="flex items-center justify-center gap-6 mb-10">
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, delay: 0.2 }}
+              className="h-[1px] w-20 lg:w-32 bg-white origin-right"
+            />
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              whileInView={{ scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4, type: "spring", stiffness: 150 }}
+              className="w-2 h-2 bg-white rotate-45"
+            />
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, delay: 0.2 }}
+              className="h-[1px] w-20 lg:w-32 bg-white origin-left"
+            />
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="inline-block px-6 py-2 border border-white/20 mb-8"
           >
-            <span>View All Contestants</span>
-            <TrendingUp size={18} />
-          </Link>
+            <span className="text-xs uppercase tracking-[0.3em] text-white/60 font-bold">Coming Soon</span>
+          </motion.div>
+
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="text-5xl lg:text-7xl font-black mb-6 tracking-tighter"
+          >
+            Meet The <span className="italic font-light">Contestants</span>
+          </motion.h2>
+          
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="text-lg text-white/70 max-w-2xl mx-auto leading-relaxed"
+          >
+            Our platform is launching soon with South Africa's brightest students competing for scholarships and recognition.
+          </motion.p>
         </motion.div>
 
-        {/* Contestants Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {contestants.map((contestant, index) => (
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+          {stats.map((stat, index) => (
             <motion.div
-              key={contestant.id}
-              initial={{ opacity: 0, y: 20 }}
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group"
+              transition={{ duration: 0.7, delay: 1.1 + index * 0.15 }}
+              className="border border-white/10 p-8 lg:p-10 text-center relative group hover:border-white/30 transition-colors duration-300"
             >
-              <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                {/* Image */}
-                <div className="relative h-64 bg-gradient-to-br from-primary-500 to-accent-500 overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center text-white text-6xl font-bold opacity-20">
-                    #{index + 1}
-                  </div>
-                  {/* Placeholder - replace with actual images */}
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition"></div>
+              {/* Corner decoration */}
+              <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/40" />
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/40" />
+              
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 1.3 + index * 0.15 }}
+              >
+                <div className="text-6xl font-black mb-3 tracking-tight">{stat.value}</div>
+                <div className="text-sm uppercase tracking-[0.2em] text-white/90 mb-2 font-bold">
+                  {stat.label}
                 </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-bold text-gray-900 mb-2">
-                    {contestant.name}
-                  </h3>
-                  
-                  <p className="text-sm text-gray-600 mb-1 font-medium">
-                    {contestant.institution}
-                  </p>
-                  
-                  <div className="flex items-center text-sm text-gray-500 mb-4">
-                    <MapPin size={14} className="mr-1" />
-                    <span>{contestant.province}</span>
-                  </div>
-
-                  {/* Votes */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <div className="text-2xl font-bold text-gray-900">
-                        {contestant.votes.toLocaleString()}
-                      </div>
-                      <div className="text-xs text-gray-500">Total Votes</div>
-                    </div>
-                    <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center group-hover:scale-110 transition">
-                      <Heart className="text-red-500" fill="currentColor" size={24} />
-                    </div>
-                  </div>
-
-                  {/* Vote Button */}
-                  <Link
-                    href={`/vote?contestant=${contestant.id}`}
-                    className="block w-full py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white font-medium rounded-lg text-center hover:shadow-lg transition"
-                  >
-                    Vote Now
-                  </Link>
-                </div>
-              </div>
+                <div className="text-xs text-white/50">{stat.sublabel}</div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
+
+        {/* Divider */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 1.8 }}
+          className="flex items-center justify-center gap-6 mb-16"
+        >
+          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="w-2 h-2 bg-white rotate-45 flex-shrink-0"
+          />
+          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        </motion.div>
+
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 2 }}
+          className="text-center"
+        >
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <Users className="w-8 h-8" strokeWidth={1.5} />
+            <Trophy className="w-8 h-8" strokeWidth={1.5} />
+            <Calendar className="w-8 h-8" strokeWidth={1.5} />
+          </div>
+
+          <h3 className="text-3xl font-black mb-4 tracking-tight">
+            Be Part of the Journey
+          </h3>
+          
+          <p className="text-white/70 mb-10 max-w-xl mx-auto">
+            Register now to be notified when contestants are announced and voting opens.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/auth/register"
+              className="group/btn relative px-8 py-4 bg-white text-black font-black text-sm uppercase tracking-[0.15em] hover:bg-white/90 transition-all duration-300 overflow-hidden"
+            >
+              <span className="relative z-10">Register Interest</span>
+              <motion.div
+                className="absolute inset-0 bg-black"
+                initial={{ x: '-100%' }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+              <span className="relative z-10 opacity-0 group-hover/btn:opacity-100 transition-opacity">Register Interest</span>
+            </Link>
+            
+            <Link
+              href="/about"
+              className="group/link inline-flex items-center gap-3 px-8 py-4 border border-white/30 text-white font-black text-sm uppercase tracking-[0.15em] hover:border-white hover:bg-white/5 transition-all duration-300"
+            >
+              <span>Learn More</span>
+              <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 2.3 }}
+            className="text-white/40 text-sm mt-12"
+          >
+            Competition details and contestant announcements coming soon
+          </motion.p>
+        </motion.div>
       </div>
     </section>
   );
