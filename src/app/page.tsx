@@ -1,4 +1,5 @@
 import Hero from "@/components/home/Hero";
+import AboutShow from "@/components/home/AboutShow";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import HowItWorks from "@/components/home/HowItWorks";
 import Contestants from "@/components/home/Contestants";
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Statistics />
+      <AboutShow />
       <FeaturesSection />
       <HowItWorks />
       <Contestants />
