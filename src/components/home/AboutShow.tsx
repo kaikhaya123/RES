@@ -1,9 +1,32 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Users, Trophy, Play } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+
+function NumberTicker({ value, duration = 2 }: { value: number; duration?: number }) {
+  const nodeRef = useRef<HTMLSpanElement>(null);
+  const motionValue = useMotionValue(0);
+
+  useEffect(() => {
+    const node = nodeRef.current;
+    if (!node) return;
+
+    const controls = animate(motionValue, value, {
+      duration,
+      ease: "easeOut",
+      onUpdate: (latest) => {
+        node.textContent = Math.floor(latest).toString();
+      }
+    });
+
+    return controls.stop;
+  }, [motionValue, value, duration]);
+
+  return <span ref={nodeRef}>0</span>;
+}
 
 export default function AboutShow() {
   const stats = [
@@ -216,19 +239,30 @@ export default function AboutShow() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-24"
         >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-              className="text-center"
-            >
-              <div className="text-4xl lg:text-5xl font-black mb-2 tracking-tight">{stat.value}</div>
-              <div className="text-sm text-gray-600 uppercase tracking-wider">{stat.label}</div>
-            </motion.div>
-          ))}
+          {stats.map((stat, index) => {
+            const numericValue = parseInt(stat.value.replace(/[^0-9]/g, ''));
+            const hasNumber = !isNaN(numericValue);
+            
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-4xl lg:text-5xl font-black mb-2 tracking-tight">
+                  {hasNumber && index === 1 ? (
+                    <NumberTicker value={numericValue} duration={2.5} />
+                  ) : (
+                    stat.value
+                  )}
+                </div>
+                <div className="text-sm text-gray-600 uppercase tracking-wider">{stat.label}</div>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         {/* What Makes R.E.S. Unique */}
