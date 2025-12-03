@@ -8,7 +8,7 @@ export default function Hero() {
     <section 
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{
-        backgroundImage: "url('/Images/14de92112583225.601797d6ede76.jpg')",
+        backgroundImage: "url('/Images/360_F_452934931_bGlXLhU6zcsxwHhLC98VJ9vbgYKBViUi.jpg')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
@@ -16,7 +16,7 @@ export default function Hero() {
     >
       {/* Background Image with Ripple Effect */}
       <RippleEffect
-        imageUrl="/Images/14de92112583225.601797d6ede76.jpg"
+        imageUrl="/Images/360_F_452934931_bGlXLhU6zcsxwHhLC98VJ9vbgYKBViUi.jpg"
         intensity={0.4}
         rippleCount={2}
         rippleSize={120}
