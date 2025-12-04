@@ -66,22 +66,12 @@ export default function Sponsors() {
         }} />
       </div>
 
-      {/* Abstract shapes with parallax */}
-      <motion.div
-        style={{ y: yTitle }}
-        className="absolute top-40 right-10 w-32 h-32 border-4 border-black/5 rotate-45"
-      />
-      <motion.div
-        style={{ y: ySponsors }}
-        className="absolute bottom-40 left-10 w-24 h-24 border-4 border-black/5 rotate-12"
-      />
+      {/* Subtle abstract shapes for depth */}
+      <motion.div style={{ y: yTitle }} className="absolute top-36 right-8 w-28 h-28 border-2 border-black/6 rounded-md rotate-12 opacity-40" />
 
       <div className="container mx-auto px-6 lg:px-12 max-w-7xl relative">
-        {/* Section Header with Parallax */}
-        <motion.div 
-          style={{ y: yTitle, opacity }}
-          className="text-center mb-32"
-        >
+        {/* Section Header with Parallax (clean and focused) */}
+        <motion.div style={{ y: yTitle, opacity }} className="text-center mb-24">
           {/* Decorative Lines */}
           <div className="flex items-center justify-center gap-6 mb-10">
             <motion.div
@@ -107,15 +97,9 @@ export default function Sponsors() {
             />
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="inline-flex items-center gap-2 px-6 py-2 border-2 border-black mb-8"
-          >
-            <Handshake className="w-3 h-3" />
-            <span className="text-xs uppercase tracking-[0.3em] font-black">Powered By</span>
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.4 }} className="inline-flex items-center gap-2 px-4 py-2 border border-black/10 rounded mb-6">
+            <Handshake className="w-4 h-4 text-gray-600" />
+            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-gray-600">Powered By</span>
           </motion.div>
 
           <motion.h2
@@ -123,9 +107,9 @@ export default function Sponsors() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-5xl lg:text-8xl font-black mb-6 tracking-tighter"
+            className="text-5xl lg:text-8xl font-black mb-6 tracking-tighter section-title"
           >
-            Our <span className="italic font-light">Partners</span>
+            Our <span className="font-light">Partners</span>
           </motion.h2>
 
           <motion.p
@@ -140,13 +124,7 @@ export default function Sponsors() {
         </motion.div>
 
         {/* Title Sponsor - Large Featured */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-32"
-        >
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="mb-24">
           <div className="relative group">
             <div className="bg-black p-12 lg:p-16 relative overflow-hidden">
               {/* Background Pattern */}
@@ -164,10 +142,10 @@ export default function Sponsors() {
                   transition={{ duration: 0.4 }}
                   className="relative"
                 >
-                  <div className="aspect-[3/2] bg-white flex items-center justify-center relative overflow-hidden group-hover:shadow-2xl transition-shadow duration-500">
-                    {/* Placeholder logo */}
-                    <div className="w-48 h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                      <Award className="w-24 h-24 text-gray-400" strokeWidth={1} />
+                  <div className="aspect-[3/2] bg-white flex items-center justify-center relative overflow-hidden group-hover:shadow-lg transition-shadow duration-400">
+                    {/* Placeholder logo (clean, centered) */}
+                    <div className="w-40 h-40 flex items-center justify-center">
+                      <Award className="w-20 h-20 text-gray-300" strokeWidth={1} />
                     </div>
                     
                     {/* Corner accents */}
@@ -197,7 +175,7 @@ export default function Sponsors() {
                     </div>
 
                     <h3 className="text-3xl lg:text-4xl font-black mb-6 tracking-tight">
-                      Empowering <span className="italic font-light">Tomorrow's</span> Leaders
+                      Empowering <span className="font-light">Tomorrow's</span> Leaders
                     </h3>
 
                     <p className="text-white/70 mb-8 leading-relaxed">
@@ -276,10 +254,8 @@ export default function Sponsors() {
                   </div>
 
                   {/* Info */}
-                  <h4 className="text-lg font-black mb-2 tracking-tight">{sponsor.name}</h4>
-                  <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-4">
-                    {sponsor.industry}
-                  </p>
+                  <h4 className="text-lg font-bold mb-2 tracking-tight">{sponsor.name}</h4>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-4">{sponsor.industry}</p>
 
                   {/* Hover indicator */}
                   <div className="flex items-center gap-2 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
@@ -296,13 +272,7 @@ export default function Sponsors() {
         </motion.div>
 
         {/* Supporting Sponsors - Auto-scroll Carousel */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-32"
-        >
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="mb-20">
           <div className="flex items-center gap-3 mb-12">
             <motion.div
               animate={{ rotate: 360 }}
@@ -315,25 +285,15 @@ export default function Sponsors() {
 
           {/* Carousel container */}
           <div className="relative overflow-hidden">
-            <motion.div
-              animate={{ x: `-${currentIndex * 25}%` }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-              className="flex gap-6"
-            >
+            <motion.div animate={{ x: `-${currentIndex * 20}%` }} transition={{ duration: 0.8, ease: "easeInOut" }} className="flex gap-6">
               {supportingSponsors.map((sponsor, index) => (
-                <motion.div
-                  key={index}
-                  className="min-w-[calc(25%-1.5rem)] md:min-w-[calc(20%-1.5rem)] lg:min-w-[calc(12.5%-1.5rem)]"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="aspect-square border border-black/20 bg-gradient-to-br from-gray-50 to-white p-6 flex items-center justify-center hover:border-black hover:shadow-lg transition-all duration-300 group">
+                <motion.div key={index} className="min-w-[200px] md:min-w-[220px] lg:min-w-[240px]" whileHover={{ scale: 1.03 }}>
+                  <div className="aspect-square border border-gray-100 bg-white p-6 flex items-center justify-center hover:shadow-md transition-all duration-300 group">
                     <div className="text-center">
-                      <div className="w-12 h-12 mx-auto mb-2 bg-gray-200 flex items-center justify-center group-hover:bg-gray-300 transition-colors">
-                        <Zap className="w-6 h-6 text-gray-400" strokeWidth={1.5} />
+                      <div className="w-12 h-12 mx-auto mb-2 flex items-center justify-center text-gray-400">
+                        <Zap className="w-6 h-6" strokeWidth={1.5} />
                       </div>
-                      <p className="text-xs font-bold text-gray-400 group-hover:text-black transition-colors">
-                        {sponsor}
-                      </p>
+                      <p className="text-xs font-semibold text-gray-600 transition-colors">{sponsor}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -341,8 +301,8 @@ export default function Sponsors() {
             </motion.div>
 
             {/* Gradient overlays */}
-            <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+            <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none" />
           </div>
         </motion.div>
 
@@ -372,7 +332,7 @@ export default function Sponsors() {
           className="text-center"
         >
           <h3 className="text-4xl lg:text-5xl font-black mb-6 tracking-tight">
-            Become a <span className="italic font-light">Partner</span>
+            Become a <span className="font-light">Partner</span>
           </h3>
           
           <p className="text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">

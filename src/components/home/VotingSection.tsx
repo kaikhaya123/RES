@@ -176,9 +176,9 @@ export default function VotingSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-5xl lg:text-8xl font-black mb-6 tracking-tighter text-white"
+            className="text-5xl lg:text-8xl font-black mb-6 tracking-tighter text-white section-title"
           >
-            Power Your <span className="italic font-light">Favorite</span>
+            Power Your <span className="font-light">Favorite</span>
           </motion.h2>
 
           <motion.p
@@ -474,7 +474,7 @@ export default function VotingSection() {
             transition={{ duration: 0.8 }}
             className="text-4xl lg:text-6xl font-black mb-6 tracking-tight text-white"
           >
-            Make Your <span className="italic font-light">Voice</span> Count
+            Make Your <span className="font-light">Voice</span> Count
           </motion.h3>
           
           <motion.p

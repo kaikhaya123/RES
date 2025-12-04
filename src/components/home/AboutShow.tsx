@@ -84,9 +84,9 @@ export default function AboutShow() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-5xl lg:text-6xl font-black mb-6 tracking-tighter leading-[1.1]"
+              className="text-5xl lg:text-6xl font-black mb-6 tracking-tighter leading-[1.1] section-title"
             >
-              The Movement That's <span className="italic font-light">Changing</span> Student Life
+              The Movement That's <span className="">Changing</span> Student Life
             </motion.h2>
 
             {/* Subtitle */}
@@ -124,7 +124,7 @@ export default function AboutShow() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="border-l-4 border-black pl-6 mb-8"
             >
-              <p className="text-gray-700 leading-relaxed italic">
+              <p className="text-gray-700 leading-relaxed">
                 Inspired by the legacy of Robben Island and the values of Nelson Mandela's Long Walk to Freedom, R.E.S. stands as a modern movement that promotes unity, leadership, and transformation through digital storytelling.
               </p>
             </motion.div>
@@ -263,7 +263,7 @@ export default function AboutShow() {
           className="mb-24"
         >
           <h3 className="text-3xl lg:text-4xl font-black mb-12 text-center tracking-tight">
-            What Makes R.E.S. <span className="italic font-light">Unique</span>
+            What Makes R.E.S. <span className="font-light">Unique</span>
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -292,7 +292,7 @@ export default function AboutShow() {
           className="text-center max-w-4xl mx-auto mb-20"
         >
           <h3 className="text-3xl lg:text-4xl font-black mb-6 tracking-tight">
-            Why It <span className="italic font-light">Matters</span>
+            Why It <span className="font-light">Matters</span>
           </h3>
           <p className="text-xl text-gray-700 leading-relaxed">
             R.E.S. creates opportunities for young people, supports student bursaries, improves campus safety, grows youth entrepreneurship, and brings South Africans together through a shared digital experience.
@@ -375,7 +375,7 @@ export default function AboutShow() {
           className="text-center bg-black text-white p-12 lg:p-16"
         >
           <h3 className="text-4xl lg:text-5xl font-black mb-4 tracking-tight">
-            Join the <span className="italic font-light">Movement</span>
+            Join the <span className="font-light">Movement</span>
           </h3>
           <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
             Register, vote, and become part of South Africa's biggest student show.

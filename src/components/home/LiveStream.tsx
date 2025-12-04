@@ -85,7 +85,7 @@ export default function LiveStream() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-5xl lg:text-7xl font-black tracking-tighter mb-6"
+            className="text-5xl lg:text-7xl font-black tracking-tighter mb-6 section-title"
           >
             Watch Live & Engage
           </motion.h2>

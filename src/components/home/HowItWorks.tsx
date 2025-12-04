@@ -29,7 +29,7 @@ export default function HowItWorks() {
       title: 'Live Streaming',
       subtitle: 'REAL-TIME VIEWING',
       description: 'Live streaming across multiple social platforms allows viewers to follow contestant journeys and daily activities in real-time.',
-      image: '/Images/youtube-stream.png',
+      image: '/Images/download (10) (2).jpg',
       link: '/stream',
       linkText: 'WATCH LIVE',
       color: 'from-neutral-900 to-gray-800'
@@ -90,7 +90,7 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-6xl lg:text-7xl font-black text-black mb-8 tracking-tighter"
+            className="text-6xl lg:text-7xl font-black text-black mb-8 tracking-tighter section-title"
           >
             How It Works
           </motion.h2>

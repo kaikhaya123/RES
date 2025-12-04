@@ -69,9 +69,9 @@ export default function Contestants() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-5xl lg:text-7xl font-black mb-6 tracking-tighter"
+            className="text-5xl lg:text-7xl font-black mb-6 tracking-tighter section-title"
           >
-            Meet The <span className="italic font-light">Contestants</span>
+            Meet The <span className="">Contestants</span>
           </motion.h2>
           
           <motion.p 

@@ -7,6 +7,8 @@ import LiveStream from "@/components/home/LiveStream";
 import VotingSection from "@/components/home/VotingSection";
 import Statistics from "@/components/home/Statistics";
 import Sponsors from "@/components/home/Sponsors";
+import MakingADifference from "@/components/home/MakingADifference";
+import Merch from "@/components/home/Merch";
 import CallToAction from "@/components/home/CallToAction";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -24,6 +26,8 @@ export default function Home() {
       <LiveStream />
       <VotingSection />
       <Sponsors />
+      <MakingADifference />
+      <Merch />
       <CallToAction />
       <Footer />
     </main>

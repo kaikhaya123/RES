@@ -6,3 +6,17 @@
 .font-futura {
 	font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
 }
+
+@layer components {
+	.section-title {
+		@apply font-black tracking-tighter mb-6;
+	}
+
+	.section-eyebrow {
+		@apply text-sm font-semibold uppercase tracking-wider mb-3;
+	}
+
+	.section-subtitle {
+		@apply text-lg leading-relaxed max-w-3xl mx-auto;
+	}
+}

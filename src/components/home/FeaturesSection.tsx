@@ -64,7 +64,7 @@ export default function FeaturesSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-3xl lg:text-4xl font-bold text-gray-900"
+            className="text-3xl lg:text-4xl font-bold text-gray-900 section-title"
           >
             Everything You Need to Participate
           </motion.h2>
