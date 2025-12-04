@@ -1,7 +1,4 @@
-"use client"
-
 import type { HTMLAttributes } from "react"
-import { useEffect, useState, useRef } from 'react'
 
 const PHONE_WIDTH = 433
 const PHONE_HEIGHT = 882
@@ -19,17 +16,9 @@ const HEIGHT_PCT = (SCREEN_HEIGHT / PHONE_HEIGHT) * 100
 const RADIUS_H = (SCREEN_RADIUS / SCREEN_WIDTH) * 100
 const RADIUS_V = (SCREEN_RADIUS / SCREEN_HEIGHT) * 100
 
-export interface ResponsiveIsland {
-  base?: number
-  sm?: number
-  lg?: number
-}
-
 export interface IphoneProps extends HTMLAttributes<HTMLDivElement> {
   src?: string
   videoSrc?: string
-  /** pixels to shift media down so it doesn't cover the dynamic island/notch. Can be a number or responsive object. */
-  islandSafe?: number | ResponsiveIsland
 }
 
 export function Iphone({
@@ -37,71 +26,14 @@ export function Iphone({
   videoSrc,
   className,
   style,
-  islandSafe,
   ...props
 }: IphoneProps) {
   const hasVideo = !!videoSrc
   const hasMedia = hasVideo || !!src
 
-  // responsive islandSafe: number or { base, sm, lg }
-  const [islandSafePx, setIslandSafePx] = useState<number>(
-    typeof islandSafe === 'number' ? islandSafe : (islandSafe?.base ?? 42)
-  )
-
-  const videoRef = useRef<HTMLVideoElement | null>(null)
-  const [showPlayButton, setShowPlayButton] = useState(false)
-
-  useEffect(() => {
-    const compute = () => {
-      if (typeof islandSafe === 'number') {
-        setIslandSafePx(islandSafe)
-        return
-      }
-      const w = typeof window !== 'undefined' ? window.innerWidth : 0
-      if (w >= 1024) {
-        setIslandSafePx(islandSafe?.lg ?? islandSafe?.sm ?? islandSafe?.base ?? 42)
-      } else if (w >= 640) {
-        setIslandSafePx(islandSafe?.sm ?? islandSafe?.base ?? 42)
-      } else {
-        setIslandSafePx(islandSafe?.base ?? 42)
-      }
-    }
-
-    compute()
-    window.addEventListener('resize', compute)
-    return () => window.removeEventListener('resize', compute)
-  }, [islandSafe])
-
-  // Try to programmatically play the video on mount/when source changes
-  useEffect(() => {
-    const el = videoRef.current
-    if (!el) return
-    // Ensure muted flags for autoplay policies
-    el.muted = true
-    el.defaultMuted = true
-    el.playsInline = true
-
-    const tryPlay = async () => {
-      try {
-        await el.play()
-        // if playback started, ensure play button hidden
-        if (!el.paused) setShowPlayButton(false)
-      } catch (e) {
-        // autoplay blocked — show tap to play
-        setShowPlayButton(true)
-      }
-      // double-check: if still paused after attempt, show play button
-      setTimeout(() => {
-        if (el.paused) setShowPlayButton(true)
-      }, 250)
-    }
-
-    tryPlay()
-  }, [videoSrc])
-
   return (
     <div
-      className={`relative inline-block w-full align-middle leading-none ${className ?? ""}`}
+      className={`relative inline-block w-full align-middle leading-none ${className}`}
       style={{
         aspectRatio: `${PHONE_WIDTH}/${PHONE_HEIGHT}`,
         ...style,
@@ -110,75 +42,30 @@ export function Iphone({
     >
       {hasVideo && (
         <div
-          className="absolute z-0 overflow-hidden"
+          className="pointer-events-none absolute z-0 overflow-hidden"
           style={{
             left: `${LEFT_PCT}%`,
             top: `${TOP_PCT}%`,
             width: `${WIDTH_PCT}%`,
             height: `${HEIGHT_PCT}%`,
             borderRadius: `${RADIUS_H}% / ${RADIUS_V}%`,
-            zIndex: 0,
           }}
         >
           <video
-            ref={videoRef}
-            className="block w-full h-full"
+            className="block size-full object-cover"
             src={videoSrc}
             autoPlay
             loop
             muted
-            defaultMuted
             playsInline
             preload="metadata"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
-            onClick={() => {
-              const el = videoRef.current
-              if (!el) return
-              if (el.paused) el.play().catch(() => {})
-              else el.pause()
-            }}
           />
         </div>
       )}
 
-      {/* Blended dynamic island: semi-transparent pill with backdrop blur so the image blends beneath it */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          left: `${(172.5 / PHONE_WIDTH) * 100}%`,
-          top: `${(30 / PHONE_HEIGHT) * 100}%`,
-          width: `${((259.5 - 172.5) / PHONE_WIDTH) * 100}%`,
-          height: `${(37 / PHONE_HEIGHT) * 100}%`,
-          transform: 'translate(-50%, 0)',
-          pointerEvents: 'none',
-          zIndex: 30,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            borderRadius: 999,
-            background: 'rgba(0,0,0,0.12)',
-            backdropFilter: 'blur(6px)',
-            WebkitBackdropFilter: 'blur(6px)',
-            boxShadow: '0 6px 18px rgba(0,0,0,0.18), inset 0 -1px 0 rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.04)',
-          }}
-        />
-      </div>
-
       {!hasVideo && src && (
         <div
-          className="absolute z-0 overflow-hidden"
+          className="pointer-events-none absolute z-0 overflow-hidden"
           style={{
             left: `${LEFT_PCT}%`,
             top: `${TOP_PCT}%`,
@@ -191,12 +78,6 @@ export function Iphone({
             src={src}
             alt=""
             className="block size-full object-cover object-top"
-            style={{
-              width: '100%',
-              height: `calc(100% + ${islandSafePx}px)`,
-              objectFit: 'cover',
-              transform: `translateY(${islandSafePx}px)`,
-            }}
           />
         </div>
       )}
@@ -206,7 +87,7 @@ export function Iphone({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="absolute inset-0 size-full"
-        style={{ transform: "translateZ(0)", zIndex: 40 }}
+        style={{ transform: "translateZ(0)" }}
       >
         <g mask={hasMedia ? "url(#screenPunch)" : undefined}>
           <path
@@ -262,7 +143,13 @@ export function Iphone({
 
         <defs>
           <mask id="screenPunch" maskUnits="userSpaceOnUse">
-            <rect x="0" y="0" width={PHONE_WIDTH} height={PHONE_HEIGHT} fill="white" />
+            <rect
+              x="0"
+              y="0"
+              width={PHONE_WIDTH}
+              height={PHONE_HEIGHT}
+              fill="white"
+            />
             <rect
               x={SCREEN_X}
               y={SCREEN_Y}
@@ -285,14 +172,6 @@ export function Iphone({
           </clipPath>
         </defs>
       </svg>
-    </div>
-  )
-}
-
-export function Demo() {
-  return (
-    <div className="w-[434px]">
-      <Iphone src="/Images/iphone-preview.jpg" islandSafe={{ base: 36, sm: 44, lg: 56 }} />
     </div>
   )
 }
