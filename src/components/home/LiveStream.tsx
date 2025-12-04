@@ -1,32 +1,14 @@
 'use client';
 
-import { motion, useMotionValue, animate, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Play, Users, Radio, ArrowRight, Zap, Calendar, TrendingUp } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { Play, Users, Radio, ArrowRight, Calendar } from 'lucide-react';
 import Image from 'next/image';
+// Update the import path to the correct relative location, for example:
+import { Iphone } from '../../registry/magicui/iphone';
+// Or, if the file does not exist, create 'src/registry/magicui/iphone.tsx' and export the Iphone component from there.
 
-function LiveCounter({ target, suffix = '' }: { target: number; suffix?: string }) {
-  const nodeRef = useRef<HTMLSpanElement>(null);
-  const motionValue = useMotionValue(0);
-
-  useEffect(() => {
-    const node = nodeRef.current;
-    if (!node) return;
-
-    const controls = animate(motionValue, target, {
-      duration: 2.5,
-      ease: "easeOut",
-      onUpdate: (latest) => {
-        node.textContent = `${Math.floor(latest).toLocaleString()}${suffix}`;
-      }
-    });
-
-    return controls.stop;
-  }, [motionValue, target, suffix]);
-
-  return <span ref={nodeRef}>0{suffix}</span>;
-}
+// LiveCounter removed while backend is not connected; numeric placeholders used instead.
 
 export default function LiveStream() {
   const platforms = [
@@ -121,82 +103,16 @@ export default function LiveStream() {
 
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
-          {/* Left: Stream Preview */}
+          {/* Left: iPhone Placeholder Only */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative"
+            className="relative flex items-center justify-center"
           >
-            {/* Corner Decorations */}
-            <div className="absolute -top-4 -left-4 w-8 h-8 border-t-4 border-l-4 border-white" />
-            <div className="absolute -top-4 -right-4 w-8 h-8 border-t-4 border-r-4 border-white" />
-            <div className="absolute -bottom-4 -left-4 w-8 h-8 border-b-4 border-l-4 border-white" />
-            <div className="absolute -bottom-4 -right-4 w-8 h-8 border-b-4 border-r-4 border-white" />
-
-            {/* Video Container */}
-            <div className="relative aspect-video bg-zinc-900 border-2 border-white overflow-hidden group">
-              <Image
-                src="/Images/Watch live_imgupscaler.ai_General_4K.jpg"
-                alt="Live Stream Preview"
-                fill
-                className="object-cover"
-              />
-
-              {/* Play Overlay */}
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="w-20 h-20 bg-white rounded-full flex items-center justify-center cursor-pointer"
-                >
-                  <Play className="w-8 h-8 text-black ml-1" fill="black" />
-                </motion.div>
-              </div>
-
-              {/* Live Badge */}
-              <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-2 bg-black border-2 border-white">
-                <motion.div
-                  animate={{ opacity: [1, 0.3, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="w-2 h-2 bg-white rounded-full"
-                />
-                <span className="text-white font-black text-xs uppercase tracking-wider">Live</span>
-              </div>
-
-              {/* Viewer Count */}
-              <div className="absolute top-4 right-4 px-3 py-2 bg-black border-2 border-white">
-                <div className="flex items-center gap-2">
-                  <Users className="w-4 h-4" />
-                  <span className="text-white font-bold text-xs">
-                    <LiveCounter target={7200000} suffix="+" /> Watching
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Interactive Buttons */}
-            <div className="grid grid-cols-2 gap-4 mt-6">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="py-4 bg-white text-black font-black text-sm uppercase tracking-wider border-2 border-black hover:bg-black hover:text-white transition-colors"
-              >
-                <div className="flex items-center justify-center gap-2">
-                  <Play className="w-4 h-4" />
-                  Vote Now
-                </div>
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="py-4 bg-black text-white font-black text-sm uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-colors"
-              >
-                <div className="flex items-center justify-center gap-2">
-                  <Zap className="w-4 h-4" />
-                  Daily Quiz
-                </div>
-              </motion.button>
+            <div className="w-[320px] sm:w-[360px] lg:w-[480px]">
+              <Iphone videoSrc="/Videos/PinDown.io_@zarooza_1764838825.mp4" islandSafe={{ base: 36, sm: 44, lg: 56 }} />
             </div>
           </motion.div>
 
@@ -231,13 +147,11 @@ export default function LiveStream() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="relative border-2 border-white p-6 group hover:bg-white hover:text-black transition-colors"
                 >
-                  <div className="absolute top-2 right-2 w-1 h-1 bg-current" />
+                  
                   <div className="text-sm font-black uppercase tracking-[0.3em] mb-2 opacity-60">
                     {stat.label}
                   </div>
-                  <div className="text-4xl font-black tracking-tighter">
-                    <LiveCounter target={stat.value} suffix={stat.suffix} />
-                  </div>
+                  <div className="text-4xl font-black tracking-tighter">—</div>
                 </motion.div>
               ))}
             </div>
@@ -259,8 +173,7 @@ export default function LiveStream() {
                     className="relative border-2 border-white p-4 text-center group hover:bg-white hover:text-black transition-colors cursor-pointer"
                   >
                     {/* Corner Decoration */}
-                    <div className="absolute top-1 left-1 w-1 h-1 bg-current" />
-                    <div className="absolute bottom-1 right-1 w-1 h-1 bg-current" />
+                      {/* corner decorations removed */}
                     
                     {/* Platform Icon/Image */}
                     <div className="relative w-12 h-12 mx-auto mb-2">
@@ -273,9 +186,6 @@ export default function LiveStream() {
                     </div>
                     
                     <div className="text-xs font-black uppercase tracking-wider">{platform.name}</div>
-                    <div className="text-[10px] text-gray-400 group-hover:text-black/60 mt-1">
-                      <LiveCounter target={platform.viewers} suffix="+" /> watching
-                    </div>
                   </motion.div>
                 ))}
               </div>
