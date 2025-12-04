@@ -30,9 +30,9 @@ function LiveCounter({ target, suffix = '' }: { target: number; suffix?: string 
 
 export default function LiveStream() {
   const platforms = [
-    { name: 'TikTok', icon: '📱', color: 'white', viewers: 3200000 },
-    { name: 'Facebook', icon: '👍', color: 'white', viewers: 1200000 },
-    { name: 'YouTube', icon: '▶️', color: 'white', viewers: 2800000 }
+    { name: 'TikTok', image: '/Images/tik-tok.png', color: 'white', viewers: 3200000 },
+    { name: 'Facebook', image: '/Images/social-media.png', color: 'white', viewers: 1200000 },
+    { name: 'YouTube', image: '/Images/youtube.png', color: 'white', viewers: 2800000 }
   ];
 
   const stats = [
@@ -262,7 +262,16 @@ export default function LiveStream() {
                     <div className="absolute top-1 left-1 w-1 h-1 bg-current" />
                     <div className="absolute bottom-1 right-1 w-1 h-1 bg-current" />
                     
-                    <div className="text-3xl mb-2">{platform.icon}</div>
+                    {/* Platform Icon/Image */}
+                    <div className="relative w-12 h-12 mx-auto mb-2">
+                      <Image
+                        src={platform.image}
+                        alt={`${platform.name} icon`}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    
                     <div className="text-xs font-black uppercase tracking-wider">{platform.name}</div>
                     <div className="text-[10px] text-gray-400 group-hover:text-black/60 mt-1">
                       <LiveCounter target={platform.viewers} suffix="+" /> watching
