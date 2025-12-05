@@ -185,31 +185,37 @@
 
 /* CSS-based animation for mobile reliability */
 @keyframes logoloop-scroll-horizontal {
-  from {
+  0% {
     transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
   }
-  to {
+  100% {
     transform: translate3d(-50%, 0, 0);
+    -webkit-transform: translate3d(-50%, 0, 0);
   }
 }
 
 @keyframes logoloop-scroll-vertical {
-  from {
+  0% {
     transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
   }
-  to {
+  100% {
     transform: translate3d(0, -50%, 0);
+    -webkit-transform: translate3d(0, -50%, 0);
   }
 }
 
 /* Apply CSS animation on mobile as primary method */
 @media (max-width: 767px) {
   .logoloop:not(.logoloop--vertical) .logoloop__track {
-    animation: logoloop-scroll-horizontal 30s linear infinite;
+    animation: logoloop-scroll-horizontal linear infinite;
+    -webkit-animation: logoloop-scroll-horizontal linear infinite;
   }
   
   .logoloop.logoloop--vertical .logoloop__track {
-    animation: logoloop-scroll-vertical 30s linear infinite;
+    animation: logoloop-scroll-vertical linear infinite;
+    -webkit-animation: logoloop-scroll-vertical linear infinite;
   }
   
   .logoloop__track {

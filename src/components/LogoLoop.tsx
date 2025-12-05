@@ -249,6 +249,16 @@ export const LogoLoop = memo<LogoLoopProps>(
 
     const isVertical = direction === 'up' || direction === 'down';
 
+    // Calculate animation duration for CSS fallback (mobile)
+    // Speed is in px/s, and we need to move seqWidth distance
+    // Duration = distance / speed
+    const cssAnimationDuration = useMemo(() => {
+      const size = isVertical ? seqHeight : seqWidth;
+      if (size === 0 || speed === 0) return 20; // fallback duration
+      // Calculate time to scroll one full sequence width
+      return Math.abs(size / speed);
+    }, [seqWidth, seqHeight, speed, isVertical]);
+
     const targetVelocity = useMemo(() => {
       const magnitude = Math.abs(speed);
       let directionMultiplier: number;
@@ -611,8 +621,11 @@ export const LogoLoop = memo<LogoLoopProps>(
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
             perspective: 1000,
-            WebkitPerspective: 1000
-          }}
+            WebkitPerspective: 1000,
+            // Dynamic animation duration for mobile CSS animation
+            animationDuration: `${cssAnimationDuration}s`,
+            WebkitAnimationDuration: `${cssAnimationDuration}s`
+          } as React.CSSProperties}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
