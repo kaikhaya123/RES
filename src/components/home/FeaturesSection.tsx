@@ -4,61 +4,44 @@ import React from "react";
 import { motion } from "framer-motion";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
-export default function ModernFeatures() {
+export default function FeaturesSection() {
   const features = [
     {
       title: "Vote for Contestants",
-      description:
-        "Cast up to 100 votes daily. Simple, fast, and secure voting.",
-      animation: "Election concept Lottie JSON animation.lottie",
+      description: "Cast up to 100 votes per day for your favorite contestants. Free and premium voting options available.",
+      animation: "Election concept Lottie JSON animation.lottie"
     },
     {
       title: "Daily Quizzes",
-      description:
-        "Answer fun quizzes, earn points, and climb the leaderboard.",
-      animation: "Funny brain.lottie",
+      description: "Test your knowledge with exciting daily quizzes. Win points, climb leaderboards, and earn rewards.",
+      animation: "Brain disappointed.lottie"
     },
     {
       title: "Nominate Students",
-      description:
-        "Help undiscovered talent get into the show by nominating them.",
-      animation: "referral.lottie",
+      description: "Know someone amazing? Nominate talented students from your campus to join the competition.",
+      animation: "referral.lottie"
     },
     {
       title: "Live Streaming",
-      description:
-        "Watch daily livestreams across TikTok, Facebook, and YouTube.",
-      animation: "Live Streaming.lottie",
+      description: "Watch the show live 18 hours daily on TikTok, Facebook, and YouTube.",
+      animation: "Live Streaming.lottie"
     },
     {
       title: "Win Prizes",
-      description:
-        "Earn rewards including cash, devices, and exclusive merch.",
-      animation: "Champion.lottie",
+      description: "Compete for prizes including cash, devices, bursaries, and exclusive merchandise.",
+      animation: "Rewards Programme.lottie"
     },
     {
       title: "Earn Achievements",
-      description:
-        "Unlock badges as you participate and grow your profile.",
-      animation: "Winner.lottie",
-    },
+      description: "Unlock badges and achievements as you participate.",
+      animation: "Champion.lottie"
+    }
   ];
 
   return (
-    <section className="relative py-28 bg-white overflow-hidden">
-      {/* Soft parallax light blobs */}
-      <motion.div
-        className="absolute top-0 left-0 w-96 h-96 rounded-full bg-purple-300 opacity-20 blur-3xl"
-        animate={{ y: [0, 20, 0] }}
-        transition={{ duration: 10, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-pink-300 opacity-20 blur-3xl"
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 12, repeat: Infinity }}
-      />
-
+    <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -67,68 +50,94 @@ export default function ModernFeatures() {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <p className="text-sm tracking-widest text-gray-500 mb-4">
+          <p className="text-sm font-semibold text-gray-500 tracking-wider mb-3">
             PLATFORM FEATURES
           </p>
-
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
-            Your Tools for the Competition
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">
+            Everything You Can Do
           </h2>
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.15,
-              }}
-              whileHover={{
-                y: -12,
-                scale: 1.03,
-                transition: { duration: 0.25 },
-              }}
-              className="relative backdrop-blur-xl bg-white/40 p-8 rounded-3xl shadow-lg border border-white/60"
-              style={{
-                boxShadow:
-                  "0 10px 35px rgba(0,0,0,0.06), inset 0 0 0 1px rgba(255,255,255,0.5)",
-              }}
-            >
-              {/* Floating light behind card */}
-              <motion.div
-                className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-200/40 to-pink-200/40 opacity-0"
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
-              />
+        {/* 3-column modern layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-              {/* Lottie Animation */}
-              <div className="flex items-center justify-center mb-6 relative z-10">
-                <div className="w-32 h-32">
-                  <DotLottieReact
-                    src={encodeURI(`/lottie-files/${feature.animation}`)}
-                    loop
-                    autoplay
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                </div>
+          {/* LEFT COLUMN */}
+          <div className="flex flex-col gap-8">
+            {features.slice(0, 2).map((item, idx) => (
+              <FeatureCard key={idx} item={item} delay={idx * 0.2} />
+            ))}
+          </div>
+
+          {/* CENTER COLUMN */}
+          <div className="flex flex-col gap-8">
+            <FeatureCard item={features[2]} delay={0.4} />
+            
+            {/* LARGE CARD */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="rounded-3xl p-10 bg-white/50 backdrop-blur-md shadow-xl border border-gray-100 flex flex-col justify-center"
+            >
+              <div className="mx-auto w-48 h-48 mb-8">
+                <DotLottieReact
+                  src={`/lottie-files/${features[3].animation}`}
+                  loop
+                  autoplay
+                />
               </div>
 
-              <h3 className="text-xl font-semibold text-gray-900 text-center mb-3 relative z-10">
-                {feature.title}
+              <h3 className="text-2xl font-bold text-center mb-4">
+                {features[3].title}
               </h3>
 
-              <p className="text-gray-600 text-center relative z-10">
-                {feature.description}
+              <p className="text-gray-600 text-center leading-relaxed">
+                {features[3].description}
               </p>
             </motion.div>
-          ))}
+          </div>
+
+          {/* RIGHT COLUMN */}
+          <div className="flex flex-col gap-8">
+            {features.slice(4, 6).map((item, idx) => (
+              <FeatureCard key={idx} item={item} delay={idx * 0.2} />
+            ))}
+          </div>
         </div>
+
       </div>
     </section>
+  );
+}
+
+function FeatureCard({ item, delay }: { item: { title: string; description: string; animation: string }; delay: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay }}
+      whileHover={{
+        scale: 1.03,
+        y: -6,
+        transition: { duration: 0.25 }
+      }}
+      className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition"
+    >
+      <div className="w-28 h-28 mx-auto mb-6">
+        <DotLottieReact
+          src={`/lottie-files/${item.animation}`}
+          loop
+          autoplay
+        />
+      </div>
+      <h3 className="text-xl font-bold text-center mb-3">
+        {item.title}
+      </h3>
+      <p className="text-gray-600 text-center">
+        {item.description}
+      </p>
+    </motion.div>
   );
 }
