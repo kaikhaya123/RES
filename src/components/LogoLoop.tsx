@@ -420,6 +420,10 @@ export const LogoLoop = memo<LogoLoopProps>(
               scaleOnHover &&
                 'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-110'
             )}
+            style={{
+              transform: 'translate3d(0, 0, 0)',
+              WebkitTransform: 'translate3d(0, 0, 0)'
+            }}
             src={item.src}
             srcSet={item.srcSet}
             sizes={item.sizes}
@@ -427,7 +431,7 @@ export const LogoLoop = memo<LogoLoopProps>(
             height={item.height}
             alt={item.alt ?? ''}
             title={item.title}
-            loading={(item as any).loading ?? 'eager'}
+            loading="eager"
             decoding="async"
             draggable={false}
           />
@@ -515,7 +519,11 @@ export const LogoLoop = memo<LogoLoopProps>(
       <div
         ref={containerRef}
         className={rootClasses}
-        style={containerStyle}
+        style={{
+          ...containerStyle,
+          touchAction: 'pan-y',
+          WebkitOverflowScrolling: 'touch'
+        }}
         role="region"
         aria-label={ariaLabel}
         onMouseEnter={handleMouseEnter}
@@ -575,6 +583,14 @@ export const LogoLoop = memo<LogoLoopProps>(
             isVertical ? 'flex-col h-max w-full' : 'flex-row w-max'
           )}
           ref={trackRef}
+          style={{
+            transform: 'translate3d(0, 0, 0)',
+            WebkitTransform: 'translate3d(0, 0, 0)',
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+            perspective: 1000,
+            WebkitPerspective: 1000
+          }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
