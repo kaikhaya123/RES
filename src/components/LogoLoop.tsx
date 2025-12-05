@@ -89,6 +89,16 @@ const useAnimationLoop = (
     const track = trackRef.current;
     if (!track) return;
 
+    // On mobile, let CSS animations handle it completely - skip JavaScript animation
+    if (isMobile) {
+      // Just set initial transform and let CSS animation take over
+      track.style.transform = 'translate3d(0, 0, 0)';
+      (track.style as any).webkitTransform = 'translate3d(0, 0, 0)';
+      return () => {
+        // cleanup
+      };
+    }
+
     // Apply a reduced animation intensity on mobile to save CPU and make motion subtler.
     // Use a less aggressive reduction so motion remains visible on small screens.
     const mobileFactor = isMobile ? 1 : 1; // Keep full speed on mobile for visibility
@@ -403,9 +413,10 @@ export const LogoLoop = memo<LogoLoopProps>(
           '[--logoloop-fadeColorAuto:#ffffff]',
           'dark:[--logoloop-fadeColorAuto:#0b0b0b]',
           scaleOnHover && 'py-[calc(var(--logoloop-logoHeight)*0.1)]',
+          isMobile && 'logoloop--mobile',
           className
         ),
-      [isVertical, scaleOnHover, className]
+      [isVertical, scaleOnHover, isMobile, className]
     );
 
     const handleMouseEnter = useCallback(() => {

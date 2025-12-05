@@ -208,14 +208,17 @@
 
 /* Apply CSS animation on mobile as primary method */
 @media (max-width: 767px) {
-  .logoloop:not(.logoloop--vertical) .logoloop__track {
-    animation: logoloop-scroll-horizontal linear infinite;
-    -webkit-animation: logoloop-scroll-horizontal linear infinite;
+  /* Force CSS animation on all mobile devices */
+  .logoloop:not(.logoloop--vertical) .logoloop__track,
+  .logoloop--mobile:not(.logoloop--vertical) .logoloop__track {
+    animation: logoloop-scroll-horizontal linear infinite !important;
+    -webkit-animation: logoloop-scroll-horizontal linear infinite !important;
   }
   
-  .logoloop.logoloop--vertical .logoloop__track {
-    animation: logoloop-scroll-vertical linear infinite;
-    -webkit-animation: logoloop-scroll-vertical linear infinite;
+  .logoloop.logoloop--vertical .logoloop__track,
+  .logoloop--mobile.logoloop--vertical .logoloop__track {
+    animation: logoloop-scroll-vertical linear infinite !important;
+    -webkit-animation: logoloop-scroll-vertical linear infinite !important;
   }
   
   .logoloop__track {
