@@ -5,7 +5,13 @@ import { ReactNode } from 'react';
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
-    <SessionProvider>
+    <SessionProvider 
+      // Completely disable session management until database is ready
+      session={null}
+      refetchInterval={0}
+      refetchOnWindowFocus={false}
+      refetchWhenOffline={false}
+    >
       {children}
     </SessionProvider>
   );

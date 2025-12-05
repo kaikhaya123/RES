@@ -5,7 +5,9 @@ import { prisma } from './prisma';
 import bcrypt from 'bcryptjs';
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  // Only use adapter if database is available
+  ...(process.env.DATABASE_URL && { adapter: PrismaAdapter(prisma) }),
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: 'jwt',
   },
@@ -27,41 +29,51 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Invalid credentials');
         }
 
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
+        try {
+          const user = await prisma.user.findUnique({
+            where: {
+              email: credentials.email,
+            },
+          });
 
-        if (!user || !user.password) {
-          throw new Error('Invalid credentials');
+          if (!user || !user.password) {
+            throw new Error('Invalid credentials');
+          }
+
+          if (user.isBanned) {
+            throw new Error('Account is banned');
+          }
+
+          const isPasswordValid = await bcrypt.compare(
+            credentials.password,
+            user.password
+          );
+
+          if (!isPasswordValid) {
+            throw new Error('Invalid credentials');
+          }
+
+          // Update last login
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { lastLogin: new Date() },
+          });
+
+          return {
+            id: user.id,
+            email: user.email,
+            name: `${user.firstName} ${user.lastName}`,
+            userType: user.userType,
+          };
+        } catch (error) {
+          console.error('Auth error:', error);
+          // If database is not available, return null to prevent app crash
+          if (error instanceof Error && error.message.includes('Can\'t reach database')) {
+            console.warn('Database not available. Authentication disabled.');
+            return null;
+          }
+          throw error;
         }
-
-        if (user.isBanned) {
-          throw new Error('Account is banned');
-        }
-
-        const isPasswordValid = await bcrypt.compare(
-          credentials.password,
-          user.password
-        );
-
-        if (!isPasswordValid) {
-          throw new Error('Invalid credentials');
-        }
-
-        // Update last login
-        await prisma.user.update({
-          where: { id: user.id },
-          data: { lastLogin: new Date() },
-        });
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: `${user.firstName} ${user.lastName}`,
-          userType: user.userType,
-        };
       },
     }),
   ],

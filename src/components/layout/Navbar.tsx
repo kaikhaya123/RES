@@ -9,7 +9,18 @@ import { Menu, X } from 'lucide-react';
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { data: session, status } = useSession();
+  
+  // Safely handle session - don't crash if auth fails
+  let session = null;
+  let status = 'unauthenticated';
+  
+  try {
+    const sessionData = useSession();
+    session = sessionData.data;
+    status = sessionData.status;
+  } catch (error) {
+    console.warn('Session unavailable:', error);
+  }
 
   useEffect(() => {
     let ticking = false;
