@@ -51,7 +51,7 @@ export default function Contestants() {
             transition={{ duration: 1 }}
             className="relative group"
           >
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+            <div className="relative aspect-[4/5] md:aspect-[3/4] rounded-2xl overflow-hidden">
               {/* Image Container */}
               <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900">
                 <Image 
@@ -115,16 +115,16 @@ export default function Contestants() {
               <div className="absolute inset-0 border-2 border-white/0 group-hover:border-white/30 rounded-2xl transition-all duration-500" />
 
               {/* Static Labels */}
-              <div className="absolute top-6 right-6 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                <span className="text-xs font-bold uppercase tracking-wider">Coming Soon</span>
+              <div className="absolute top-4 right-4 md:top-6 md:right-6 px-3 py-1.5 md:px-4 md:py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider">Coming Soon</span>
               </div>
 
-              <div className="absolute bottom-6 left-6 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                <span className="text-xs font-bold uppercase tracking-wider">40 Contestants</span>
+              <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 px-3 py-1.5 md:px-4 md:py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider">40 Contestants</span>
               </div>
 
-              <div className="absolute top-1/2 left-6 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                <span className="text-xs font-bold uppercase tracking-wider">National Showcase</span>
+              <div className="absolute top-1/2 left-4 md:left-6 px-3 py-1.5 md:px-4 md:py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider">National Showcase</span>
               </div>
             </div>
           </motion.div>
@@ -139,7 +139,7 @@ export default function Contestants() {
           >
             {/* Headline */}
             <h2 
-              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter leading-[0.95]"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter leading-[0.95]"
               style={{
                 backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%), url(/Images/Glass_hands.jpg)',
                 backgroundSize: 'cover',
@@ -155,7 +155,7 @@ export default function Contestants() {
             </h2>
 
             {/* Subtext */}
-            <p className="text-lg text-white/70 leading-relaxed">
+            <p className="text-base md:text-lg text-white/70 leading-relaxed">
               South Africa's brightest students will appear here soon — competing for scholarships, recognition, and opportunities that change lives.
             </p>
 
@@ -168,16 +168,16 @@ export default function Contestants() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
-                  className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300"
+                  className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 flex items-center justify-center bg-white/10 rounded-lg">
-                    <stat.icon className="w-6 h-6" strokeWidth={2} />
+                  <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/10 rounded-lg flex-shrink-0">
+                    <stat.icon className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2} />
                   </div>
-                  <div className="flex-1">
-                    <div className="text-2xl font-black">{stat.value}</div>
-                    <div className="text-sm text-white/60">{stat.label}</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xl md:text-2xl font-black">{stat.value}</div>
+                    <div className="text-xs md:text-sm text-white/60">{stat.label}</div>
                   </div>
-                  <div className="text-xs text-white/40 hidden sm:block">{stat.sublabel}</div>
+                  <div className="text-xs text-white/40 hidden sm:block flex-shrink-0">{stat.sublabel}</div>
                 </motion.div>
               ))}
             </div>
@@ -192,20 +192,20 @@ export default function Contestants() {
           transition={{ duration: 0.8 }}
           className="text-center max-w-2xl mx-auto"
         >
-          <h3 className="text-3xl font-black mb-4 tracking-tight">
+          <h3 className="text-2xl md:text-3xl font-black mb-4 tracking-tight">
             Be Part of the Journey
           </h3>
           
-          <p className="text-white/60 mb-10">
+          <p className="text-sm md:text-base text-white/60 mb-8 md:mb-10">
             Register now to get early access when contestants are announced and voting opens.
           </p>
           
           {/* Primary CTA */}
           <Link
             href="/auth/register"
-            className="group inline-flex items-center gap-3 px-10 py-5 bg-white text-black font-black text-sm uppercase tracking-[0.15em] rounded-full hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-500 mb-6"
+            className="group inline-flex items-center gap-2 md:gap-3 px-6 md:px-10 py-4 md:py-5 bg-white text-black font-black text-xs md:text-sm uppercase tracking-[0.15em] rounded-full hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-500 mb-6"
           >
-            <span>Register to Get Early Access</span>
+            <span className="whitespace-nowrap">Register to Get Early Access</span>
             <motion.div
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
