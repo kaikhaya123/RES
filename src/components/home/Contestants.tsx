@@ -141,15 +141,16 @@ export default function Contestants() {
             <h2 
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter leading-[0.95]"
               style={{
-                backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%), url(/Images/Glass_hands.jpg)',
+                background: 'url(/Images/Glass_hands.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                backgroundBlendMode: 'overlay',
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                color: 'transparent'
-              }}
+                color: 'transparent',
+                textShadow: 'none',
+                willChange: 'transform'
+              } as React.CSSProperties}
             >
               Meet the Contestants
             </h2>
