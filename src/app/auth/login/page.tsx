@@ -252,7 +252,7 @@ export default function LoginPage() {
         >
           <div className="relative w-full h-full min-h-[600px]">
             <Image
-              src="/Images/high-angle-friends-posing-together.jpg"
+              src="/Images/Vintage _ 90s _ Fashion n Friends (1).jpg"
               alt="Students collaborating"
               fill
               className="object-cover"
