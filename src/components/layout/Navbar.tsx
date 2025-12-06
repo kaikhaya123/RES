@@ -116,34 +116,34 @@ export default function Navbar() {
               </div>
 
               {/* Menu Content */}
-              <div className="flex-1 container mx-auto px-6 lg:px-12 py-12">
-                <div className="grid lg:grid-cols-2 gap-16 h-full">
+              <div className="flex-1 container mx-auto px-6 lg:px-12 py-12 overflow-y-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
                   {/* Left Column - Main Menu */}
-                  <div className="flex flex-col justify-center space-y-6">
+                  <div className="flex flex-col justify-center space-y-4 lg:space-y-6">
                     <Link 
                       href="/about" 
-                      className="text-5xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
+                      className="text-4xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
                       onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
                     >
                       About
                     </Link>
                     <Link 
                       href="/journey" 
-                      className="text-5xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
+                      className="text-4xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
                       onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
                     >
                       Journey
                     </Link>
                     <Link 
                       href="/contestants" 
-                      className="text-5xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
+                      className="text-4xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
                       onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
                     >
                       Contestants
                     </Link>
                     <Link 
                       href="/impact" 
-                      className="text-5xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
+                      className="text-4xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
                       onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
                     >
                       Impact
@@ -151,34 +151,34 @@ export default function Navbar() {
                   </div>
 
                   {/* Right Column - Secondary Menu */}
-                  <div className="flex flex-col justify-center space-y-6">
+                  <div className="flex flex-col justify-center space-y-4 lg:space-y-6">
                     <Link 
                       href="/vote" 
-                      className="text-4xl lg:text-5xl text-white hover:text-white/70 font-light transition"
+                      className="text-3xl lg:text-5xl text-white hover:text-white/70 font-light transition"
                       onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
                     >
                       Vote
                     </Link>
                     <Link 
                       href="/stream" 
-                      className="text-4xl lg:text-5xl text-white hover:text-white/70 font-light transition"
+                      className="text-3xl lg:text-5xl text-white hover:text-white/70 font-light transition"
                       onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
                     >
                       Watch Live
                     </Link>
                     <Link 
                       href="/contact" 
-                      className="text-4xl lg:text-5xl text-white hover:text-white/70 font-light transition"
+                      className="text-3xl lg:text-5xl text-white hover:text-white/70 font-light transition"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Contact
                     </Link>
 
-                    <div className="pt-8 space-y-4">
+                    <div className="pt-6 lg:pt-8 space-y-3 lg:space-y-4">
                       {session ? (
                         <Link
                           href="/dashboard"
-                          className="block text-2xl text-white hover:text-white/70 font-light transition"
+                          className="block text-xl lg:text-2xl text-white hover:text-white/70 font-light transition"
                           onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
                         >
                           Dashboard
@@ -187,14 +187,14 @@ export default function Navbar() {
                         <>
                           <Link
                             href="/auth/login"
-                            className="block text-2xl text-white hover:text-white/70 font-light transition"
+                            className="block text-xl lg:text-2xl text-white hover:text-white/70 font-light transition"
                             onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
                           >
                             Login
                           </Link>
                           <Link
                             href="/auth/register"
-                            className="block text-2xl text-white hover:text-white/70 font-light transition"
+                            className="block text-xl lg:text-2xl text-white hover:text-white/70 font-light transition"
                             onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
                           >
                             Sign Up
