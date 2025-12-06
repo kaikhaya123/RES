@@ -194,13 +194,30 @@ const useAnimationLoop = (
     const track = trackRef.current;
     if (!track) return;
 
+    // Wait for dimensions to be calculated
+    if (seqWidth === 0 && seqHeight === 0) {
+      console.log('[LogoLoop useAnimationLoop] Waiting for dimensions...');
+      return;
+    }
+
     // On mobile, skip JS animation entirely - let CSS animation handle it
     if (isMobile) {
+      console.log('[LogoLoop useAnimationLoop] Mobile mode - skipping JS animation', {
+        seqWidth,
+        seqHeight
+      });
       // Set initial transform and exit - CSS will animate
       track.style.transform = 'translate3d(0, 0, 0)';
       (track.style as any).webkitTransform = 'translate3d(0, 0, 0)';
       return;
     }
+
+    console.log('[LogoLoop useAnimationLoop] Desktop mode - starting JS animation', {
+      isMobile,
+      seqWidth,
+      seqHeight,
+      targetVelocity
+    });
 
     // Apply animation on desktop only
     const mobileFactor = 1;
@@ -351,6 +368,7 @@ export const LogoLoop = memo<LogoLoopProps>(
     const [copyCount, setCopyCount] = useState(12); // Increased initial count for better mobile visibility
     const [isHovered, setIsHovered] = useState(false);
     const [isMobile, setIsMobile] = useState<boolean>(false);
+    const isMobileRef = useRef<boolean>(false);
 
     const effectiveHoverSpeed = useMemo(() => {
       if (hoverSpeed !== undefined) return hoverSpeed;
@@ -372,12 +390,16 @@ export const LogoLoop = memo<LogoLoopProps>(
         const estimatedSize = logos.length * 200;
         const duration = Math.abs(estimatedSize / (speed || 40));
         // Ensure reasonable duration (between 10s and 120s)
-        return Math.min(Math.max(duration, 10), 120);
+        const result = Math.min(Math.max(duration, 10), 120);
+        console.log('[LogoLoop] CSS animation duration (fallback):', { estimatedSize, duration, result, isMobile });
+        return result;
       }
       // Calculate time to scroll one full sequence width
       const duration = Math.abs(size / speed);
-      return Math.min(Math.max(duration, 10), 120);
-    }, [seqWidth, seqHeight, speed, isVertical, logos.length]);
+      const result = Math.min(Math.max(duration, 10), 120);
+      console.log('[LogoLoop] CSS animation duration (calculated):', { size, speed, duration, result, isMobile });
+      return result;
+    }, [seqWidth, seqHeight, speed, isVertical, logos.length, isMobile]);
 
     const targetVelocity = useMemo(() => {
       const magnitude = Math.abs(speed);
@@ -465,8 +487,29 @@ export const LogoLoop = memo<LogoLoopProps>(
     useEffect(() => {
       if (typeof window === 'undefined' || !window.matchMedia) return;
       const mq = window.matchMedia('(max-width: 767px)');
-      const handler = () => setIsMobile(mq.matches);
-      handler();
+      const handler = () => {
+        const matches = mq.matches;
+        // Only update if state actually changed
+        if (isMobileRef.current !== matches) {
+          console.log('[LogoLoop] Mobile detection changed:', { 
+            matches, 
+            windowWidth: window.innerWidth,
+            devicePixelRatio: window.devicePixelRatio,
+            timestamp: Date.now()
+          });
+          isMobileRef.current = matches;
+          setIsMobile(matches);
+        }
+      };
+      // Initial check
+      console.log('[LogoLoop] Initial mobile check:', {
+        matches: mq.matches,
+        windowWidth: window.innerWidth,
+        userAgent: navigator.userAgent
+      });
+      isMobileRef.current = mq.matches;
+      setIsMobile(mq.matches);
+      
       if (typeof mq.addEventListener === 'function') mq.addEventListener('change', handler);
       else mq.addListener(handler as any);
       return () => {
@@ -482,9 +525,10 @@ export const LogoLoop = memo<LogoLoopProps>(
       () => ({
         '--logoloop-gap': `${gap}px`,
         '--logoloop-logoHeight': `${logoHeight}px`,
+        '--logoloop-duration': `${cssAnimationDuration}s`,
         ...(fadeOutColor && { '--logoloop-fadeColor': fadeOutColor })
       } as React.CSSProperties),
-      [gap, logoHeight, fadeOutColor]
+      [gap, logoHeight, cssAnimationDuration, fadeOutColor]
     );
 
     const rootClasses = useMemo(

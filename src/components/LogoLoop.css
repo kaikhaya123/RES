@@ -217,14 +217,14 @@
   /* Force CSS animation on all mobile devices */
   .logoloop:not(.logoloop--vertical) .logoloop__track,
   .logoloop--mobile:not(.logoloop--vertical) .logoloop__track {
-    animation: logoloop-scroll-horizontal linear infinite !important;
-    -webkit-animation: logoloop-scroll-horizontal linear infinite !important;
+    animation: logoloop-scroll-horizontal var(--logoloop-duration, 60s) linear infinite !important;
+    -webkit-animation: logoloop-scroll-horizontal var(--logoloop-duration, 60s) linear infinite !important;
   }
   
   .logoloop.logoloop--vertical .logoloop__track,
   .logoloop--mobile.logoloop--vertical .logoloop__track {
-    animation: logoloop-scroll-vertical linear infinite !important;
-    -webkit-animation: logoloop-scroll-vertical linear infinite !important;
+    animation: logoloop-scroll-vertical var(--logoloop-duration, 60s) linear infinite !important;
+    -webkit-animation: logoloop-scroll-vertical var(--logoloop-duration, 60s) linear infinite !important;
   }
   
   .logoloop__track {
