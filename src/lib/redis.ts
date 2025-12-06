@@ -4,11 +4,15 @@ const globalForRedis = globalThis as unknown as {
   redis: ReturnType<typeof createClient> | undefined
 }
 
+// Skip Redis connection during build time to avoid ECONNREFUSED errors
+const isBuildTime = process.env.NEXT_PHASE === 'phase-production-build' || 
+                    process.env.NODE_ENV === 'production' && !process.env.REDIS_URL;
+
 export const redis = globalForRedis.redis ?? createClient({
   url: process.env.REDIS_URL || 'redis://localhost:6379'
 });
 
-if (!redis.isOpen) {
+if (!isBuildTime && !redis.isOpen) {
   redis.connect().catch(console.error);
 }
 
@@ -32,6 +36,7 @@ export const CACHE_TTL = {
 
 export async function cacheGet<T>(key: string): Promise<T | null> {
   try {
+    if (isBuildTime) return null;
     const data = await redis.get(key);
     return data ? JSON.parse(data) : null;
   } catch (error) {
@@ -42,6 +47,7 @@ export async function cacheGet<T>(key: string): Promise<T | null> {
 
 export async function cacheSet(key: string, value: any, ttl: number = CACHE_TTL.MEDIUM): Promise<void> {
   try {
+    if (isBuildTime) return;
     await redis.setEx(key, ttl, JSON.stringify(value));
   } catch (error) {
     console.error('Cache set error:', error);
@@ -50,6 +56,7 @@ export async function cacheSet(key: string, value: any, ttl: number = CACHE_TTL.
 
 export async function cacheDelete(key: string): Promise<void> {
   try {
+    if (isBuildTime) return;
     await redis.del(key);
   } catch (error) {
     console.error('Cache delete error:', error);
@@ -58,6 +65,7 @@ export async function cacheDelete(key: string): Promise<void> {
 
 export async function cacheDeletePattern(pattern: string): Promise<void> {
   try {
+    if (isBuildTime) return;
     const keys = await redis.keys(pattern);
     if (keys.length > 0) {
       await redis.del(keys);
