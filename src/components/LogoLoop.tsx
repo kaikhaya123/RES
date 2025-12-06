@@ -11,6 +11,95 @@ const toCssLength = (value: string | number | undefined) => (typeof value === 'n
 
 const cx = (...parts: (string | boolean | undefined)[]) => parts.filter(Boolean).join(' ');
 
+// Memoized individual logo item to prevent unnecessary re-renders
+const LogoItem = memo<{
+  item: any;
+  itemKey: string;
+  isVertical: boolean;
+  scaleOnHover: boolean;
+  renderItem?: (item: any, key: string) => React.ReactNode;
+}>(({ item, itemKey, isVertical, scaleOnHover, renderItem }) => {
+  if (renderItem) {
+    return (
+      <li
+        className={cx(
+          'flex-none text-[length:var(--logoloop-logoHeight)] leading-[1]',
+          isVertical ? 'mb-[var(--logoloop-gap)]' : 'mr-[var(--logoloop-gap)]',
+          scaleOnHover && 'overflow-visible group/item'
+        )}
+        key={itemKey}
+        role="listitem"
+      >
+        {renderItem(item, itemKey)}
+      </li>
+    );
+  }
+
+  const content = (
+    <img
+      className={cx(
+        'h-[var(--logoloop-logoHeight)] w-auto block object-contain',
+        '[-webkit-user-drag:none] pointer-events-none',
+        '[image-rendering:-webkit-optimize-contrast]',
+        'motion-reduce:transition-none',
+        scaleOnHover &&
+          'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-110'
+      )}
+      style={{
+        transform: 'translate3d(0, 0, 0)',
+        WebkitTransform: 'translate3d(0, 0, 0)'
+      }}
+      src={item.src}
+      srcSet={item.srcSet}
+      sizes={item.sizes}
+      width={item.width}
+      height={item.height}
+      alt={item.alt ?? ''}
+      title={item.title}
+      loading="eager"
+      decoding="async"
+      draggable={false}
+    />
+  );
+
+  const itemAriaLabel = item.alt ?? item.title;
+
+  const inner = item.href ? (
+    <a
+      className={cx(
+        'inline-flex items-center no-underline rounded',
+        'transition-opacity duration-200 ease-linear',
+        'hover:opacity-80',
+        'focus-visible:outline focus-visible:outline-current focus-visible:outline-offset-2'
+      )}
+      href={item.href}
+      aria-label={itemAriaLabel || 'logo link'}
+      target="_blank"
+      rel="noreferrer noopener"
+    >
+      {content}
+    </a>
+  ) : (
+    content
+  );
+
+  return (
+    <li
+      className={cx(
+        'flex-none text-[length:var(--logoloop-logoHeight)] leading-[1]',
+        isVertical ? 'mb-[var(--logoloop-gap)]' : 'mr-[var(--logoloop-gap)]',
+        scaleOnHover && 'overflow-visible group/item'
+      )}
+      key={itemKey}
+      role="listitem"
+    >
+      {inner}
+    </li>
+  );
+});
+
+LogoItem.displayName = 'LogoItem';
+
 const useResizeObserver = (callback: () => void, elements: React.RefObject<HTMLElement>[], dependencies: any[]) => {
   useEffect(() => {
     if (!window.ResizeObserver) {
@@ -431,95 +520,17 @@ export const LogoLoop = memo<LogoLoopProps>(
     }, [effectiveHoverSpeed]);
 
     // Touch devices don't fire mouseenter/mouseleave; map touch events to hover state
+    // Use RAF to debounce and prevent blocking
     const handleTouchStart = useCallback(() => {
-      if (effectiveHoverSpeed !== undefined) setIsHovered(true);
+      if (effectiveHoverSpeed !== undefined) {
+        requestAnimationFrame(() => setIsHovered(true));
+      }
     }, [effectiveHoverSpeed]);
     const handleTouchEnd = useCallback(() => {
-      if (effectiveHoverSpeed !== undefined) setIsHovered(false);
+      if (effectiveHoverSpeed !== undefined) {
+        requestAnimationFrame(() => setIsHovered(false));
+      }
     }, [effectiveHoverSpeed]);
-
-    const renderLogoItem = useCallback(
-      (item: LogoItem, key: string) => {
-        if (renderItem) {
-          return (
-            <li
-              className={cx(
-                'flex-none text-[length:var(--logoloop-logoHeight)] leading-[1]',
-                isVertical ? 'mb-[var(--logoloop-gap)]' : 'mr-[var(--logoloop-gap)]',
-                scaleOnHover && 'overflow-visible group/item'
-              )}
-              key={key}
-              role="listitem"
-            >
-              {renderItem(item, key)}
-            </li>
-          );
-        }
-
-        const content = (
-          <img
-            className={cx(
-              'h-[var(--logoloop-logoHeight)] w-auto block object-contain',
-              '[-webkit-user-drag:none] pointer-events-none',
-              '[image-rendering:-webkit-optimize-contrast]',
-              'motion-reduce:transition-none',
-              scaleOnHover &&
-                'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-110'
-            )}
-            style={{
-              transform: 'translate3d(0, 0, 0)',
-              WebkitTransform: 'translate3d(0, 0, 0)'
-            }}
-            src={item.src}
-            srcSet={item.srcSet}
-            sizes={item.sizes}
-            width={item.width}
-            height={item.height}
-            alt={item.alt ?? ''}
-            title={item.title}
-            loading="eager"
-            decoding="async"
-            draggable={false}
-          />
-        );
-
-        const itemAriaLabel = item.alt ?? item.title;
-
-        const inner = item.href ? (
-          <a
-            className={cx(
-              'inline-flex items-center no-underline rounded',
-              'transition-opacity duration-200 ease-linear',
-              'hover:opacity-80',
-              'focus-visible:outline focus-visible:outline-current focus-visible:outline-offset-2'
-            )}
-            href={item.href}
-            aria-label={itemAriaLabel || 'logo link'}
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            {content}
-          </a>
-        ) : (
-          content
-        );
-
-        return (
-          <li
-            className={cx(
-              'flex-none text-[length:var(--logoloop-logoHeight)] leading-[1]',
-              isVertical ? 'mb-[var(--logoloop-gap)]' : 'mr-[var(--logoloop-gap)]',
-              scaleOnHover && 'overflow-visible group/item'
-            )}
-            key={key}
-            role="listitem"
-          >
-            {inner}
-          </li>
-        );
-      },
-      [isVertical, scaleOnHover, renderItem]
-    );
 
     const logoLists = useMemo(
       () =>
@@ -531,10 +542,19 @@ export const LogoLoop = memo<LogoLoopProps>(
             aria-hidden={copyIndex > 0}
             ref={copyIndex === 0 ? seqRef : undefined}
           >
-            {logos.map((item, itemIndex) => renderLogoItem(item, `${copyIndex}-${itemIndex}`))}
+            {logos.map((item, itemIndex) => (
+              <LogoItem
+                key={`${copyIndex}-${itemIndex}`}
+                item={item}
+                itemKey={`${copyIndex}-${itemIndex}`}
+                isVertical={isVertical}
+                scaleOnHover={scaleOnHover}
+                renderItem={renderItem}
+              />
+            ))}
           </ul>
         )),
-      [copyCount, logos, renderLogoItem, isVertical]
+      [copyCount, logos, isVertical, scaleOnHover, renderItem]
     );
 
     const containerStyle = useMemo(

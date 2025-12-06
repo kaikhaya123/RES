@@ -56,6 +56,9 @@
   font-size: var(--logoloop-logoHeight);
   line-height: 1;
   /* Remove margin since we're using gap on parent */
+  /* Optimize rendering performance */
+  content-visibility: auto;
+  contain: layout style paint;
 }
 
 .logoloop--vertical .logoloop__item {
