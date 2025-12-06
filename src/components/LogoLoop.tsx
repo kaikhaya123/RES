@@ -102,23 +102,39 @@ LogoItem.displayName = 'LogoItem';
 
 const useResizeObserver = (callback: () => void, elements: React.RefObject<HTMLElement>[], dependencies: any[]) => {
   useEffect(() => {
+    let rafId: number | null = null;
+    let isScheduled = false;
+    
+    // Throttled callback - only runs once per animation frame
+    const throttledCallback = () => {
+      if (isScheduled) return;
+      isScheduled = true;
+      rafId = requestAnimationFrame(() => {
+        callback();
+        isScheduled = false;
+      });
+    };
+    
     if (!window.ResizeObserver) {
-      const handleResize = () => callback();
-      window.addEventListener('resize', handleResize);
-      callback();
-      return () => window.removeEventListener('resize', handleResize);
+      window.addEventListener('resize', throttledCallback);
+      throttledCallback();
+      return () => {
+        window.removeEventListener('resize', throttledCallback);
+        if (rafId !== null) cancelAnimationFrame(rafId);
+      };
     }
 
     const observers = elements.map(ref => {
       if (!ref.current) return null;
-      const observer = new ResizeObserver(callback);
+      const observer = new ResizeObserver(throttledCallback);
       observer.observe(ref.current);
       return observer;
     });
 
-    callback();
+    throttledCallback();
     return () => {
       observers.forEach(observer => observer?.disconnect());
+      if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, [callback, elements, dependencies]);
 };
@@ -373,95 +389,68 @@ export const LogoLoop = memo<LogoLoopProps>(
     }, [speed, direction, isVertical]);
 
     const updateDimensions = useCallback(() => {
-      const containerWidth = containerRef.current?.clientWidth ?? 0;
-      const sequenceRect = seqRef.current?.getBoundingClientRect?.();
-      const sequenceWidth = sequenceRect?.width ?? 0;
-      const sequenceHeight = sequenceRect?.height ?? 0;
-      // Debug: expose measured sizes in console to help diagnose mobile issues
-      try {
-        // only output in development to avoid noise in production
-        if (process?.env?.NODE_ENV !== 'production') {
-          // eslint-disable-next-line no-console
-          console.debug('LogoLoop:updateDimensions', { containerWidth, sequenceWidth, sequenceHeight });
-        }
-      } catch (e) {
-        // ignore
-      }
-      if (isVertical) {
-        const parentHeight = containerRef.current?.parentElement?.clientHeight ?? 0;
-        if (containerRef.current && parentHeight > 0) {
-          const targetHeight = Math.ceil(parentHeight);
-          if (containerRef.current.style.height !== `${targetHeight}px`)
-            containerRef.current.style.height = `${targetHeight}px`;
-        }
-        if (sequenceHeight > 0) {
-          setSeqHeight(Math.ceil(sequenceHeight));
-          const viewport = containerRef.current?.clientHeight ?? parentHeight ?? sequenceHeight;
-          const copiesNeeded = Math.ceil(viewport / sequenceHeight) + ANIMATION_CONFIG.COPY_HEADROOM;
+      // Use RAF to defer expensive measurements and prevent blocking
+      requestAnimationFrame(() => {
+        const containerWidth = containerRef.current?.clientWidth ?? 0;
+        const sequenceRect = seqRef.current?.getBoundingClientRect?.();
+        const sequenceWidth = sequenceRect?.width ?? 0;
+        const sequenceHeight = sequenceRect?.height ?? 0;
+        
+        if (isVertical) {
+          const parentHeight = containerRef.current?.parentElement?.clientHeight ?? 0;
+          if (containerRef.current && parentHeight > 0) {
+            const targetHeight = Math.ceil(parentHeight);
+            if (containerRef.current.style.height !== `${targetHeight}px`)
+              containerRef.current.style.height = `${targetHeight}px`;
+          }
+          if (sequenceHeight > 0) {
+            setSeqHeight(Math.ceil(sequenceHeight));
+            const viewport = containerRef.current?.clientHeight ?? parentHeight ?? sequenceHeight;
+            const copiesNeeded = Math.ceil(viewport / sequenceHeight) + ANIMATION_CONFIG.COPY_HEADROOM;
+            setCopyCount(Math.max(8, copiesNeeded));
+          }
+        } else if (sequenceWidth > 0) {
+          setSeqWidth(Math.ceil(sequenceWidth));
+          const copiesNeeded = Math.ceil(containerWidth / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
           setCopyCount(Math.max(8, copiesNeeded));
-        }
-      } else if (sequenceWidth > 0) {
-        setSeqWidth(Math.ceil(sequenceWidth));
-        const copiesNeeded = Math.ceil(containerWidth / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
-        setCopyCount(Math.max(8, copiesNeeded));
-      } else {
-        // Fallback: if sequenceWidth is 0 (mobile lazy-load or measurement timing issue),
-        // try to approximate by summing child image widths or using container width.
-        let approxWidth = 0;
-        try {
-          const imgs = seqRef.current?.querySelectorAll('img') ?? [];
-          imgs.forEach((img: Element) => {
-            const el = img as HTMLElement;
-            const w = el.clientWidth || el.getBoundingClientRect?.().width || 0;
-            approxWidth += w;
-          });
-        } catch (e) {
-          approxWidth = 0;
-        }
-
-        if (approxWidth > 0) {
-          setSeqWidth(Math.ceil(approxWidth));
-          const copiesNeeded = Math.ceil(containerWidth / approxWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
-          setCopyCount(Math.max(8, copiesNeeded));
-        } else if (containerWidth > 0) {
-          // As last resort use container width to ensure animation starts
-          const fallback = Math.max(8, Math.ceil(containerWidth / 100));
-          setSeqWidth(Math.ceil(containerWidth));
-          setCopyCount(fallback + ANIMATION_CONFIG.COPY_HEADROOM);
         } else {
-          // Last-resort fallback: always create enough copies for mobile
-          const vw = typeof window !== 'undefined' ? window.innerWidth : 0;
-          if (vw > 0) {
-            setSeqWidth(Math.ceil(vw));
-            const copiesNeeded = Math.ceil(vw / 100) + ANIMATION_CONFIG.COPY_HEADROOM;
-            setCopyCount(Math.max(10, copiesNeeded)); // Ensure at least 10 copies for mobile
+          // Simplified fallback - avoid expensive querySelectorAll
+          if (containerWidth > 0) {
+            // Estimate: logo count × average logo width (200px)
+            const estimatedWidth = logos.length * 200;
+            setSeqWidth(estimatedWidth);
+            const copiesNeeded = Math.ceil(containerWidth / estimatedWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
+            setCopyCount(Math.max(8, copiesNeeded));
           } else {
-            // Final fallback - just use a reasonable number
-            setCopyCount(10);
+            // Last-resort fallback
+            const vw = typeof window !== 'undefined' ? window.innerWidth : 0;
+            if (vw > 0) {
+              const estimatedWidth = logos.length * 200;
+              setSeqWidth(estimatedWidth);
+              const copiesNeeded = Math.ceil(vw / estimatedWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
+              setCopyCount(Math.max(10, copiesNeeded));
+            } else {
+              setCopyCount(10);
+            }
           }
         }
-      }
-    }, [isVertical]);
+      });
+    }, [isVertical, logos.length]);
 
     // Retry measurements a few times after mount to handle mobile rendering timing
+    // Reduced frequency to minimize blocking
     useEffect(() => {
       if (typeof window === 'undefined') return;
       // Immediate first call
       updateDimensions();
-      const t1 = setTimeout(updateDimensions, 50);
-      const t2 = setTimeout(updateDimensions, 150);
-      const t3 = setTimeout(updateDimensions, 500);
-      const t4 = setTimeout(updateDimensions, 1000);
-      // periodic retries for a short window
-      const interval = setInterval(updateDimensions, 500);
-      const stop = setTimeout(() => clearInterval(interval), 3000);
+      const t1 = setTimeout(updateDimensions, 100);
+      const t2 = setTimeout(updateDimensions, 300);
+      const t3 = setTimeout(updateDimensions, 1000);
+      // Single retry after initial attempts
       return () => {
         clearTimeout(t1);
         clearTimeout(t2);
         clearTimeout(t3);
-        clearTimeout(t4);
-        clearInterval(interval);
-        clearTimeout(stop);
       };
     }, [updateDimensions]);
 
