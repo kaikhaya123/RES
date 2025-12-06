@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import RippleEffect from '@/components/ui/RippleEffect';
-import RevealTextScroll from '@/components/ui/reveal-text-scroll';
 
 export default function Hero() {
   return (
@@ -41,22 +40,15 @@ export default function Hero() {
             ROOMZA'S EDUCATED SECRET
           </motion.h1>
 
-          {/* Subtitle with Scroll Reveal */}
-          <RevealTextScroll
-            text="South Africa's first student reality show empowering 20 students over 6 weeks to transform lives through education and leadership"
-            tag="p"
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg md:text-xl lg:text-2xl text-white/90 font-medium max-w-2xl leading-snug tracking-tight drop-shadow-md"
-            direction="bottom"
-            fadeEdge={30}
-            blur={true}
-            blurAmount={8}
-            colorMorph={true}
-            startColor="#ffffff60"
-            endColor="#ffffffe6"
-            kerningTighten={true}
-            startKerning={0.05}
-            endKerning={-0.02}
-          />
+          >
+            South Africa's first student reality show empowering 20 students over 6 weeks to transform lives through education and leadership
+          </motion.p>
         </div>
       </div>
     </section>
