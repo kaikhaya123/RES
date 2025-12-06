@@ -348,7 +348,7 @@ export const LogoLoop = memo<LogoLoopProps>(
 
     const [seqWidth, setSeqWidth] = useState(0);
     const [seqHeight, setSeqHeight] = useState(0);
-    const [copyCount, setCopyCount] = useState(10); // Start with more copies for mobile visibility
+    const [copyCount, setCopyCount] = useState(12); // Increased initial count for better mobile visibility
     const [isHovered, setIsHovered] = useState(false);
     const [isMobile, setIsMobile] = useState<boolean>(false);
 
@@ -370,10 +370,13 @@ export const LogoLoop = memo<LogoLoopProps>(
         // Fallback: estimate based on logo count and typical spacing
         // Assume ~200px per logo (logo + gap) × logo count / speed
         const estimatedSize = logos.length * 200;
-        return Math.abs(estimatedSize / speed) || 60; // default 60s if speed is 0
+        const duration = Math.abs(estimatedSize / (speed || 40));
+        // Ensure reasonable duration (between 10s and 120s)
+        return Math.min(Math.max(duration, 10), 120);
       }
       // Calculate time to scroll one full sequence width
-      return Math.abs(size / speed);
+      const duration = Math.abs(size / speed);
+      return Math.min(Math.max(duration, 10), 120);
     }, [seqWidth, seqHeight, speed, isVertical, logos.length]);
 
     const targetVelocity = useMemo(() => {
@@ -407,12 +410,12 @@ export const LogoLoop = memo<LogoLoopProps>(
             setSeqHeight(Math.ceil(sequenceHeight));
             const viewport = containerRef.current?.clientHeight ?? parentHeight ?? sequenceHeight;
             const copiesNeeded = Math.ceil(viewport / sequenceHeight) + ANIMATION_CONFIG.COPY_HEADROOM;
-            setCopyCount(Math.max(8, copiesNeeded));
+            setCopyCount(Math.max(12, copiesNeeded));
           }
         } else if (sequenceWidth > 0) {
           setSeqWidth(Math.ceil(sequenceWidth));
           const copiesNeeded = Math.ceil(containerWidth / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
-          setCopyCount(Math.max(8, copiesNeeded));
+          setCopyCount(Math.max(12, copiesNeeded));
         } else {
           // Simplified fallback - avoid expensive querySelectorAll
           if (containerWidth > 0) {
@@ -420,7 +423,7 @@ export const LogoLoop = memo<LogoLoopProps>(
             const estimatedWidth = logos.length * 200;
             setSeqWidth(estimatedWidth);
             const copiesNeeded = Math.ceil(containerWidth / estimatedWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
-            setCopyCount(Math.max(8, copiesNeeded));
+            setCopyCount(Math.max(12, copiesNeeded));
           } else {
             // Last-resort fallback
             const vw = typeof window !== 'undefined' ? window.innerWidth : 0;
@@ -428,9 +431,9 @@ export const LogoLoop = memo<LogoLoopProps>(
               const estimatedWidth = logos.length * 200;
               setSeqWidth(estimatedWidth);
               const copiesNeeded = Math.ceil(vw / estimatedWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
-              setCopyCount(Math.max(10, copiesNeeded));
+              setCopyCount(Math.max(12, copiesNeeded));
             } else {
-              setCopyCount(10);
+              setCopyCount(12);
             }
           }
         }
@@ -646,11 +649,13 @@ export const LogoLoop = memo<LogoLoopProps>(
             WebkitBackfaceVisibility: 'hidden',
             perspective: 1000,
             WebkitPerspective: 1000,
-            // Apply CSS animation on mobile devices
-            ...(isMobile && {
-              animation: `logoloop-scroll-${isVertical ? 'vertical' : 'horizontal'} ${cssAnimationDuration}s linear infinite`,
-              WebkitAnimation: `logoloop-scroll-${isVertical ? 'vertical' : 'horizontal'} ${cssAnimationDuration}s linear infinite`
-            })
+            // Always apply CSS animation on mobile, use calculated duration or fallback
+            animation: isMobile 
+              ? `logoloop-scroll-${isVertical ? 'vertical' : 'horizontal'} ${cssAnimationDuration}s linear infinite`
+              : undefined,
+            WebkitAnimation: isMobile 
+              ? `logoloop-scroll-${isVertical ? 'vertical' : 'horizontal'} ${cssAnimationDuration}s linear infinite`
+              : undefined
           } as React.CSSProperties}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
