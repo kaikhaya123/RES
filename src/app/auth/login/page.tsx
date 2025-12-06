@@ -250,15 +250,19 @@ export default function LoginPage() {
           transition={{ duration: 0.6 }}
           className="hidden lg:flex lg:w-7/12 relative"
         >
-          <div className="relative w-full h-full min-h-[600px]">
-            <Image
-              src="/Images/Vintage _ 90s _ Fashion n Friends (1).jpg"
-              alt="Students collaborating"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+         <div className="relative w-full h-full min-h-[600px] flex items-end justify-center">
+            {/* Full Background Video */}
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src="/Videos/olShi6AW2pQj75e9EX.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+         </div>
         </motion.div>
       </div>
     </div>
