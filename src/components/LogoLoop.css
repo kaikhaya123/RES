@@ -29,6 +29,9 @@
   user-select: none;
   position: relative;
   z-index: 0;
+  /* Ensure proper spacing between logos */
+  align-items: center;
+  gap: var(--logoloop-gap);
 }
 
 .logoloop--vertical .logoloop__track {
@@ -40,6 +43,8 @@
 .logoloop__list {
   display: flex;
   align-items: center;
+  /* Prevent overlapping */
+  gap: var(--logoloop-gap);
 }
 
 .logoloop--vertical .logoloop__list {
@@ -48,23 +53,21 @@
 
 .logoloop__item {
   flex: 0 0 auto;
-  margin-right: var(--logoloop-gap);
   font-size: var(--logoloop-logoHeight);
   line-height: 1;
+  /* Remove margin since we're using gap on parent */
 }
 
 .logoloop--vertical .logoloop__item {
-  margin-right: 0;
-  margin-bottom: var(--logoloop-gap);
+  /* Remove margin since we're using gap on parent */
 }
 
 .logoloop__item:last-child {
-  margin-right: var(--logoloop-gap);
+  /* Remove margin since we're using gap on parent */
 }
 
 .logoloop--vertical .logoloop__item:last-child {
-  margin-right: 0;
-  margin-bottom: var(--logoloop-gap);
+  /* Remove margin since we're using gap on parent */
 }
 
 .logoloop__node {

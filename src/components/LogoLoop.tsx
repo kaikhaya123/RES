@@ -89,19 +89,8 @@ const useAnimationLoop = (
     const track = trackRef.current;
     if (!track) return;
 
-    // On mobile, let CSS animations handle it completely - skip JavaScript animation
-    if (isMobile) {
-      // Just set initial transform and let CSS animation take over
-      track.style.transform = 'translate3d(0, 0, 0)';
-      (track.style as any).webkitTransform = 'translate3d(0, 0, 0)';
-      return () => {
-        // cleanup
-      };
-    }
-
-    // Apply a reduced animation intensity on mobile to save CPU and make motion subtler.
-    // Use a less aggressive reduction so motion remains visible on small screens.
-    const mobileFactor = isMobile ? 1 : 1; // Keep full speed on mobile for visibility
+    // Apply animation on all devices including mobile
+    const mobileFactor = 1; // Keep full speed on all devices
 
     const prefersReduced =
       typeof window !== 'undefined' &&
@@ -246,7 +235,7 @@ export const LogoLoop = memo<LogoLoopProps>(
 
     const [seqWidth, setSeqWidth] = useState(0);
     const [seqHeight, setSeqHeight] = useState(0);
-    const [copyCount, setCopyCount] = useState(6); // Start with more copies for mobile
+    const [copyCount, setCopyCount] = useState(10); // Start with more copies for mobile visibility
     const [isHovered, setIsHovered] = useState(false);
     const [isMobile, setIsMobile] = useState<boolean>(false);
 
@@ -307,12 +296,12 @@ export const LogoLoop = memo<LogoLoopProps>(
           setSeqHeight(Math.ceil(sequenceHeight));
           const viewport = containerRef.current?.clientHeight ?? parentHeight ?? sequenceHeight;
           const copiesNeeded = Math.ceil(viewport / sequenceHeight) + ANIMATION_CONFIG.COPY_HEADROOM;
-          setCopyCount(Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
+          setCopyCount(Math.max(8, copiesNeeded));
         }
       } else if (sequenceWidth > 0) {
         setSeqWidth(Math.ceil(sequenceWidth));
         const copiesNeeded = Math.ceil(containerWidth / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
-        setCopyCount(Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
+        setCopyCount(Math.max(8, copiesNeeded));
       } else {
         // Fallback: if sequenceWidth is 0 (mobile lazy-load or measurement timing issue),
         // try to approximate by summing child image widths or using container width.
@@ -331,15 +320,10 @@ export const LogoLoop = memo<LogoLoopProps>(
         if (approxWidth > 0) {
           setSeqWidth(Math.ceil(approxWidth));
           const copiesNeeded = Math.ceil(containerWidth / approxWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
-          setCopyCount(Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
+          setCopyCount(Math.max(8, copiesNeeded));
         } else if (containerWidth > 0) {
           // As last resort use container width to ensure animation starts
-          const fallback = Math.max(ANIMATION_CONFIG.MIN_COPIES, Math.ceil(containerWidth / 100));
-          setSeqWidth(Math.ceil(containerWidth));
-          setCopyCount(fallback + ANIMATION_CONFIG.COPY_HEADROOM);
-        } else if (containerWidth > 0) {
-          // use container width
-          const fallback = Math.max(ANIMATION_CONFIG.MIN_COPIES, Math.ceil(containerWidth / 100));
+          const fallback = Math.max(8, Math.ceil(containerWidth / 100));
           setSeqWidth(Math.ceil(containerWidth));
           setCopyCount(fallback + ANIMATION_CONFIG.COPY_HEADROOM);
         } else {
@@ -348,10 +332,10 @@ export const LogoLoop = memo<LogoLoopProps>(
           if (vw > 0) {
             setSeqWidth(Math.ceil(vw));
             const copiesNeeded = Math.ceil(vw / 100) + ANIMATION_CONFIG.COPY_HEADROOM;
-            setCopyCount(Math.max(6, copiesNeeded)); // Ensure at least 6 copies
+            setCopyCount(Math.max(10, copiesNeeded)); // Ensure at least 10 copies for mobile
           } else {
             // Final fallback - just use a reasonable number
-            setCopyCount(8);
+            setCopyCount(10);
           }
         }
       }
@@ -640,9 +624,11 @@ export const LogoLoop = memo<LogoLoopProps>(
             WebkitBackfaceVisibility: 'hidden',
             perspective: 1000,
             WebkitPerspective: 1000,
-            // Dynamic animation duration for mobile CSS animation
-            animationDuration: `${cssAnimationDuration}s`,
-            WebkitAnimationDuration: `${cssAnimationDuration}s`
+            // Apply CSS animation on mobile devices
+            ...(isMobile && {
+              animation: `logoloop-scroll-${isVertical ? 'vertical' : 'horizontal'} ${cssAnimationDuration}s linear infinite`,
+              WebkitAnimation: `logoloop-scroll-${isVertical ? 'vertical' : 'horizontal'} ${cssAnimationDuration}s linear infinite`
+            })
           } as React.CSSProperties}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
