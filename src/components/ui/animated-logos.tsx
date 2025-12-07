@@ -106,42 +106,42 @@ export default function AnimatedLogos({
 
   if (displayMode === "batch-cycle") {
     return (
-      <div className="relative w-full py-32 overflow-hidden">
-        {/* Background Image with Minimal Overlay */}
+      <div className="relative w-full py-24 lg:py-32 overflow-hidden">
+        {/* Background Image with Overlay */}
         <div className="absolute inset-0">
           <Image
-            src="/Images/High-angle.jpg"
+            src="/Images/low-angle-underground-hip-hop-musicians.jpg"
             alt="Student partners background"
             fill
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/30" />
         </div>
 
-        {/* Content */}
-        <div className="relative z-20 max-w-7xl mx-auto px-6">
+        {/* Content Container */}
+        <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-12">
           
-          {/* Header */}
+          {/* Header Section - Centered */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-6">
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-black/80 border border-white/30 rounded-full mb-8">
               <div className="w-6 h-[2px] bg-white" />
               <span className="text-sm font-bold tracking-[0.25em] uppercase text-white">
                 Trusted by 80+ Brands
               </span>
             </div>
-            <h3 className="text-5xl lg:text-7xl font-black text-white drop-shadow-2xl">
+            <h3 className="text-4xl md:text-5xl lg:text-7xl font-black text-white drop-shadow-2xl">
               Our Partners
             </h3>
           </motion.div>
 
-          {/* Batch Grid Animation */}
-          <div className="min-h-[400px] flex items-center justify-center">
+          {/* Logo Grid Section */}
+          <div className="min-h-[420px] flex items-center justify-center mb-16">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentBatch}
@@ -149,7 +149,7 @@ export default function AnimatedLogos({
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 w-full"
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 w-full"
                 style={{ willChange: "opacity" }}
               >
                 {batchLogos.map((logo, index) => (
@@ -163,7 +163,7 @@ export default function AnimatedLogos({
                     className="relative aspect-[3/2] flex items-center justify-center group"
                     style={{ willChange: "transform, opacity" }}
                   >
-                    <div className="relative w-full h-full">
+                    <div className="relative w-full h-full p-2">
                       <Image
                         src={logo.img}
                         alt={`${logo.name} logo`}
@@ -185,8 +185,8 @@ export default function AnimatedLogos({
             </AnimatePresence>
           </div>
 
-          {/* Batch Indicators */}
-          <div className="flex justify-center gap-2 mt-12">
+          {/* Batch Indicators - Centered */}
+          <div className="flex justify-center gap-2 mb-16">
             {Array.from({ length: Math.ceil(shuffledLogos.length / batchSize) }).map((_, i) => (
               <button
                 key={i}
@@ -201,27 +201,27 @@ export default function AnimatedLogos({
             ))}
           </div>
 
-          {/* Stats */}
+          {/* Stats Section - Centered & Balanced */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="mt-16 flex justify-center"
+            className="flex justify-center"
           >
-            <div className="inline-flex items-center gap-8 px-8 py-4 bg-black/80 border border-white/30 rounded-2xl">
+            <div className="inline-flex flex-wrap items-center justify-center gap-6 md:gap-8 px-6 md:px-10 py-5 bg-black/80 border border-white/30 rounded-2xl">
               <div className="text-center">
-                <div className="text-2xl font-black text-white mb-1">{logos.length}+</div>
-                <div className="text-xs text-white/70 font-semibold">Partners</div>
+                <div className="text-2xl md:text-3xl font-black text-white mb-1">{logos.length}+</div>
+                <div className="text-xs text-white/70 font-semibold uppercase tracking-wide">Partners</div>
               </div>
-              <div className="w-px h-10 bg-white/20" />
+              <div className="w-px h-12 bg-white/20" />
               <div className="text-center">
-                <div className="text-2xl font-black text-white mb-1">20M+</div>
-                <div className="text-xs text-white/70 font-semibold">Combined Reach</div>
+                <div className="text-2xl md:text-3xl font-black text-white mb-1">20M+</div>
+                <div className="text-xs text-white/70 font-semibold uppercase tracking-wide">Reach</div>
               </div>
-              <div className="w-px h-10 bg-white/20" />
+              <div className="w-px h-12 bg-white/20" />
               <div className="text-center">
-                <div className="text-2xl font-black text-white mb-1">15+</div>
-                <div className="text-xs text-white/70 font-semibold">Industries</div>
+                <div className="text-2xl md:text-3xl font-black text-white mb-1">15+</div>
+                <div className="text-xs text-white/70 font-semibold uppercase tracking-wide">Industries</div>
               </div>
             </div>
           </motion.div>
