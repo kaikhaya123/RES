@@ -1,3 +1,4 @@
+
 "use client";
 
 import { motion } from "framer-motion";
@@ -7,7 +8,6 @@ import AnimatedLogos from "@/components/ui/animated-logos";
 export default function Sponsors() {
   return (
     <section className="relative bg-white py-40 overflow-hidden">
-
       {/* Soft background accent */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -17,9 +17,7 @@ export default function Sponsors() {
           className="w-[650px] h-[650px] bg-black/5 blur-3xl rounded-full absolute -top-20 -left-10"
         />
       </div>
-
       <div className="max-w-7xl mx-auto px-6 lg:px-12 space-y-40">
-
         {/* INTRO SECTION */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -27,14 +25,13 @@ export default function Sponsors() {
           transition={{ duration: 0.7 }}
           className="text-center"
         >
-          <h1 className="text-6xl lg:text-7xl font-black tracking-tight">
+          <h1 className="text-white lg:text-7xl font-black tracking-tight">
             Our Partners
           </h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto mt-6">
+          <p className="text-white-600 text-lg max-w-2xl mx-auto mt-6">
             Leading brands join us to elevate student culture, creativity and digital engagement across South Africa.
           </p>
         </motion.div>
-
         {/* SPOTLIGHT MAIN SPONSOR */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -63,7 +60,6 @@ export default function Sponsors() {
               />
             </motion.div>
           </motion.div>
-
           {/* MAIN SPONSOR INFO */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
@@ -73,23 +69,18 @@ export default function Sponsors() {
             <p className="text-sm tracking-widest text-black/50 font-bold">
               SPOTLIGHT SPONSOR
             </p>
-
             <h3 className="text-5xl font-black mt-4">MTN South Africa</h3>
-
             <p className="text-gray-700 text-lg mt-6 leading-relaxed max-w-lg">
               MTN powers our digital infrastructure, enabling real time streaming, voting, 
               campus activations and premium student experiences.
             </p>
-
             <button className="mt-10 px-10 py-4 border border-black rounded-xl hover:bg-black hover:text-white transition-all font-semibold">
               Explore Partnership
             </button>
           </motion.div>
         </motion.div>
-
         {/* ANIMATED LOGO SHOWCASE */}
         <AnimatedLogos />
-
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
