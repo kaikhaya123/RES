@@ -4,480 +4,350 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Mail, Lock, User, AlertCircle, Eye, EyeOff, Home, Calendar, MapPin, School, Building2, Landmark, CheckCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { AlertCircle, Eye, EyeOff } from "lucide-react";
 import ToastMobile from "@/components/ToastMobile";
 
 export default function RegisterPage() {
-	const router = useRouter();
-	const [formData, setFormData] = useState({
-		firstName: "",
-		lastName: "",
-		email: "",
-		phone: "",
-		password: "",
-		confirmPassword: "",
-		dateOfBirth: "",
-		homeAddress: "",
-		province: "",
-		userType: "public", // 'student' or 'public'
-		// Student fields
-		institution: "",
-		campus: "",
-		residence: "",
-		// Public fields
-		municipality: "",
-		town: "",
-		// Security
-		verificationCode: "",
-		acceptTerms: false,
-	});
-	const [error, setError] = useState<string | null>(null);
-	const [success, setSuccess] = useState<string | null>(null);
-	const [isLoading, setIsLoading] = useState(false);
-	const [showPassword, setShowPassword] = useState(false);
-	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-	const [codeSent, setCodeSent] = useState(false);
-	const [phoneVerified, setPhoneVerified] = useState(false);
-	const [lastPhoneAttempt, setLastPhoneAttempt] = useState("");
-	const [toast, setToast] = useState({
-		show: false,
-		message: ''
-	});
+  const router = useRouter();
 
-	// Auto-send SMS code when phone number is valid and changes
-	useEffect(() => {
-		const isValidPhone = formData.phone && formData.phone.length >= 10;
-		const phoneChanged = formData.phone !== lastPhoneAttempt;
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    dateOfBirth: "",
+    homeAddress: "",
+    province: "",
+    userType: "public",
+    institution: "",
+    campus: "",
+    residence: "",
+    municipality: "",
+    town: "",
+    verificationCode: "",
+    acceptTerms: false,
+  });
 
-		if (isValidPhone && phoneChanged && formData.phone.length === 10) {
-			setLastPhoneAttempt(formData.phone);
-			sendSMSCodeAutomatically();
-		}
-	}, [formData.phone, lastPhoneAttempt]);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [toast, setToast] = useState({ show: false, message: "" });
+  const [isLoading, setIsLoading] = useState(false);
+  const [codeSent, setCodeSent] = useState(false);
 
-	const sendSMSCodeAutomatically = async () => {
-		try {
-			console.log('[Auto-SMS] Sending code to:', formData.phone);
-			const res = await fetch("/api/auth/verify-phone", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					phone: formData.phone,
-					action: "verify"
-				}),
-			});
-			
-			const data = await res.json();
-			
-			if (res.ok) {
-				setCodeSent(true);
-				setPhoneVerified(false); // Reset verification status
-				setToast({
-					show: true,
-					message: "✓ SMS code sent to your phone"
-				});
-				console.log('[Auto-SMS] Code sent successfully');
-			} else {
-				console.log('[Auto-SMS] Failed to send:', data.error);
-			}
-		} catch (err: any) {
-			console.error('[Auto-SMS] Error:', err);
-		}
-	};
+  const handleChange = (e: any) => {
+    const { name, value, type } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? e.target.checked : value,
+    }));
+  };
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-		const { name, value, type } = e.target;
-		let fieldValue: string | boolean = value;
-		if (type === "checkbox") {
-			fieldValue = (e.target as HTMLInputElement).checked;
-		}
-		setFormData((prev) => ({
-			...prev,
-			[name]: fieldValue,
-		}));
-	};
+  const handleSendCode = async () => {
+    if (!formData.phone) {
+      setToast({ show: true, message: "Enter your phone number first" });
+      return;
+    }
 
-	const handleSendCode = async () => {
-		if (!formData.phone) {
-			setToast({
-				show: true,
-				message: "Please enter your phone number first"
-			});
-			return;
-		}
-		
-		try {
-			setIsLoading(true);
-			setToast({
-				show: true,
-				message: "Waiting for your verification code..."
-			});
+    try {
+      const response = await fetch('/api/auth/verify-phone', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          phone: formData.phone,
+          action: 'verify',
+        }),
+      });
 
-			const res = await fetch("/api/auth/verify-phone", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					phone: formData.phone,
-					action: "verify"
-				}),
-			});
-			
-			const data = await res.json();
-			console.log('[SendCode Response]', data);
-			
-			if (!res.ok) {
-				setToast({
-					show: true,
-					message: data.error || "Failed to send verification code"
-				});
-				setIsLoading(false);
-				return;
-			}
-			
-			setCodeSent(true);
-			setError(null);
-			setToast({
-				show: true,
-				message: "Code sent! Check your phone."
-			});
-			setTimeout(() => setCodeSent(false), 300000); // 5 minutes
-			setIsLoading(false);
-		} catch (err: any) {
-			console.error('[SendCode Error]', err);
-			setToast({
-				show: true,
-				message: "Something went wrong. Please try again."
-			});
-			setIsLoading(false);
-		}
-	};
+      if (!response.ok) {
+        const errorData = await response.json();
+        setToast({ show: true, message: errorData.error || 'Failed to send code' });
+        return;
+      }
 
-	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault();
-		setError(null);
-		setIsLoading(true);
+      setCodeSent(true);
+      setToast({ show: true, message: "Code sent to your phone" });
+    } catch (error: any) {
+      setToast({ show: true, message: error.message || 'Failed to send code' });
+    }
+  };
 
-		// Verify password match
-		if (formData.password !== formData.confirmPassword) {
-			setToast({
-				show: true,
-				message: "Passwords do not match"
-			});
-			setIsLoading(false);
-			return;
-		}
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      setToast({ show: true, message: "Passwords do not match" });
+      return;
+    }
+    if (!formData.acceptTerms) {
+      setToast({ show: true, message: "Please accept terms" });
+      return;
+    }
+    if (!formData.verificationCode) {
+      setToast({ show: true, message: "Enter your verification code" });
+      return;
+    }
 
-		// Verify terms accepted
-		if (!formData.acceptTerms) {
-			setToast({
-				show: true,
-				message: "You must agree to Terms & Privacy Policy"
-			});
-			setIsLoading(false);
-			return;
-		}
+    setIsLoading(true);
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          role: 'user',
+          userType: formData.userType.toUpperCase(),
+          email: formData.email,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phone: formData.phone,
+          password: formData.password,
+          dateOfBirth: formData.dateOfBirth,
+          homeAddress: formData.homeAddress,
+          province: formData.province,
+          institution: formData.institution,
+          campus: formData.campus,
+          residence: formData.residence,
+          verificationCode: formData.verificationCode,
+        }),
+      });
 
-		// NEW: Verify SMS code before registration
-		if (!formData.verificationCode) {
-			setToast({
-				show: true,
-				message: "Please enter the verification code sent to your phone"
-			});
-			setIsLoading(false);
-			return;
-		}
+      if (!response.ok) {
+        const errorData = await response.json();
+        setToast({ show: true, message: errorData.error || 'Registration failed' });
+        setIsLoading(false);
+        return;
+      }
 
-		try {
-			// Verify the code with backend
-			const verifyRes = await fetch("/api/auth/verify-phone", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					phone: formData.phone,
-					action: "confirm",
-					code: formData.verificationCode
-				}),
-			});
+      const data = await response.json();
+      setToast({ show: true, message: "Registration successful" });
+      setTimeout(() => {
+        router.push("/auth/login?registered=true");
+      }, 1500);
+    } catch (error: any) {
+      setToast({ show: true, message: error.message || 'An error occurred' });
+      setIsLoading(false);
+    }
+  };
 
-			const verifyData = await verifyRes.json();
-			
-			if (!verifyRes.ok) {
-				setToast({
-					show: true,
-					message: verifyData.error || "Invalid verification code"
-				});
-				setIsLoading(false);
-				return;
-			}
+  return (
+    <motion.div
+      className="min-h-screen w-full bg-black flex items-center justify-center p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <ToastMobile
+        show={toast.show}
+        message={toast.message}
+        onClose={() => setToast({ ...toast, show: false })}
+      />
 
-			// Code verified! Mark as verified
-			setPhoneVerified(true);
-			setToast({
-				show: true,
-				message: "✓ Phone verified! Completing registration..."
-			});
+      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 rounded-2xl overflow-hidden shadow-2xl bg-neutral-900 border border-white/10">
 
-			// Now proceed with registration
-			const payload: any = {
-				...formData,
-				userType: formData.userType === "student" ? "STUDENT" : "PUBLIC",
-				role: "user",
-			};
-			delete payload.verificationCode;
+        {/* LEFT IMAGE SIDE */}
+        <motion.div
+          className="relative hidden lg:flex items-center justify-center bg-neutral-900"
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Image
+            src="/Images/register-side.jpg"
+            alt="Register"
+            fill
+            className="object-cover opacity-80"
+          />
 
-			const res = await fetch("/api/auth/register", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(payload),
-			});
-			const data = await res.json();
-			console.log("[Registration API Response]", data);
-			if (!res.ok) {
-				setToast({
-					show: true,
-					message: data.error || "Registration failed"
-				});
-				setIsLoading(false);
-				return;
-			}
-			setIsLoading(false);
-			setToast({
-				show: true,
-				message: "✓ Registration successful! Redirecting..."
-			});
-			// Redirect after a short delay
-			setTimeout(() => {
-			  router.push("/auth/login?registered=true");
-			}, 2000);
-		} catch (err: any) {
-			console.error('[Registration Error]', err);
-			setToast({
-				show: true,
-				message: err.message || "An error occurred. Please try again."
-			});
-			setIsLoading(false);
-		}
-	};
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="absolute bottom-10 text-center px-6"
+          >
+            <h2 className="text-3xl font-bold text-white mb-2 tracking-tight">
+              Join the Experience
+            </h2>
+            <p className="text-gray-300 text-sm max-w-sm mx-auto">
+              Create your account to access exclusive student and public features.
+            </p>
+          </motion.div>
+        </motion.div>
 
-	return (
-		<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 p-4">
-			<ToastMobile
-				show={toast.show}
-				message={toast.message}
-				onClose={() => setToast({ ...toast, show: false })}
-			/>
-			<div className="w-full max-w-2xl flex flex-col rounded-2xl overflow-hidden shadow-2xl min-h-[600px] bg-white/5">
-				<motion.div
-					initial={{ opacity: 0, x: -50 }}
-					animate={{ opacity: 1, x: 0 }}
-					transition={{ duration: 0.6 }}
-				>
-					<div className="flex flex-col justify-center p-6 lg:p-8 items-center overflow-y-auto">
-						<motion.div
-							initial={{ opacity: 0, y: -20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6 }}
-							className="mb-4"
-						>
-							<div className="relative w-32 h-32 mx-auto">
-								<Image
-									src="/Images/RES Logo with Futuristic Emblem.png"
-									alt="R.E.S."
-									fill
-									className="object-contain"
-									priority
-								/>
-							</div>
-						</motion.div>
-						<div className="text-center mb-6">
-							<h1 className="text-2xl lg:text-3xl font-bold text-white mb-2">Sign Up</h1>
-							<p className="text-sm text-gray-400">Register as a student or public user</p>
-						</div>
-						{error && (
-							<motion.div
-								initial={{ opacity: 0, y: -10 }}
-								animate={{ opacity: 1, y: 0 }}
-								className="mb-6 p-4 bg-red-500/10 border border-red-500/50 rounded-lg flex items-start space-x-3 w-full max-w-md"
-							>
-								<AlertCircle className="text-red-500 flex-shrink-0 mt-0.5" size={20} />
-								<p className="text-red-400 text-sm">{error}</p>
-							</motion.div>
-						)}
-						{success && (
-							<motion.div
-								initial={{ opacity: 0, y: -10 }}
-								animate={{ opacity: 1, y: 0 }}
-								className="mb-6 p-4 bg-green-500/10 border border-green-500/50 rounded-lg flex items-start space-x-3 w-full max-w-md"
-							>
-								<svg className="text-green-500 flex-shrink-0 mt-0.5" width="20" height="20" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>
-								<p className="text-green-400 text-sm">{success}</p>
-							</motion.div>
-						)}
-						<form onSubmit={handleSubmit} className="space-y-4 w-full max-w-md">
-							<div className="flex space-x-2 mb-2">
-								<label className={`flex-1 cursor-pointer rounded-lg px-3 py-2 text-center text-xs font-semibold transition border ${formData.userType === "student" ? "bg-blue-600 text-white border-blue-600" : "bg-white/10 text-gray-300 border-white/20"}`}> 
-									<input type="radio" name="userType" value="student" checked={formData.userType === "student"} onChange={handleChange} className="hidden" />
-									Student
-								</label>
-								<label className={`flex-1 cursor-pointer rounded-lg px-3 py-2 text-center text-xs font-semibold transition border ${formData.userType === "public" ? "bg-blue-600 text-white border-blue-600" : "bg-white/10 text-gray-300 border-white/20"}`}> 
-									<input type="radio" name="userType" value="public" checked={formData.userType === "public"} onChange={handleChange} className="hidden" />
-									Public
-								</label>
-							</div>
-							<div className="grid grid-cols-1 gap-3">
-								<div>
-									<label htmlFor="name" className="block text-xs font-medium text-gray-300 mb-1.5">Name</label>
-									<input id="firstName" name="firstName" type="text" value={formData.firstName} onChange={handleChange} required className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="Enter your name" />
-								</div>
-								<div>
-									<label htmlFor="surname" className="block text-xs font-medium text-gray-300 mb-1.5">Surname</label>
-									<input id="lastName" name="lastName" type="text" value={formData.lastName} onChange={handleChange} required className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="Enter your surname" />
-								</div>
-								<div>
-									<label htmlFor="email" className="block text-xs font-medium text-gray-300 mb-1.5">Email</label>
-									<input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="you@example.com" />
-								</div>
-								<div>
-									<label htmlFor="cellphone" className="block text-xs font-medium text-gray-300 mb-1.5">Cellphone Number</label>
-									<input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} required className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="e.g. 0812345678" />
-								</div>
-								<div>
-									<label htmlFor="dob" className="block text-xs font-medium text-gray-300 mb-1.5">Date of Birth</label>
-									<input id="dateOfBirth" name="dateOfBirth" type="date" value={formData.dateOfBirth} onChange={handleChange} required className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" />
-								</div>
-								<div>
-									<label htmlFor="address" className="block text-xs font-medium text-gray-300 mb-1.5">Home Address</label>
-									<input id="homeAddress" name="homeAddress" type="text" value={formData.homeAddress} onChange={handleChange} required className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="Enter your home address" />
-								</div>
-								<div>
-									<label htmlFor="province" className="block text-xs font-medium text-gray-300 mb-1.5">Province</label>
-									<select
-										id="province"
-										name="province"
-										value={formData.province}
-										onChange={handleChange}
-										required
-										className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition"
-									>
-										<option value="">Select your province</option>
-										<option value="EASTERN_CAPE">Eastern Cape</option>
-										<option value="FREE_STATE">Free State</option>
-										<option value="GAUTENG">Gauteng</option>
-										<option value="KWAZULU_NATAL">KwaZulu-Natal</option>
-										<option value="LIMPOPO">Limpopo</option>
-										<option value="MPUMALANGA">Mpumalanga</option>
-										<option value="NORTHERN_CAPE">Northern Cape</option>
-										<option value="NORTH_WEST">North West</option>
-										<option value="WESTERN_CAPE">Western Cape</option>
-									</select>
-								</div>
-								{/* Student fields */}
-								{formData.userType === "student" && (
-									<>
-										<div>
-											<label htmlFor="institution" className="block text-xs font-medium text-gray-300 mb-1.5">Institution</label>
-											<input id="institution" name="institution" type="text" value={formData.institution} onChange={handleChange} required className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="Enter your institution" />
-										</div>
-										<div>
-											<label htmlFor="campus" className="block text-xs font-medium text-gray-300 mb-1.5">Campus</label>
-											<input id="campus" name="campus" type="text" value={formData.campus} onChange={handleChange} required className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="Enter your campus" />
-										</div>
-										<div>
-											<label htmlFor="residence" className="block text-xs font-medium text-gray-300 mb-1.5">Student Residence/Accommodation</label>
-											<input id="residence" name="residence" type="text" value={formData.residence} onChange={handleChange} required className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="Enter your residence or accommodation" />
-										</div>
-									</>
-								)}
-								{/* Public fields */}
-								{formData.userType === "public" && (
-									<>
-										<div>
-											<label htmlFor="municipality" className="block text-xs font-medium text-gray-300 mb-1.5">Municipality</label>
-											<input id="municipality" name="municipality" type="text" value={formData.municipality} onChange={handleChange} required className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="Enter your municipality" />
-										</div>
-										<div>
-											<label htmlFor="town" className="block text-xs font-medium text-gray-300 mb-1.5">Town or Suburb</label>
-											<input id="town" name="town" type="text" value={formData.town} onChange={handleChange} required className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="Enter your town or suburb" />
-										</div>
-									</>
-								)}
-								<div>
-									<label htmlFor="password" className="block text-xs font-medium text-gray-300 mb-1.5">Password</label>
-									<div className="relative">
-										<input id="password" name="password" type={showPassword ? "text" : "password"} value={formData.password} onChange={handleChange} required className="w-full p-2 pr-10 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="Create a strong password" />
-										<button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition">
-											{showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-										</button>
-									</div>
-								</div>
-								<div>
-									<label htmlFor="confirmPassword" className="block text-xs font-medium text-gray-300 mb-1.5">Confirm Password</label>
-									<div className="relative">
-										<input id="confirmPassword" name="confirmPassword" type={showConfirmPassword ? "text" : "password"} value={formData.confirmPassword} onChange={handleChange} required className="w-full p-2 pr-10 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="Confirm your password" />
-										<button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition">
-											{showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-										</button>
-									</div>
-								</div>
-								<div className="flex items-center space-x-2">
-									<button 
-										type="button" 
-										onClick={handleSendCode} 
-										className={`px-3 py-1.5 rounded text-xs font-semibold transition ${
-											phoneVerified 
-												? 'bg-green-600 text-white hover:bg-green-700' 
-												: 'bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50'
-										}`} 
-										disabled={codeSent || phoneVerified}
-									>
-										{phoneVerified ? "✓ Verified" : (codeSent ? "Code Sent" : "Resend Code")}
-									</button>
-									<input 
-										id="verificationCode" 
-										name="verificationCode" 
-										type="text" 
-										value={formData.verificationCode} 
-										onChange={handleChange} 
-										maxLength={6}
-										required 
-										className={`flex-1 p-2 bg-white/5 border rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:border-transparent transition ${
-											phoneVerified 
-												? 'border-green-500 focus:ring-green-500' 
-												: 'border-white/10 focus:ring-primary-500'
-										}`} 
-										placeholder="6-digit code" 
-									/>
-									{phoneVerified && <CheckCircle size={20} className="text-green-500" />}
-								</div>
-								<div className="flex items-center space-x-2">
-									<input id="acceptTerms" name="acceptTerms" type="checkbox" checked={formData.acceptTerms} onChange={handleChange} required className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
-									<label htmlFor="terms" className="text-xs text-gray-300">I agree to the <Link href="/terms" className="underline">Terms</Link> and <Link href="/privacy" className="underline">Privacy Policy</Link></label>
-								</div>
-								<button type="submit" disabled={isLoading} className="w-full py-2.5 bg-black text-white text-sm font-semibold rounded-lg hover:bg-gray-900 hover:shadow-lg transition transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none border border-white/20 mt-2">
-									{isLoading ? (
-										<span className="flex items-center justify-center space-x-2">
-											<svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-												<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-												<path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-											</svg>
-											<span className="text-sm">Creating account...</span>
-										</span>
-									) : (
-										"Create Account"
-									)}
-								</button>
-							</div>
-						</form>
-						<p className="mt-5 text-center text-gray-400 text-xs">
-							Already have an account?{' '}
-							<Link href="/auth/login" className="text-primary-400 hover:text-primary-300 font-medium transition">
-								Log in
-							</Link>
-						</p>
-					</div>
-				</motion.div>
-			</div>
-		</div>
-	);
+        {/* RIGHT FORM SIDE */}
+        <motion.div
+          className="p-6 lg:p-10 overflow-y-auto"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-8"
+          >
+            <div className="w-20 h-20 mx-auto relative mb-2">
+              <Image
+                src="/Images/RES Logo with Futuristic Emblem.png"
+                alt="Logo"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <h1 className="text-2xl font-bold text-white">Create your account</h1>
+            <p className="text-gray-400 text-sm mt-1">
+              Register as a student or public user
+            </p>
+          </motion.div>
+
+          {/* USER TYPE SWITCH */}
+          <div className="grid grid-cols-2 gap-2 mb-6">
+            {["student", "public"].map((type) => (
+              <button
+                key={type}
+                type="button"
+                onClick={() => setFormData({ ...formData, userType: type })}
+                className={`p-2 rounded-lg text-sm font-semibold border transition 
+                  ${formData.userType === type
+                    ? "bg-blue-600 border-blue-600 text-white"
+                    : "bg-white/5 border-white/10 text-gray-300"}`}
+              >
+                {type === "student" ? "Student" : "Public"}
+              </button>
+            ))}
+          </div>
+
+          {/* FORM */}
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <InputField id="firstName" name="firstName" label="Name" value={formData.firstName} onChange={handleChange} />
+              <InputField id="lastName" name="lastName" label="Surname" value={formData.lastName} onChange={handleChange} />
+            </div>
+
+            <InputField id="email" name="email" label="Email" value={formData.email} onChange={handleChange} />
+            <InputField id="phone" name="phone" label="Phone Number" value={formData.phone} onChange={handleChange} />
+
+            <InputField id="dateOfBirth" name="dateOfBirth" type="date" label="Date of Birth" value={formData.dateOfBirth} onChange={handleChange} />
+
+            <InputField id="homeAddress" name="homeAddress" label="Home Address" value={formData.homeAddress} onChange={handleChange} />
+
+            <select
+              name="province"
+              value={formData.province}
+              onChange={handleChange}
+              className="w-full p-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm"
+            >
+              <option value="">Select province</option>
+              <option value="GAUTENG">Gauteng</option>
+              <option value="KWAZULU_NATAL">KwaZulu-Natal</option>
+              <option value="WESTERN_CAPE">Western Cape</option>
+            </select>
+
+            {/* STUDENT FIELDS */}
+            <AnimatePresence>
+              {formData.userType === "student" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="grid grid-cols-1 gap-4"
+                >
+                  <InputField id="institution" name="institution" label="Institution" value={formData.institution} onChange={handleChange} />
+                  <InputField id="campus" name="campus" label="Campus" value={formData.campus} onChange={handleChange} />
+                  <InputField id="residence" name="residence" label="Residence" value={formData.residence} onChange={handleChange} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* VERIFICATION CODE */}
+            <div className="flex gap-3">
+              <input
+                name="verificationCode"
+                value={formData.verificationCode}
+                onChange={handleChange}
+                placeholder="Enter verification code"
+                className="flex-1 p-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm"
+              />
+              <button
+                type="button"
+                onClick={handleSendCode}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm"
+              >
+                Send
+              </button>
+            </div>
+
+            {/* PASSWORDS */}
+            <PasswordField label="Password" name="password" value={formData.password} onChange={handleChange} show={showPassword} toggle={() => setShowPassword(!showPassword)} />
+
+            <PasswordField label="Confirm Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} show={showConfirmPassword} toggle={() => setShowConfirmPassword(!showConfirmPassword)} />
+
+            {/* TERMS */}
+            <label className="flex items-center gap-2 text-sm text-gray-300">
+              <input type="checkbox" name="acceptTerms" checked={formData.acceptTerms} onChange={handleChange} />
+              I agree to the Terms and Privacy
+            </label>
+
+            <motion.button
+              type="submit"
+              whileTap={{ scale: 0.95 }}
+              className="w-full bg-blue-600 py-3 rounded-lg text-white font-semibold text-sm"
+            >
+              {isLoading ? "Creating account..." : "Create Account"}
+            </motion.button>
+
+            <p className="text-center text-xs text-gray-400">
+              Already have an account?  
+              <Link href="/auth/login" className="text-blue-500 ml-1">Login</Link>
+            </p>
+          </form>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* INPUT FIELD COMPONENT */
+function InputField({ id, name, label, value, onChange, type = "text" }: any) {
+  return (
+    <div>
+      <label className="block text-xs text-gray-400 mb-1">{label}</label>
+      <motion.input
+        whileFocus={{ scale: 1.01 }}
+        id={id}
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange}
+        className="w-full p-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm"
+      />
+    </div>
+  );
+}
+
+/* PASSWORD FIELD */
+function PasswordField({ label, name, value, onChange, show, toggle }: any) {
+  return (
+    <div className="relative">
+      <label className="block text-xs text-gray-400 mb-1">{label}</label>
+      <motion.input
+        whileFocus={{ scale: 1.01 }}
+        type={show ? "text" : "password"}
+        name={name}
+        value={value}
+        onChange={onChange}
+        className="w-full p-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm"
+      />
+      <button
+        type="button"
+        onClick={toggle}
+        className="absolute right-3 top-9 text-gray-400"
+      >
+        {show ? <EyeOff size={16} /> : <Eye size={16} />}
+      </button>
+    </div>
+  );
 }
