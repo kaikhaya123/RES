@@ -25,7 +25,7 @@ export default function Sponsors() {
           transition={{ duration: 0.7 }}
           className="text-center"
         >
-          <h1 className="text-white lg:text-7xl font-black tracking-tight">
+          <h1 className="text-black lg:text-7xl font-black tracking-tight">
             Our Partners
           </h1>
           <p className="text-white-600 text-lg max-w-2xl mx-auto mt-6">

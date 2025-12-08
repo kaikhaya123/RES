@@ -1,11 +1,11 @@
 ﻿"use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { AlertCircle, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import ToastMobile from "@/components/ToastMobile";
 
 export default function RegisterPage() {
@@ -25,15 +25,12 @@ export default function RegisterPage() {
     institution: "",
     campus: "",
     residence: "",
-    municipality: "",
-    town: "",
     verificationCode: "",
     acceptTerms: false,
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [toast, setToast] = useState({ show: false, message: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [codeSent, setCodeSent] = useState(false);
@@ -52,55 +49,57 @@ export default function RegisterPage() {
       return;
     }
 
+    setToast({ show: true, message: "Sending verification code..." });
+
     try {
-      const response = await fetch('/api/auth/verify-phone', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await fetch("/api/auth/verify-phone", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           phone: formData.phone,
-          action: 'verify',
+          action: "verify",
         }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        setToast({ show: true, message: errorData.error || 'Failed to send code' });
+        setToast({ show: true, message: errorData.error });
         return;
       }
 
       setCodeSent(true);
       setToast({ show: true, message: "Code sent to your phone" });
-    } catch (error: any) {
-      setToast({ show: true, message: error.message || 'Failed to send code' });
+    } catch (err: any) {
+      setToast({ show: true, message: err.message });
     }
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirmPassword) {
       setToast({ show: true, message: "Passwords do not match" });
       return;
     }
+
     if (!formData.acceptTerms) {
       setToast({ show: true, message: "Please accept terms" });
       return;
     }
+
     if (!formData.verificationCode) {
       setToast({ show: true, message: "Enter your verification code" });
       return;
     }
 
     setIsLoading(true);
+
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          role: 'user',
+          role: "user",
           userType: formData.userType.toUpperCase(),
           email: formData.email,
           firstName: formData.firstName,
@@ -119,21 +118,24 @@ export default function RegisterPage() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        setToast({ show: true, message: errorData.error || 'Registration failed' });
+        setToast({ show: true, message: errorData.error });
         setIsLoading(false);
         return;
       }
 
-      const data = await response.json();
       setToast({ show: true, message: "Registration successful" });
+
       setTimeout(() => {
         router.push("/auth/login?registered=true");
       }, 1500);
-    } catch (error: any) {
-      setToast({ show: true, message: error.message || 'An error occurred' });
+    } catch (err: any) {
+      setToast({ show: true, message: err.message });
       setIsLoading(false);
     }
   };
+
+  const studentVideo = "/Videos/hmnQ4LuoH2h1T2H3vF.mp4";
+  const publicVideo = "/Videos/QGfOI16HI23CjfACj4.mp4";
 
   return (
     <motion.div
@@ -147,47 +149,48 @@ export default function RegisterPage() {
         onClose={() => setToast({ ...toast, show: false })}
       />
 
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 rounded-2xl overflow-hidden shadow-2xl bg-neutral-900 border border-white/10">
+      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 bg-neutral-900 border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
 
-        {/* LEFT IMAGE SIDE */}
+        {/* LEFT VIDEO SIDE */}
         <motion.div
           className="relative hidden lg:flex items-center justify-center bg-neutral-900"
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        src="/Videos/QGfOI16HI23CjfACj4.mp4"
-        className="object-cover opacity-80 w-full h-full absolute inset-0"
-      />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            src={formData.userType === "student" ? studentVideo : publicVideo}
+            className="object-cover opacity-80 w-full h-full absolute inset-0"
+          />
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="absolute bottom-10 text-center px-6"
           >
-            <h2 className="text-3xl font-bold text-white mb-2 tracking-tight">
+            <h2 className="text-3xl font-bold text-white mb-2">
               Join the Experience
             </h2>
             <p className="text-gray-300 text-sm max-w-sm mx-auto">
-              Create your account to access exclusive student and public features.
+              {formData.userType === "student"
+                ? "Create your student account for campus-only access."
+                : "Create your public profile for full platform access."}
             </p>
           </motion.div>
         </motion.div>
 
-        {/* RIGHT FORM SIDE */}
+        {/* RIGHT FORM SECTION */}
         <motion.div
           className="p-6 lg:p-10 overflow-y-auto"
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
         >
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-8"
           >
@@ -199,10 +202,9 @@ export default function RegisterPage() {
                 className="object-contain"
               />
             </div>
+
             <h1 className="text-2xl font-bold text-white">Create your account</h1>
-            <p className="text-gray-400 text-sm mt-1">
-              Register as a student or public user
-            </p>
+            <p className="text-gray-400 text-sm">Register as student or public</p>
           </motion.div>
 
           {/* USER TYPE SWITCH */}
@@ -213,9 +215,11 @@ export default function RegisterPage() {
                 type="button"
                 onClick={() => setFormData({ ...formData, userType: type })}
                 className={`p-2 rounded-lg text-sm font-semibold border transition 
-                  ${formData.userType === type
-                    ? "bg-blue-600 border-blue-600 text-white"
-                    : "bg-white/5 border-white/10 text-gray-300"}`}
+                  ${
+                    formData.userType === type
+                      ? "bg-blue-600 border-blue-600 text-white"
+                      : "bg-white/5 border-white/10 text-gray-300"
+                  }`}
               >
                 {type === "student" ? "Student" : "Public"}
               </button>
@@ -224,17 +228,18 @@ export default function RegisterPage() {
 
           {/* FORM */}
           <form className="space-y-4" onSubmit={handleSubmit}>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <InputField id="firstName" name="firstName" label="Name" value={formData.firstName} onChange={handleChange} />
-              <InputField id="lastName" name="lastName" label="Surname" value={formData.lastName} onChange={handleChange} />
+              <InputField name="firstName" label="Name" value={formData.firstName} onChange={handleChange} />
+              <InputField name="lastName" label="Surname" value={formData.lastName} onChange={handleChange} />
             </div>
 
-            <InputField id="email" name="email" label="Email" value={formData.email} onChange={handleChange} />
-            <InputField id="phone" name="phone" label="Phone Number" value={formData.phone} onChange={handleChange} />
+            <InputField name="email" label="Email" value={formData.email} onChange={handleChange} />
+            <InputField name="phone" label="Phone Number" value={formData.phone} onChange={handleChange} />
 
-            <InputField id="dateOfBirth" name="dateOfBirth" type="date" label="Date of Birth" value={formData.dateOfBirth} onChange={handleChange} />
+            <InputField name="dateOfBirth" type="date" label="Date of Birth" value={formData.dateOfBirth} onChange={handleChange} />
 
-            <InputField id="homeAddress" name="homeAddress" label="Home Address" value={formData.homeAddress} onChange={handleChange} />
+            <InputField name="homeAddress" label="Home Address" value={formData.homeAddress} onChange={handleChange} />
 
             <select
               name="province"
@@ -252,14 +257,14 @@ export default function RegisterPage() {
             <AnimatePresence>
               {formData.userType === "student" && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
+                  exit={{ opacity: 0, y: -15 }}
                   className="grid grid-cols-1 gap-4"
                 >
-                  <InputField id="institution" name="institution" label="Institution" value={formData.institution} onChange={handleChange} />
-                  <InputField id="campus" name="campus" label="Campus" value={formData.campus} onChange={handleChange} />
-                  <InputField id="residence" name="residence" label="Residence" value={formData.residence} onChange={handleChange} />
+                  <InputField name="institution" label="Institution" value={formData.institution} onChange={handleChange} />
+                  <InputField name="campus" label="Campus" value={formData.campus} onChange={handleChange} />
+                  <InputField name="residence" label="Residence" value={formData.residence} onChange={handleChange} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -283,9 +288,8 @@ export default function RegisterPage() {
             </div>
 
             {/* PASSWORDS */}
-            <PasswordField label="Password" name="password" value={formData.password} onChange={handleChange} show={showPassword} toggle={() => setShowPassword(!showPassword)} />
-
-            <PasswordField label="Confirm Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} show={showConfirmPassword} toggle={() => setShowConfirmPassword(!showConfirmPassword)} />
+            <PasswordField label="Password" name="password" value={formData.password} show={showPassword} toggle={() => setShowPassword(!showPassword)} onChange={handleChange} />
+            <PasswordField label="Confirm Password" name="confirmPassword" value={formData.confirmPassword} show={showConfirmPassword} toggle={() => setShowConfirmPassword(!showConfirmPassword)} onChange={handleChange} />
 
             {/* TERMS */}
             <label className="flex items-center gap-2 text-sm text-gray-300">
@@ -302,7 +306,7 @@ export default function RegisterPage() {
             </motion.button>
 
             <p className="text-center text-xs text-gray-400">
-              Already have an account?  
+              Already have an account  
               <Link href="/auth/login" className="text-blue-500 ml-1">Login</Link>
             </p>
           </form>
@@ -312,14 +316,13 @@ export default function RegisterPage() {
   );
 }
 
-/* INPUT FIELD COMPONENT */
-function InputField({ id, name, label, value, onChange, type = "text" }: any) {
+/* INPUT FIELD */
+function InputField({ name, label, value, onChange, type = "text" }: any) {
   return (
     <div>
       <label className="block text-xs text-gray-400 mb-1">{label}</label>
       <motion.input
         whileFocus={{ scale: 1.01 }}
-        id={id}
         name={name}
         type={type}
         value={value}
@@ -335,6 +338,7 @@ function PasswordField({ label, name, value, onChange, show, toggle }: any) {
   return (
     <div className="relative">
       <label className="block text-xs text-gray-400 mb-1">{label}</label>
+
       <motion.input
         whileFocus={{ scale: 1.01 }}
         type={show ? "text" : "password"}
@@ -343,6 +347,7 @@ function PasswordField({ label, name, value, onChange, show, toggle }: any) {
         onChange={onChange}
         className="w-full p-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm"
       />
+
       <button
         type="button"
         onClick={toggle}

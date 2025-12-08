@@ -116,11 +116,11 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3 mt-2">
                 <Phone size={16} className="text-primary-500" />
-                <span>+27 (0) 11 123 4567</span>
+                <span>+27 78 523 8792</span>
               </div>
               <div className="flex items-center gap-3 mt-2">
                 <MapPin size={16} className="text-primary-500" />
-                <span>Johannesburg, South Africa</span>
+                <span>Durban South Africa</span>
               </div>
             </div>
           </div>
