@@ -1,11 +1,11 @@
 ﻿"use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Mail, Lock, User, AlertCircle, Eye, EyeOff, Home, Calendar, MapPin, School, Building2, Landmark } from "lucide-react";
+import { Mail, Lock, User, AlertCircle, Eye, EyeOff, Home, Calendar, MapPin, School, Building2, Landmark, CheckCircle } from "lucide-react";
 import ToastMobile from "@/components/ToastMobile";
 
 export default function RegisterPage() {
@@ -38,10 +38,53 @@ export default function RegisterPage() {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 	const [codeSent, setCodeSent] = useState(false);
+	const [phoneVerified, setPhoneVerified] = useState(false);
+	const [lastPhoneAttempt, setLastPhoneAttempt] = useState("");
 	const [toast, setToast] = useState({
 		show: false,
 		message: ''
 	});
+
+	// Auto-send SMS code when phone number is valid and changes
+	useEffect(() => {
+		const isValidPhone = formData.phone && formData.phone.length >= 10;
+		const phoneChanged = formData.phone !== lastPhoneAttempt;
+
+		if (isValidPhone && phoneChanged && formData.phone.length === 10) {
+			setLastPhoneAttempt(formData.phone);
+			sendSMSCodeAutomatically();
+		}
+	}, [formData.phone, lastPhoneAttempt]);
+
+	const sendSMSCodeAutomatically = async () => {
+		try {
+			console.log('[Auto-SMS] Sending code to:', formData.phone);
+			const res = await fetch("/api/auth/verify-phone", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					phone: formData.phone,
+					action: "verify"
+				}),
+			});
+			
+			const data = await res.json();
+			
+			if (res.ok) {
+				setCodeSent(true);
+				setPhoneVerified(false); // Reset verification status
+				setToast({
+					show: true,
+					message: "✓ SMS code sent to your phone"
+				});
+				console.log('[Auto-SMS] Code sent successfully');
+			} else {
+				console.log('[Auto-SMS] Failed to send:', data.error);
+			}
+		} catch (err: any) {
+			console.error('[Auto-SMS] Error:', err);
+		}
+	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value, type } = e.target;
@@ -114,50 +157,105 @@ export default function RegisterPage() {
 		e.preventDefault();
 		setError(null);
 		setIsLoading(true);
+
+		// Verify password match
 		if (formData.password !== formData.confirmPassword) {
-			setError("Passwords do not match.");
-			setIsLoading(false);
-			return;
-		}
-		if (!formData.acceptTerms) {
-			setError("You must agree to the Terms and Privacy Policy.");
+			setToast({
+				show: true,
+				message: "Passwords do not match"
+			});
 			setIsLoading(false);
 			return;
 		}
 
-		// Prepare payload for API
-		const payload: any = {
-			...formData,
-			userType: formData.userType === "student" ? "STUDENT" : "PUBLIC",
-			role: "user", // Always send role for clarity (unless admin)
-		};
-		// Remove fields not needed by backend
-		delete payload.verificationCode;
+		// Verify terms accepted
+		if (!formData.acceptTerms) {
+			setToast({
+				show: true,
+				message: "You must agree to Terms & Privacy Policy"
+			});
+			setIsLoading(false);
+			return;
+		}
+
+		// NEW: Verify SMS code before registration
+		if (!formData.verificationCode) {
+			setToast({
+				show: true,
+				message: "Please enter the verification code sent to your phone"
+			});
+			setIsLoading(false);
+			return;
+		}
 
 		try {
+			// Verify the code with backend
+			const verifyRes = await fetch("/api/auth/verify-phone", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					phone: formData.phone,
+					action: "confirm",
+					code: formData.verificationCode
+				}),
+			});
+
+			const verifyData = await verifyRes.json();
+			
+			if (!verifyRes.ok) {
+				setToast({
+					show: true,
+					message: verifyData.error || "Invalid verification code"
+				});
+				setIsLoading(false);
+				return;
+			}
+
+			// Code verified! Mark as verified
+			setPhoneVerified(true);
+			setToast({
+				show: true,
+				message: "✓ Phone verified! Completing registration..."
+			});
+
+			// Now proceed with registration
+			const payload: any = {
+				...formData,
+				userType: formData.userType === "student" ? "STUDENT" : "PUBLIC",
+				role: "user",
+			};
+			delete payload.verificationCode;
+
 			const res = await fetch("/api/auth/register", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(payload),
 			});
 			const data = await res.json();
-			console.log("[Registration API Response]", data); // Debug log
+			console.log("[Registration API Response]", data);
 			if (!res.ok) {
-				setError(data.error || "Registration failed");
-				setSuccess(null);
+				setToast({
+					show: true,
+					message: data.error || "Registration failed"
+				});
 				setIsLoading(false);
 				return;
 			}
 			setIsLoading(false);
-			setError(null);
-			setSuccess("Registration successful! Please check your email to verify your account.");
-			// Optionally redirect after a short delay
+			setToast({
+				show: true,
+				message: "✓ Registration successful! Redirecting..."
+			});
+			// Redirect after a short delay
 			setTimeout(() => {
 			  router.push("/auth/login?registered=true");
-			}, 2500);
+			}, 2000);
 		} catch (err: any) {
-			setError("An error occurred. Please try again.");
-			setSuccess(null);
+			console.error('[Registration Error]', err);
+			setToast({
+				show: true,
+				message: err.message || "An error occurred. Please try again."
+			});
 			setIsLoading(false);
 		}
 	};
@@ -323,10 +421,34 @@ export default function RegisterPage() {
 									</div>
 								</div>
 								<div className="flex items-center space-x-2">
-									<button type="button" onClick={handleSendCode} className="px-3 py-1.5 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs font-semibold transition disabled:opacity-50" disabled={codeSent}>
-										{codeSent ? "Code Sent" : "Send Verification Code"}
+									<button 
+										type="button" 
+										onClick={handleSendCode} 
+										className={`px-3 py-1.5 rounded text-xs font-semibold transition ${
+											phoneVerified 
+												? 'bg-green-600 text-white hover:bg-green-700' 
+												: 'bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50'
+										}`} 
+										disabled={codeSent || phoneVerified}
+									>
+										{phoneVerified ? "✓ Verified" : (codeSent ? "Code Sent" : "Resend Code")}
 									</button>
-									<input id="verificationCode" name="verificationCode" type="text" value={formData.verificationCode} onChange={handleChange} required className="flex-1 p-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="Enter code" />
+									<input 
+										id="verificationCode" 
+										name="verificationCode" 
+										type="text" 
+										value={formData.verificationCode} 
+										onChange={handleChange} 
+										maxLength={6}
+										required 
+										className={`flex-1 p-2 bg-white/5 border rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:border-transparent transition ${
+											phoneVerified 
+												? 'border-green-500 focus:ring-green-500' 
+												: 'border-white/10 focus:ring-primary-500'
+										}`} 
+										placeholder="6-digit code" 
+									/>
+									{phoneVerified && <CheckCircle size={20} className="text-green-500" />}
 								</div>
 								<div className="flex items-center space-x-2">
 									<input id="acceptTerms" name="acceptTerms" type="checkbox" checked={formData.acceptTerms} onChange={handleChange} required className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
