@@ -156,12 +156,14 @@ export default function RegisterPage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Image
-            src="/Images/register-side.jpg"
-            alt="Register"
-            fill
-            className="object-cover opacity-80"
-          />
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        src="/Videos/QGfOI16HI23CjfACj4.mp4"
+        className="object-cover opacity-80 w-full h-full absolute inset-0"
+      />
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}

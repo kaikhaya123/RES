@@ -58,35 +58,17 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen w-full relative bg-black overflow-hidden flex items-center justify-center p-4">
-      
-      {/* Background Video */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="absolute inset-0"
-      >
-        <video autoPlay loop muted playsInline className="w-full h-full object-cover">
-          <source src="/Videos/olShi6AW2pQj75e9EX.mp4" type="video/mp4" />
-        </video>
+    <div className="min-h-screen w-full bg-black flex overflow-hidden">
 
-        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/40" />
-      </motion.div>
-
-      {/* Login Container */}
+      {/* LEFT FORM SECTION */}
       <motion.div
-        initial={{ opacity: 0, y: 40, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
+        initial={{ opacity: 0, x: -40 }}
+        animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
-        className="relative w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl"
+        className="w-full lg:w-1/2 px-8 lg:px-16 py-12 flex flex-col justify-center relative z-10"
       >
-        
         {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex justify-center mb-6"
-        >
+        <div className="flex justify-center mb-8">
           <div className="relative w-28 h-28">
             <Image
               src="/Images/RES Logo with Futuristic Emblem.png"
@@ -95,23 +77,22 @@ export default function LoginPage() {
               className="object-contain"
             />
           </div>
-        </motion.div>
+        </div>
 
-        <h1 className="text-3xl font-bold text-white text-center mb-2">
-          Welcome Back
-        </h1>
-        <p className="text-gray-400 text-center text-sm mb-6">
+        {/* Headings */}
+        <h1 className="text-3xl font-bold text-white text-center">Welcome Back</h1>
+        <p className="text-gray-400 text-center text-sm mt-2 mb-8">
           Log in to your R.E.S. account
         </p>
 
-        {/* Error Notice */}
+        {/* Error Message */}
         <AnimatePresence>
           {error && (
             <motion.div
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
-              className="mb-4 p-3 bg-red-500/20 border border-red-500 rounded-lg flex items-center gap-3"
+              className="p-3 bg-red-500/20 border border-red-500 rounded-lg flex items-center gap-3 mb-4"
             >
               <AlertCircle size={18} className="text-red-400" />
               <p className="text-red-300 text-sm">{error}</p>
@@ -119,8 +100,8 @@ export default function LoginPage() {
           )}
         </AnimatePresence>
 
-        {/* Form */}
-        <form className="space-y-4" onSubmit={handleSubmit}>
+        {/* FORM */}
+        <form className="space-y-5" onSubmit={handleSubmit}>
 
           {/* Role */}
           <div>
@@ -130,8 +111,8 @@ export default function LoginPage() {
               onChange={(e) => setRole(e.target.value as "user" | "admin")}
               className="w-full bg-white/10 border border-white/20 rounded-lg p-2 text-white text-sm focus:outline-none"
             >
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
+              <option className="text-black" value="user">User</option>
+              <option className="text-black" value="admin">Admin</option>
             </select>
           </div>
 
@@ -140,14 +121,13 @@ export default function LoginPage() {
             <label className="block mb-1 text-xs text-gray-300">Email or Phone</label>
             <div className="relative">
               <Mail className="absolute left-3 top-3 text-gray-500" size={18} />
-              <motion.input
-                whileFocus={{ scale: 1.01 }}
+              <input
                 type="text"
                 required
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full pl-10 pr-3 py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 text-sm focus:outline-none"
+                className="w-full pl-10 pr-3 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 text-sm focus:outline-none"
               />
             </div>
           </div>
@@ -157,14 +137,13 @@ export default function LoginPage() {
             <label className="block mb-1 text-xs text-gray-300">Password</label>
             <div className="relative">
               <Lock className="absolute left-3 top-3 text-gray-500" size={18} />
-              <motion.input
-                whileFocus={{ scale: 1.01 }}
+              <input
                 type={showPassword ? "text" : "password"}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-10 py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 text-sm focus:outline-none"
+                className="w-full pl-10 pr-10 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 text-sm focus:outline-none"
               />
               <button
                 type="button"
@@ -196,25 +175,40 @@ export default function LoginPage() {
             </div>
           )}
 
-          {/* Login button */}
+          {/* Login Button */}
           <motion.button
             type="submit"
             disabled={isLoading}
             whileTap={{ scale: 0.97 }}
             whileHover={{ scale: 1.01 }}
-            className="w-full py-2.5 bg-white/10 border border-white/20 rounded-lg text-white font-semibold text-sm"
+            className="w-full py-3 bg-primary-500/80 hover:bg-primary-500 transition border border-white/20 rounded-lg text-white font-semibold text-sm"
           >
             {isLoading ? "Logging in..." : "Log In"}
           </motion.button>
         </form>
 
-        {/* Sign up */}
-        <p className="text-center text-gray-400 text-xs mt-6">
+        {/* Sign Up */}
+        <p className="text-center text-gray-400 text-xs mt-8">
           Don't have an account?{" "}
           <Link href="/auth/register" className="text-primary-300">
             Sign up
           </Link>
         </p>
+      </motion.div>
+
+      {/* RIGHT VIDEO SECTION */}
+      <motion.div
+        initial={{ opacity: 0, x: 60 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7 }}
+        className="hidden lg:block w-1/2 h-full relative"
+      >
+        <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+          <source src="/Videos/olShi6AW2pQj75e9EX.mp4" type="video/mp4" />
+        </video>
+
+        {/* Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/40 to-black/20" />
       </motion.div>
     </div>
   );
