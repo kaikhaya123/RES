@@ -66,7 +66,7 @@ export default function ContestantsPage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-white text-4xl md:text-5xl font-extrabold"
           >
-            Meet the Contestants
+            MEET THE CONTESTANTS
           </motion.h1>
           <p className="text-gray-200 text-sm md:text-base mt-3 max-w-xl mx-auto">
             Learn about every contestant who shapes the show. Vote. Engage. Support your favorite student.
