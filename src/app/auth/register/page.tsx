@@ -134,7 +134,7 @@ export default function RegisterPage() {
     }
   };
 
-  const studentVideo = "/Videos/hmnQ4LuoH2h1T2H3vF.mp4";
+  const studentVideo = "/Images/14ja88p7l24qT7wKMg.mp4";
   const publicVideo = "/Videos/QGfOI16HI23CjfACj4.mp4";
 
   return (
@@ -149,11 +149,11 @@ export default function RegisterPage() {
         onClose={() => setToast({ ...toast, show: false })}
       />
 
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 bg-neutral-900 border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
+      <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 bg-neutral-900 border border-white/10 rounded-3xl shadow-2xl overflow-hidden">
 
         {/* LEFT VIDEO SIDE */}
         <motion.div
-          className="relative hidden lg:flex items-center justify-center bg-neutral-900"
+          className="relative hidden lg:flex items-center justify-center bg-black/80 overflow-hidden h-screen"
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
@@ -163,19 +163,31 @@ export default function RegisterPage() {
             loop
             muted
             playsInline
+            key={formData.userType}
             src={formData.userType === "student" ? studentVideo : publicVideo}
-            className="object-cover opacity-80 w-full h-full absolute inset-0"
+            className="w-full h-full object-cover"
+            style={{
+              filter: 'brightness(1.15) contrast(1.2) saturate(1.1) hue-rotate(0deg)',
+              WebkitFilter: 'brightness(1.15) contrast(1.2) saturate(1.1) hue-rotate(0deg)',
+            }}
           />
+          
+          {/* Enhanced gradient overlay for better readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60" />
+          
+          {/* Additional vignette effect */}
+          <div className="absolute inset-0 shadow-2xl inset shadow-black/50" />
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="absolute bottom-10 text-center px-6"
+            transition={{ delay: 0.2 }}
+            className="absolute bottom-16 text-center px-8 z-10 w-full"
           >
-            <h2 className="text-3xl font-bold text-white mb-2">
+            <h2 className="text-4xl font-bold text-white mb-3 drop-shadow-lg">
               Join the Experience
             </h2>
-            <p className="text-gray-300 text-sm max-w-sm mx-auto">
+            <p className="text-gray-200 text-base max-w-sm mx-auto drop-shadow-md">
               {formData.userType === "student"
                 ? "Create your student account for campus-only access."
                 : "Create your public profile for full platform access."}
@@ -185,9 +197,10 @@ export default function RegisterPage() {
 
         {/* RIGHT FORM SECTION */}
         <motion.div
-          className="p-6 lg:p-10 overflow-y-auto"
+          className="p-6 lg:p-12 overflow-y-auto bg-neutral-900/50"
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
         >
           <motion.div
             initial={{ opacity: 0, y: -15 }}
