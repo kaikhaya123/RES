@@ -14,22 +14,19 @@ export function verifyToken(token: string) {
 }
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { prisma } from './prisma';
 import bcrypt from 'bcryptjs';
 
+// Use JWT strategy for reliability - database adapter can cause fetch errors
 export const authOptions: NextAuthOptions = {
-  // Only use adapter if database is available
-  ...(process.env.DATABASE_URL && { adapter: PrismaAdapter(prisma) }),
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-change-in-production',
   session: {
     strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
     signIn: '/auth/login',
-    signOut: '/auth/logout',
     error: '/auth/error',
-    verifyRequest: '/auth/verify-request',
   },
   providers: [
     CredentialsProvider({
@@ -68,19 +65,14 @@ export const authOptions: NextAuthOptions = {
           }
 
           return {
-            id: user.id,
-            email: user.email,
-            name: `${user.firstName} ${user.lastName}`,
+            id: String(user.id),
+            email: user.email || '',
+            name: `${user.firstName || ''} ${user.lastName || ''}`.trim(),
             userType: user.userType,
           };
         } catch (error) {
           console.error('Auth error:', error);
-          // If database is not available, return null to prevent app crash
-          if (error instanceof Error && error.message.includes('Can\'t reach database')) {
-            console.warn('Database not available. Authentication disabled.');
-            return null;
-          }
-          throw error;
+          throw new Error('Authentication failed');
         }
       },
     }),
@@ -89,6 +81,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.email = user.email;
         token.userType = user.userType;
       }
       return token;
@@ -96,7 +89,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.userType = token.userType as string;
+        session.user.email = token.email as string;
       }
       return session;
     },

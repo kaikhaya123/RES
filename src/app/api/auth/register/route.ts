@@ -4,22 +4,9 @@ import bcrypt from 'bcryptjs';
 import { studentRegistrationSchema, publicRegistrationSchema } from '@/lib/validations';
 import { generateRandomString } from '@/lib/utils';
 import { logger } from '@/lib/logger';
-import { checkRateLimit, getClientIp, RATE_LIMITS } from '@/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting
-    const clientIp = getClientIp(request);
-    const rateLimitCheck = checkRateLimit(clientIp, '/api/auth/register', RATE_LIMITS.AUTH);
-    
-    if (!rateLimitCheck.allowed) {
-      logger.warn('Registration', 'Rate limit exceeded', { ip: clientIp, remaining: rateLimitCheck.remaining });
-      return NextResponse.json(
-        { error: 'Too many registration attempts. Please try again later.' },
-        { status: 429 }
-      );
-    }
-
     const body = await request.json();
     const { role, ...data } = body;
 

@@ -46,36 +46,60 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TikTok"
-                className="w-10 h-10 flex items-center justify-center bg-no-repeat bg-center hover:scale-110 transition-transform"
-                style={{ backgroundImage: `url('/Images/icons8-tiktok-50.png)`, backgroundSize: '22px 22px' }}
-              />
+                className="w-10 h-10 flex items-center justify-center hover:scale-110 transition-transform"
+              >
+                <Image
+                  src="/Images/icons8-tiktok-50.png"
+                  alt="TikTok"
+                  width={22}
+                  height={22}
+                />
+              </a>
 
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-10 h-10 flex items-center justify-center bg-no-repeat bg-center hover:scale-110 transition-transform"
-                style={{ backgroundImage: `url('/Images/icons8-instagram-30.png')`, backgroundSize: '22px 22px' }}
-              />
+                className="w-10 h-10 flex items-center justify-center hover:scale-110 transition-transform"
+              >
+                <Image
+                  src="/Images/icons8-instagram-30.png"
+                  alt="Instagram"
+                  width={22}
+                  height={22}
+                />
+              </a>
 
               <a
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"
-                className="w-10 h-10 flex items-center justify-center bg-no-repeat bg-center hover:scale-110 transition-transform"
-                style={{ backgroundImage: `url('/Images/icons8-youtube-logo-50.png')`, backgroundSize: '22px 22px' }}
-              />
+                className="w-10 h-10 flex items-center justify-center hover:scale-110 transition-transform"
+              >
+                <Image
+                  src="/Images/icons8-youtube-logo-50.png"
+                  alt="YouTube"
+                  width={22}
+                  height={22}
+                />
+              </a>
 
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="w-10 h-10 flex items-center justify-center bg-no-repeat bg-center hover:scale-110 transition-transform"
-                style={{ backgroundImage: `url('/Images/icons8-facebook-50 (1).png')`, backgroundSize: '22px 22px' }}
-              />
+                className="w-10 h-10 flex items-center justify-center hover:scale-110 transition-transform"
+              >
+                <Image
+                  src="/Images/icons8-facebook-50 (1).png"
+                  alt="Facebook"
+                  width={22}
+                  height={22}
+                />
+              </a>
             </div>
           </div>
 
