@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { StaggeredText } from '@/components/ui/staggered-text';
 
 export default function ImpactPage() {
   return (
@@ -29,19 +30,29 @@ export default function ImpactPage() {
           className="relative z-10 w-full h-full bg-black bg-opacity-60 flex items-center px-6 md:px-16"
         >
           <div>
-            <h1 className="text-white text-4xl md:text-6xl font-black leading-tight">
-              Your Story. Your Voice. Your Impact.
-            </h1>
-            <p className="text-gray-300 text-sm md:text-lg mt-4 max-w-xl">
+            <StaggeredText
+              text="Your Story. Your Voice. Your Impact."
+              className="text-white text-4xl md:text-6xl font-black leading-tight"
+              staggerDirection="top"
+              staggerDelay={0.05}
+              distance={20}
+              duration={0.5}
+            />
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-gray-300 text-sm md:text-lg mt-4 max-w-xl"
+            >
               See how the platform gives students and communities real opportunities.
-            </p>
+            </motion.p>
           </div>
         </motion.div>
       </section>
 
       {/* STATS */}
       <section className="py-16 px-6 md:px-16">
-        <h2 className="text-3xl md:text-4xl font-black mb-10">Our Reach</h2>
+        <h2 className="text-3xl md:text-4xl font-black mb-10">OUR REACH</h2>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
@@ -67,7 +78,7 @@ export default function ImpactPage() {
 
       {/* STORIES */}
       <section className="py-16 px-6 md:px-16">
-        <h2 className="text-3xl md:text-4xl font-black mb-10">Student Stories</h2>
+        <h2 className="text-3xl md:text-4xl font-black mb-10">STUDENT STORIES</h2>
 
         <div className="space-y-16">
 
@@ -88,7 +99,7 @@ export default function ImpactPage() {
               />
             </div>
             <div className="md:w-1/2">
-              <h3 className="text-xl md:text-2xl font-bold">Exposure and Confidence</h3>
+              <h3 className="text-xl md:text-2xl font-bold">EXPOSURE & CONFINDENCE</h3>
               <p className="text-gray-600 text-sm md:text-base mt-3 leading-relaxed">
                 Students gained real visibility through voting, challenges, and live events.
               </p>
@@ -112,7 +123,7 @@ export default function ImpactPage() {
               />
             </div>
             <div className="md:w-1/2">
-              <h3 className="text-xl md:text-2xl font-bold">Community Growth</h3>
+              <h3 className="text-xl md:text-2xl font-bold">COMMUNITY GROWTH</h3>
               <p className="text-gray-600 text-sm md:text-base mt-3 leading-relaxed">
                 Students created real influence and connected with followers across campuses.
               </p>
@@ -124,7 +135,7 @@ export default function ImpactPage() {
 
       {/* GALLERY */}
       <section className="py-16 px-6 md:px-16">
-        <h2 className="text-3xl md:text-4xl font-black mb-10">Gallery Impact Wall</h2>
+        <h2 className="text-3xl md:text-4xl font-black mb-10">GALLERY STUDENT WALL</h2>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {[
