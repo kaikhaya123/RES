@@ -35,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <body className="antialiased font-futura">
+      <body suppressHydrationWarning className="antialiased font-futura">
         <Providers>
           {children}
           <Toaster 

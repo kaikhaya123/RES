@@ -6,7 +6,7 @@ import RippleEffect from '@/components/ui/RippleEffect';
 export default function Hero() {
   return (
     <section 
-      className="relative min-h-screen flex items-end overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden"
       style={{
         backgroundImage: "url('/Images/college-students-different-ethnicities-cramming-min.jpg')",
         backgroundSize: 'cover',
@@ -16,7 +16,7 @@ export default function Hero() {
     >
       {/* Background Image with Ripple Effect */}
       <RippleEffect
-        imageUrl="/Images/people.jpg"
+        imageUrl="/Images/college-students-different-ethnicities-cramming-min.jpg"
         intensity={0.4}
         rippleCount={2}
         rippleSize={120}
@@ -25,17 +25,17 @@ export default function Hero() {
         className="absolute inset-0 z-0"
       />
       
-      {/* Gradient Overlay - from transparent at top to solid at bottom */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 z-10"></div>
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/30 z-10"></div>
 
-      <div className="container mx-auto px-6 lg:px-12 pb-16 relative z-20 w-full">
-        <div className="max-w-3xl">
+      <div className="container mx-auto px-6 lg:px-12 py-32 relative z-20">
+        <div className="max-w-4xl">
           {/* Main Heading */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight tracking-tight drop-shadow-lg"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-lg"
           >
             ROOMZA'S EDUCATED SECRET
           </motion.h1>
@@ -45,9 +45,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-base md:text-lg lg:text-xl text-white/95 font-medium max-w-2xl leading-relaxed drop-shadow-md"
+            className="text-lg md:text-xl lg:text-2xl text-white/90 font-medium max-w-2xl leading-snug tracking-tight drop-shadow-md"
           >
-           Welcome to R.E.S. A student reality show that inspires, educates, and rewards. You watch students face real challenges. You see them rise. You see them fall. You see them grow. This is the movement shaping the next generation
+           This is R.E.S. A student reality show that inspires, educates, and rewards. You watch students face real challenges.You see them rise. You see them fall. You see them grow.
           </motion.p>
         </div>
       </div>

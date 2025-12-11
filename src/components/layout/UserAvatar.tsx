@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { User, LogOut, LayoutDashboard } from 'lucide-react';
+import { User, LogOut, LayoutDashboard, ChevronDown } from 'lucide-react';
 import { Session } from 'next-auth';
 
 interface UserAvatarProps {
@@ -48,7 +48,7 @@ export function UserAvatar({ session, isScrolled }: UserAvatarProps) {
     return (
       <Link
         href="/auth/login"
-        className="relative p-2 hover:opacity-80 transition flex items-center justify-center"
+        className="relative p-2 hover:opacity-80 transition-all duration-300 flex items-center justify-center"
       >
         <User
           size={24}
@@ -61,49 +61,90 @@ export function UserAvatar({ session, isScrolled }: UserAvatarProps) {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      {/* Floating Avatar */}
+      {/* Avatar Button - Modern Minimal Design */}
       <button
         onClick={() => setShowDropdown(!showDropdown)}
-        className="relative w-12 h-12 rounded-full bg-black text-brand-yellow flex items-center justify-center text-sm font-black shadow-lg hover:shadow-xl transition-all hover:scale-105"
+        className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-white/10 transition-all duration-300 group backdrop-blur-sm"
       >
-        {getInitials()}
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-yellow to-yellow-500 flex items-center justify-center flex-shrink-0 shadow-lg hover:shadow-xl transition-shadow">
+          <User size={22} className="text-black font-bold" />
+        </div>
+        <div className="flex flex-col items-start hidden sm:flex min-w-0 gap-0.5">
+          <span className="text-white font-black text-sm leading-none drop-shadow-md">
+            khayalami
+          </span>
+          <span className="text-gray-200 text-xs font-bold leading-none drop-shadow">Participant</span>
+        </div>
+        <ChevronDown 
+          size={18} 
+          className="text-white drop-shadow-md group-hover:text-brand-yellow transition-all duration-300 group-hover:rotate-180 ml-0.5"
+        />
       </button>
 
-      {/* Dropdown Card */}
+      {/* Dropdown Menu - Modern Clean Design */}
       {showDropdown && (
-        <div className="absolute right-0 mt-4 w-72 bg-white rounded-2xl shadow-2xl border border-warm-stone-border overflow-hidden animate-in fade-in slide-in-from-top-3 duration-300">
+        <div className="absolute right-0 mt-3 w-80 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-gray-200/50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 z-50">
           
-          {/* User Header */}
-          <div className="px-6 py-6 bg-black text-white flex flex-col border-b border-warm-stone-border">
-            <p className="font-black text-lg">{session.user?.name || session.user?.email}</p>
-            <p className="text-sm text-gray-300 mt-1">{session.user?.email}</p>
-            <div className="mt-4 flex items-center gap-2">
-              <span className="bg-brand-yellow text-black px-3 py-1 rounded-full text-xs font-black">Active</span>
+          {/* User Header Section */}
+          <div className="px-6 py-5 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 border-b-3 border-brand-yellow">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 rounded-full bg-brand-yellow flex items-center justify-center shadow-lg">
+                <User size={26} className="text-gray-900 font-bold" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-white font-black text-base leading-tight">khayalami</p>
+                <p className="text-gray-300 text-sm leading-tight font-semibold">{session.user?.email}</p>
+              </div>
+            </div>
+            
+            {/* Status Badges */}
+            <div className="flex flex-wrap gap-2">
+              <span className="inline-block px-3 py-1.5 bg-brand-yellow text-gray-900 text-xs font-black rounded-full shadow-md">
+                ✓ Active
+              </span>
+              <span className="inline-block px-3 py-1.5 bg-gray-700 text-white text-xs font-black rounded-full border border-gray-600">
+                Top Voter
+              </span>
             </div>
           </div>
 
           {/* Menu Items */}
-          <div className="flex flex-col divide-y divide-warm-stone-border">
+          <div className="flex flex-col py-3 px-2">
             <Link
               href="/dashboard"
-              className="flex items-center gap-3 px-6 py-4 text-black hover:bg-warm-stone-base transition-colors font-semibold"
               onClick={() => setShowDropdown(false)}
+              className="flex items-center gap-4 px-5 py-3.5 text-gray-800 hover:bg-gray-100 rounded-lg transition-all duration-200 font-semibold text-base group border-l-4 border-transparent hover:border-brand-yellow"
             >
-              <LayoutDashboard size={18} className="text-black" /> Dashboard
+              <LayoutDashboard size={22} className="text-gray-700 group-hover:text-brand-yellow transition-colors flex-shrink-0" />
+              <span className="group-hover:translate-x-1 transition-transform">Dashboard</span>
             </Link>
+
             <Link
               href="/dashboard/profile"
-              className="flex items-center gap-3 px-6 py-4 text-black hover:bg-warm-stone-base transition-colors font-semibold"
               onClick={() => setShowDropdown(false)}
+              className="flex items-center gap-4 px-5 py-3.5 text-gray-800 hover:bg-gray-100 rounded-lg transition-all duration-200 font-semibold text-base group border-l-4 border-transparent hover:border-brand-yellow"
             >
-              <User size={18} className="text-black" /> Profile
+              <User size={22} className="text-gray-700 group-hover:text-brand-yellow transition-colors flex-shrink-0" />
+              <span className="group-hover:translate-x-1 transition-transform">Profile</span>
             </Link>
+
+            {/* Divider */}
+            <div className="my-2.5 h-px bg-gray-300 mx-3" />
+
             <button
               onClick={handleLogout}
-              className="flex items-center gap-3 px-6 py-4 text-black hover:bg-warm-stone-base transition-colors font-semibold text-left w-full"
+              className="flex items-center gap-4 px-5 py-3.5 text-red-700 hover:bg-red-50 rounded-lg transition-all duration-200 font-semibold text-base group text-left w-full border-l-4 border-transparent hover:border-red-500"
             >
-              <LogOut size={18} className="text-black" /> Logout
+              <LogOut size={22} className="text-red-600 group-hover:text-red-700 transition-colors flex-shrink-0" />
+              <span className="group-hover:translate-x-1 transition-transform">Sign Out</span>
             </button>
+          </div>
+
+          {/* Footer */}
+          <div className="px-5 py-3.5 bg-gray-100/80 border-t border-gray-200">
+            <p className="text-xs text-gray-700 font-bold text-center">
+              R.E.S. • Student Competition Platform
+            </p>
           </div>
         </div>
       )}
