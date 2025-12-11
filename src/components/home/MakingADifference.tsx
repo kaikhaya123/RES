@@ -21,8 +21,8 @@ function StatCard({ value, label, delay = 0 }: { value: string; label: string; d
 
 export default function MakingADifference() {
   const stats = [
-    { value: '~500', label: 'Campuses Engaged' },
-    { value: '+/- 2M', label: 'Students to be Reached' }
+    { value: '500', label: 'Campuses Engaged' },
+    { value: '2M', label: 'Students to be Reached' }
   ];
 
   const testimonials = [

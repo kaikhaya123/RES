@@ -1,155 +1,125 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Image from 'next/image';
 
 export default function FeaturesSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
   const features = [
     {
       id: 1,
       title: 'Vote for Contestants',
-      fullDescription:
-        'Cast your votes and watch the live vote counts update instantly. Vote up to 100 times daily to support your favorite contestants. Your votes directly influence who advances in each round.',
-      details: [
-        'Vote up to 100 times daily',
-        'Real-time vote count updates',
-        'Direct impact on eliminations',
-        'Secure voting system',
-        'Multiple voting methods',
-      ],
-      lottie: 'Election concept Lottie JSON animation.lottie',
-      cta: 'START VOTING',
+      description: 'Use your account to vote for your favourite contestant in real time.',
+      image: '/Images/VOTE (1).jpg',
+      lottie: 'Election concept Lottie JSON animation.lottie'
     },
     {
       id: 2,
       title: 'Watch Live Streaming',
-      fullDescription:
-        'Experience real-time streaming across all major platforms. Watch HD quality broadcasts with interactive features and never miss a moment of the action.',
-      details: [
-        'HD quality live broadcasts',
-        'Multiple platform streams',
-        'Interactive viewer features',
-        'Replay availability',
-        'Live chat engagement',
-      ],
-      lottie: 'Live Streaming.lottie',
-      cta: 'WATCH NOW',
+      description: 'Catch daily live feeds and stay updated with drama and highlights.',
+      image: '/Images/Live Neon Sign, Live LED Light, Live Logo Neon Wall Art, Broadcast Wall Art, Live Show LED Sign, Custom Neon Sign, News Channel Wall Art,.png',
+      lottie: 'Live Streaming.lottie'
     },
     {
       id: 3,
       title: 'Participate in Challenges',
-      fullDescription:
-        'Take on exciting weekly challenges designed to test your skills. Complete tasks to earn bonus points and unlock exclusive badges and rewards.',
-      details: [
-        'Weekly themed challenges',
-        'Earn bonus points',
-        'Unlock exclusive badges',
-        'Compete on leaderboards',
-        'Win special rewards',
-      ],
-      lottie: 'Rewards Programme.lottie',
-      cta: 'VIEW CHALLENGES',
+      description: 'Compete in weekly challenges and boost your chances to win rewards.',
+      image: '/Images/download (18).png',
+      lottie: 'Rewards Programme.lottie'
     },
+    {
+      id: 4,
+      title: 'Nominate a Contestant',
+      description: 'Refer your friends and nominate them as contestants in the competition.',
+      image: '/Images/KSENIIA FAST.png',
+      lottie: 'referral.lottie'
+    },
+    {
+      id: 5,
+      title: 'Take the Quiz',
+      description: 'Test your knowledge with fun trivia and win extra points.',
+      image: '/Images/download (17) (1).jpg',
+      lottie: 'Funny brain.lottie'
+    },
+    {
+      id: 6,
+      title: 'Win Exclusive Prizes',
+      description: 'Stand a chance to win exclusive prizes by completing tasks.',
+      image: '/Images/Download UEFA Champion Celebration Design for free.png',
+      lottie: 'Champion.lottie'
+    }
   ];
 
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    return scrollYProgress.onChange((p) => {
-      const index = Math.min(features.length - 1, Math.floor(p * features.length));
-      setActiveIndex(index);
-    });
-  }, [scrollYProgress, features.length]);
+  const [active, setActive] = useState(features[0]);
 
   return (
-    <section ref={containerRef} className="relative bg-black">
-      {/* Sticky container for scroll effect */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
-        {features.map((feature, index) => {
-          const start = index / features.length;
-          const end = (index + 1) / features.length;
+    <section className="w-full py-12 md:py-20 px-4 md:px-6 lg:px-16">
+      <h2 className="text-3xl md:text-4xl font-black mb-2 md:mb-3">
+        How You Participate
+      </h2>
+      <p className="text-gray-600 text-sm md:text-base mb-8 md:mb-10 max-w-2xl leading-relaxed">
+        Explore every way you can join, vote, compete and win inside the platform.
+      </p>
 
-          const opacity = useTransform(scrollYProgress, [start - 0.1, start, end, end + 0.1], [0, 1, 1, 0]);
-          const scale = useTransform(scrollYProgress, [start - 0.1, start, end, end + 0.1], [0.95, 1, 1, 0.95]);
-
-          return (
+      {/* Desktop: Flex layout | Mobile: Stacked */}
+      <div className="flex flex-col lg:flex-row gap-6 md:gap-10 lg:gap-14 items-stretch">
+        
+        {/* LEFT SIDE LIST */}
+        <div className="space-y-3 md:space-y-5 flex-1 order-2 lg:order-1">
+          {features.map(feature => (
             <motion.div
               key={feature.id}
-              style={{ opacity, scale, pointerEvents: activeIndex === index ? 'auto' : 'none' }}
-              className="absolute inset-0 w-full h-screen flex flex-col lg:flex-row"
+              onClick={() => setActive(feature)}
+              whileHover={{ scale: 1.02 }}
+              className={`p-4 md:p-5 rounded-xl md:rounded-2xl cursor-pointer transition-all border 
+                ${active.id === feature.id ? 'border-black bg-gray-100' : 'border-gray-300'}`}
             >
-              {/* Left Side - Lottie */}
-              <div className="hidden lg:flex lg:w-2/5 w-1/2 h-full items-center justify-center bg-gradient-to-br from-gray-900 to-black">
-                <DotLottieReact
-                  src={`/lottie-files/${feature.lottie}`}
-                  autoplay
-                  loop
-                  style={{ width: '70%', height: '70%' }}
-                />
-              </div>
-
-              {/* Right Side - Content */}
-              <div className="w-full lg:w-3/5 h-full flex items-center justify-center px-6 lg:px-16 py-20 overflow-y-auto lg:overflow-hidden">
-                <div className="max-w-2xl flex flex-col gap-6">
-                  {/* Mobile Lottie */}
-                  <div className="lg:hidden w-full h-auto mb-6 flex justify-center">
-                    <DotLottieReact
-                      src={`/lottie-files/${feature.lottie}`}
-                      autoplay
-                      loop
-                      style={{ width: 'clamp(6rem, 50%, 18rem)', height: 'clamp(6rem, 50%, 18rem)' }}
-                    />
-                  </div>
-
-                  {/* Title */}
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tighter">
-                    {feature.title}
-                  </h2>
-
-                  {/* Accent line */}
-                  <div className="h-1 w-16 lg:w-24 bg-white rounded-full mb-4"></div>
-
-                  {/* Description */}
-                  <p className="text-gray-300 text-base md:text-lg">{feature.fullDescription}</p>
-
-                  {/* Details list */}
-                  <ul className="list-disc list-inside text-gray-300 space-y-2">
-                    {feature.details.map((detail, i) => (
-                      <li key={i}>{detail}</li>
-                    ))}
-                  </ul>
-
-                  {/* CTA Button */}
-                  <button className="px-8 py-4 bg-white text-black font-black uppercase rounded-lg hover:bg-gray-200 transition-all w-fit">
-                    {feature.cta}
-                  </button>
+              <div className="flex items-start md:items-center gap-3 md:gap-4">
+                
+                {/* Small micro Lottie icon - Larger on mobile for clarity */}
+                <div className="w-14 h-14 md:w-12 md:h-12 flex-shrink-0">
+                  <DotLottieReact
+                    src={`/lottie-files/${feature.lottie}`}
+                    autoplay
+                    loop
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
+                    }}
+                  />
                 </div>
+
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-base md:text-lg font-bold leading-tight">{feature.title}</h3>
+                  <p className="text-gray-600 text-xs md:text-sm leading-snug mt-1">{feature.description}</p>
+                </div>
+
               </div>
             </motion.div>
-          );
-        })}
-
-        {/* Slide indicator dots */}
-        <div className="absolute bottom-8 left-6 md:left-14 lg:left-20 z-50 flex gap-2">
-          {features.map((_, i) => (
-            <motion.div
-              key={i}
-              animate={{ width: activeIndex === i ? 32 : 8 }}
-              className={`h-2 rounded-full transition-all duration-300 ${activeIndex === i ? 'bg-white' : 'bg-gray-700'}`}
-            />
           ))}
         </div>
-      </div>
 
-      {/* Spacer to allow scrolling */}
-      <div style={{ height: `${features.length * 100}vh` }} />
+        {/* RIGHT SIDE IMAGE - FULL HEIGHT BORDERLESS */}
+        <div className="relative flex-1 h-64 md:h-96 lg:h-auto lg:min-h-[550px] rounded-none overflow-hidden shadow-none order-1 lg:order-2">
+                  <motion.div 
+            key={active.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="w-full h-full"
+                  >
+                    <Image
+              src={active.image}
+              alt="Feature"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </motion.div>
+              </div>
+      </div>
     </section>
   );
 }
