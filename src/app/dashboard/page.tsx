@@ -182,7 +182,7 @@ export default function DashboardPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-gradient-to-r from-amber-50 to-white rounded-2xl p-6 md:p-8 border border-neutral-100 shadow-md flex flex-col md:flex-row items-center gap-6"
+          className="bg-warm-stone-secondary rounded-2xl p-6 md:p-8 border border-warm-stone-border shadow-md flex flex-col md:flex-row items-center gap-6"
         >
           <div className="flex-1">
             <div className="flex items-center gap-3">
@@ -211,7 +211,7 @@ export default function DashboardPage() {
       {/* ACTIONS GRID */}
       <section className="max-w-7xl mx-auto px-6 lg:px-12 mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <motion.div whileHover={{ y: -6 }} className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm">
+          <motion.div whileHover={{ y: -6 }} className="bg-warm-stone-secondary rounded-2xl p-6 border border-warm-stone-border shadow-sm">
             <Link href="/vote" className="block">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-amber-50">
@@ -226,7 +226,7 @@ export default function DashboardPage() {
             </Link>
           </motion.div>
 
-          <motion.div whileHover={{ y: -6 }} className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm">
+          <motion.div whileHover={{ y: -6 }} className="bg-warm-stone-secondary rounded-2xl p-6 border border-warm-stone-border shadow-sm">
             <Link href="/quiz" className="block">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-indigo-50">
@@ -241,7 +241,7 @@ export default function DashboardPage() {
             </Link>
           </motion.div>
 
-          <motion.div whileHover={{ y: -6 }} className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm">
+          <motion.div whileHover={{ y: -6 }} className="bg-warm-stone-secondary rounded-2xl p-6 border border-warm-stone-border shadow-sm">
             <Link href="/stream" className="block">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-red-50">
@@ -256,7 +256,7 @@ export default function DashboardPage() {
             </Link>
           </motion.div>
 
-          <motion.div whileHover={{ y: -6 }} className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm">
+          <motion.div whileHover={{ y: -6 }} className="bg-warm-stone-secondary rounded-2xl p-6 border border-warm-stone-border shadow-sm">
             <Link href="/leaderboard" className="block">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-emerald-50">
@@ -276,7 +276,7 @@ export default function DashboardPage() {
       {/* LEADERBOARD + PROFILE */}
       <section className="max-w-7xl mx-auto px-6 lg:px-12 mt-10 pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm">
+          <div className="lg:col-span-2 bg-warm-stone-secondary rounded-2xl p-6 border border-warm-stone-border shadow-sm">
             <div className="flex items-center gap-3 mb-6">
               <Trophy className="text-amber-600" />
               <h3 className="text-xl font-bold">Top Voters</h3>
@@ -289,7 +289,7 @@ export default function DashboardPage() {
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + i * 0.06 }}
-                  className="flex items-center justify-between p-3 rounded-lg border border-neutral-100"
+                  className="flex items-center justify-between p-3 rounded-lg border border-warm-stone-border"
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-rose-500 flex items-center justify-center font-bold text-white">
@@ -306,7 +306,7 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <aside className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm">
+          <aside className="bg-warm-stone-secondary rounded-2xl p-6 border border-warm-stone-border shadow-sm">
             <div className="mb-4">
               <p className="text-xs text-slate-500 uppercase">Your Profile</p>
               <div className="mt-3 flex items-center gap-3">
@@ -319,7 +319,7 @@ export default function DashboardPage() {
             </div>
 
             <nav className="space-y-2">
-              <Link href="/dashboard/profile" className="flex items-center justify-between p-3 rounded-lg border border-neutral-100 hover:bg-slate-50">
+              <Link href="/dashboard/profile" className="flex items-center justify-between p-3 rounded-lg border border-warm-stone-border hover:bg-warm-stone-base">
                 <div className="flex items-center gap-3">
                   <User />
                   <span className="font-medium">My Profile</span>
@@ -327,7 +327,7 @@ export default function DashboardPage() {
                 <ArrowRight />
               </Link>
 
-              <Link href="/dashboard/settings" className="flex items-center justify-between p-3 rounded-lg border border-neutral-100 hover:bg-slate-50">
+              <Link href="/dashboard/settings" className="flex items-center justify-between p-3 rounded-lg border border-warm-stone-border hover:bg-warm-stone-base\">
                 <div className="flex items-center gap-3">
                   <Settings />
                   <span className="font-medium">Settings</span>
@@ -345,7 +345,7 @@ export default function DashboardPage() {
       </section>
 
       {/* FOOTER CTA */}
-      <footer className="bg-white border-t border-neutral-100">
+      <footer className="bg-warm-stone-base border-t border-warm-stone-border\">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center">
             <h3 className="text-2xl font-bold">Ready to level up?</h3>
@@ -353,7 +353,7 @@ export default function DashboardPage() {
 
             <div className="mt-6 flex items-center justify-center gap-4">
               <Link href="/stream" className="inline-flex items-center gap-2 px-6 py-3 bg-amber-600 text-white rounded-lg font-bold">Watch Live</Link>
-              <Link href="/auth/register" className="inline-flex items-center gap-2 px-6 py-3 border border-neutral-200 rounded-lg">Register</Link>
+              <Link href="/auth/register" className="inline-flex items-center gap-2 px-6 py-3 border border-warm-stone-border rounded-lg\">Register</Link>
             </div>
           </motion.div>
         </div>

@@ -75,13 +75,13 @@ export default function ContestantsPage() {
       </section>
 
       {/* FILTER BAR */}
-      <div className="w-full px-6 md:px-12 py-6 flex gap-4">
+      <div className="w-full px-6 md:px-12 py-6 flex gap-4 bg-dark-bg-soft text-white\">
         {['all', 'popular', 'trending', 'new'].map(cat => (
           <button
             key={cat}
             onClick={() => setFilter(cat)}
             className={`px-4 py-2 rounded-lg text-sm font-medium border 
-              ${filter === cat ? 'bg-black text-white border-black' : 'border-gray-400 text-gray-700'}`}
+              ${filter === cat ? 'bg-white text-black border-white' : 'border-gray-600 text-gray-300'}`}
           >
             {cat.charAt(0).toUpperCase() + cat.slice(1)}
           </button>
@@ -89,7 +89,7 @@ export default function ContestantsPage() {
       </div>
 
       {/* GRID */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-12 pb-20">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-12 pb-20 bg-dark-bg-soft\">
         {filtered.map(c => (
           <motion.div
             key={c.id}
@@ -97,7 +97,7 @@ export default function ContestantsPage() {
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ scale: 1.02 }}
             viewport={{ once: true }}
-            className="rounded-xl overflow-hidden bg-white shadow-md"
+            className="rounded-xl overflow-hidden bg-warm-stone-secondary shadow-md"
           >
             <div className="relative h-64">
               <Image 

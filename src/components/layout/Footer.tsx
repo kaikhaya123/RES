@@ -127,11 +127,12 @@ export default function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
+                suppressHydrationWarning
                 className="flex-1 px-4 py-2 rounded-md bg-gray-800 text-gray-100 placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-primary-500"
               />
               <button type="submit" className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-500 transition">Subscribe</button>
             </form>
-            {subscribed && <div className="mt-3 text-sm text-green-400">Thanks — you're subscribed!</div>}
+            {subscribed && <div className="mt-3 text-sm text-green-400" suppressHydrationWarning>Thanks — you're subscribed!</div>}
 
             <div className="mt-6 text-gray-400 text-sm">
               <div className="flex items-center gap-3">

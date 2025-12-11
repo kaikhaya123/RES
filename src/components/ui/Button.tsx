@@ -23,7 +23,7 @@ export default function Button({
   const base = "px-4 py-2 rounded font-bold transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2";
   const variants = {
     primary: "bg-black text-white hover:bg-gray-800 focus:ring-black",
-    secondary: "bg-white text-black border hover:bg-gray-100 focus:ring-gray-400",
+    secondary: "bg-warm-stone-secondary text-black border border-warm-stone-border hover:bg-warm-stone-border focus:ring-warm-stone-border",
     danger: "bg-red-600 text-white hover:bg-red-700 focus:ring-red-600"
   };
   return (

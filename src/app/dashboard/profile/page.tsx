@@ -29,7 +29,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-24 pb-12">
+    <div className="min-h-screen bg-dark-bg-soft pt-24 pb-12">
       <div className="container mx-auto px-4 lg:px-12">
         {/* Back Button */}
         <Link
@@ -41,7 +41,7 @@ export default function ProfilePage() {
         </Link>
 
         {/* Profile Card */}
-        <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 max-w-2xl">
+        <div className="bg-warm-stone-secondary rounded-2xl p-8 shadow-lg border border-warm-stone-border max-w-2xl\">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">My Profile</h1>
 
           <div className="space-y-6">

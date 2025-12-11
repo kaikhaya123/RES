@@ -51,7 +51,7 @@ export default function ImpactPage() {
       </section>
 
       {/* STATS */}
-      <section className="py-16 px-6 md:px-16">
+      <section className="py-16 px-6 md:px-16 bg-dark-bg-soft text-white\">
         <h2 className="text-3xl md:text-4xl font-black mb-10">OUR REACH</h2>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -67,7 +67,7 @@ export default function ImpactPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.15 }}
-              className="bg-white rounded-xl p-6 text-center shadow-sm border"
+              className="bg-warm-stone-secondary rounded-xl p-6 text-center shadow-sm border border-warm-stone-border"
             >
               <p className="text-3xl md:text-4xl font-black">{item.value}</p>
               <p className="text-gray-600 text-sm mt-2">{item.label}</p>
@@ -77,7 +77,7 @@ export default function ImpactPage() {
       </section>
 
       {/* STORIES */}
-      <section className="py-16 px-6 md:px-16">
+      <section className="py-16 px-6 md:px-16 bg-dark-bg-soft text-white\">
         <h2 className="text-3xl md:text-4xl font-black mb-10">STUDENT STORIES</h2>
 
         <div className="space-y-16">
@@ -100,7 +100,7 @@ export default function ImpactPage() {
             </div>
             <div className="md:w-1/2">
               <h3 className="text-xl md:text-2xl font-bold">EXPOSURE & CONFINDENCE</h3>
-              <p className="text-gray-600 text-sm md:text-base mt-3 leading-relaxed">
+              <p className="text-gray-300 text-sm md:text-base mt-3 leading-relaxed\">
                 Students gained real visibility through voting, challenges, and live events.
               </p>
             </div>
@@ -134,7 +134,7 @@ export default function ImpactPage() {
       </section>
 
       {/* GALLERY */}
-      <section className="py-16 px-6 md:px-16">
+      <section className="py-16 px-6 md:px-16 bg-dark-bg-soft text-white\">
         <h2 className="text-3xl md:text-4xl font-black mb-10">GALLERY STUDENT WALL</h2>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -168,7 +168,7 @@ export default function ImpactPage() {
         </p>
 
         <div className="mt-6 flex justify-center gap-4">
-          <button className="px-6 py-3 bg-white text-black font-semibold rounded-lg">
+          <button className="px-6 py-3 bg-black text-white font-semibold rounded-lg">
             Join as Student
           </button>
           <button className="px-6 py-3 bg-gray-700 text-white font-semibold rounded-lg">

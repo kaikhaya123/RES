@@ -31,10 +31,8 @@ function NumberTicker({ value, duration = 2 }: { value: number; duration?: numbe
 
 export default function AboutShow() {
   const stats = [
-    { value: '7M+', label: 'Daily Users' },
-    { value: '383', label: 'Campuses Engaged' },
-    { value: '100M+', label: 'Impressions' },
-    { value: '1.7M', label: 'Students Reached' }
+    { value: '500', label: 'Campuses Engaged' },
+    { value: '+/- 2M', label: 'Students to be Reached' }
   ];
 
   const highlights = [
@@ -47,11 +45,11 @@ export default function AboutShow() {
   ];
 
   return (
-    <section className="py-32 lg:py-40 bg-white relative overflow-hidden">
+    <section className="py-32 lg:py-40 bg-dark-bg-soft relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{ 
-          backgroundImage: 'linear-gradient(black 1px, transparent 1px), linear-gradient(90deg, black 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
           backgroundSize: '60px 60px'
         }} />
       </div>
@@ -74,7 +72,7 @@ export default function AboutShow() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="inline-block mb-8"
             >
-              <span className="px-4 py-2 border-2 border-black text-xs uppercase tracking-[0.3em] font-black">
+              <span className="px-4 py-2 border-2 border-white text-xs uppercase tracking-[0.3em] font-black text-white">
                 About the Show
               </span>
             </motion.div>
@@ -86,7 +84,7 @@ export default function AboutShow() {
               className="text-5xl lg:text-6xl font-black mb-6 tracking-tighter leading-[1.1]"
               fontSize={60}
               lineHeight={1.1}
-              color="#000000"
+              color="#FFFFFF"
               initialBlur={15}
               initialOpacity={0.2}
               fadeDelay={0.05}
@@ -98,10 +96,10 @@ export default function AboutShow() {
             <AnimatedTextReveal 
               text="South Africa's first digital student reality show celebrating talent, education, resilience, and youth empowerment."
               tag="p"
-              className="text-xl text-gray-600 mb-8 leading-relaxed font-light"
+              className="text-xl text-gray-300 mb-8 leading-relaxed font-light"
               fontSize={20}
               lineHeight={1.6}
-              color="#4B5563"
+              color="#D1D5DB"
               initialBlur={10}
               initialOpacity={0.3}
               fadeDelay={0.04}
@@ -114,10 +112,10 @@ export default function AboutShow() {
               <AnimatedTextReveal 
                 text="Roomza's Educated Secret (R.E.S.) is a national student-focused reality competition designed to uplift, empower, and celebrate young people through entertainment, education, and digital participation."
                 tag="p"
-                className="text-gray-700 text-lg leading-relaxed"
+                className="text-gray-300 text-lg leading-relaxed"
                 fontSize={18}
                 lineHeight={1.6}
-                color="#374151"
+                color="#D1D5DB"
                 initialBlur={8}
                 initialOpacity={0.3}
                 fadeDelay={0.03}
@@ -127,10 +125,10 @@ export default function AboutShow() {
               <AnimatedTextReveal 
                 text="Students across the country compete in challenges, the public votes, and millions join the journey through quizzes, livestreams, and social media."
                 tag="p"
-                className="text-gray-700 text-lg leading-relaxed"
+                className="text-gray-300 text-lg leading-relaxed"
                 fontSize={18}
                 lineHeight={1.6}
-                color="#374151"
+                color="#D1D5DB"
                 initialBlur={8}
                 initialOpacity={0.3}
                 fadeDelay={0.03}
@@ -140,14 +138,14 @@ export default function AboutShow() {
             </div>
 
             {/* Inspiration with Animated Reveal */}
-            <div className="border-l-4 border-black pl-6 mb-8">
+            <div className="border-l-4 border-white pl-6 mb-8">
               <AnimatedTextReveal 
                 text="Inspired by the legacy of Robben Island and the values of Nelson Mandela's Long Walk to Freedom, R.E.S. stands as a modern movement that promotes unity, leadership, and transformation through digital storytelling."
                 tag="p"
-                className="text-gray-700 text-lg leading-relaxed"
+                className="text-gray-200 text-lg leading-relaxed"
                 fontSize={18}
                 lineHeight={1.6}
-                color="#374151"
+                color="#D1D5DB"
                 initialBlur={8}
                 initialOpacity={0.3}
                 fadeDelay={0.03}
@@ -166,14 +164,14 @@ export default function AboutShow() {
             >
               <Link
                 href="/auth/register"
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-black text-white font-black text-sm uppercase tracking-[0.15em] hover:bg-black/90 transition-all duration-300"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-brand-yellow text-black font-black text-sm uppercase tracking-[0.15em] hover:bg-yellow-400 transition-all duration-300"
               >
                 <span>Register Now</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/journey"
-                className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-black text-black font-black text-sm uppercase tracking-[0.15em] hover:bg-black hover:text-white transition-all duration-300"
+                className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-brand-yellow text-white font-black text-sm uppercase tracking-[0.15em] hover:bg-brand-yellow hover:text-black transition-all duration-300"
               >
                 <span>The Journey</span>
                 <Play className="w-4 h-4" />
@@ -202,7 +200,7 @@ export default function AboutShow() {
                 <div className="relative w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
                   {/* Uncomment and use this when you add your image */}
                   <Image
-                    src="/Images/download (9) (1).jpg"
+                    src="/Images/college-students-different-ethnicities-cramming (3).jpg"
                     alt="R.E.S. Students"
                     fill
                     className="object-cover"
@@ -253,12 +251,11 @@ export default function AboutShow() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-24"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-24 max-w-2xl mx-auto"
         >
           {stats.map((stat, index) => {
             const numericValue = parseInt(stat.value.replace(/[^0-9]/g, ''));
             const hasNumber = !isNaN(numericValue);
-            
             return (
               <motion.div
                 key={index}
@@ -268,14 +265,14 @@ export default function AboutShow() {
                 transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                 className="text-center"
               >
-                <div className="text-4xl lg:text-5xl font-black mb-2 tracking-tight">
+                <div className="text-4xl lg:text-5xl font-black mb-2 tracking-tight text-white">
                   {hasNumber && index === 1 ? (
                     <NumberTicker value={numericValue} duration={2.5} />
                   ) : (
                     stat.value
                   )}
                 </div>
-                <div className="text-sm text-gray-600 uppercase tracking-wider">{stat.label}</div>
+                <div className="text-sm text-gray-200 uppercase tracking-wider">{stat.label}</div>
               </motion.div>
             );
           })}
@@ -289,7 +286,7 @@ export default function AboutShow() {
           transition={{ duration: 0.8 }}
           className="mb-24"
         >
-          <h3 className="text-3xl lg:text-4xl font-black mb-12 text-center tracking-tight">
+          <h3 className="text-white lg:text-4xl font-black mb-12 text-center tracking-tight">
             What Makes R.E.S. <span className="font-light">Unique</span>
           </h3>
           
@@ -303,8 +300,8 @@ export default function AboutShow() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="flex items-start gap-4 group"
               >
-                <div className="w-2 h-2 bg-black rotate-45 mt-2 flex-shrink-0 group-hover:scale-125 transition-transform" />
-                <p className="text-gray-700 leading-relaxed">{highlight}</p>
+                <div className="w-2 h-2 bg-white rotate-45 mt-2 flex-shrink-0 group-hover:scale-125 transition-transform" />
+                <p className="text-white leading-relaxed">{highlight}</p>
               </motion.div>
             ))}
           </div>
@@ -319,9 +316,9 @@ export default function AboutShow() {
           className="text-center max-w-4xl mx-auto mb-20"
         >
           <h3 className="text-3xl lg:text-4xl font-black mb-6 tracking-tight">
-            Why It <span className="font-light">Matters</span>
+            <span className="text-white">Why It <span className="font-light">Matters</span></span>
           </h3>
-          <p className="text-xl text-gray-700 leading-relaxed">
+          <p className="text-xl text-gray-100 leading-relaxed">
             R.E.S. creates opportunities for young people, supports student bursaries, improves campus safety, grows youth entrepreneurship, and brings South Africans together through a shared digital experience.
           </p>
         </motion.div>
@@ -334,28 +331,28 @@ export default function AboutShow() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="border-2 border-black p-8 lg:p-10"
+            className="border-2 border-white p-8 lg:p-10"
           >
             <div className="flex items-center gap-4 mb-6">
-              <Trophy className="w-8 h-8" strokeWidth={2} />
-              <h4 className="text-2xl font-black tracking-tight">Students Can</h4>
+              <Trophy className="w-8 h-8 text-white" strokeWidth={2} />
+              <h4 className="text-2xl font-black tracking-tight text-white">Students Can</h4>
             </div>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-black rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-gray-700">Compete in weekly challenges</span>
+                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
+                <span className="text-white">Compete in weekly challenges</span>
               </li>
               <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-black rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-gray-700">Build their profile</span>
+                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
+                <span className="text-white">Build their profile</span>
               </li>
               <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-black rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-gray-700">Gain supporters</span>
+                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
+                <span className="text-white">Gain supporters</span>
               </li>
               <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-black rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-gray-700">Win prizes and opportunities</span>
+                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
+                <span className="text-white">Win prizes and opportunities</span>
               </li>
             </ul>
           </motion.div>
@@ -366,28 +363,32 @@ export default function AboutShow() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="border-2 border-black p-8 lg:p-10"
+            className="border-2 border-white p-8 lg:p-10"
           >
             <div className="flex items-center gap-4 mb-6">
-              <Users className="w-8 h-8" strokeWidth={2} />
-              <h4 className="text-2xl font-black tracking-tight">Public Can</h4>
+              <Users className="w-8 h-8 text-white" strokeWidth={2} />
+              <h4 className="text-2xl font-black tracking-tight text-white">Public Can</h4>
             </div>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-black rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-gray-700">Vote daily (free & premium)</span>
+                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
+                <span className="text-white">Vote daily (free & premium)</span>
               </li>
               <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-black rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-gray-700">Join livestreams</span>
+                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
+                <span className="text-white">Join livestreams</span>
               </li>
               <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-black rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-gray-700">Play daily quizzes</span>
+                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
+                <span className="text-white">Play daily quizzes</span>
               </li>
               <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-black rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-gray-700">Support their favourite contestant</span>
+                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
+                <span className="text-white">Support their favourite contestant</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
+                <span className="text-white"><span className="font-bold">Participate in weekly competitions and win prizes</span></span>
               </li>
             </ul>
           </motion.div>
@@ -399,25 +400,36 @@ export default function AboutShow() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center bg-black text-white p-12 lg:p-16"
+          className="text-center bg-black text-white p-12 lg:p-16 relative overflow-hidden"
         >
-          <h3 className="text-4xl lg:text-5xl font-black mb-4 tracking-tight">
-            Join the <span className="font-light">Movement</span>
-          </h3>
-          <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-            Register, vote, and become part of South Africa's biggest student show.
-          </p>
+          {/* Background image */}
+          <Image
+            src="/Images/hipster-freedom-youth-teenager-graphic-word.jpg"
+            alt="Join the Movement Background"
+            fill
+            className="object-cover object-center absolute inset-0 z-0 opacity-30 pointer-events-none"
+            sizes="100vw"
+            priority
+          />
+          <div className="relative z-10">
+            <h3 className="text-4xl lg:text-5xl font-black mb-4 tracking-tight">
+              Join the <span className="font-light">Movement</span>
+            </h3>
+            <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+              Register, vote, and become part of South Africa's biggest student show.
+            </p>
+          </div>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/auth/register"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-black text-sm uppercase tracking-[0.15em] hover:bg-white/90 transition-all duration-300"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-brand-yellow text-black font-black text-sm uppercase tracking-[0.15em] hover:bg-yellow-400 transition-all duration-300"
             >
               <span>Register Now</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="#contestants"
-              className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-white text-white font-black text-sm uppercase tracking-[0.15em] hover:bg-white hover:text-black transition-all duration-300"
+              className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-brand-yellow text-white font-black text-sm uppercase tracking-[0.15em] hover:bg-brand-yellow hover:text-black transition-all duration-300"
             >
               <span>Meet Contestants</span>
             </Link>

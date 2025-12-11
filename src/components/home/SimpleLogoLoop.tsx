@@ -18,7 +18,7 @@ export default function SimpleLogoLoop() {
   ];
 
   return (
-    <div className="w-full overflow-hidden bg-gradient-to-br from-gray-50 to-white py-20">
+    <div className="w-full overflow-hidden bg-dark-bg-soft py-20">
       <div className="relative flex">
         {/* Original set */}
         <div className="flex animate-scroll items-center gap-16">

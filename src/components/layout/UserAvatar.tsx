@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { User, LogOut, LayoutDashboard, UserCircle } from 'lucide-react';
+import { User, LogOut, LayoutDashboard } from 'lucide-react';
 import { Session } from 'next-auth';
 
 interface UserAvatarProps {
@@ -64,50 +64,48 @@ export function UserAvatar({ session, isScrolled }: UserAvatarProps) {
       {/* Floating Avatar */}
       <button
         onClick={() => setShowDropdown(!showDropdown)}
-        className="relative w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-white flex items-center justify-center text-lg font-bold shadow-lg hover:shadow-2xl transition-all"
+        className="relative w-12 h-12 rounded-full bg-black text-brand-yellow flex items-center justify-center text-sm font-black shadow-lg hover:shadow-xl transition-all hover:scale-105"
       >
         {getInitials()}
       </button>
 
       {/* Dropdown Card */}
       {showDropdown && (
-        <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden animate-in fade-in slide-in-from-top-3 duration-300">
+        <div className="absolute right-0 mt-4 w-72 bg-white rounded-2xl shadow-2xl border border-warm-stone-border overflow-hidden animate-in fade-in slide-in-from-top-3 duration-300">
           
-        {/* User Header */}
-        <div className="px-5 py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white flex flex-col rounded-t-2xl">
-          <p className="font-semibold text-lg">{session.user?.name || session.user?.email}</p>
-          <p className="text-sm opacity-90 mt-1">{session.user?.email}</p>
-          {/* Gamification Example */}
-          <div className="mt-2 flex items-center gap-2 text-sm">
-            <span className="bg-white/30 px-2 py-0.5 rounded-full">Level 5</span>
-            <span className="bg-white/30 px-2 py-0.5 rounded-full">Top Voter</span>
+          {/* User Header */}
+          <div className="px-6 py-6 bg-black text-white flex flex-col border-b border-warm-stone-border">
+            <p className="font-black text-lg">{session.user?.name || session.user?.email}</p>
+            <p className="text-sm text-gray-300 mt-1">{session.user?.email}</p>
+            <div className="mt-4 flex items-center gap-2">
+              <span className="bg-brand-yellow text-black px-3 py-1 rounded-full text-xs font-black">Active</span>
+            </div>
+          </div>
+
+          {/* Menu Items */}
+          <div className="flex flex-col divide-y divide-warm-stone-border">
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-3 px-6 py-4 text-black hover:bg-warm-stone-base transition-colors font-semibold"
+              onClick={() => setShowDropdown(false)}
+            >
+              <LayoutDashboard size={18} className="text-black" /> Dashboard
+            </Link>
+            <Link
+              href="/dashboard/profile"
+              className="flex items-center gap-3 px-6 py-4 text-black hover:bg-warm-stone-base transition-colors font-semibold"
+              onClick={() => setShowDropdown(false)}
+            >
+              <User size={18} className="text-black" /> Profile
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-3 px-6 py-4 text-black hover:bg-warm-stone-base transition-colors font-semibold text-left w-full"
+            >
+              <LogOut size={18} className="text-black" /> Logout
+            </button>
           </div>
         </div>
-
-        {/* Menu Items */}
-        <div className="flex flex-col py-2">
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-3 px-5 py-2 text-gray-700 hover:bg-gray-50 transition rounded-lg"
-            onClick={() => setShowDropdown(false)}
-          >
-            <LayoutDashboard size={16} /> Dashboard
-          </Link>
-          <Link
-            href="/dashboard/profile"
-            className="flex items-center gap-3 px-5 py-2 text-gray-700 hover:bg-gray-50 transition rounded-lg"
-            onClick={() => setShowDropdown(false)}
-          >
-            <User size={16} /> Profile
-          </Link>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-3 px-5 py-2 text-red-600 hover:bg-red-50 transition rounded-lg text-left"
-          >
-            <LogOut size={16} /> Logout
-          </button>
-        </div>
-      </div>
       )}
     </div>
   );

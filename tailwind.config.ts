@@ -10,6 +10,27 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
+  			// Warm Stone Palette
+  			'warm-stone': {
+  				'base': '#F2EFEA',      // Base background
+  				'secondary': '#E7E3DD', // Secondary surface
+  				'border': '#D6D2CB'     // Border and subtle lines
+  			},
+  			// Dark Backgrounds
+  			'dark-bg': {
+  				'pure': '#000000',      // Pure Black - strongest glow effect
+  				'soft': '#0A0A0A',      // Soft Black - smooth look with depth
+  				'charcoal': '#111111',  // Deep Charcoal - good for sections
+  				'warm': '#1A1A1A',      // Warm Charcoal - pairs well with gold
+  				'matte': '#1F1F1F'      // Matte Graphite - useful for cards
+  			},
+  			// Yellow Accent
+  			'brand-yellow': '#FBBF24', // Vibrant yellow for logo and accents
+  			// Charcoal Blue
+  			'charcoal-blue': {
+  				'light': '#2C3E50',     // Light Charcoal Blue
+  				'dark': '#1A2533'       // Dark Charcoal Blue for dramatic sections
+  			},
   			primary: {
   				'50': '#fef2f2',
   				'100': '#fee2e2',

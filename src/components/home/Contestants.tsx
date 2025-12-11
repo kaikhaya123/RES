@@ -55,7 +55,7 @@ export default function Contestants() {
               {/* Image Container */}
               <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900">
                 <Image 
-                  src="/Images/Silhouettes_2.jpg"
+                  src="/Images/ChatGPT Image Dec 11, 2025, 12_10_18 PM.png"
                   alt="Featured Students"
                   fill
                   className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
@@ -120,7 +120,7 @@ export default function Contestants() {
               </div>
 
               <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 px-3 py-1.5 md:px-4 md:py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider">40 Contestants</span>
+                <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider">20 Contestants</span>
               </div>
             </div>
           </motion.div>
@@ -200,7 +200,7 @@ export default function Contestants() {
           {/* Primary CTA */}
           <Link
             href="/auth/register"
-            className="group inline-flex items-center gap-2 md:gap-3 px-6 md:px-10 py-4 md:py-5 bg-white text-black font-black text-xs md:text-sm uppercase tracking-[0.15em] rounded-full hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-500 mb-6"
+            className="group inline-flex items-center gap-2 md:gap-3 px-6 md:px-10 py-4 md:py-5 bg-brand-yellow text-black font-black text-xs md:text-sm uppercase tracking-[0.15em] rounded-full hover:bg-yellow-400 hover:shadow-[0_0_30px_rgba(251,191,36,0.3)] transition-all duration-500 mb-6"
           >
             <span className="whitespace-nowrap">Register to Get Early Access</span>
             <motion.div

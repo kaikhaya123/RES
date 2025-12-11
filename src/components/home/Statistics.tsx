@@ -28,7 +28,9 @@ export default function Statistics() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
+          className="text-center"
         >
+          <h2 className="text-3xl md:text-4xl font-black mb-8 text-black">Participating South African Universities</h2>
           <LogoLoop 
             logos={universityLogos}
             speed={40}

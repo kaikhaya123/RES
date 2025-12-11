@@ -188,7 +188,7 @@ export default function AnimatedLogos({
                       scale: 1.05,
                       transition: { duration: 0.2 }
                     }}
-                    className="relative w-24 h-16 sm:w-40 sm:h-24 md:w-48 md:h-32 flex items-center justify-center grayscale hover:grayscale-0 opacity-90 hover:opacity-100 transition-all group bg-white/80 rounded-lg shadow-lg backdrop-blur-sm"
+                    className="relative w-24 h-16 sm:w-40 sm:h-24 md:w-48 md:h-32 flex items-center justify-center grayscale hover:grayscale-0 opacity-90 hover:opacity-100 transition-all group bg-warm-stone-secondary rounded-lg shadow-lg backdrop-blur-sm"
                     style={{ willChange: "transform, opacity" }}
                   >
                     <Image
@@ -284,7 +284,7 @@ export default function AnimatedLogos({
               {duplicatedLogos.map((logo, index) => (
                 <div
                   key={`${logo.name}-${index}`}
-                  className="flex-shrink-0 relative w-24 h-16 sm:w-40 sm:h-24 md:w-48 md:h-32 grayscale hover:grayscale-0 opacity-90 hover:opacity-100 transition-all duration-300 bg-white/80 rounded-lg shadow-lg backdrop-blur-sm"
+                  className="flex-shrink-0 relative w-24 h-16 sm:w-40 sm:h-24 md:w-48 md:h-32 grayscale hover:grayscale-0 opacity-90 hover:opacity-100 transition-all duration-300 bg-warm-stone-secondary rounded-lg shadow-lg backdrop-blur-sm"
                 >
                   <Image
                     src={logo.img}

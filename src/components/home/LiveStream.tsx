@@ -16,7 +16,7 @@ export default function LiveStream() {
     { name: 'YouTube', image: '/Images/youtube.png', viewers: 2800000 }
   ];
   return (
-    <section className="relative py-32 lg:py-40 bg-white text-black overflow-hidden">
+    <section className="relative py-32 lg:py-40 bg-dark-bg-soft text-white overflow-hidden">
       {/* Grid Background */}
       <div
         className="absolute inset-0 opacity-[0.03]"
@@ -56,19 +56,19 @@ export default function LiveStream() {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="h-[2px] w-32 bg-black origin-right"
+              className="h-[2px] w-32 bg-white origin-right"
             />
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="w-2 h-2 bg-black rotate-45"
+              className="w-2 h-2 bg-white rotate-45"
             />
               <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="h-[2px] w-32 bg-black origin-left"
+              className="h-[2px] w-32 bg-white origin-left"
             />
           </div>
 
@@ -77,7 +77,7 @@ export default function LiveStream() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-5xl lg:text-7xl font-black tracking-tighter mb-6 section-title"
+            className="text-5xl lg:text-7xl font-black tracking-tighter mb-6 text-white section-title"
           >
             Watch Live & Engage
           </motion.h2>
@@ -121,10 +121,10 @@ export default function LiveStream() {
           >
             {/* Mission Statement */}
             <div>
-              <h3 className="text-3xl font-black tracking-tighter mb-4">
+              <h3 className="text-3xl font-black tracking-tighter mb-4 text-white">
                 Stream Everywhere, Engage Instantly
               </h3>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-gray-300 leading-relaxed">
                 Experience the show live on your favorite platform. Whether you're on TikTok scrolling through campus life, 
                 watching YouTube with friends, or following on Facebook — we're streaming 18 hours daily to bring you 
                 non-stop entertainment, voting opportunities, and interactive quizzes with real prizes.
@@ -132,7 +132,7 @@ export default function LiveStream() {
             </div>
             {/* Platform Badges */}
             <div>
-              <div className="text-sm font-black uppercase tracking-[0.3em] mb-4 text-gray-400">
+              <div className="text-sm font-black uppercase tracking-[0.3em] mb-4 text-white">
                 Watch On
               </div>
               <div className="grid grid-cols-3 gap-3">
@@ -222,7 +222,7 @@ Stream, Vote, Win — All at Once
 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
 href="/stream"
-className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-black text-sm uppercase tracking-wider hover:bg-black hover:text-white border-2 border-black transition-colors"
+className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white font-black text-sm uppercase tracking-wider hover:bg-warm-stone-base hover:text-black border-2 border-black transition-colors"
 >
                 <Play className="w-5 h-5" />
                   <span>Watch Live Now</span>

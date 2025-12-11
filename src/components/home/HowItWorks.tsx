@@ -11,7 +11,7 @@ export default function HowItWorks() {
       title: 'Student Registration',
       subtitle: 'EDUCATIONAL OPPORTUNITIES',
       description: 'Students register for the competition to showcase their talents and compete for educational scholarships and prizes.',
-      image: '/Images/sergey-zolkin-_UeY8aTI6d0-unsplash.jpg',
+      image: '/Images/vertical-shot-curly-haired-millennial-girl-sits-crossed-legs-uses-mobile-phone-laptop-computer-connected-wireless.jpg',
       link: '/auth/register',
       linkText: 'OUR PLATFORM',
       color: 'from-slate-900 to-gray-800'
@@ -20,7 +20,7 @@ export default function HowItWorks() {
       title: 'Voting System',
       subtitle: 'PUBLIC ENGAGEMENT',
       description: 'Public votes for their favorite contestants up to 100 times daily. Vote counts determine weekly eliminations and final winners.',
-      image: '/Images/download (10) (1).jpg',
+      image: '/Images/close-up-employee-typing-laptop-keyboard-inputting-data-metrics.jpg',
       link: '/vote',
       linkText: 'VOTE NOW',
       color: 'from-zinc-900 to-stone-800'
@@ -29,7 +29,7 @@ export default function HowItWorks() {
       title: 'Live Streaming',
       subtitle: 'REAL-TIME VIEWING',
       description: 'Live streaming across multiple social platforms allows viewers to follow contestant journeys and daily activities in real-time.',
-      image: '/Images/download (10) (2).jpg',
+      image: '/Images/african-american-woman-watching-streaming-service.jpg',
       link: '/stream',
       linkText: 'WATCH LIVE',
       color: 'from-neutral-900 to-gray-800'
@@ -37,7 +37,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="bg-white py-32 lg:py-40 relative overflow-hidden">
+    <section className="bg-dark-bg-soft py-32 lg:py-40 relative overflow-hidden">
       {/* Animated background grid */}
       <motion.div 
         className="absolute inset-0 opacity-[0.03]"
@@ -46,7 +46,7 @@ export default function HowItWorks() {
         transition={{ duration: 2 }}
       >
         <div className="absolute inset-0" style={{ 
-          backgroundImage: 'linear-gradient(black 1px, transparent 1px), linear-gradient(90deg, black 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
           backgroundSize: '60px 60px'
         }} />
       </motion.div>
@@ -67,21 +67,21 @@ export default function HowItWorks() {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="h-[2px] w-24 bg-black origin-right"
+              className="h-[2px] w-24 bg-white origin-right"
             />
             <motion.span
               initial={{ scale: 0, rotate: -180 }}
               whileInView={{ scale: 1, rotate: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.5, type: "spring" }}
-              className="w-3 h-3 bg-black rotate-45"
+              className="w-3 h-3 bg-white rotate-45"
             />
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="h-[2px] w-24 bg-black origin-left"
+              className="h-[2px] w-24 bg-white origin-left"
             />
           </div>
 
@@ -90,7 +90,7 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-6xl lg:text-7xl font-black text-black mb-8 tracking-tighter section-title"
+            className="text-6xl lg:text-7xl font-black text-white mb-8 tracking-tighter section-title"
           >
             How It Works
           </motion.h2>
@@ -100,7 +100,7 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-lg text-gray-600 max-w-xl mx-auto font-light tracking-wide"
+            className="text-lg text-gray-300 max-w-xl mx-auto font-light tracking-wide"
           >
             Three seamless steps to transform student potential into achievement
           </motion.p>
@@ -180,7 +180,7 @@ function StepCard({ step, index }: { step: any; index: number }) {
         className="relative"
       >
         {/* Image Container */}
-        <div className="relative mb-10 overflow-hidden">
+        <div className="relative mb-10 overflow-hidden rounded-lg">
           <motion.div
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -190,10 +190,13 @@ function StepCard({ step, index }: { step: any; index: number }) {
               src={step.image}
               alt={step.title}
               fill
-              sizes="(max-width: 768px) 100vw, 33vw"
-              className="object-cover transition-all duration-700"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover transition-all duration-700 w-full h-full"
               style={{ transform: isHovered ? 'translateZ(20px)' : 'translateZ(0)' }}
               priority={index === 0}
+              quality={90}
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAKAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8VAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8A/9k="
             />
             
             {/* Animated border */}
@@ -253,14 +256,14 @@ function StepCard({ step, index }: { step: any; index: number }) {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.25 + 0.6 }}
-              className="h-[2px] w-8 bg-black origin-left"
+              className="h-[2px] w-8 bg-white origin-left"
             />
             <motion.p
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.25 + 0.7 }}
-              className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]"
+              className="text-[10px] font-black text-white uppercase tracking-[0.3em]"
             >
               {step.subtitle}
             </motion.p>
@@ -271,7 +274,7 @@ function StepCard({ step, index }: { step: any; index: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.25 + 0.8 }}
-            className="text-4xl font-black text-black mb-6 tracking-tighter leading-[1.1]"
+            className="text-4xl font-black text-white mb-6 tracking-tighter leading-[1.1]"
           >
             {step.title}
           </motion.h3>
@@ -281,7 +284,7 @@ function StepCard({ step, index }: { step: any; index: number }) {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.25 + 0.9 }}
-            className="text-gray-700 leading-relaxed mb-10 font-light text-[15px]"
+            className="text-gray-300 leading-relaxed mb-10 font-light text-[15px]"
           >
             {step.description}
           </motion.p>
@@ -289,7 +292,7 @@ function StepCard({ step, index }: { step: any; index: number }) {
           {/* Advanced button */}
           <Link
             href={step.link}
-            className="group/btn relative inline-flex items-center gap-4 text-black font-black text-xs uppercase tracking-[0.15em] overflow-hidden"
+            className="group/btn relative inline-flex items-center gap-4 text-white font-black text-xs uppercase tracking-[0.15em] overflow-hidden"
           >
             <span className="relative z-10 transition-transform group-hover/btn:translate-x-2 duration-300">
               {step.linkText}
@@ -301,7 +304,7 @@ function StepCard({ step, index }: { step: any; index: number }) {
               transition={{ duration: 0.6, repeat: isHovered ? Infinity : 0 }}
             >
               <motion.span 
-                className="h-[2px] bg-black"
+                className="h-[2px] bg-white"
                 initial={{ width: 32 }}
                 whileHover={{ width: 48 }}
                 transition={{ duration: 0.3 }}

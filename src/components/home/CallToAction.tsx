@@ -33,7 +33,7 @@ export default function CallToAction() {
       style={{ backgroundImage: `url('/Images/porter-raab-Ucr4Yp-t364-unsplash.jpg')` }}
     >
       {/* Overlay for readability */}
-      <div className="absolute inset-0 bg-white/70" />
+      <div className="absolute inset-0 bg-black/70" />
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
@@ -42,8 +42,8 @@ export default function CallToAction() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 section-title">Be Part of the R.E.S. Experience</h2>
-          <p className="text-lg text-slate-600 mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 section-title">Be Part of the R.E.S. Experience</h2>
+          <p className="text-lg text-gray-300 mb-8">
             You can join, vote, watch, and support the biggest student reality show in South Africa. Take your step today.
           </p>
 
@@ -61,7 +61,7 @@ export default function CallToAction() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 300 }}
-                className={`w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full text-sm font-semibold shadow-sm transition transform bg-slate-900 text-white hover:shadow-lg`}
+                className={`w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full text-sm font-semibold shadow-sm transition transform bg-brand-yellow text-black hover:bg-yellow-400 hover:shadow-lg`}
                 aria-label={b.label}
               >
                 <span>{b.label}</span>
@@ -70,9 +70,9 @@ export default function CallToAction() {
             ))}
           </motion.div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-slate-600">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-gray-300">
             {secondary.map((s) => (
-              <button key={s.key} onClick={s.action} className="underline hover:text-slate-800 transition">
+              <button key={s.key} onClick={s.action} className="underline hover:text-white transition">
                 {s.label}
               </button>
             ))}
@@ -80,7 +80,7 @@ export default function CallToAction() {
         </motion.div>
       </div>
         {/* Bottom visual divider to keep CTA separate from footer */}
-        <div className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none bg-gradient-to-b from-transparent to-white/90" />
+        <div className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none bg-gradient-to-b from-transparent to-black/90" />
     </section>
   );
 }

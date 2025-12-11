@@ -33,7 +33,7 @@ export default function Merch() {
   }
 
   return (
-    <section className="bg-white pt-24 pb-32">
+    <section className="bg-dark-bg-soft pt-24 pb-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Hero */}
@@ -44,8 +44,8 @@ export default function Merch() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl font-black text-gray-900">R.E.S. Premium Merch</h2>
-          <p className="text-gray-600 text-sm mt-3">Limited styles. Clean designs. High quality.</p>
+          <h2 className="text-4xl font-black text-white">R.E.S. Premium Merch</h2>
+          <p className="text-gray-300 text-sm mt-3">Limited styles. Clean designs. High quality.</p>
         </motion.div>
 
         {/* Product Grid */}
@@ -58,7 +58,7 @@ export default function Merch() {
               transition={{ duration: 0.55, delay: idx * 0.08 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.02 }}
-              className="group relative bg-white"
+              className="group relative bg-warm-stone-secondary"
             >
               {/* Image */}
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-gray-100">
@@ -87,7 +87,7 @@ export default function Merch() {
                 <motion.button
                   onClick={() => handleAdd(p)}
                   whileTap={{ scale: 0.92 }}
-                  className="inline-flex items-center gap-2 bg-black text-white text-xs font-bold px-3 py-2 rounded-lg"
+                  className="inline-flex items-center gap-2 bg-brand-yellow text-black text-xs font-bold px-3 py-2 rounded-lg hover:bg-yellow-400 transition-all"
                 >
                   <ShoppingCart size={15} />
                   Buy
@@ -107,7 +107,7 @@ export default function Merch() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.25 }}
-                className="bg-white border border-gray-200 shadow-md px-4 py-2 rounded-lg"
+                className="bg-warm-stone-secondary border border-warm-stone-border shadow-md px-4 py-2 rounded-lg"
               >
                 <p className="text-sm text-gray-800 font-semibold">{t.message}</p>
               </motion.div>

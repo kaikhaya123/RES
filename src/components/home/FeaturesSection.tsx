@@ -54,11 +54,11 @@ export default function FeaturesSection() {
   const [active, setActive] = useState(features[0]);
 
   return (
-    <section className="w-full py-12 md:py-20 px-4 md:px-6 lg:px-16">
-      <h2 className="text-3xl md:text-4xl font-black mb-2 md:mb-3">
+    <section className="w-full py-12 md:py-20 px-4 md:px-6 lg:px-16 bg-dark-bg-soft">
+      <h2 className="text-3xl md:text-4xl font-black mb-2 md:mb-3 text-white">
         How You Participate
       </h2>
-      <p className="text-gray-600 text-sm md:text-base mb-8 md:mb-10 max-w-2xl leading-relaxed">
+      <p className="text-gray-300 text-sm md:text-base mb-8 md:mb-10 max-w-2xl leading-relaxed">
         Explore every way you can join, vote, compete and win inside the platform.
       </p>
 
@@ -72,8 +72,8 @@ export default function FeaturesSection() {
               key={feature.id}
               onClick={() => setActive(feature)}
               whileHover={{ scale: 1.02 }}
-              className={`p-4 md:p-5 rounded-xl md:rounded-2xl cursor-pointer transition-all border 
-                ${active.id === feature.id ? 'border-black bg-gray-100' : 'border-gray-300'}`}
+              className={`p-4 md:p-5 rounded-xl md:rounded-2xl cursor-pointer transition-all border bg-warm-stone-secondary
+                ${active.id === feature.id ? 'border-white' : 'border-warm-stone-border'}`}
             >
               <div className="flex items-start md:items-center gap-3 md:gap-4">
                 
