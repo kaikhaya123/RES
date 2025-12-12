@@ -1,8 +1,30 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 export default function IntroSection() {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Ensure muted and attempt to play programmatically for autoplay reliability
+    const start = async () => {
+      try {
+        video.muted = true;
+        await video.play();
+      } catch (err) {
+        // Fallback: try again after ensuring muted
+        video.muted = true;
+        try { await video.play(); } catch {}
+      }
+    };
+
+    start();
+  }, []);
+  
   return (
     <section className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-black">
       
@@ -11,10 +33,12 @@ export default function IntroSection() {
         
         {/* Background video */}
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
+          preload="auto"
           className="w-full h-full object-cover scale-110 animate-slowZoom"
         >
           <source src="/Videos/14595546-hd_1920_1080_60fps.mp4" type="video/mp4" />
