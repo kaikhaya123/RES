@@ -32,7 +32,7 @@ function NumberTicker({ value, duration = 2 }: { value: number; duration?: numbe
 export default function AboutShow() {
   const stats = [
     { value: '500', label: 'Campuses Engaged' },
-    { value: '+/- 2M', label: 'Students to be Reached' }
+    { value: '2M', label: 'Students to be Reached' }
   ];
 
   const highlights = [
@@ -85,7 +85,7 @@ export default function AboutShow() {
               fontSize={60}
               lineHeight={1.1}
               color="#FFFFFF"
-              initialBlur={15}
+              initialBlur={0}
               initialOpacity={0.2}
               fadeDelay={0.05}
               fadeDuration={0.6}
@@ -100,7 +100,7 @@ export default function AboutShow() {
               fontSize={20}
               lineHeight={1.6}
               color="#D1D5DB"
-              initialBlur={10}
+              initialBlur={0}
               initialOpacity={0.3}
               fadeDelay={0.04}
               fadeDuration={0.5}
@@ -116,7 +116,7 @@ export default function AboutShow() {
                 fontSize={18}
                 lineHeight={1.6}
                 color="#D1D5DB"
-                initialBlur={8}
+                initialBlur={0}
                 initialOpacity={0.3}
                 fadeDelay={0.03}
                 fadeDuration={0.5}
@@ -129,7 +129,7 @@ export default function AboutShow() {
                 fontSize={18}
                 lineHeight={1.6}
                 color="#D1D5DB"
-                initialBlur={8}
+                initialBlur={0}
                 initialOpacity={0.3}
                 fadeDelay={0.03}
                 fadeDuration={0.5}
@@ -146,7 +146,7 @@ export default function AboutShow() {
                 fontSize={18}
                 lineHeight={1.6}
                 color="#D1D5DB"
-                initialBlur={8}
+                initialBlur={0}
                 initialOpacity={0.3}
                 fadeDelay={0.03}
                 fadeDuration={0.5}
@@ -254,29 +254,36 @@ export default function AboutShow() {
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-24 max-w-2xl mx-auto"
         >
           {stats.map((stat, index) => {
-            const numericValue = parseInt(stat.value.replace(/[^0-9]/g, ''));
+            // Extract numeric value and optional suffix (e.g. "2M", "1.5K", "500")
+            const match = stat.value.match(/^([\d,\.]+)([a-zA-Z%]*)$/);
+            const numericStr = match ? match[1] : '';
+            const suffix = match && match[2] ? match[2] : '';
+            const numericValue = numericStr ? parseFloat(numericStr.replace(/,/g, '')) : NaN;
             const hasNumber = !isNaN(numericValue);
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-4xl lg:text-5xl font-black mb-2 tracking-tight text-white">
-                  {hasNumber && index === 1 ? (
-                    <NumberTicker value={numericValue} duration={2.5} />
+             return (
+               <motion.div
+                 key={index}
+                 initial={{ opacity: 0, scale: 0.8 }}
+                 whileInView={{ opacity: 1, scale: 1 }}
+                 viewport={{ once: true }}
+                 transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                 className="text-center"
+               >
+                 <div className="text-4xl lg:text-5xl font-black mb-2 tracking-tight text-white">
+                  {hasNumber ? (
+                    <span className="flex items-baseline justify-center gap-1">
+                      <NumberTicker value={numericValue} duration={2.5} />
+                      {suffix && <span className="text-2xl lg:text-3xl font-bold ml-1">{suffix}</span>}
+                    </span>
                   ) : (
                     stat.value
                   )}
-                </div>
-                <div className="text-sm text-gray-200 uppercase tracking-wider">{stat.label}</div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+                 </div>
+                 <div className="text-sm text-gray-200 uppercase tracking-wider">{stat.label}</div>
+               </motion.div>
+             );
+           })}
+         </motion.div>
 
         {/* What Makes R.E.S. Unique */}
         <motion.div

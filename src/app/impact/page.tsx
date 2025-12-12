@@ -15,7 +15,7 @@ export default function ImpactPage() {
       <section className="relative w-full h-[80vh] flex mt-24">
         <div className="absolute inset-0">
           <Image
-            src="/Images/portrait-friendly-goodlooking-woman-with-curly-hair-red-warm-beanie-pointing-upper-left-cor.jpg"
+            src="/Images/friendlylooking-sociable-stylish-woman-with-curly-hair-red-beanie-winking-joyfully-pointi.jpg"
             alt="Impact Hero"
             fill
             className="object-cover"

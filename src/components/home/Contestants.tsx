@@ -17,7 +17,7 @@ export default function Contestants() {
   const yParticles = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   const stats = [
-    { icon: Users, value: '40', label: 'Contestants', sublabel: 'National Showcase' },
+    { icon: Users, value: '20', label: 'Contestants', sublabel: 'National Showcase' },
     { icon: Calendar, value: 'TBA', label: 'Competition Start', sublabel: 'Registration Coming Soon' },
     { icon: Trophy, value: 'R50K+', label: 'Prize Pool', sublabel: 'Scholarships & Rewards' }
   ];
