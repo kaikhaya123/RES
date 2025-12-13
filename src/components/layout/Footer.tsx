@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 import { useState } from 'react';
+import { RevealLinks } from '../RevealLinks';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -40,66 +41,17 @@ export default function Footer() {
               />
             </div>
 
-            <div className="mt-4 flex items-center space-x-3">
-              <a
-                href="https://tiktok.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="TikTok"
-                className="w-10 h-10 flex items-center justify-center hover:scale-110 transition-transform"
-              >
-                <Image
-                  src="/Images/icons8-tiktok-50.png"
-                  alt="TikTok"
-                  width={22}
-                  height={22}
-                />
-              </a>
-
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="w-10 h-10 flex items-center justify-center hover:scale-110 transition-transform"
-              >
-                <Image
-                  src="/Images/icons8-instagram-30.png"
-                  alt="Instagram"
-                  width={22}
-                  height={22}
-                />
-              </a>
-
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="w-10 h-10 flex items-center justify-center hover:scale-110 transition-transform"
-              >
-                <Image
-                  src="/Images/icons8-youtube-logo-50.png"
-                  alt="YouTube"
-                  width={22}
-                  height={22}
-                />
-              </a>
-
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="w-10 h-10 flex items-center justify-center hover:scale-110 transition-transform"
-              >
-                <Image
-                  src="/Images/icons8-facebook-50 (1).png"
-                  alt="Facebook"
-                  width={22}
-                  height={22}
-                />
-              </a>
+            <div className="mt-4">
+              <RevealLinks
+                layout="horizontal"
+                links={[
+                  { label: "TikTok", href: "https://tiktok.com" },
+                  { label: "Instagram", href: "https://instagram.com" },
+                  { label: "YouTube", href: "https://youtube.com" },
+                  { label: "Facebook", href: "https://facebook.com" },
+                ]}
+                className="py-6"
+              />
             </div>
           </div>
 
