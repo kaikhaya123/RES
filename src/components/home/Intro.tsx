@@ -78,7 +78,7 @@ export default function IntroSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="max-w-xl space-y-6 text-left"
+          className="max-w-xl space-y-8 text-left"
         >
           <h1 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
             The Future of Student Competition Starts Here

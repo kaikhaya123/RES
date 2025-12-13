@@ -3,7 +3,7 @@
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Users, Trophy, Play } from 'lucide-react';
+import { ArrowRight, Zap, Flame, Play } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import AnimatedTextReveal from '@/components/ui/animated-text-reveal';
 
@@ -31,17 +31,17 @@ function NumberTicker({ value, duration = 2 }: { value: number; duration?: numbe
 
 export default function AboutShow() {
   const stats = [
-    { value: '500', label: 'Campuses Engaged' },
-    { value: '2M', label: 'Students to be Reached' }
+    { value: '500', label: 'Campuses Engaged Nationwide' },
+    { value: '2M', label: 'Students and Youth Reached' }
   ];
 
   const highlights = [
-    'First nationwide online student reality show',
-    'Powered by interactive voting, daily quizzes, and live streaming',
-    'Open to students from universities, TVET colleges, and private institutions',
-    'A platform that amplifies youth voices',
-    'Built on education, empowerment, and opportunity',
-    'Reaches millions of viewers across South Africa'
+    'South Africa\'s first large-scale, interactive student leadership reality platform',
+    'Built on verified voting, daily challenges, quizzes, and live-streamed experiences',
+    'Open to students from public universities, TVET colleges, and private institutions',
+    'Designed to develop leadership, innovation, and social responsibility',
+    'Inspired by the legacy of Robben Island and the journey toward freedom and growth',
+    'Engaging millions of viewers across South Africa through web and social platforms'
   ];
 
   return (
@@ -245,159 +245,402 @@ export default function AboutShow() {
           </motion.div>
         </div>
 
-        {/* Stats Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-24 max-w-2xl mx-auto"
-        >
-          {stats.map((stat, index) => {
-            // Extract numeric value and optional suffix (e.g. "2M", "1.5K", "500")
-            const match = stat.value.match(/^([\d,\.]+)([a-zA-Z%]*)$/);
-            const numericStr = match ? match[1] : '';
-            const suffix = match && match[2] ? match[2] : '';
-            const numericValue = numericStr ? parseFloat(numericStr.replace(/,/g, '')) : NaN;
-            const hasNumber = !isNaN(numericValue);
-             return (
-               <motion.div
-                 key={index}
-                 initial={{ opacity: 0, scale: 0.8 }}
-                 whileInView={{ opacity: 1, scale: 1 }}
-                 viewport={{ once: true }}
-                 transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                 className="text-center"
-               >
-                 <div className="text-4xl lg:text-5xl font-black mb-2 tracking-tight text-white">
-                  {hasNumber ? (
-                    <span className="flex items-baseline justify-center gap-1">
-                      <NumberTicker value={numericValue} duration={2.5} />
-                      {suffix && <span className="text-2xl lg:text-3xl font-bold ml-1">{suffix}</span>}
-                    </span>
-                  ) : (
-                    stat.value
-                  )}
-                 </div>
-                 <div className="text-sm text-gray-200 uppercase tracking-wider">{stat.label}</div>
-               </motion.div>
-             );
-           })}
-         </motion.div>
-
-        {/* What Makes R.E.S. Unique */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-24"
-        >
-          <h3 className="text-white lg:text-4xl font-black mb-12 text-center tracking-tight">
-            What Makes R.E.S. <span className="font-light">Unique</span>
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {highlights.map((highlight, index) => (
+        {/* STATS HERO - MASSIVE AND UNAVOIDABLE */}
+        <div className="mb-40 relative">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8"
+          >
+            {/* Stat 1 - 500 Campuses */}
+            <div className="relative overflow-hidden group cursor-default">
               <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="flex items-start gap-4 group"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="relative p-12 lg:p-20 bg-gradient-to-br from-white via-white/95 to-white/90 border-2 border-white"
               >
-                <div className="w-2 h-2 bg-white rotate-45 mt-2 flex-shrink-0 group-hover:scale-125 transition-transform" />
-                <p className="text-white leading-relaxed">{highlight}</p>
+                {/* Animated background elements */}
+                <motion.div
+                  animate={{ 
+                    opacity: [0.3, 0.6, 0.3],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                  className="absolute -right-20 -top-20 w-40 h-40 bg-black/5 rounded-full blur-3xl"
+                />
+                
+                <div className="relative z-10">
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.1 }}
+                    className="text-8xl lg:text-9xl font-black text-black mb-2 leading-none"
+                  >
+                    500
+                  </motion.div>
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="text-xl lg:text-2xl font-black text-black/70 uppercase tracking-widest"
+                  >
+                    Campuses Engaged Nationwide
+                  </motion.p>
+                </div>
               </motion.div>
-            ))}
+            </div>
+
+            {/* Stat 2 - 2M Students */}
+            <div className="relative overflow-hidden group cursor-default">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="relative p-12 lg:p-20 bg-gradient-to-br from-white via-white/95 to-white/90 border-2 border-white"
+              >
+                {/* Animated background elements */}
+                <motion.div
+                  animate={{ 
+                    opacity: [0.3, 0.6, 0.3],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+                  className="absolute -left-20 -bottom-20 w-40 h-40 bg-black/5 rounded-full blur-3xl"
+                />
+                
+                <div className="relative z-10">
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="text-8xl lg:text-9xl font-black text-black mb-2 leading-none flex items-baseline gap-3"
+                  >
+                    <span>2</span>
+                    <span className="text-5xl lg:text-7xl">M</span>
+                  </motion.div>
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    className="text-xl lg:text-2xl font-black text-black/70 uppercase tracking-widest"
+                  >
+                    Students and Youth Reached
+                  </motion.p>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* HERO IMAGE - Scale & Diversity */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="mb-40 relative overflow-hidden rounded-2xl"
+        >
+          <div className="relative aspect-video lg:aspect-[3/1.5] overflow-hidden group">
+            <Image
+              src="/Images/college-students-different-ethnicities-cramming (4).jpg"
+              alt="R.E.S. Students from across South Africa"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              sizes="100vw"
+            />
+            {/* Overlay for text readability */}
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/25 transition-colors" />
+            
+            {/* Text Overlay */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="text-center"
+              >
+                <p className="text-4xl lg:text-5xl font-black text-white mb-4">
+                  The Movement Across South Africa
+                </p>
+                <p className="text-xl text-white/90">
+                  From campuses to communities, millions are rising
+                </p>
+              </motion.div>
+            </div>
           </div>
         </motion.div>
 
-        {/* Impact Statement */}
+        {/* WHAT MAKES R.E.S. UNIQUE - With Integrated Images */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center max-w-4xl mx-auto mb-20"
+          className="mb-40"
         >
-          <h3 className="text-3xl lg:text-4xl font-black mb-6 tracking-tight">
-            <span className="text-white">Why It <span className="font-light">Matters</span></span>
-          </h3>
-          <p className="text-xl text-gray-100 leading-relaxed">
-            R.E.S. creates opportunities for young people, supports student bursaries, improves campus safety, grows youth entrepreneurship, and brings South Africans together through a shared digital experience.
-          </p>
+          <div className="mb-24">
+            <h2 className="text-6xl lg:text-7xl font-black mb-6 tracking-tighter">
+              What Makes
+              <br />
+              <span className="text-white">R.E.S.</span>
+              <br />
+              <span className="text-white/40">Unique</span>
+            </h2>
+          </div>
+          
+          <div className="space-y-24">
+            {highlights.map((highlight, index) => {
+              const imageMap: { [key: number]: string } = {
+                0: '/Images/young-adults-meeting-up-study.jpg',
+                1: '/Images/remote-employee-home-office-desk-editing-documents-tablet.jpg',
+                2: '/Images/4183677.jpg',
+                3: '/Images/person-pressing-buzzer.jpg',
+                4: '/Images/still-life-betrayal-concept.jpg',
+                5: '/Images/cheerful-women-holding-trophy-icon.jpg'
+              };
+
+              const isEven = index % 2 === 0;
+              
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: index * 0.1 }}
+                  className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${!isEven ? 'lg:grid-flow-col-dense' : ''}`}
+                >
+                  {/* Content */}
+                  <div className={`${!isEven ? 'lg:col-start-2' : ''}`}>
+                    <div className="flex items-start gap-6 mb-6">
+                      <div className="text-5xl lg:text-6xl font-black text-white/20">
+                        {String(index + 1).padStart(2, '0')}
+                      </div>
+                      <p className="text-2xl lg:text-3xl text-white font-black leading-tight pt-2">
+                        {highlight}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Image */}
+                  <div className={`relative aspect-square lg:aspect-auto lg:h-96 overflow-hidden rounded-xl group ${!isEven ? 'lg:col-start-1' : ''}`}>
+                    <Image
+                      src={imageMap[index] || '/Images/college-students-different-ethnicities-cramming (3).jpg'}
+                      alt={highlight}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </motion.div>
 
-        {/* The Experience - Two Column */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-          {/* Students Can */}
+        {/* WHY IT MATTERS - Bold, Unavoidable Statement */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-40 relative"
+        >
+          <div className="max-w-4xl">
+            <h2 className="text-6xl lg:text-7xl font-black mb-12 tracking-tighter">
+              Why It
+              <br />
+              <span className="text-white/30">Matters</span>
+            </h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-3xl lg:text-4xl font-black text-white mb-16 leading-tight"
+            >
+              R.E.S. exists to address real student challenges.
+            </motion.p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="bg-white/[0.03] border border-white/10 p-8 backdrop-blur-sm"
+              >
+                <div className="text-6xl font-black text-white/20 mb-4">01</div>
+                <p className="text-xl text-white font-medium leading-relaxed">
+                  Creates access to opportunity
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="bg-white/[0.03] border border-white/10 p-8 backdrop-blur-sm"
+              >
+                <div className="text-6xl font-black text-white/20 mb-4">02</div>
+                <p className="text-xl text-white font-medium leading-relaxed">
+                  Supports bursaries and student development initiatives
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="bg-white/[0.03] border border-white/10 p-8 backdrop-blur-sm"
+              >
+                <div className="text-6xl font-black text-white/20 mb-4">03</div>
+                <p className="text-xl text-white font-medium leading-relaxed">
+                  Highlights campus safety and accommodation challenges
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="bg-white/[0.03] border border-white/10 p-8 backdrop-blur-sm"
+              >
+                <div className="text-6xl font-black text-white/20 mb-4">04</div>
+                <p className="text-xl text-white font-medium leading-relaxed">
+                  Promotes entrepreneurship, leadership, and community impact
+                </p>
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="border-l-4 border-white pl-8 py-8"
+            >
+              <p className="text-2xl text-white font-black leading-tight">
+                R.E.S. brings South Africans together through a shared digital experience rooted in 
+                <span className="text-white/50"> purpose, not spectacle.</span>
+              </p>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* THE EXPERIENCE - Dual Presentation */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-40">
+          {/* FOR STUDENTS - Energetic, Growth Focused */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="border-2 border-white p-8 lg:p-10"
           >
-            <div className="flex items-center gap-4 mb-6">
-              <Trophy className="w-8 h-8 text-white" strokeWidth={2} />
-              <h4 className="text-2xl font-black tracking-tight text-white">Students Can</h4>
+            <div className="flex items-center gap-4 mb-12">
+              <div className="p-3 bg-white/10 rounded-lg">
+                <Zap className="w-8 h-8 text-white" strokeWidth={2.5} />
+              </div>
+              <h3 className="text-5xl lg:text-6xl font-black tracking-tight text-white">
+                For
+                <br />
+                <span className="text-white/40">Students</span>
+              </h3>
             </div>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-white">Compete in weekly challenges</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-white">Build their profile</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-white">Gain supporters</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-white">Win prizes and opportunities</span>
-              </li>
-            </ul>
+
+            <div className="space-y-4">
+              {[
+                "Apply or be nominated to participate",
+                "Compete in structured weekly challenges",
+                "Develop leadership and innovation skills",
+                "Build national visibility and public support",
+                "Access mentorship, rewards, and future opportunities"
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="flex gap-4 items-start p-4 border-l-4 border-white hover:border-white hover:bg-white/5 transition-all group"
+                >
+                  <span className="text-2xl font-black text-white/40 flex-shrink-0 group-hover:text-white transition-colors">▸</span>
+                  <span className="text-lg text-white/80 group-hover:text-white transition-colors font-medium">{item}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="text-white/60 italic text-sm mt-8 pt-8 border-t border-white/10"
+            >
+              Participation is designed to grow character, confidence, and impact beyond the show.
+            </motion.p>
           </motion.div>
 
-          {/* Public Can */}
+          {/* FOR PUBLIC - Community Driven */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="border-2 border-white p-8 lg:p-10"
+            transition={{ duration: 0.8, delay: 0.1 }}
           >
-            <div className="flex items-center gap-4 mb-6">
-              <Users className="w-8 h-8 text-white" strokeWidth={2} />
-              <h4 className="text-2xl font-black tracking-tight text-white">Public Can</h4>
+            <div className="flex items-center gap-4 mb-12">
+              <div className="p-3 bg-white/10 rounded-lg">
+                <Flame className="w-8 h-8 text-white" strokeWidth={2.5} />
+              </div>
+              <h3 className="text-5xl lg:text-6xl font-black tracking-tight text-white">
+                For
+                <br />
+                <span className="text-white/40">Public</span>
+              </h3>
             </div>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-white">Vote daily (free & premium)</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-white">Join livestreams</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-white">Play daily quizzes</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-white">Support their favourite contestant</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-white rotate-45 mt-2 flex-shrink-0" />
-                <span className="text-white"><span className="font-bold">Participate in weekly competitions and win prizes</span></span>
-              </li>
-            </ul>
+
+            <div className="space-y-4">
+              {[
+                "Register and vote daily using verified accounts",
+                "Participate in quizzes and weekly competitions",
+                "Join live streams and real-time decision moments",
+                "Support contestants and community projects",
+                "Win rewards through platform engagement"
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="flex gap-4 items-start p-4 border-r-4 border-white hover:border-white hover:bg-white/5 transition-all group text-right"
+                >
+                  <span className="text-lg text-white/80 group-hover:text-white transition-colors font-medium">{item}</span>
+                  <span className="text-2xl font-black text-white/40 flex-shrink-0 group-hover:text-white transition-colors">◂</span>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="text-white/60 italic text-sm mt-8 pt-8 border-t border-white/10"
+            >
+              Every action contributes to the direction and outcome of the show.
+            </motion.p>
           </motion.div>
         </div>
 
@@ -419,12 +662,20 @@ export default function AboutShow() {
             priority
           />
           <div className="relative z-10">
-            <h3 className="text-4xl lg:text-5xl font-black mb-4 tracking-tight">
+            <h3 className="text-4xl lg:text-5xl font-black mb-6 tracking-tight">
               Join the <span className="font-light">Movement</span>
             </h3>
-            <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-              Register, vote, and become part of South Africa's biggest student show.
-            </p>
+            <div className="space-y-2 mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-white/90">
+                This is more than a show.
+              </p>
+              <p className="text-xl text-white/90">
+                It is a national platform for growth, leadership, and opportunity.
+              </p>
+              <p className="text-xl text-white/80 mt-4">
+                Register, participate, and shape the future of South Africa's next leaders.
+              </p>
+            </div>
           </div>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
@@ -438,7 +689,7 @@ export default function AboutShow() {
               href="#contestants"
               className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-brand-yellow text-white font-black text-sm uppercase tracking-[0.15em] hover:bg-brand-yellow hover:text-black transition-all duration-300"
             >
-              <span>Meet Contestants</span>
+              <span>Meet the Contestants</span>
             </Link>
           </div>
         </motion.div>
