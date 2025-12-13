@@ -399,10 +399,11 @@ export default function AboutShow() {
               const imageMap: { [key: number]: string } = {
                 0: '/Images/young-adults-meeting-up-study.jpg',
                 1: '/Images/remote-employee-home-office-desk-editing-documents-tablet.jpg',
-                2: '/Images/4183677.jpg',
+                2: '/Images/5298421.jpg',
                 3: '/Images/person-pressing-buzzer.jpg',
                 4: '/Images/bernd-dittrich-E0iLOeY8hV4-unsplash.jpg',
-                5: '/Images/high-angle-smiley-women-with-smartphones.jpg'
+                5: '/Images/high-angle-smiley-women-with-smartphones-min.jpg',
+                6: '/Images/college-students-different-ethnicities-cramming (4).jpg'
               };
 
               const isEven = index % 2 === 0;
