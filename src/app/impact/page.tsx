@@ -15,12 +15,3 @@ export default function ImpactPage() {
     </div>
   );
 }
-            Join as Public
-          </button>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
-  );
-}
