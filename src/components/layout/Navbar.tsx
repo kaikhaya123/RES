@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSession, signOut } from 'next-auth/react';
-import { Menu, X, User, LayoutDashboard, LogOut } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { X, User, LayoutDashboard, LogOut } from 'lucide-react';
 import { UserAvatar } from './UserAvatar';
 
 export default function Navbar() {
@@ -69,12 +70,31 @@ export default function Navbar() {
             <UserAvatar session={session} isScrolled={isScrolled} />
 
             {/* Mobile Menu Button */}
-            <button
+            <motion.button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`p-2 transition ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80 drop-shadow-md'}`}
+              className={`p-2 transition relative w-12 h-12 flex items-center justify-center ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80 drop-shadow-md'}`}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Menu size={28} strokeWidth={1.5} />
-            </button>
+              {/* Top line */}
+              <motion.div
+                className="absolute w-6 h-0.5 bg-current rounded-full"
+                animate={isMobileMenuOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: -8 }}
+                transition={{ duration: 0.3 }}
+              />
+              {/* Middle line */}
+              <motion.div
+                className="absolute w-6 h-0.5 bg-current rounded-full"
+                animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+              {/* Bottom line */}
+              <motion.div
+                className="absolute w-6 h-0.5 bg-current rounded-full"
+                animate={isMobileMenuOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 8 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.button>
           </div>
         </div>
 
