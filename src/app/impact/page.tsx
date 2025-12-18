@@ -56,7 +56,7 @@ export default function ImpactPage() {
 
       <main className="flex-1">
         {/* HERO */}
-        <section className="relative overflow-hidden min-h-[600px] lg:min-h-[700px] flex items-center bg-black">
+        <section className="relative overflow-hidden min-h-screen flex items-center bg-black">
           {/* Background Image */}
           <div className="absolute inset-0 z-0 overflow-hidden">
             <Image
@@ -77,7 +77,7 @@ export default function ImpactPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="max-w-2xl text-4xl font-black leading-tight tracking-tighter lg:text-5xl text-white"
+              className="max-w-2xl text-4xl font-black leading-tight tracking-tighter lg:text-5xl text-white m-0"
             >
               Real Impact.
               <br />
@@ -89,7 +89,7 @@ export default function ImpactPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-4 max-w-xl text-base lg:text-lg text-white/90"
+              className="mt-4 max-w-xl text-base lg:text-lg text-white/90 m-0"
             >
               R.E.S. is designed to move beyond entertainment. Every action on the platform contributes to measurable student and community outcomes.
             </motion.p>
