@@ -61,7 +61,8 @@ export default function JourneyPage() {
             backgroundImage: "url('/Images/friends-running-while-out-city.jpg')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundAttachment: 'fixed'
+            backgroundAttachment: 'scroll',
+            backgroundRepeat: 'no-repeat'
           }}
         >
           {/* Overlay for text readability */}
