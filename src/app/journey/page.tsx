@@ -58,7 +58,7 @@ export default function JourneyPage() {
         <section 
           className="relative min-h-screen flex items-center overflow-hidden"
           style={{
-            backgroundImage: "url('/Images/friends-running-while-out-city.jpg')",
+            backgroundImage: "url('/Images/6759.jpg')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundAttachment: 'scroll',
