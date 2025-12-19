@@ -14,43 +14,56 @@ export default function AboutPage() {
 
       <main className="flex-1">
         {/* HERO */}
-        <section className="px-6 py-32 lg:px-12">
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-5xl text-6xl font-black tracking-tighter leading-tight lg:text-7xl"
-          >
-            About
-            <br />
-            <span className="text-white/40">R.E.S.</span>
-          </motion.h1>
+        <section className="relative w-full px-6 py-32 lg:px-12 overflow-hidden min-h-[600px] lg:min-h-[700px]">
+          <Image
+            src="/Images/students-rehashing.jpg"
+            alt="Background"
+            fill
+            className="object-cover object-center absolute inset-0"
+            priority
+            quality={100}
+            sizes="100vw"
+            style={{ zIndex: 0 }}
+          />
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-8 max-w-3xl text-xl text-white/70"
-          >
-            Roomza’s Educated Secret is South Africa’s first digital student reality competition built to combine leadership, education, and national participation.
-          </motion.p>
-        </section>
+          <div className="relative z-10">
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-5xl text-6xl font-black tracking-tighter leading-tight lg:text-7xl"
+        >
+          About
+          <br />
+          <span className="text-white/40">Roomza's educated Secret</span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-8 max-w-3xl text-xl text-white/70"
+        >
+          Roomza's Educated Secret is South Africa's first digital student reality competition built to combine leadership, education, and national participation.
+        </motion.p>
+          </div>
+                  </section>
 
         {/* WHAT IT IS */}
-        <section className="bg-white text-black px-6 py-28 lg:px-12">
+        <section className="bg-brand-yellow text-black px-6 py-28 lg:px-12">
           <div className="mx-auto max-w-5xl">
             <h2 className="mb-10 text-5xl font-black tracking-tight">What R.E.S. Is</h2>
             <div className="space-y-6 text-lg leading-relaxed">
               <p>
-                R.E.S. is a national student-focused reality platform where twenty students from universities, TVET colleges, and private institutions compete in structured challenges.
+          R.E.S. is a national student-focused reality platform where twenty students from universities, TVET colleges, and private institutions compete in structured challenges.
               </p>
               <p>
-                The public participates through verified voting, quizzes, and live interactions that directly influence outcomes.
+          The public participates through verified voting, quizzes, and live interactions that directly influence outcomes.
               </p>
               <p>
-                The show blends competition with real-world learning, leadership development, and community impact.
+          The show blends competition with real-world learning, leadership development, and community impact.
               </p>
             </div>
           </div>
@@ -87,7 +100,7 @@ export default function AboutPage() {
               className="relative aspect-[4/5] overflow-hidden"
             >
               <Image
-                src="/Images/college-students-different-ethnicities-cramming (3)-min.jpg"
+                src="/Images/college-students-different-ethnicities-cramming0.jpg"
                 alt="Students collaborating"
                 fill
                 className="object-cover"
