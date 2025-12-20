@@ -73,40 +73,57 @@ export default function HowItWorksSection() {
 function StepSection({ imgUrl, step, title, description, cta, index }: StepProps & { index: number }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref });
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.5, 1, 1, 0.5]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
 
   return (
-    <section ref={ref} className="relative h-[110vh] px-4">
-      <motion.div
-        style={{ scale }}
-        className="sticky top-6 h-[90vh] rounded-3xl overflow-hidden"
-      >
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${imgUrl})` }}
-        />
-        <div className="absolute inset-0 bg-black/65" />
-      </motion.div>
+    <section ref={ref} className="relative min-h-screen px-4 py-20 bg-black">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+          {/* Image Column */}
+          <motion.div
+            style={{ opacity, scale }}
+            className="order-2 md:order-1 h-[400px] md:h-[500px] rounded-3xl overflow-hidden"
+          >
+            <div
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${imgUrl})` }}
+            />
+          </motion.div>
 
-      <div className="relative z-10 flex h-screen items-center justify-center text-center px-6">
-        <div className="max-w-4xl">
-          <p className="text-brand-yellow font-bold tracking-widest mb-4">{step}</p>
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-6">
-            {title}
-          </h2>
-          <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-10">
-            {description}
-          </p>
+          {/* Content Column */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="order-1 md:order-2 space-y-6"
+          >
+            <div>
+              <p className="text-brand-yellow font-bold tracking-widest text-sm md:text-base mb-2">
+                {step}
+              </p>
+              <h2 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
+                {title}
+              </h2>
+            </div>
 
-          {cta && (
-            <a
-              href="/challenges"
-              className="inline-flex items-center gap-3 bg-brand-yellow px-10 py-4 text-black font-bold rounded-lg hover:opacity-90 transition"
-            >
-              Start Your Journey
-              <FiArrowUpRight />
-            </a>
-          )}
+            <p className="text-lg md:text-xl text-white/80 leading-relaxed">
+              {description}
+            </p>
+
+            {cta && (
+              <motion.a
+                href="/challenges"
+                className="inline-flex items-center gap-3 bg-brand-yellow px-8 md:px-10 py-3 md:py-4 text-black font-bold rounded-lg hover:opacity-90 transition-all"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Start Your Journey
+                <FiArrowUpRight />
+              </motion.a>
+            )}
+          </motion.div>
         </div>
       </div>
     </section>
@@ -115,46 +132,71 @@ function StepSection({ imgUrl, step, title, description, cta, index }: StepProps
 
 function TrustSection() {
   return (
-    <section className="bg-brand-yellow px-6 py-16">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 items-start">
-          {/* Left Column */}
-          <div>
-            <h2 className="text-4xl md:text-5xl font-black text-black mb-8">
-              Built on Trust
-            </h2>
-
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-xl font-bold text-black mb-2">
-                  Verified and Secure
-                </h3>
-                <p className="text-black text-base leading-relaxed">
-                  Identity verification, fraud prevention, and transparent systems protect every vote and every participant.
-                </p>
-              </div>
-
-              <div className="border-t border-black/20 pt-6">
-                <p className="text-2xl font-black text-black mb-2">
-                  Your voice shapes the future.
-                </p>
-                <p className="text-base text-black font-semibold">
-                  This is more than a show. It is a national movement.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column */}
-          <div>
-            <h3 className="text-2xl font-bold text-black mb-4">
-              Transparent by Design
-            </h3>
-            <p className="text-black text-base leading-relaxed">
-              Public rules. Public outcomes. No manipulation. Leadership earned in the open.
-            </p>
-          </div>
+    <section className="bg-brand-yellow px-6 py-20 md:py-32">
+      <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
+        <div className="mb-20">
+          <h2 className="text-5xl md:text-6xl font-black text-black mb-4">
+            Built on Trust
+          </h2>
+          <div className="w-24 h-1 bg-black rounded-full" />
         </div>
+
+        {/* Trust Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-20">
+          {/* Feature 1 */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="space-y-4">
+              <h3 className="text-2xl md:text-3xl font-black text-black">
+                Verified and Secure
+              </h3>
+              <p className="text-black text-lg leading-relaxed">
+                Identity verification, fraud prevention, and transparent systems protect every vote and every participant.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Feature 2 */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <div className="space-y-4">
+              <h3 className="text-2xl md:text-3xl font-black text-black">
+                Transparent by Design
+              </h3>
+              <p className="text-black text-lg leading-relaxed">
+                Public rules. Public outcomes. No manipulation. Leadership earned in the open.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Divider */}
+        <div className="w-full h-1 bg-black/30 my-16 rounded-full" />
+
+        {/* Bottom Message Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="max-w-4xl"
+        >
+          <h3 className="text-4xl md:text-5xl font-black text-black leading-tight mb-6">
+            Your voice shapes the future.
+          </h3>
+          <p className="text-xl md:text-2xl text-black/90 font-semibold leading-relaxed">
+            This is more than a show. It is a national movement.
+          </p>
+        </motion.div>
       </div>
     </section>
   );
