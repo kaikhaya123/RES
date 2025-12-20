@@ -60,7 +60,7 @@ export default function ImpactPage() {
           {/* Background Image */}
           <div className="absolute inset-0 z-0 overflow-hidden">
             <Image
-              src="/Images/college-students-different-ethnicities-cramming (6).jpg"
+              src="/Images/college-students-different-ethnicities-cramming (6)-min.jpg"
               alt="Students collaborating"
               fill
               className="object-cover object-center"
@@ -166,7 +166,7 @@ export default function ImpactPage() {
         <section className="relative overflow-hidden">
           <div className="relative aspect-video">
             <Image
-              src="/Images/friends-learning-study-group.jpg"
+              src="/Images/friends-learning-study-group-min.jpg"
               alt="Student impact"
               fill
               className="object-cover"

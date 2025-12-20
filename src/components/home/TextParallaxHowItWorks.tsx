@@ -58,7 +58,7 @@ export const TextParallaxHowItWorks = () => {
   return (
     <div className="bg-brand-yellow">
       <TextParallaxContent
-        imgUrl="/Images/vertical-shot-curly-haired-millennial-girl-sits-crossed-legs-uses-mobile-phone-laptop-computer-connected-wireless.jpg"
+        imgUrl="/Images/vertical-shot-curly-haired-millennial-girl-sits-crossed-legs-uses-mobile-phone-laptop-computer-connected-wireless-min.jpg"
         subheading="Step 1"
         heading="Register and Verify"
         stepNumber={1}
@@ -74,7 +74,7 @@ export const TextParallaxHowItWorks = () => {
       </TextParallaxContent>
 
       <TextParallaxContent
-        imgUrl="/Images/person-pressing-buzzer.jpg"
+        imgUrl="/Images/person-pressing-buzzer-min.jpg"
         subheading="Step 2"
         heading="Apply or Nominate"
         stepNumber={2}
@@ -90,7 +90,7 @@ export const TextParallaxHowItWorks = () => {
       </TextParallaxContent>
 
       <TextParallaxContent
-        imgUrl="/Images/front-view-women-pressing-buzzer.jpg"
+        imgUrl="/Images/front-view-women-pressing-buzzer-min.jpg"
         subheading="Step 3"
         heading="Vote and Play Daily"
         stepNumber={3}

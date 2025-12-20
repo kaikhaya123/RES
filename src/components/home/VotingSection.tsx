@@ -28,7 +28,7 @@ export default function VotingSection() {
     },
     { 
       id: 3, 
-      image: '/Images/vertical-shot-happy-young-woman-with-curly-hair-holds-notepad-pen-makes-notes-what-she-observes-around-city-dressed-casual-green-jumper-poses-outdoors-against-blurred-background (1).jpg', 
+      image: 'public/Images/vertical-shot-happy-young-woman-with-curly-hair-holds-notepad-pen-makes-notes-what-she-observes-around-city-dressed-casual-green-jumper-poses-outdoors-against-blurred-background (1)-min.jpg', 
       name: 'Contestant 3',
       votes: 0,
       rank: 3,

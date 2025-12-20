@@ -54,7 +54,7 @@ export default function FeaturesSection() {
       id: 6,
       title: 'Win the Prize',
       description: 'Bursaries. Recognition. Opportunity. The reward for impact.',
-      image: '/Images/portrait-young-woman-with-curly-hair.jpg',
+      image: '/Images/portrait-young-woman-with-curly-hair-min.jpg',
       lottie: 'Champion.lottie',
       isPrimary: false
     }

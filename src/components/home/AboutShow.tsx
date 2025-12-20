@@ -201,7 +201,7 @@ export default function AboutShow() {
                 <div className="relative w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
                   {/* Uncomment and use this when you add your image */}
                   <Image
-                    src="/Images/college-students-different-ethnicities-cramming (3)-min.jpg"
+                    src="/Images/college-students-different-ethnicities-cramming%20(3)-min.jpg"
                     alt="R.E.S. Students"
                     fill
                     className="object-cover"
@@ -410,8 +410,8 @@ export default function AboutShow() {
             {highlights.map((item, index) => {
               const imageMap: { [key: number]: string } = {
                 0: '/Images/young-adults-meeting-up-study.jpg',
-                1: '/Images/medium-shot-women-holding-smartphones.jpg',
-                2: '/Images/joy-armani-KAK0jPmDLt8-unsplash.jpg',
+                1: '/Images/medium-shot-women-holding-smartphones-min.jpg',
+                2: '/Images/joy-armani-KAK0jPmDLt8-unsplash-min.jpg',
                 3: '/Images/concentrated-young-multiethnic-friends-students-outdoors-studying.jpg',
                 4: '/Images/bernd-dittrich-E0iLOeY8hV4-unsplash.jpg',
                 5: '/Images/high-angle-smiley-women-with-smartphones-min.jpg',

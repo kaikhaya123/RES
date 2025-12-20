@@ -16,7 +16,7 @@ export default function MovementPage() {
         {/* HERO - ROBBEN ISLAND */}
         <section className="relative px-6 lg:px-12 overflow-hidden min-h-[500px] md:min-h-[600px] lg:min-h-[700px] flex items-end">
           <Image
-            src="/Images/front-view-young-people-hostel.jpg"
+            src="/Images/front-view-young-people-hostel-min.jpg"
             alt="The Movement"
             fill
             className="object-cover object-center"
@@ -129,14 +129,14 @@ export default function MovementPage() {
                   title: 'Talking with the Enemy',
                   subtitle: 'Innovation & Collaboration',
                   description: 'Teams pitch business ideas. Cultural talent showcases unite diversity. Understanding across differences becomes the path forward.',
-                  image: '/Images/happy-joyful-friends-talking-laughing.jpg'
+                  image: '/Images/happy-joyful-friends-talking-laughing-min.jpg'
                 },
                 {
                   week: 'Week 6',
                   title: 'Freedom',
                   subtitle: 'The Final Push',
                   description: 'Finalists design implementable community projects. True victory is defined by impact, not elimination. Freedom earned through contribution.',
-                  image: '/Images/young-black-woman.jpg'
+                  image: '/Images/young-black-woman-min.jpg'
                 }
               ].map((item, index) => (
                 <motion.div

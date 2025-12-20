@@ -20,7 +20,7 @@ const steps = [
     description:
       'Twenty students are selected based on potential, drive, and diversity.',
     icon: '/Images/recruitment.png',
-    image: '/Images/gender-fluid-people-posing.jpg'
+    image: '/Images/gender-fluid-people-posing-min.jpg'
   },
   {
     number: '03',
@@ -28,7 +28,7 @@ const steps = [
     description:
       'Weekly challenges test leadership, creativity, intelligence, and resilience.',
     icon: '/Images/compete.png',
-    image: '/Images/college-students-different-ethnicities-cramming (8).jpg'
+    image: '/Images/college-students-different-ethnicities-cramming (8)-min.jpg'
   },
   {
     number: '04',
@@ -36,7 +36,7 @@ const steps = [
     description:
       'The nation votes. Every vote shapes the journey and the outcome.',
     icon: '/Images/election.png',
-    image: '/Images/woman-using-her-mobile-phone-city-skyline-night-light-background.jpg'
+    image: '/Images/woman-using-her-mobile-phone-city-skyline-night-light-background-min.jpg'
   },
   {
     number: '05',
@@ -44,7 +44,7 @@ const steps = [
     description:
       'Winners gain recognition, opportunities, and national exposure.',
     icon: '/Images/victory.png',
-    image: '/Images/people-traveling-subway-winter-time.jpg'
+    image: '/Images/people-traveling-subway-winter-time-min (1).jpg'
   }
 ];
 
@@ -58,7 +58,7 @@ export default function JourneyPage() {
         <section 
           className="relative min-h-screen flex items-center overflow-hidden"
           style={{
-            backgroundImage: "url('/Images/6759.jpg')",
+            backgroundImage: "url('/Images/6759-min.jpg')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundAttachment: 'scroll',
