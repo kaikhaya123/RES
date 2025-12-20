@@ -56,6 +56,18 @@ export default function Navbar() {
             <Link href="/about" className={`font-light text-sm lg:text-base transition ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80 drop-shadow-md'}`}>
               About
             </Link>
+            <Link href="/movement" className={`font-light text-sm lg:text-base transition ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80 drop-shadow-md'}`}>
+              Movement
+            </Link>
+            <Link href="/challenges" className={`font-light text-sm lg:text-base transition ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80 drop-shadow-md'}`}>
+              Challenges
+            </Link>
+            <Link href="/apply" className={`font-light text-sm lg:text-base transition ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80 drop-shadow-md'}`}>
+              Apply
+            </Link>
+            <Link href="/news" className={`font-light text-sm lg:text-base transition ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80 drop-shadow-md'}`}>
+              News
+            </Link>
             <Link href="/journey" className={`font-light text-sm lg:text-base transition ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80 drop-shadow-md'}`}>
               Journey
             </Link>
@@ -142,18 +154,39 @@ export default function Navbar() {
                       About
                     </Link>
                     <Link 
+                      href="/movement" 
+                      className="text-4xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
+                      onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
+                    >
+                      Movement
+                    </Link>
+                    <Link 
+                      href="/challenges" 
+                      className="text-4xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
+                      onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
+                    >
+                      Challenges
+                    </Link>
+                    <Link 
+                      href="/apply" 
+                      className="text-4xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
+                      onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
+                    >
+                      Apply
+                    </Link>
+                    <Link 
+                      href="/news" 
+                      className="text-4xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
+                      onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
+                    >
+                      News
+                    </Link>
+                    <Link 
                       href="/journey" 
                       className="text-4xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
                       onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
                     >
                       Journey
-                    </Link>
-                    <Link 
-                      href="/contestants" 
-                      className="text-4xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight"
-                      onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
-                    >
-                      Contestants
                     </Link>
                     <Link 
                       href="/impact" 
