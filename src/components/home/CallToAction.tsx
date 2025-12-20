@@ -1,95 +1,112 @@
 'use client';
 
-import { useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { ArrowRight, PlayCircle } from 'lucide-react';
 
 export default function CallToAction() {
-  const scrollTo = useCallback((id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      // fallback: navigate to anchor
-      window.location.hash = id;
-    }
-  }, []);
-
-  const btns = [
-    { key: 'register', label: 'Register Now', action: () => scrollTo('register') },
-    { key: 'vote', label: 'Vote for Contestants', action: () => scrollTo('vote') },
-    { key: 'live', label: 'Watch Live', action: () => scrollTo('live') },
-  ];
-
-  const secondary = [
-    { key: 'challenges', label: 'View Upcoming Challenges', action: () => scrollTo('challenges') },
-    { key: 'merch', label: 'Explore Merch', action: () => scrollTo('merch') },
-  ];
-
   return (
-    <section className="py-24 pb-32 mb-16 lg:pb-40 lg:mb-24 relative overflow-hidden">
-      {/* Background image with lazy loading and quality optimization */}
+    <section className="relative overflow-hidden bg-black py-32 lg:py-40">
+      {/* Background */}
       <Image
         src="/Images/porter-raab-Ucr4Yp-t364-unsplash.jpg"
-        alt="Call to action background"
+        alt="R.E.S. Experience"
         fill
-        className="absolute inset-0 object-cover"
-        quality={75}
+        className="object-cover"
+        quality={80}
         sizes="100vw"
-        loading="lazy"
         priority={false}
       />
-      {/* Overlay for readability */}
-      <div className="absolute inset-0 bg-black/70" />
-      <div className="container mx-auto px-4 md:px-6 lg:px-16 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/75" />
+
+      <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
+        {/* Eyebrow */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center"
+          className="mb-6 text-xs font-bold uppercase tracking-[0.3em] text-brand-yellow"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 section-title">Be Part of the R.E.S. Experience</h2>
-          <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-200 mb-6 md:mb-10 max-w-3xl mx-auto leading-relaxed">
-            You can join, vote, watch, and support the biggest student reality show in South Africa. Take your step today.
-          </p>
+          Roomza's Educated Secret
+        </motion.p>
 
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={{ show: { transition: { staggerChildren: 0.08 } } }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 md:gap-4 mb-2 md:mb-4"
+        {/* Headline */}
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-4xl font-black leading-tight text-white md:text-6xl"
+        >
+          This Is Where Students
+          <br />
+          Become National Leaders
+        </motion.h2>
+
+        {/* Explanation */}
+        <motion.p
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mx-auto mt-8 max-w-3xl text-lg text-white/70 md:text-xl"
+        >
+          R.E.S. is not just a show. It is a national platform where students
+          compete, grow, lead, and shape South Africa’s future through real
+          challenges and real impact.
+        </motion.p>
+
+        {/* Primary CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-14 flex flex-col items-center gap-6 sm:flex-row sm:justify-center"
+        >
+          <Link
+            href="/apply"
+            className="group inline-flex items-center gap-4 rounded-full bg-brand-yellow px-10 py-5 text-sm font-black uppercase tracking-widest text-black transition hover:bg-yellow-400"
           >
-            {btns.map((b, i) => (
-              <motion.button
-                key={b.key}
-                onClick={b.action}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-                className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 sm:px-8 py-2 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-semibold shadow-lg transition transform bg-brand-yellow text-black hover:bg-yellow-400 hover:shadow-xl`}
-                aria-label={b.label}
-              >
-                <span>{b.label}</span>
-                <ArrowRight size={16} />
-              </motion.button>
-            ))}
-          </motion.div>
+            Apply to Compete
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-base text-gray-300">
-            {secondary.map((s) => (
-              <button key={s.key} onClick={s.action} className="underline hover:text-white transition">
-                {s.label}
-              </button>
-            ))}
-          </div>
+          <Link
+            href="/journey"
+            className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-widest text-white/80 hover:text-white transition"
+          >
+            <PlayCircle className="h-5 w-5" />
+            See How It Works
+          </Link>
+        </motion.div>
+
+        {/* Supporting actions */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="mt-10 flex flex-wrap justify-center gap-8 text-sm text-white/50"
+        >
+          <Link href="/vote" className="hover:text-white transition">
+            Vote for Contestants
+          </Link>
+          <Link href="/live" className="hover:text-white transition">
+            Watch Live
+          </Link>
+          <Link href="/merch" className="hover:text-white transition">
+            Support the Movement
+          </Link>
         </motion.div>
       </div>
-        {/* Bottom visual divider to keep CTA separate from footer */}
-        <div className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none bg-gradient-to-b from-transparent to-black/90" />
+
+      {/* Bottom fade */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-black" />
     </section>
   );
 }

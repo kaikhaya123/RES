@@ -32,8 +32,8 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-warm-stone-base/95 backdrop-blur-md shadow-lg'
-          : 'bg-gradient-to-b from-black/40 to-transparent backdrop-blur-sm'
+          ? 'bg-warm-stone-base/95 shadow-lg'
+          : 'bg-gradient-to-b from-black/40 to-transparent'
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 lg:px-12">
@@ -73,9 +73,6 @@ export default function Navbar() {
             </Link>
             <Link href="/impact" className={`font-light text-sm lg:text-base transition-colors ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-amber-300 drop-shadow-md'}`}>
               Impact
-            </Link>
-            <Link href="/vote" className={`font-light text-sm lg:text-base transition-colors px-3 py-1 rounded ${isScrolled ? 'bg-amber-400 text-black hover:bg-amber-300' : 'bg-amber-400/20 text-amber-300 hover:bg-amber-400/30 drop-shadow-md'}`}>
-              Vote
             </Link>
           </div>
 
@@ -202,13 +199,6 @@ export default function Navbar() {
 
                   {/* Right Column - Secondary Menu */}
                   <div className="flex flex-col justify-center space-y-4 lg:space-y-6">
-                    <Link 
-                      href="/vote" 
-                      className="text-3xl lg:text-5xl text-white hover:text-white/70 font-light transition"
-                      onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
-                    >
-                      Vote
-                    </Link>
                     <Link 
                       href="/stream" 
                       className="text-3xl lg:text-5xl text-white hover:text-white/70 font-light transition"

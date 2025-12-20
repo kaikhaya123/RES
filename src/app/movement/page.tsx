@@ -122,7 +122,7 @@ export default function MovementPage() {
                   title: 'Beginning to Hope',
                   subtitle: 'Leadership Emerges',
                   description: 'Leadership challenges inspire. Contestants design solutions to real student crises. Hope blooms through purpose.',
-                  image: '/Images/young-people-creating-new-project.jpg'
+                  image: '/Images/college-students.jpg'
                 },
                 {
                   week: 'Week 4-5',
