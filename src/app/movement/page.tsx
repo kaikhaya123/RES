@@ -115,7 +115,7 @@ export default function MovementPage() {
                   title: 'The Dark Years',
                   subtitle: 'Robben Island: Testing the Foundation',
                   description: 'Welcome to the house. Ice-breakers, orientation, and initial challenges test character. Like Robben Island prisoners, contestants face discomfort to discover their resilience.',
-                  image: '/Images/students-rehashing-theater-class (1).jpg'
+                  image: '/Images/students-rehashing-theater-class%20(1).jpg'
                 },
                 {
                   week: 'Week 3',

@@ -42,7 +42,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center relative z-10">
             <div className="relative w-12 md:w-16 lg:w-20 h-12 md:h-16 lg:h-20">
               <Image
-                src="/Images/RES Logo with Futuristic Emblem.png"
+                src="/Images/RES%20Logo%20with%20Futuristic%20Emblem.png"
                 alt="R.E.S."
                 fill
                 className="object-contain"
@@ -124,7 +124,7 @@ export default function Navbar() {
                   <Link href="/" onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))} className="flex items-center">
                     <div className="relative w-20 h-20">
                       <Image
-                        src="/Images/RES Logo with Futuristic Emblem.png"
+                        src="/Images/RES%20Logo%20with%20Futuristic%20Emblem.png"
                         alt="R.E.S."
                         fill
                         className="object-contain"

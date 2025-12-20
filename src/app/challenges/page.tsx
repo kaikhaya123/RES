@@ -84,7 +84,7 @@ export default function ChallengesPage() {
       title: 'Finale - Final Performance',
       subtitle: 'GRAND FINALE',
       description: 'Your final shot: showcase everything you\'ve learned. Any format. Go big.',
-      image: '/Images/college-students-different-ethnicities-cramming (4).jpg',
+      image: '/Images/college-students-different-ethnicities-cramming%20(4).jpg',
       status: 'UPCOMING',
       progress: 0,
       prize: 'R10,000',

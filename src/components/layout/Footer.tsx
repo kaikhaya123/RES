@@ -33,7 +33,7 @@ export default function Footer() {
           <div>
             <div className="mb-4">
               <Image
-                src="/Images/RES Logo with Futuristic Emblem.png"
+                src="/Images/RES%20Logo%20with%20Futuristic%20Emblem.png"
                 alt="R.E.S. logo"
                 width={320}
                 height={80}

@@ -82,7 +82,7 @@ export default function LoginPage() {
         <div className="flex justify-center mb-8">
           <div className="relative w-28 h-28">
             <Image
-              src="/Images/RES Logo with Futuristic Emblem.png"
+              src="/Images/RES%20Logo%20with%20Futuristic%20Emblem.png"
               alt="Logo"
               fill
               className="object-contain"

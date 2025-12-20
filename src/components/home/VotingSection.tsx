@@ -28,7 +28,7 @@ export default function VotingSection() {
     },
     { 
       id: 3, 
-      image: 'public/Images/vertical-shot-happy-young-woman-with-curly-hair-holds-notepad-pen-makes-notes-what-she-observes-around-city-dressed-casual-green-jumper-poses-outdoors-against-blurred-background (1)-min.jpg', 
+      image: '/Images/vertical-shot-happy-young-woman-with-curly-hair-holds-notepad-pen-makes-notes-what-she-observes-around-city-dressed-casual-green-jumper-poses-outdoors-against-blurred-background%20(1)-min.jpg', 
       name: 'Contestant 3',
       votes: 0,
       rank: 3,
@@ -36,7 +36,7 @@ export default function VotingSection() {
     },
     { 
       id: 4, 
-      image: '/Images/college-students-different-ethnicities-cramming-min (1).jpg', 
+      image: '/Images/college-students-different-ethnicities-cramming-min%20(1).jpg', 
       name: 'Contestant 4',
       votes: 0,
       rank: 4,

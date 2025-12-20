@@ -8,7 +8,7 @@ export default function SimpleLogoLoop() {
     '/Images/SU-Logo.png',
     '/Images/horizontal-logo-bg-removebg-preview.png',
     '/Images/UKZN_logo.svg.png',
-    '/Images/Rhodes University Logo.png',
+    '/Images/Rhodes%20University%20Logo.png',
     '/Images/logo_09_2020.png',
     '/Images/university-johannesburg.png',
     '/Images/unisa_logo_university_of_south_africa-freelogovectors.net_.png',

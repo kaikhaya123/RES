@@ -56,7 +56,7 @@ export const TextParallaxHowItWorks = () => {
   const totalSteps = 6;
   
   return (
-    <div className="bg-brand-yellow">
+    <div className="bg-dark-bg-soft">
       <TextParallaxContent
         imgUrl="/Images/vertical-shot-curly-haired-millennial-girl-sits-crossed-legs-uses-mobile-phone-laptop-computer-connected-wireless-min.jpg"
         subheading="Step 1"
@@ -140,7 +140,7 @@ export const TextParallaxHowItWorks = () => {
       </TextParallaxContent>
 
       <TextParallaxContent
-        imgUrl="/Images/cheerful-women-holding-trophy-icon.jpg"
+        imgUrl="/Images/cheerful-women-holding-trophy-icon-min.jpg"
         subheading="Step 6"
         heading="Win. Impact. Change"
         stepNumber={6}

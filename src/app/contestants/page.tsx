@@ -55,7 +55,7 @@ export default function ContestantsPage() {
       {/* HERO */}
       <section className="w-full h-[70vh] relative flex items-center justify-center bg-black mt-24">
         <Image 
-          src="/Images/adobe-69386156c98ae (1).jpg"
+          src="/Images/adobe-69386156c98ae%20(1).jpg"
           alt="Contestants"
           fill
           className="object-cover opacity-60"

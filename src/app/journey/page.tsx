@@ -28,7 +28,7 @@ const steps = [
     description:
       'Weekly challenges test leadership, creativity, intelligence, and resilience.',
     icon: '/Images/compete.png',
-    image: '/Images/college-students-different-ethnicities-cramming (8)-min.jpg'
+    image: '/Images/college-students-different-ethnicities-cramming%20(8)-min.jpg'
   },
   {
     number: '04',
@@ -44,7 +44,7 @@ const steps = [
     description:
       'Winners gain recognition, opportunities, and national exposure.',
     icon: '/Images/victory.png',
-    image: '/Images/people-traveling-subway-winter-time-min (1).jpg'
+    image: '/Images/people-traveling-subway-winter-time-min%20(1).jpg'
   }
 ];
 

@@ -11,7 +11,7 @@ export default function FeaturesSection() {
       id: 1,
       title: 'Cast Your Vote',
       description: 'Your choice matters. Vote in real time and directly influence the competition.',
-      image: '/Images/VOTE (1).jpg',
+      image: '/Images/VOTE%20(1).jpg',
       lottie: 'Election concept Lottie JSON animation.lottie',
       isPrimary: true
     },
@@ -38,7 +38,7 @@ export default function FeaturesSection() {
       id: 4,
       title: 'Refer a Leader',
       description: 'Know someone exceptional? Nominate them directly.',
-      image: '/Images/KSENIIA FAST.png',
+      image: '/Images/KSENIIA%20FAST.png',
       lottie: 'referral.lottie',
       isPrimary: false
     },
@@ -46,7 +46,7 @@ export default function FeaturesSection() {
       id: 5,
       title: 'Test Your Knowledge',
       description: 'Brain power wins prizes. Prove your edge.',
-      image: '/Images/college-students-different-ethnicities-cramming (2).jpg',
+      image: '/Images/college-students-different-ethnicities-cramming%20(2).jpg',
       lottie: 'Funny brain.lottie',
       isPrimary: false
     },

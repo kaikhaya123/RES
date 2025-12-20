@@ -11,7 +11,7 @@ export default function Statistics() {
     { src: '/Images/SU-Logo.png', alt: 'Stellenbosch University', width: 421, height: 155, priority: false },
     { src: '/Images/horizontal-logo-bg-removebg-preview.png', alt: 'Wits University', width: 468, height: 152, priority: false },
     { src: '/Images/UKZN_logo.svg.png', alt: 'University of KwaZulu-Natal', width: 1200, height: 438, priority: false },
-    { src: '/Images/Rhodes University Logo.png', alt: 'Rhodes University', width: 512, height: 162, priority: false },
+    { src: '/Images/Rhodes%20University%20Logo.png', alt: 'Rhodes University', width: 512, height: 162, priority: false },
     { src: '/Images/logo_09_2020.png', alt: 'Nelson Mandela University', width: 2030, height: 696, priority: true },
     { src: '/Images/university-johannesburg.png', alt: 'University of Johannesburg', width: 745, height: 332, priority: false },
     { src: '/Images/unisa_logo_university_of_south_africa-freelogovectors.net_.png', alt: 'UNISA', width: 1280, height: 720, priority: false },

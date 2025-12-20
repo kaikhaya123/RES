@@ -60,7 +60,7 @@ export default function ImpactPage() {
           {/* Background Image */}
           <div className="absolute inset-0 z-0 overflow-hidden">
             <Image
-              src="/Images/college-students-different-ethnicities-cramming (6)-min.jpg"
+              src="/Images/college-students-different-ethnicities-cramming%20(6)-min.jpg"
               alt="Students collaborating"
               fill
               className="object-cover object-center"

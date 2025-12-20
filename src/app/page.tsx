@@ -1,5 +1,5 @@
 import Hero from "@/components/home/Hero";
-import Intro from"@/components/home/Intro";
+import Intro from "@/components/home/Intro";
 
 import AboutShow from "@/components/home/AboutShow";
 import FeaturesSection from "@/components/home/FeaturesSection";

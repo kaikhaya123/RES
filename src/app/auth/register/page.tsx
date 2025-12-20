@@ -222,7 +222,7 @@ export default function RegisterPage() {
           >
             <div className="w-20 h-20 mx-auto relative mb-2">
               <Image
-                src="/Images/RES Logo with Futuristic Emblem.png"
+                src="/Images/RES%20Logo%20with%20Futuristic%20Emblem.png"
                 alt="Logo"
                 fill
                 className="object-contain"

@@ -349,7 +349,7 @@ export default function AboutShow() {
         >
           <div className="relative aspect-[4/3] sm:aspect-video lg:aspect-[3/1.5] overflow-hidden group">
             <Image
-              src="/Images/college-students-different-ethnicities-cramming (4)-min.jpg"
+              src="/Images/college-students-different-ethnicities-cramming%20(4)-min.jpg"
               alt="R.E.S. Students from across South Africa"
               fill
               className="object-cover object-center sm:object-top group-hover:scale-105 transition-transform duration-700"
