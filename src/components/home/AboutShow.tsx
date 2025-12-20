@@ -188,7 +188,7 @@ export default function AboutShow() {
             transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
             className="relative z-0 flex items-center justify-center w-full h-full"
           >
-            <div className="relative aspect-[4/5] lg:aspect-[3/4]">
+            <div className="relative w-full h-full max-h-[600px] lg:max-h-[700px]">
               {/* Main Image Container */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
