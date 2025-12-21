@@ -75,7 +75,7 @@ export default function FeaturesSection() {
   const FeatureButton = ({ feature, isPhaseStart }: { feature: (typeof allFeatures)[0]; isPhaseStart?: boolean }) => (
     <motion.button
       onClick={() => setActive(feature)}
-      className={`w-full text-left p-4 md:p-5 rounded-xl md:rounded-2xl transition-all border relative group ${
+      className={`w-full text-left p-3 md:p-4 rounded-lg md:rounded-xl transition-all border relative group ${
         active.id === feature.id
           ? 'border-black bg-gradient-to-r from-black/5 to-transparent shadow-md'
           : 'border-gray-300 hover:border-gray-400'
@@ -90,9 +90,9 @@ export default function FeaturesSection() {
         </div>
       )}
 
-      <div className="flex items-start gap-3 md:gap-4">
+      <div className="flex items-start gap-2 md:gap-3">
         {/* Icon - Static, animate on hover only */}
-        <div className={`${feature.isPrimary ? 'w-16 h-16 md:w-14 md:h-14' : 'w-12 h-12 md:w-11 md:h-11'} flex-shrink-0 relative`}>
+        <div className={`${feature.isPrimary ? 'w-12 h-12 md:w-11 md:h-11' : 'w-10 h-10 md:w-9 md:h-9'} flex-shrink-0 relative`}>
           <div className={feature.isPrimary ? 'absolute inset-0 bg-black/5 rounded-full blur-lg' : ''} />
           <DotLottieReact
             src={`/lottie-files/${feature.lottie}`}
@@ -109,15 +109,15 @@ export default function FeaturesSection() {
         <div className="min-w-0 flex-1 pt-0.5">
           <h3 className={`font-bold leading-tight ${
             feature.isPrimary
-              ? 'text-lg md:text-xl text-black'
-              : 'text-base md:text-lg text-gray-900'
+              ? 'text-base md:text-lg text-black'
+              : 'text-sm md:text-base text-gray-900'
           }`}>
             {feature.title}
           </h3>
-          <p className={`leading-snug mt-1 ${
+          <p className={`leading-snug mt-0.5 ${
             feature.isPrimary
-              ? 'text-sm md:text-base text-gray-700'
-              : 'text-xs md:text-sm text-gray-600'
+              ? 'text-xs md:text-sm text-gray-700'
+              : 'text-[11px] md:text-xs text-gray-600'
           }`}>
             {feature.description}
           </p>
@@ -136,13 +136,13 @@ export default function FeaturesSection() {
   );
 
   return (
-    <section className="w-full py-12 md:py-16 lg:py-24 px-4 md:px-6 lg:px-16 bg-white">
+    <section className="w-full py-8 md:py-12 lg:py-16 px-4 md:px-6 lg:px-12 bg-white">
       <div className="max-w-7xl mx-auto">
-      <div className="mb-8 md:mb-12 lg:mb-16">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-3 md:mb-4 lg:mb-5">
+      <div className="mb-6 md:mb-8 lg:mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-2 md:mb-3 lg:mb-4">
           YOUR IMPACT STARTS HERE
         </h2>
-        <p className="text-gray-700 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl leading-relaxed">
+        <p className="text-gray-700 text-xs sm:text-sm md:text-base lg:text-lg max-w-3xl leading-relaxed">
           From first vote to lasting impact. Three phases. One movement.
         </p>
       </div>

@@ -7,7 +7,7 @@ import { ArrowRight, PlayCircle } from 'lucide-react';
 
 export default function CallToAction() {
   return (
-    <section className="relative overflow-hidden bg-black py-32 lg:py-40">
+    <section className="relative overflow-hidden bg-black py-16 lg:py-24">
       {/* Background */}
       <Image
         src="/Images/porter-raab-Ucr4Yp-t364-unsplash.jpg"
@@ -22,14 +22,14 @@ export default function CallToAction() {
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/75" />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-5xl px-4 md:px-6 text-center">
         {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-6 text-xs font-bold uppercase tracking-[0.3em] text-brand-yellow"
+          className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-brand-yellow"
         >
           Roomza's Educated Secret
         </motion.p>
@@ -40,7 +40,7 @@ export default function CallToAction() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-4xl font-black leading-tight text-white md:text-6xl"
+          className="text-3xl font-black leading-tight text-white md:text-4xl"
         >
           This Is Where Students
           <br />
@@ -53,7 +53,7 @@ export default function CallToAction() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mx-auto mt-8 max-w-3xl text-lg text-white/70 md:text-xl"
+          className="mx-auto mt-5 max-w-3xl text-sm text-white/70 md:text-base"
         >
           R.E.S. is not just a show. It is a national platform where students
           compete, grow, lead, and shape South Africa’s future through real
@@ -66,14 +66,14 @@ export default function CallToAction() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-14 flex flex-col items-center gap-6 sm:flex-row sm:justify-center"
+          className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
           <Link
             href="/apply"
-            className="group inline-flex items-center gap-4 rounded-full bg-brand-yellow px-10 py-5 text-sm font-black uppercase tracking-widest text-black transition hover:bg-yellow-400"
+            className="group inline-flex items-center gap-3 rounded-full bg-brand-yellow px-6 py-3 text-xs font-black uppercase tracking-widest text-black transition hover:bg-yellow-400"
           >
             Apply to Compete
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
           </Link>
 
           <Link

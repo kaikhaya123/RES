@@ -53,9 +53,9 @@ export default function AboutShow() {
         }} />
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 lg:px-16 max-w-7xl relative">
+      <div className="container mx-auto px-4 md:px-6 lg:px-12 max-w-7xl relative">
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 lg:gap-28 items-stretch mb-16 md:mb-24 lg:mb-28">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-stretch mb-12 md:mb-16 lg:mb-20">
           {/* Left: Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
@@ -70,9 +70,9 @@ export default function AboutShow() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-block mb-4 md:mb-6 lg:mb-10"
+              className="inline-block mb-3 md:mb-4 lg:mb-6"
             >
-              <span className="px-4 md:px-6 py-2 md:py-3 border-2 border-white text-xs md:text-sm uppercase tracking-[0.3em] font-black text-white">
+              <span className="px-3 md:px-5 py-1.5 md:py-2 border-2 border-white text-[10px] md:text-xs uppercase tracking-[0.3em] font-black text-white">
                 About the Show
               </span>
             </motion.div>
@@ -83,7 +83,7 @@ export default function AboutShow() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
-              className="text-6xl lg:text-7xl font-black mb-8 tracking-tighter leading-[1.1] text-white"
+              className="text-4xl lg:text-5xl font-black mb-5 tracking-tighter leading-[1.1] text-white"
             >
               The Movement That's Changing Student Life
             </motion.h2>
@@ -94,13 +94,13 @@ export default function AboutShow() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="text-2xl text-gray-300 mb-10 leading-relaxed font-light"
+              className="text-lg text-gray-300 mb-6 leading-relaxed font-light"
             >
               South Africa's first digital student reality show celebrating talent, education, resilience, and youth empowerment.
             </motion.p>
 
             {/* Mission Statement - Optimized animations */}
-            <div className="space-y-6 mb-8">
+            <div className="space-y-4 mb-5">
               <motion.p
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}

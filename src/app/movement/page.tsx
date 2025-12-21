@@ -129,7 +129,7 @@ export default function MovementPage() {
                   title: 'Talking with the Enemy',
                   subtitle: 'Innovation & Collaboration',
                   description: 'Teams pitch business ideas. Cultural talent showcases unite diversity. Understanding across differences becomes the path forward.',
-                  image: '/Images/happy-joyful-friends-talking-laughing-min.jpg'
+                  image: '/Images/young-adults-meeting-up-study-min.jpg'
                 },
                 {
                   week: 'Week 6',

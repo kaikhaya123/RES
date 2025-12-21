@@ -53,7 +53,7 @@ export default function Navbar() {
           </Link>
 
           {/* Center Navigation */}
-          <div className="hidden lg:flex items-center space-x-8 lg:space-x-12">
+          <div className="hidden lg:flex items-center space-x-6 lg:space-x-8">
             <Link 
               href="/about" 
               className={`font-light text-sm lg:text-base transition-colors focus:outline-none focus:ring-2 focus:ring-amber-300 px-2 py-1 rounded ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-amber-300 drop-shadow-md'}`}
@@ -89,20 +89,6 @@ export default function Navbar() {
             >
               News
             </Link>
-            <Link 
-              href="/journey" 
-              className={`font-light text-sm lg:text-base transition-colors focus:outline-none focus:ring-2 focus:ring-amber-300 px-2 py-1 rounded ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-amber-300 drop-shadow-md'}`}
-              aria-label="Follow the journey"
-            >
-              Journey
-            </Link>
-            <Link 
-              href="/impact" 
-              className={`font-light text-sm lg:text-base transition-colors focus:outline-none focus:ring-2 focus:ring-amber-300 px-2 py-1 rounded ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-amber-300 drop-shadow-md'}`}
-              aria-label="See our impact"
-            >
-              Impact
-            </Link>
           </div>
 
           {/* Right Section - User Avatar & Menu */}
@@ -110,10 +96,10 @@ export default function Navbar() {
             {/* User Avatar with Dropdown */}
             <UserAvatar session={session} isScrolled={isScrolled} />
 
-            {/* Mobile Menu Button */}
+            {/* Menu Button - Show on all sizes */}
             <motion.button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`p-2 transition relative w-12 h-12 flex items-center justify-center lg:hidden focus:outline-none focus:ring-2 focus:ring-amber-300 rounded ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80 drop-shadow-md'}`}
+              className={`p-2 transition relative w-12 h-12 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-amber-300 rounded ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80 drop-shadow-md'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}

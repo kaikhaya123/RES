@@ -68,15 +68,20 @@ export default function LoginPage() {
         className="w-full lg:w-1/2 px-8 lg:px-16 py-12 flex flex-col justify-center relative z-10"
       >
         {/* Close/Back Button */}
-        <div className="absolute top-6 left-6">
+        <motion.div 
+          className="absolute top-4 left-4 md:top-6 md:left-6 lg:top-8 lg:left-8 z-50"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
           <Link 
             href="/"
-            className="p-2 rounded-full hover:bg-white/10 transition"
+            className="inline-flex items-center justify-center p-2 md:p-2 rounded-full hover:bg-white/10 transition-all duration-200 group"
             title="Back to home"
+            aria-label="Back to home"
           >
-            <X size={24} className="text-white" />
+            <X size={20} className="text-white group-hover:text-brand-yellow transition-colors" />
           </Link>
-        </div>
+        </motion.div>
 
         {/* Logo */}
         <div className="flex justify-center mb-8">

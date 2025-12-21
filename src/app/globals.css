@@ -9,14 +9,14 @@
 
 @layer components {
 	.section-title {
-		@apply font-black tracking-tighter mb-6 text-4xl md:text-5xl lg:text-6xl;
+		@apply font-black tracking-tighter mb-4 text-3xl md:text-4xl lg:text-5xl;
 	}
 
 	.section-eyebrow {
-		@apply text-sm font-semibold uppercase tracking-wider mb-3;
+		@apply text-[10px] font-semibold uppercase tracking-wider mb-2;
 	}
 
 	.section-subtitle {
-		@apply text-base md:text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto;
+		@apply text-sm md:text-base lg:text-lg leading-relaxed max-w-3xl mx-auto;
 	}
 }

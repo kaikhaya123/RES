@@ -39,14 +39,14 @@ export default function Hero() {
       {/* Overlay for better text readability */}
       <div className="absolute inset-0 bg-black/20 z-10"></div>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-12 sm:py-16 md:py-24 lg:py-32 relative z-20 flex items-center min-h-screen">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-12 md:py-16 lg:py-20 relative z-20 flex items-center min-h-screen">
         <div className="max-w-2xl lg:max-w-3xl">
           {/* Main Heading */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight tracking-tight drop-shadow-lg"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-2 sm:mb-3 md:mb-4 leading-tight tracking-tight drop-shadow-lg"
           >
             ROOMZA'S EDUCATED SECRET
           </motion.h1>
@@ -56,7 +56,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-sm sm:text-base md:text-xl lg:text-3xl text-white/90 font-medium leading-tight sm:leading-snug md:leading-relaxed tracking-tight drop-shadow-md"
+            className="text-xs sm:text-sm md:text-lg lg:text-2xl text-white/90 font-medium leading-snug sm:leading-snug md:leading-relaxed tracking-tight drop-shadow-md"
           >
             This is R.E.S. A student reality show that inspires, educates, and rewards. You watch students face real challenges. You see them rise. You see them fall. You see them grow.
           </motion.p>

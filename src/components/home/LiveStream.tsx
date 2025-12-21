@@ -14,7 +14,7 @@ export default function LiveStream() {
   ];
 
   return (
-    <section className="relative py-16 md:py-24 lg:py-36 bg-dark-bg-soft text-white overflow-hidden">
+    <section className="relative py-8 md:py-12 lg:py-20 bg-dark-bg-soft text-white overflow-hidden">
       {/* Subtle grid */}
       <div
         className="absolute inset-0 opacity-[0.035]"
@@ -29,21 +29,21 @@ export default function LiveStream() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-12">
         {/* Header */}
-        <div className="text-center mb-12 md:mb-20">
+        <div className="text-center mb-8 md:mb-12">
           <motion.div
             initial={{ scale: 0 }}
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ type: 'spring', duration: 0.6 }}
-            className="inline-flex items-center gap-2 md:gap-3 px-3 md:px-6 py-2 md:py-3 border border-white/70 rounded-full mb-4 md:mb-8"
+            className="inline-flex items-center gap-2 md:gap-3 px-3 md:px-5 py-1.5 md:py-2 border border-white/70 rounded-full mb-3 md:mb-5"
           >
             <motion.div
               animate={{ scale: [1, 1.4, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
               className="w-2 h-2 bg-white rounded-full"
             />
-            <Radio className="w-4 h-4" />
-            <span className="text-xs font-black uppercase tracking-[0.35em]">
+            <Radio className="w-3 h-3" />
+            <span className="text-[10px] font-black uppercase tracking-[0.35em]">
               Live Daily
             </span>
           </motion.div>
@@ -53,7 +53,7 @@ export default function LiveStream() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="text-5xl lg:text-7xl font-black tracking-tight mb-6"
+            className="text-4xl lg:text-5xl font-black tracking-tight mb-4"
           >
             Watch Live. Vote Live.
           </motion.h2>
@@ -63,7 +63,7 @@ export default function LiveStream() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="text-lg text-gray-400 max-w-3xl mx-auto"
+            className="text-sm text-gray-400 max-w-3xl mx-auto"
           >
             Stream the competition in real time. Engage with contestants.
             Influence outcomes. Join South Africa’s biggest student experience.
@@ -71,7 +71,7 @@ export default function LiveStream() {
         </div>
 
         {/* Main grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {/* Visual */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}

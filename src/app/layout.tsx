@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Manrope, Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { Providers } from "@/components/Providers";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 // Optimize font loading with display: swap to prevent FOUT
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: '--font-manrope',
+  display: 'swap',
+  preload: true,
+});
+
 const inter = Inter({ 
   subsets: ["latin"],
   variable: '--font-inter',
@@ -40,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${manrope.variable} ${inter.variable} ${poppins.variable}`}>
       <head>
         {/* Preconnect to critical third-party domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

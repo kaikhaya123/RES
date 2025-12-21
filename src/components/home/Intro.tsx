@@ -70,25 +70,25 @@ export default function IntroSection() {
       </div>
 
       {/* RIGHT CONTENT */}
-      <div className="relative z-10 flex items-center px-8 py-24 lg:px-24">
+      <div className="relative z-10 flex items-center px-6 py-16 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
           viewport={{ once: true }}
-          className="max-w-2xl space-y-12"
+          className="max-w-2xl space-y-8"
         >
 
           {/* Eyebrow */}
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-px bg-brand-yellow" />
-            <span className="text-xs font-bold tracking-[0.3em] uppercase text-brand-yellow">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-px bg-brand-yellow" />
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-yellow">
               National Student Reality Show
             </span>
           </div>
 
           {/* Headline */}
-          <h1 className="text-4xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight">
+          <h1 className="text-3xl lg:text-5xl font-black text-white leading-[1.05] tracking-tight">
             The Future of
             <br />
             Student Competition
@@ -97,7 +97,7 @@ export default function IntroSection() {
           </h1>
 
           {/* Core statement */}
-          <p className="text-base lg:text-lg text-white/75 leading-relaxed max-w-md">
+          <p className="text-sm lg:text-base text-white/75 leading-relaxed max-w-md">
             Twenty students. One national stage.  
             Real challenges, real growth, real opportunity.
           </p>

@@ -104,6 +104,13 @@ const config: Config = {
   		},
   		fontFamily: {
   			sans: [
+  				'var(--font-manrope)',
+  				'Manrope',
+  				'system-ui',
+  				'sans-serif'
+  			],
+  			inter: [
+  				'var(--font-inter)',
   				'Inter',
   				'system-ui',
   				'sans-serif'
