@@ -1,65 +1,113 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { FiArrowDown } from 'react-icons/fi';
 
-export default function IntroSection() {
+type Slide = {
+  id: number;
+  title: string;
+  subtitle: string;
+  image: string;
+};
+
+const slides: Slide[] = [
+  {
+    id: 1,
+    title: 'Where Students Compete',
+    subtitle: 'A national digital stage built for talent and growth.',
+    image: '/Images/bottom-view-four-schoolkids-min.jpg',
+  },
+  {
+    id: 2,
+    title: 'Real Challenges',
+    subtitle: 'Leadership, skill, pressure, and performance.',
+    image: '/Images/horizontal-image-interracial-couple-pulling-tricks-each-other-posing-isolated-against-blank-orange-wall-looking-suspicious-planning-trick-prank-rubbing-hands-min.jpg',
+  },
+  {
+    id: 3,
+    title: 'Public Impact',
+    subtitle: 'Votes, visibility, and real world opportunity.',
+    image: '/Images/authentic-small-youthful-marketing-agency-min.jpg',
+  },
+];
+
+export default function IntroStorySections() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     video.muted = true;
-    video.defaultMuted = true;
-    video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
-    video.setAttribute('webkit-playsinline', '');
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.35 }
-    );
-
-    observer.observe(video);
-
-    return () => observer.disconnect();
+    video.play().catch(() => {});
   }, []);
 
   return (
-    <section className="relative min-h-[100vh] md:min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-black overflow-hidden">
+    <section ref={containerRef} className="relative bg-black text-white">
 
-      {/* LEFT VISUAL */}
-      <div className="relative h-[45vh] md:h-[55vh] lg:h-screen overflow-hidden">
-        <video
-          ref={videoRef}
-          loop
-          muted
-          playsInline
-          preload="none"
-          className="absolute inset-0 w-full h-full object-cover scale-[1.15]"
-        >
-          <source src="/Videos/14595546-hd_1920_1080_60fps.mp4" type="video/mp4" />
-        </video>
+      {/* INTRO HERO */}
+      <section className="relative min-h-screen overflow-hidden flex items-center">
+        <div className="absolute inset-0">
+          <video
+            ref={videoRef}
+            loop
+            muted
+            playsInline
+            preload="none"
+            className="w-full h-full object-cover scale-[1.08]"
+          >
+            <source src="/Videos/14595546-hd_1920_1080_60fps.mp4" type="video/mp4" />
+          </video>
 
-        {/* Cinematic overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/20" />
-        <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/75 to-black/40" />
+          <div className="absolute inset-0 bg-black/30" />
+        </div>
 
-        {/* Subtle edge glow */}
-        <div className="absolute inset-y-0 right-0 w-px bg-brand-yellow/30 hidden lg:block" />
+        <div className="relative z-10 max-w-xl px-6 lg:px-16 space-y-10">
+          <div className="flex items-center gap-4">
+            <span className="w-10 h-px bg-brand-white" />
+            <span className="text-[11px] font-bold tracking-[0.35em] uppercase text-brand-white">
+              National Student Reality Platform
+            </span>
+          </div>
 
-        {/* Scroll cue */}
+          <h1 className="text-4xl lg:text-6xl font-black leading-[1.05] tracking-tight">
+            Where Students
+            <br />
+            Compete.
+            <br />
+            Grow.
+            <br />
+            Rise.
+          </h1>
+
+          <p className="text-base lg:text-lg text-white/80 leading-relaxed">
+            A national digital stage unlocking leadership, opportunity,
+            and measurable impact for South African students.
+          </p>
+
+          <motion.a
+            href="#story"
+            whileHover={{ x: 8 }}
+            className="inline-flex items-center gap-4 text-sm font-bold tracking-wide group pt-4"
+          >
+            Explore the Story
+            <span className="w-10 h-px bg-brand-white transition-all group-hover:w-16" />
+          </motion.a>
+        </div>
+
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-white/60"
-          animate={{ y: [0, 10, 0] }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-white/50"
+          animate={{ y: [0, 12, 0] }}
           transition={{ duration: 2.2, repeat: Infinity }}
         >
           <span className="text-[10px] font-bold tracking-[0.35em] uppercase">
@@ -67,74 +115,52 @@ export default function IntroSection() {
           </span>
           <FiArrowDown className="w-5 h-5" />
         </motion.div>
-      </div>
+      </section>
 
-      {/* RIGHT CONTENT */}
-      <div className="relative z-10 flex items-center px-6 py-16 lg:px-16">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: 'easeOut' }}
-          viewport={{ once: true }}
-          className="max-w-2xl space-y-8"
-        >
+      {/* STORY SECTIONS */}
+      <section
+        id="story"
+        className="relative h-[300vh]"
+      >
+        {slides.map((slide, index) => {
+          const start = index / slides.length;
+          const end = (index + 1) / slides.length;
 
-          {/* Eyebrow */}
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-px bg-brand-yellow" />
-            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-yellow">
-              National Student Reality Show
-            </span>
-          </div>
+          const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
+          const scale = useTransform(scrollYProgress, [start, end], [1.08, 1]);
 
-          {/* Headline */}
-          <h1 className="text-3xl lg:text-5xl font-black text-white leading-[1.05] tracking-tight">
-            The Future of
-            <br />
-            Student Competition
-            <br />
-            Starts Here
-          </h1>
+          return (
+            <motion.section
+              key={slide.id}
+              style={{ opacity }}
+              className="sticky top-0 h-screen flex items-center justify-center overflow-hidden"
+            >
+              <motion.div
+                style={{ scale }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={slide.image}
+                  alt={slide.title}
+                  fill
+                  className="object-cover"
+                  priority={index === 0}
+                />
+                <div className="absolute inset-0 bg-black/50" />
+              </motion.div>
 
-          {/* Core statement */}
-          <p className="text-sm lg:text-base text-white/75 leading-relaxed max-w-md">
-            Twenty students. One national stage.  
-            Real challenges, real growth, real opportunity.
-          </p>
-
-          {/* Proof blocks */}
-          <div className="space-y-6 pt-6 border-l border-white/10 pl-6">
-            <div>
-              <h3 className="text-sm font-bold text-white uppercase tracking-wide">
-                For Students
-              </h3>
-              <p className="text-sm text-white/65 mt-1 max-w-sm">
-                Compete, build visibility, unlock opportunities, and grow beyond campus.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-bold text-white uppercase tracking-wide">
-                For South Africa
-              </h3>
-              <p className="text-sm text-white/65 mt-1 max-w-sm">
-                A movement that celebrates youth, talent, innovation, and unity.
-              </p>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <motion.a
-            href="#participate"
-            whileHover={{ x: 6 }}
-            className="inline-flex items-center gap-3 text-sm font-bold tracking-wide text-white group pt-4"
-          >
-            Discover Your Role
-            <span className="w-8 h-px bg-brand-yellow transition-all group-hover:w-12" />
-          </motion.a>
-
-        </motion.div>
-      </div>
+              <div className="relative z-10 max-w-3xl px-6 lg:px-16 text-center space-y-6">
+                <h2 className="text-4xl lg:text-6xl font-black tracking-tight">
+                  {slide.title}
+                </h2>
+                <p className="text-lg lg:text-xl text-white/80">
+                  {slide.subtitle}
+                </p>
+              </div>
+            </motion.section>
+          );
+        })}
+      </section>
     </section>
   );
 }
