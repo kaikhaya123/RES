@@ -7,11 +7,14 @@ import { useSession, signOut } from 'next-auth/react';
 import { motion } from 'framer-motion';
 import { X, User, LayoutDashboard, LogOut, ShoppingCart } from 'lucide-react';
 import { UserAvatar } from './UserAvatar';
+import { useCart } from '@/context/cart';
+import CartDrawer from '@/components/merch/CartDrawer';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { data: session, status } = useSession();
+  const { count, toggle } = useCart();
 
   useEffect(() => {
     let ticking = false;
@@ -100,10 +103,17 @@ export default function Navbar() {
 
           {/* Right Section - User Avatar & Menu */}
           <div className="flex items-center gap-2 md:gap-4 lg:gap-6">
-            {/* Merch cart link */}
-            <Link href="/merch" aria-label="Shop merch">
+            {/* Persistant cart button (site-wide) */}
+            <button
+              onClick={() => toggle()}
+              className="relative p-2 rounded focus:outline-none focus:ring-2 focus:ring-amber-300"
+              aria-label="Open cart"
+            >
               <ShoppingCart className={`w-6 h-6 ${isScrolled ? 'text-gray-700' : 'text-white'}`} />
-            </Link>
+              {count > 0 && (
+                <span className="absolute -top-1 -right-1 bg-brand-yellow text-black text-xs rounded-full px-2 py-0.5 font-bold">{count}</span>
+              )}
+            </button>
 
             {/* Compact Merch link for small screens (hidden on lg where center nav is visible) */}
             <Link
@@ -342,6 +352,9 @@ export default function Navbar() {
           </div>
         )}
       </div>
+
+      {/* Cart drawer (site-wide) */}
+      <CartDrawer />
     </nav>
   );
 }
