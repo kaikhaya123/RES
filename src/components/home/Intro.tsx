@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { FiArrowDown } from 'react-icons/fi';
 
@@ -36,6 +36,8 @@ const slides: Slide[] = [
 export default function IntroStorySections() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [showPlayButton, setShowPlayButton] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -53,6 +55,44 @@ export default function IntroStorySections() {
       // autoplay attribute is set on the element; attempt programmatic play too
       video.play().catch(() => {});
     } catch (e) {}
+
+    // If autoplay fails (video remains paused), show a mobile play button
+    const checkAutoplay = () => {
+      try {
+        if (video.paused) {
+          setShowPlayButton(true);
+          setIsPlaying(false);
+        } else {
+          setShowPlayButton(false);
+          setIsPlaying(true);
+        }
+      } catch (e) {
+        setShowPlayButton(true);
+      }
+    };
+
+    const onPlay = () => {
+      setIsPlaying(true);
+      setShowPlayButton(false);
+    };
+    const onPause = () => {
+      setIsPlaying(false);
+      setShowPlayButton(true);
+    };
+
+    // Run a check after a small delay to allow autoplay attempt to resolve
+    const t = window.setTimeout(checkAutoplay, 250);
+
+    video.addEventListener('play', onPlay);
+    video.addEventListener('playing', onPlay);
+    video.addEventListener('pause', onPause);
+
+    return () => {
+      clearTimeout(t);
+      video.removeEventListener('play', onPlay);
+      video.removeEventListener('playing', onPlay);
+      video.removeEventListener('pause', onPause);
+    };
   }, []);
 
 
@@ -79,9 +119,40 @@ export default function IntroStorySections() {
 
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/75 to-black/40" />
           <div className="absolute inset-0 bg-black/30" />
+
+          {/* Mobile-only play button overlay when autoplay is blocked */}
+          {showPlayButton && (
+            <div className="absolute inset-0 flex items-center justify-center sm:hidden z-20">
+              <button
+                type="button"
+                aria-label={isPlaying ? 'Pause video' : 'Play video'}
+                className="bg-black/40 text-white rounded-full p-4 shadow-lg hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white"
+                onClick={async () => {
+                  const video = videoRef.current;
+                  if (!video) return;
+                  try {
+                    await video.play();
+                    setIsPlaying(true);
+                    setShowPlayButton(false);
+                  } catch (e) {
+                    // If still fails, keep showing the button
+                    setShowPlayButton(true);
+                  }
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-6 h-6 fill-current">
+                  {isPlaying ? (
+                    <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+                  ) : (
+                    <path d="M4 2.5v19L19 12 4 2.5z" />
+                  )}
+                </svg>
+              </button>
+            </div>
+          )}
         </div>
 
-        <div className="relative z-10 max-w-xl px-6 lg:px-16 space-y-10 text-center lg:text-left mx-auto">
+        <div className="relative z-10 max-w-xl lg:max-w-2xl px-6 lg:px-16 space-y-10 text-center lg:text-left mx-auto lg:mx-0 lg:ml-16">
           <div className="flex items-center gap-4">
             <span className="w-10 h-px bg-brand-white" />
             <span className="text-[11px] font-bold tracking-[0.35em] uppercase text-brand-white">
