@@ -16,21 +16,21 @@ export default function VotingSection() {
     },
     {
       id: 2,
-      image: '/Images/young-beautiful-lady-with-dark-curly-hair-khaki-shirt-holding-laptop-with-notepad-cup-coffee-go-hands-dreamily-looking-camera-isolated-min.jpg',
+      image: '/Images/medium-shot-smiley-man-work-min.jpg',
       name: 'Contestant 2',
       votes: 0,
       rank: 2
     },
     {
       id: 3,
-      image: '/Images/Girl.jpg',
+      image: '/Images/vertical-shot-happy-young-woman-with-curly-hair-holds-notepad-pen-makes-notes.jpg',
       name: 'Contestant 3',
       votes: 0,
       rank: 3
     },
     {
       id: 4,
-      image: '/Images/portrait-young-beautiful-woman-min.jpg',
+      image: '/Images/college-students-different-ethnicities-cramming-min.jpg',
       name: 'Contestant 4',
       votes: 0,
       rank: 4
@@ -42,7 +42,7 @@ export default function VotingSection() {
       <div className="container mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
         {/* LEFT */}
-        <motion.div
+            <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -89,7 +89,7 @@ export default function VotingSection() {
 
           <Link
             href="/contestants"
-            className="mt-6 text-sm text-white/40 hover:text-white transition"
+className="mt-6 text-sm text-white/40 hover:text-white transition"
           >
             View all contestants
           </Link>
