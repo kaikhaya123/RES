@@ -132,6 +132,8 @@ export default function CategoryGrid({ categories, selected = null, onSelect, va
   // Default responsive: editorial on lg, horizontal rail on small
   const featured = categories.find((c) => c.featured) || categories[0];
   const small = categories.filter((c) => c.id !== featured?.id).slice(0, 4);
+  const rightTop = small[0];
+  const bottomTwo = small.slice(1, 3);
 
   return (
     <div>
@@ -141,12 +143,12 @@ export default function CategoryGrid({ categories, selected = null, onSelect, va
         <FeaturedMobileCard featured={featured} selected={selected} onSelect={(id) => onSelect(id)} />
 
         {/* Supporting categories below - two column grid to mirror desktop hierarchy */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2">
           {small.map((cat) => (
             <button
               key={cat.id}
               onClick={() => onSelect(selected === cat.id ? null : cat.id)}
-              className="h-40 overflow-hidden"
+              className="h-32 overflow-hidden"
             >
               <div className="relative w-full h-full">
                 {cat.image && <Image src={cat.image} alt={cat.name} fill className="object-cover" />}
@@ -160,19 +162,25 @@ export default function CategoryGrid({ categories, selected = null, onSelect, va
         </div>
       </div>
 
-      {/* desktop: editorial */}
-      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 h-[420px] rounded-none overflow-hidden">
+      {/* desktop: editorial (balanced heights & larger previews) */}
+      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="lg:col-span-2 h-[520px] md:h-[560px] rounded-none overflow-hidden">
           <button onClick={() => onSelect(selected === featured?.id ? null : (featured?.id || null))} className="w-full h-full">
-            <div className="relative w-full h-full">
-              {featured?.image && <Image src={featured.image} alt={featured.name} fill className="object-cover" />}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+            <div className="relative w-full h-full bg-black flex items-center justify-center p-4 md:p-6">
+              {/* center the image and use object-contain so the full artwork is visible on desktop */}
+              {featured?.image && (
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <Image src={featured.image} alt={featured.name} fill className="object-contain object-center" priority />
+                </div>
+              )}
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
 
               <div className="absolute inset-0 flex items-end">
-                <div className="p-6 md:p-10 max-w-2xl text-left">
+                <div className="p-4 md:p-8 max-w-[75%] text-left">
                   <h3 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight drop-shadow-lg">{featured?.name}</h3>
                   {featured?.description && (
-                    <p className="text-white/80 mt-3 text-lg md:text-xl">{featured.description}</p>
+                    <p className="text-white/80 mt-3 text-base md:text-lg">{featured.description}</p>
                   )}
                 </div>
               </div>
@@ -180,18 +188,40 @@ export default function CategoryGrid({ categories, selected = null, onSelect, va
           </button>
         </div>
 
-        <div className="h-[420px] grid grid-rows-2 gap-6">
-          {small.map((cat) => (
-            <button key={cat.id} onClick={() => onSelect(selected === cat.id ? null : cat.id)} className="rounded-none overflow-hidden">
-              <div className="relative w-full h-full">
-                {cat.image && <Image src={cat.image} alt={cat.name} fill className="object-cover" />}
-                <div className="absolute inset-0 bg-black/30" />
-                <div className="absolute left-6 bottom-6">
-                  <h4 className="text-white text-lg font-black">{cat.name}</h4>
+        <div className="h-[520px] md:h-[560px] grid grid-rows-3 gap-4">
+          {/* top large tile (takes more presence) */}
+          <div className="row-span-2 rounded-none overflow-hidden">
+            {small[0] && (
+              <button
+                key={small[0].id}
+                onClick={() => onSelect(selected === small[0].id ? null : small[0].id)}
+                className="w-full h-full"
+              >
+                <div className="relative w-full h-full">
+                  {small[0].image && <Image src={small[0].image} alt={small[0].name} fill className="object-cover" />}
+                  <div className="absolute inset-0 bg-black/30" />
+                  <div className="absolute left-4 bottom-4">
+                    <h4 className="text-white text-lg md:text-xl font-black">{small[0].name}</h4>
+                  </div>
                 </div>
-              </div>
-            </button>
-          ))}
+              </button>
+            )}
+          </div>
+
+          {/* bottom: two larger preview tiles */}
+          <div className="row-span-1 grid grid-cols-2 gap-4">
+            {small.slice(1, 3).map((cat) => (
+              <button key={cat.id} onClick={() => onSelect(selected === cat.id ? null : cat.id)} className="rounded-none overflow-hidden h-36 md:h-44">
+                <div className="relative w-full h-full">
+                  {cat.image && <Image src={cat.image} alt={cat.name} fill className="object-cover" />}
+                  <div className="absolute inset-0 bg-black/30" />
+                  <div className="absolute left-4 bottom-4">
+                    <h5 className="text-white text-sm md:text-base font-black">{cat.name}</h5>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
