@@ -163,15 +163,13 @@ export default function CategoryGrid({ categories, selected = null, onSelect, va
       </div>
 
       {/* desktop: editorial (balanced heights & larger previews) */}
-      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-3 gap-3">
+      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="lg:col-span-2 h-[520px] md:h-[560px] rounded-none overflow-hidden">
           <button onClick={() => onSelect(selected === featured?.id ? null : (featured?.id || null))} className="w-full h-full">
-            <div className="relative w-full h-full bg-black flex items-center justify-center p-0 md:p-0">
-              {/* center the image and use object-contain so the full artwork is visible on desktop */}
+            <div className="relative w-full h-full bg-black">
+              {/* use object-cover so the image fills the tile edge-to-edge for visual alignment */}
               {featured?.image && (
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <Image src={featured.image} alt={featured.name} fill className="object-contain object-center" priority />
-                </div>
+                <Image src={featured.image} alt={featured.name} fill className="object-cover object-center" priority />
               )}
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
@@ -190,14 +188,14 @@ export default function CategoryGrid({ categories, selected = null, onSelect, va
 
         <div className="h-[520px] md:h-[560px] grid grid-rows-3 gap-3">
           {/* top large tile (takes more presence) */}
-          <div className="row-span-2 rounded-none overflow-hidden">
+          <div className="row-span-2 rounded-none overflow-hidden bg-black">
             {small[0] && (
               <button
                 key={small[0].id}
                 onClick={() => onSelect(selected === small[0].id ? null : small[0].id)}
                 className="w-full h-full"
               >
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-full overflow-hidden">
                   {small[0].image && <Image src={small[0].image} alt={small[0].name} fill className="object-cover" />}
                   <div className="absolute inset-0 bg-black/30" />
                   <div className="absolute left-4 bottom-4">
@@ -212,7 +210,7 @@ export default function CategoryGrid({ categories, selected = null, onSelect, va
           <div className="row-span-1 grid grid-cols-2 gap-4">
             {small.slice(1, 3).map((cat) => (
               <button key={cat.id} onClick={() => onSelect(selected === cat.id ? null : cat.id)} className="rounded-none overflow-hidden h-40 md:h-48">
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-full overflow-hidden bg-black">
                   {cat.image && <Image src={cat.image} alt={cat.name} fill className="object-cover" />}
                   <div className="absolute inset-0 bg-black/30" />
                   <div className="absolute left-4 bottom-4">
