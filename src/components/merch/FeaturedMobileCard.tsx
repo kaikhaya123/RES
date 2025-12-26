@@ -14,11 +14,11 @@ export default function FeaturedMobileCard({ featured, selected, onSelect }: Pro
   const { ref, inView } = useInView<HTMLDivElement>({ once: true, threshold: 0.12 });
 
   if (!featured) {
-    return <div className="mb-4 h-[160px] w-full" />;
+    return <div className="mb-3 h-[160px] w-full" />;
   }
 
   return (
-    <div ref={ref as any} className="mb-3 h-[240px] w-full overflow-hidden bg-neutral-900">
+    <div ref={ref as any} className="mb-3 h-[360px] w-full overflow-hidden">
       <button
         onClick={() => onSelect(selected === featured?.id ? null : (featured?.id || null))}
         className="w-full h-full"

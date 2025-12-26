@@ -143,12 +143,12 @@ export default function CategoryGrid({ categories, selected = null, onSelect, va
         <FeaturedMobileCard featured={featured} selected={selected} onSelect={(id) => onSelect(id)} />
 
         {/* Supporting categories below - two column grid to mirror desktop hierarchy */}
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-3">
           {small.map((cat) => (
             <button
               key={cat.id}
               onClick={() => onSelect(selected === cat.id ? null : cat.id)}
-              className="h-32 overflow-hidden"
+              className="h-36 overflow-hidden"
             >
               <div className="relative w-full h-full">
                 {cat.image && <Image src={cat.image} alt={cat.name} fill className="object-cover" />}
@@ -163,10 +163,10 @@ export default function CategoryGrid({ categories, selected = null, onSelect, va
       </div>
 
       {/* desktop: editorial (balanced heights & larger previews) */}
-      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-3 gap-3">
         <div className="lg:col-span-2 h-[520px] md:h-[560px] rounded-none overflow-hidden">
           <button onClick={() => onSelect(selected === featured?.id ? null : (featured?.id || null))} className="w-full h-full">
-            <div className="relative w-full h-full bg-black flex items-center justify-center p-4 md:p-6">
+            <div className="relative w-full h-full bg-black flex items-center justify-center p-0 md:p-0">
               {/* center the image and use object-contain so the full artwork is visible on desktop */}
               {featured?.image && (
                 <div className="relative w-full h-full flex items-center justify-center">
@@ -188,7 +188,7 @@ export default function CategoryGrid({ categories, selected = null, onSelect, va
           </button>
         </div>
 
-        <div className="h-[520px] md:h-[560px] grid grid-rows-3 gap-4">
+        <div className="h-[520px] md:h-[560px] grid grid-rows-3 gap-3">
           {/* top large tile (takes more presence) */}
           <div className="row-span-2 rounded-none overflow-hidden">
             {small[0] && (
@@ -211,7 +211,7 @@ export default function CategoryGrid({ categories, selected = null, onSelect, va
           {/* bottom: two larger preview tiles */}
           <div className="row-span-1 grid grid-cols-2 gap-4">
             {small.slice(1, 3).map((cat) => (
-              <button key={cat.id} onClick={() => onSelect(selected === cat.id ? null : cat.id)} className="rounded-none overflow-hidden h-36 md:h-44">
+              <button key={cat.id} onClick={() => onSelect(selected === cat.id ? null : cat.id)} className="rounded-none overflow-hidden h-40 md:h-48">
                 <div className="relative w-full h-full">
                   {cat.image && <Image src={cat.image} alt={cat.name} fill className="object-cover" />}
                   <div className="absolute inset-0 bg-black/30" />
