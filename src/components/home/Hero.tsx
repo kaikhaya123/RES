@@ -14,14 +14,14 @@ export default function Hero() {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      {/* Background Image with subtle Ripple Effect (kept subtle to avoid distraction) */}
+      {/* Background Image with Ripple Effect */}
       <RippleEffect
         imageUrl="/Images/college-students-different-ethnicities-cramming-min.jpg"
-        intensity={0.18}
-        rippleCount={1}
-        rippleSize={90}
-        rippleInterval={4000}
-        interactive={false}
+        intensity={0.4}
+        rippleCount={2}
+        rippleSize={120}
+        rippleInterval={3000}
+        interactive={true}
         className="absolute inset-0 z-0"
       />
       
@@ -30,31 +30,25 @@ export default function Hero() {
 
       <div className="container mx-auto px-6 lg:px-12 py-32 relative z-20">
         <div className="max-w-4xl">
-          {/* Main Heading (short and powerful) */}
+          {/* Main Heading */}
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight tracking-tight drop-shadow-lg"
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-lg"
           >
-            Roomza's Educated Secret
+            ROOMZA'S EDUCATED SECRET
           </motion.h1>
 
-          {/* Short punchy subtitle + CTA */}
+          {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.12 }}
-            className="text-lg md:text-xl text-white/95 font-medium max-w-xl leading-snug"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-lg md:text-xl lg:text-2xl text-white/90 font-medium max-w-2xl leading-snug tracking-tight drop-shadow-md"
           >
-            Vote. Compete. Win. Support students — real prizes, real impact.
+            This is R.E.S. A student reality show that inspires, educates, and rewards. You watch students face real challenges.You see them rise. You see them fall. You see them grow.
           </motion.p>
-
-          <div className="mt-6 flex flex-wrap gap-3 items-center">
-            <a href="/vote" className="inline-block bg-primary-600 hover:bg-primary-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg">Vote Now</a>
-            <a href="/about" className="inline-block border border-white/20 text-white/90 px-5 py-3 rounded-lg">Learn How</a>
-            <div className="text-sm text-white/80 ml-3">Join thousands — live shows & prizes</div>
-          </div>
         </div>
       </div>
     </section>
