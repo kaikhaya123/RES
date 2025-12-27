@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Product } from '@/data/merch';
+import type { Product } from '@/data/merch';
 
 type Props = {
   product: Product | null;
@@ -16,14 +16,17 @@ export default function ProductModal({ product, onClose, onAdd }: Props) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
       <div className="absolute inset-0 bg-black/60" onClick={onClose} />
 
-      <div className="relative z-10 max-w-4xl w-full bg-black rounded-none overflow-hidden">
+      <div className="relative z-10 max-w-4xl w-full bg-black rounded-lg ring-1 ring-white/6 overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <div className="relative overflow-hidden" style={{ aspectRatio: '4 / 3' }}>
             <Image src={product.image} alt={product.name} fill className="object-contain bg-black/5" />
           </div>
 
           <div className="p-6 lg:p-8">
-            <h3 className="text-2xl font-black mb-3">{product.name}</h3>
+            <div className="flex items-center gap-4 mb-3">
+              <h3 className="text-2xl font-black">{product.name}</h3>
+              {product.tag && <span className="text-xs uppercase bg-white/5 text-white px-2 py-1 rounded">{product.tag}</span>}
+            </div>
 
             {product.category && (
               <div className="mb-3">
@@ -61,7 +64,7 @@ export default function ProductModal({ product, onClose, onAdd }: Props) {
                 onClick={() => onAdd(product)}
                 disabled={product.stock === 0}
                 aria-disabled={product.stock === 0}
-                className={`bg-brand-yellow text-black px-4 py-2 rounded-none font-semibold hover:bg-yellow-300 transition ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
+                className={`bg-brand-yellow text-black px-4 py-2 rounded-full font-semibold hover:bg-yellow-300 transition ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
               >
                 Add to cart
               </button>

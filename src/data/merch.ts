@@ -23,14 +23,14 @@ export const categories: Category[] = [
   {
     id: 'featured',
     name: 'Featured',
-    image: '/Images/pexels-cottonbro-10677492.jpg',
+    image: '/Images/playful-women-shopping-together.jpg',
     description: 'Limited drops & signature pieces',
     featured: true,
   },
   {
     id: 'hoodies',
     name: 'Hoodies',
-    image: '/Images/hooded-jacket-fashion-model-black-generated-by-ai.jpg',
+    image: '/Images/people-grandstands.jpg',
   },
   {
     id: 'tshirts',
@@ -45,7 +45,7 @@ export const categories: Category[] = [
   {
     id: 'accessories',
     name: 'Accessories',
-    image: '/Images/young-adults-meeting-up-study-min.jpg',
+    image: '/Images/glasses-casual-outfit-composition.jpg',
   },
 ];
 

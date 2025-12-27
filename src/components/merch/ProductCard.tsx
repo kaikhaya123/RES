@@ -18,7 +18,7 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
   return (
     <article
       ref={ref as any}
-      className={`group bg-white/[0.02] rounded-none overflow-hidden border border-white/6 shadow-sm cursor-pointer transform hover:-translate-y-1 hover:shadow-lg transition-all duration-300 h-full flex flex-col`}
+      className={`group bg-white/4 rounded-lg overflow-hidden border border-white/8 shadow-md cursor-pointer transform hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 h-full flex flex-col`}
       style={{
         opacity: inView ? 1 : 0,
         transform: inView ? 'translateY(0)' : 'translateY(18px)',
@@ -27,7 +27,7 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
     >
       {/* Image */}
       <div
-        className="relative overflow-hidden bg-white/5 rounded-none flex-shrink-0 p-3 md:p-0"
+        className="relative overflow-hidden bg-white/5 rounded-t-lg flex-shrink-0 p-3 md:p-0"
         style={{ aspectRatio: '3 / 4' }}
         onClick={() => onOpen(product)}
       >
@@ -39,7 +39,19 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
           sizes="(max-width: 768px) 100vw, 25vw"
         />
 
+        {/* Top-left tag */}
+        {product.tag && (
+          <div className="absolute left-3 top-3 bg-black/60 text-white text-xs font-bold uppercase px-2 py-1 rounded">{product.tag}</div>
+        )}
 
+        {/* Wishlist */}
+        <button
+          aria-label="Add to wishlist"
+          className="absolute right-3 top-3 bg-white/5 w-8 h-8 flex items-center justify-center rounded-full text-white hover:bg-white/10 transition"
+          onClick={(e)=>{ e.stopPropagation(); /* TODO: wishlist handler */ }}
+        >
+          ♡
+        </button>
 
         {/* Quick add / stock indicator */}
         <div className="absolute right-3 bottom-3">
@@ -47,9 +59,9 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
             onClick={(e) => { e.stopPropagation(); onAdd(product); }}
             disabled={product.stock === 0}
             aria-disabled={product.stock === 0}
-            className={`bg-brand-yellow text-black px-3 py-1 rounded-none text-sm font-semibold shadow ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
+            className={`bg-brand-yellow text-black w-9 h-9 flex items-center justify-center rounded-full text-sm font-semibold shadow ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
           >
-            Quick add
+            +
           </button>
         </div>
       </div>
@@ -70,39 +82,25 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
           <div className="mt-2 text-white/60 text-xs hidden md:block">SKU: <span className="text-white/80">{product.id}</span></div>
 
           {/* Description: full but compact on mobile */}
-          <p className="text-white/70 text-sm mt-2">{product.description}</p>
+          <p className="text-white/70 text-sm mt-3 line-clamp-3 md:line-clamp-none">{product.description}</p>
 
-          <div className="mt-2 flex items-center gap-3 flex-wrap text-xs">
-            {product.sizes && (
-              <div className="text-white/60">Sizes: <span className="text-white/80">{product.sizes.join(', ')}</span></div>
-            )}
-            <div className={`font-medium ${product.stock && product.stock > 0 ? 'text-white/90' : 'text-red-400'}`}>
-              {product.stock && product.stock > 0 ? `In stock ${product.stock}` : 'Availability: 0'}
-            </div>
-          </div>
-
-          {/* Description: clamp on small, full on md+ */}
-          <p className="text-white/70 text-sm mt-3">{product.description}</p>
-
-          <div className="mt-3 flex items-center gap-4 flex-wrap">
-            {product.sizes && (
-              <div className="text-white/60 text-sm">Sizes: <span className="text-white/80">{product.sizes.join(', ')}</span></div>
-            )}
-            <div className={`text-sm font-medium ${product.stock && product.stock > 0 ? 'text-white/90' : 'text-red-400'}`}>
+          <div className="mt-3 flex items-center gap-3 flex-wrap text-sm text-white/60">
+            {product.sizes && <div>Sizes: <span className="text-white/80">{product.sizes.join(', ')}</span></div>}
+            <div className={`ml-auto font-medium ${product.stock && product.stock > 0 ? 'text-white/90' : 'text-red-400'}`}>
               {product.stock && product.stock > 0 ? `In stock ${product.stock}` : 'Out of stock'}
             </div>
           </div>
         </div>
 
         <div className="mt-4 flex items-center justify-between">
-          <span className="text-white font-bold text-lg">R {(product.price / 100).toFixed(2)}</span>
+          <span className="text-white font-black text-xl">R {(product.price / 100).toFixed(2)}</span>
 
           <div className="flex items-center gap-3">
             <button
               onClick={(e) => { e.stopPropagation(); onAdd(product); }}
               disabled={product.stock === 0}
               aria-disabled={product.stock === 0}
-              className={`bg-brand-yellow text-black px-3 py-1 rounded-none text-sm font-semibold hover:bg-yellow-300 transition ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
+              className={`bg-brand-yellow text-black px-3 py-1 rounded-full text-sm font-semibold hover:bg-yellow-300 transition ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
             >
               Add
             </button>
