@@ -104,8 +104,8 @@ export default function Navbar() {
 
           {/* Right Section - User Avatar & Menu */}
           <div className="flex items-center gap-2 md:gap-4 lg:gap-6">
-            {/* mobile translucent anchor for header icons */}
-            <div className="lg:!bg-transparent bg-black/20 backdrop-blur-md rounded-full px-2 py-1 flex items-center gap-2">
+            {/* mobile anchor for header icons (rounded background removed) */}
+            <div className="lg:!bg-transparent bg-transparent flex items-center gap-2">
 
             {/* Persistant cart button (site-wide) - visible on mobile and desktop in header */}
             <button
