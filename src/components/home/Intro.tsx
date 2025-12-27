@@ -116,8 +116,8 @@ export default function IntroStorySections() {
             className="w-full h-full object-cover scale-[1.08]"
             aria-hidden="true"
           >
-            <source src="/Videos/14595546-hd_1920_1080_60fps.mp4" type="video/webm" />
-            <source src="/Videos/14595546-hd_1920_1080_60fps.mp4" type="video/mp4" />
+            <source src="/Videos/1166555_Environment_Man_3840x2160 (1).webm" type="video/webm" />
+            <source src="/Videos/1166555_Environment_Man_3840x2160 (1).mp4" type="video/mp4" />
           </video>
 
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/75 to-black/40" />
