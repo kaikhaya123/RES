@@ -29,8 +29,8 @@ export default function Home() {
       <Navbar />
       <Hero />
 
-      {/* Zoom Parallax — placed under Hero (hidden on small screens for performance) */}
-      <div className="hidden md:block">
+      {/* Zoom Parallax — placed under Hero (now visible on mobile with a mobile-friendly layout) */}
+      <div>
         <ZoomParallax images={parallaxImages} />
       </div>
 
