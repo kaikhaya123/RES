@@ -152,11 +152,11 @@ export default function IntroStorySections() {
           )}
         </div>
 
-        <div className="relative z-10 max-w-xl lg:max-w-2xl px-6 lg:px-16 space-y-10 text-left mx-6 lg:mx-0 lg:ml-16">
-          <div className="flex items-center gap-4">
-            <span className="w-10 h-px bg-brand-white" />
-            <span className="text-[11px] font-bold tracking-[0.35em] uppercase text-brand-white">
-              National Student Reality Platform
+        <div className="relative z-10 max-w-xl lg:max-w-2xl px-6 lg:px-16 space-y-10 text-left mx-6 lg:mx-0">
+          <div className="relative">
+            <span className="absolute -left-3 top-1/2 -translate-y-1/2 w-10 h-px bg-brand-white" aria-hidden="true" />
+            <span className="text-[11px] md:text-sm font-semibold tracking-[0.45em] uppercase text-brand-white">
+              NATIONAL STUDENT REALITY PLATFORM
             </span>
           </div>
 
