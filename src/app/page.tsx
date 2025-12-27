@@ -11,12 +11,29 @@ import Merch from "@/components/home/Merchshowcase";
 import CallToAction from "@/components/home/CallToAction";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { ZoomParallax } from '@/components/ui/zoom-parallax';
 
 export default function Home() {
+  const parallaxImages = [
+    { src: '/Images/college-students-different-ethnicities-cramming-min.jpg', alt: 'Students collaborating' },
+    { src: '/Images/portrait-young-woman-with-curly-hair-min.jpg', alt: 'Student portrait' },
+    { src: '/Images/front-view-friends-posing-together-min.jpg', alt: 'Friends posing' },
+    { src: '/Images/modern-loose-fit-hoodie-mockup-for-fashion-brands-and-online-stores-promo-use-01452.png', alt: 'Hoodie mockup' },
+    { src: '/Images/portrait-young-beautiful-woman-min.jpg', alt: 'Portrait' },
+    { src: '/Images/young-people-creating-new-project.jpg', alt: 'Students creating project' },
+    { src: '/Images/cheerful-women-holding-trophy-icon-min.jpg', alt: 'Victory' },
+  ];
+
   return (
     <main className="min-h-screen">
       <Navbar />
       <Hero />
+
+      {/* Zoom Parallax — placed under Hero (hidden on small screens for performance) */}
+      <div className="hidden md:block">
+        <ZoomParallax images={parallaxImages} />
+      </div>
+
       <Intro/>
       <Statistics />
       <AboutShow />
