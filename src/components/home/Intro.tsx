@@ -36,6 +36,9 @@ const slides: Slide[] = [
 export default function IntroStorySections() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+
+  // Ensure safe area padding is applied on mobile (notch devices)
+  const heroStyle = { paddingTop: 'env(safe-area-inset-top, 16px)' } as const;
   const [showPlayButton, setShowPlayButton] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -97,10 +100,10 @@ export default function IntroStorySections() {
 
 
   return (
-    <section ref={containerRef} className="relative bg-black text-white">
+    <section ref={containerRef} className="relative bg-black text-white" style={heroStyle}>
 
       {/* INTRO HERO */}
-      <section className="relative min-h-screen overflow-hidden flex items-center">
+      <section className="relative min-h-screen overflow-hidden flex items-center" style={{paddingTop:0}}>
         <div className="absolute inset-0">
           <video
             ref={videoRef}
@@ -152,7 +155,7 @@ export default function IntroStorySections() {
           )}
         </div>
 
-        <div className="relative z-10 max-w-xl lg:max-w-2xl px-6 lg:px-16 space-y-10 text-left mx-6 lg:mx-0">
+        <div className="relative z-10 max-w-xl lg:max-w-2xl px-4 md:px-6 lg:px-16 space-y-6 text-left mx-4 lg:mx-0">
           <div className="relative">
             <span className="absolute -left-3 top-1/2 -translate-y-1/2 w-10 h-px bg-brand-white" aria-hidden="true" />
             <span className="text-[11px] md:text-sm font-semibold tracking-[0.45em] uppercase text-brand-white">
@@ -160,20 +163,29 @@ export default function IntroStorySections() {
             </span>
           </div>
 
-          <h1 className="text-4xl lg:text-6xl font-black leading-[1.05] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-tight overflow-hidden" style={{ WebkitLineClamp: 3, display: '-webkit-box', WebkitBoxOrient: 'vertical' as any }}>
             Where Students
             <br />
             Compete.
             <br />
-            Grow.
-            <br />
-            Rise.
+            Grow. Rise.
           </h1>
 
-          <p className="text-base lg:text-lg text-white/80 leading-relaxed">
+          <p className="text-sm md:text-base lg:text-lg text-white/80 leading-relaxed max-w-lg">
             A national digital stage unlocking leadership, opportunity,
             and measurable impact for South African students.
           </p>
+
+          <div className="mt-4">
+            <motion.a
+              href="/apply"
+              className="inline-flex items-center justify-center w-full sm:w-auto h-12 bg-brand-yellow text-black font-bold rounded-lg shadow-md px-6"
+              whileHover={{ translateY: -2 }}
+              aria-label="Apply to compete"
+            >
+              Apply Now
+            </motion.a>
+          </div>
 
           <motion.a
             href="#story"

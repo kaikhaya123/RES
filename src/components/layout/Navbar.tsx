@@ -39,6 +39,7 @@ export default function Navbar() {
           : 'bg-gradient-to-b from-black/40 to-transparent'
       }`}
       aria-label="Main navigation"
+      style={{ paddingTop: 'env(safe-area-inset-top, 12px)' }}
     >
       <div className="container mx-auto px-4 md:px-6 lg:px-12">
         <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
@@ -103,13 +104,13 @@ export default function Navbar() {
 
           {/* Right Section - User Avatar & Menu */}
           <div className="flex items-center gap-2 md:gap-4 lg:gap-6">
-            {/* Persistant cart button (site-wide) - hidden on small screens */}
+            {/* Persistant cart button (site-wide) - visible on mobile and desktop in header */}
             <button
               onClick={() => toggle()}
-              className="hidden md:inline-flex relative p-2 rounded focus:outline-none focus:ring-2 focus:ring-amber-300"
+              className="relative p-3 md:p-2 rounded focus:outline-none focus:ring-2 focus:ring-amber-300"
               aria-label="Open cart"
             >
-              <ShoppingCart className={`w-6 h-6 ${isScrolled ? 'text-gray-700' : 'text-white'}`} />
+              <ShoppingCart className={`w-7 h-7 md:w-6 md:h-6 ${isScrolled ? 'text-gray-700' : 'text-white'}`} />
               {count > 0 && (
                 <span className="absolute -top-1 -right-1 bg-brand-yellow text-black text-xs rounded-full px-2 py-0.5 font-bold">{count}</span>
               )}
@@ -346,19 +347,7 @@ export default function Navbar() {
         )}
       </div>
 
-      {/* Mobile action bar: Merch CTA + Cart (visible on small screens) */}
-      <div className="lg:hidden fixed bottom-4 left-4 right-4 z-50 flex items-center justify-end bg-black/70 backdrop-blur-sm p-2 border border-white/10">
-        <button
-          onClick={() => toggle()}
-          className="relative p-2 rounded-none focus:outline-none focus:ring-2 focus:ring-amber-300"
-          aria-label="Open cart"
-        >
-          <ShoppingCart className={`w-6 h-6 text-white`} />
-          {count > 0 && (
-            <span className="absolute -top-1 -right-1 bg-brand-yellow text-black text-xs rounded-full px-2 py-0.5 font-bold">{count}</span>
-          )}
-        </button>
-      </div>
+
 
       {/* Cart drawer (site-wide) */}
       <CartDrawer />
