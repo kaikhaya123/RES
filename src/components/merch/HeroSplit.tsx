@@ -108,7 +108,18 @@ export default function HeroSplit() {
 
         <div className="relative overflow-hidden">
           <div ref={rightRef} className="absolute inset-0 will-change-transform transition-transform duration-500">
-            <Image src={rightImage} alt="Right hero" fill priority className="object-cover" style={{ objectPosition: isWide ? 'center right' : 'center' }} />
+            <Image
+              src={rightImage}
+              alt="Right hero"
+              fill
+              priority
+              className="object-cover"
+              style={{
+                objectPosition: isWide ? 'center right' : 'center 36%',
+                // nudge and slightly scale on narrow screens to keep the subject visible when cropped
+                transform: isWide ? undefined : 'scale(1.03)'
+              }}
+            />
           </div>
           <div className="absolute inset-0 bg-gradient-to-l from-black/70 to-transparent" />
         </div>
