@@ -107,7 +107,7 @@ export default function HowItWorks() {
         </motion.div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-stretch">
           {steps.map((step, index) => (
             <StepCard key={index} step={step} index={index} />
           ))}
@@ -152,18 +152,18 @@ function StepCard({ step, index }: { step: any; index: number }) {
         ease: [0.22, 1, 0.36, 1]
       }}
       style={{ perspective: 1000 }}
-      className="group relative"
+      className="group relative h-full flex flex-col"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Mega Step Number Background */}
+      {/* Mega Step Number Background (smaller & moved) */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1, delay: index * 0.25 + 0.3, type: "spring" }}
-        className="absolute -top-16 -left-8 text-[200px] font-black text-transparent leading-none select-none pointer-events-none"
+        className="absolute -bottom-8 -left-6 text-[80px] md:text-[120px] font-black text-transparent leading-none select-none pointer-events-none opacity-40"
         style={{
           WebkitTextStroke: '2px rgba(0, 0, 0, 0.03)'
         }}
@@ -177,22 +177,22 @@ function StepCard({ step, index }: { step: any; index: number }) {
           rotateY: isHovered ? rotateY : 0,
           transformStyle: "preserve-3d"
         }}
-        className="relative"
+        className="relative flex-1 flex flex-col"
       >
-        {/* Image Container */}
-        <div className="relative mb-10 overflow-hidden rounded-lg">
+        {/* Image Container (panoramic) */}
+        <div className="relative mb-6 overflow-hidden rounded-lg">
           <motion.div
-            whileHover={{ scale: 1.03 }}
+            whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full aspect-[3/4] bg-gradient-to-br from-black to-gray-800"
+            className="relative w-full h-[220px] sm:h-[260px] md:h-[320px] lg:h-[380px] 2xl:h-[460px] bg-gradient-to-br from-black to-gray-800 overflow-hidden"
           >
             <Image
               src={step.image}
               alt={step.title}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover transition-all duration-700 w-full h-full"
-              style={{ transform: isHovered ? 'translateZ(20px)' : 'translateZ(0)' }}
+              className="object-cover object-center transition-all duration-700 w-full h-full"
+              style={{ transform: isHovered ? 'translateZ(18px)' : 'translateZ(0)' }}
               priority={index === 0}
               quality={90}
               placeholder="blur"
@@ -214,7 +214,7 @@ function StepCard({ step, index }: { step: any; index: number }) {
                   height="100%"
                   fill="none"
                   stroke="black"
-                  strokeWidth="4"
+                  strokeWidth="6"
                   initial={{ pathLength: 0 }}
                   whileHover={{ pathLength: 1 }}
                   transition={{ duration: 1, ease: "easeInOut" }}
@@ -234,9 +234,9 @@ function StepCard({ step, index }: { step: any; index: number }) {
                 stiffness: 200
               }}
               animate={isHovered ? { scale: [1, 1.05, 1] } : { scale: 1 }}
-              className="absolute bottom-6 left-6 w-16 h-16 bg-black text-white flex items-center justify-center text-2xl font-black shadow-2xl z-10"
+              className="absolute bottom-6 left-6 w-14 h-14 md:w-16 md:h-16 bg-black text-white flex items-center justify-center text-xl md:text-2xl font-black shadow-2xl z-10"
               style={{ 
-                transform: isHovered ? 'translateZ(40px)' : 'translateZ(0)',
+                transform: isHovered ? 'translateZ(28px)' : 'translateZ(0)',
               }}
             >
               {index + 1}
@@ -274,7 +274,7 @@ function StepCard({ step, index }: { step: any; index: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.25 + 0.8 }}
-            className="text-4xl font-black text-white mb-6 tracking-tighter leading-[1.1]"
+            className="text-3xl md:text-4xl lg:text-4xl font-black text-white mb-4 tracking-tighter leading-[1.06]"
           >
             {step.title}
           </motion.h3>
