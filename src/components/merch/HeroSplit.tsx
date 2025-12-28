@@ -64,22 +64,15 @@ export default function HeroSplit() {
   }, [isWide]);
 
   // Mobile uses a single intentional image; desktop swaps left/right based on screen ratio
-  // Use the left image on mobile so the focal subject (left side) fits better when cropped
+  const mobileImage = '/Images/portrait-young-beautiful-woman-gesticulating.jpg';
   const leftImage = isWide ? '/Images/portrait-young-beautiful-woman-gesticulating.jpg' : '/Images/playful-women-shopping-together.jpg';
-  const rightImage = isWide ? '/Images/waist-up-shot-happy-man-smiles-happily-dressed-orange-hat-sweater-being-good-mood-looks-directly-front-expresses-positive-emotions-stands-studio-against-bright-wall-min.jpg' : '/Images/portrait-young-adult-wearing-hoodie-mockup.jpg';
+  const rightImage = isWide ? '/Images/handsome-african-american-man-with-beard-turn-face-camera-smiling-confident-standing-pink-background.jpg' : '/Images/portrait-young-adult-wearing-hoodie-mockup.jpg';
 
   return (
     <section ref={heroRef} className="relative overflow-hidden bg-black">
-      {/* MOBILE HERO: single image using the left image to preserve subject composition */}
+      {/* MOBILE HERO: single image and separate safe zone for text */}
       <div className="relative h-[82vh] md:hidden">
-        <Image
-          src={leftImage}
-          alt="Hero mobile"
-          fill
-          priority
-          className="object-cover"
-          style={{ objectPosition: isWide ? 'left center' : 'center 28%' }}
-        />
+        <Image src={mobileImage} alt="Hero mobile" fill priority className="object-cover" style={{ objectPosition: 'center 40%' }} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30" />
 
         <div className="relative z-10 h-full flex flex-col justify-end px-6 pb-12">
@@ -101,18 +94,7 @@ export default function HeroSplit() {
       <div className="hidden md:grid grid-cols-2 md:h-[92vh] lg:h-[110vh]">
         <div className="relative overflow-hidden">
           <div ref={leftRef} className="absolute inset-0 will-change-transform transition-transform duration-500">
-            <Image
-              src={leftImage}
-              alt="Left hero"
-              fill
-              priority
-              className="object-cover"
-              style={{
-                // nudge and slightly scale on wide desktop to improve subject composition
-                objectPosition: isWide ? 'center 18%' : 'center',
-                transform: isWide ? 'scale(1.02) translateX(-2%)' : undefined,
-              }}
-            />
+            <Image src={leftImage} alt="Left hero" fill priority className="object-cover" style={{ objectPosition: isWide ? 'center left' : 'center' }} />
           </div>
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent" />
         </div>
@@ -126,9 +108,8 @@ export default function HeroSplit() {
               priority
               className="object-cover"
               style={{
-                objectPosition: isWide ? 'center right' : 'center 36%',
-                // nudge and slightly scale on narrow screens to keep the subject visible when cropped
-                transform: isWide ? undefined : 'scale(1.03)'
+                objectPosition: isWide ? 'center 66%' : 'center 36%',
+                transform: isWide ? 'scale(1.02) translateX(2%)' : 'scale(1.03)'
               }}
             />
           </div>
