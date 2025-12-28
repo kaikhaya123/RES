@@ -6,12 +6,12 @@ export default function HeroSplit() {
     <section className="relative overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-0 h-[68vh] md:h-[78vh]">
         <div className="relative">
-          <Image src="/Images/playful-women-shopping-together.jpg" alt="Move" fill className="object-cover" priority />
+          <Image src="/Images/portrait-young-beautiful-woman-gesticulating.jpg" alt="Move" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
         </div>
 
         <div className="relative">
-          <Image src="/Images/people-grandstands.jpg" alt="Rest" fill className="object-cover" priority />
+          <Image src="/Images/side-view-male-wearing-cap-with-arms-crossed.jpg" alt="Rest" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-gradient-to-l from-black/60 to-transparent" />
         </div>
       </div>
@@ -19,16 +19,16 @@ export default function HeroSplit() {
       {/* centered headline without panel — text over images */}
       <div className="absolute inset-0 flex items-center justify-center px-6">
         <div className="z-20 w-full max-w-3xl text-center">
-          <h1 className="text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] xl:text-[5.25rem] font-extrabold leading-[0.98] md:leading-[0.96] lg:leading-[0.94] text-white tracking-tight drop-shadow-[0_18px_36px_rgba(0,0,0,0.7)]">
+          <h1 className="text-[1rem] sm:text-[1.25rem] md:text-[1.75rem] lg:text-[2.5rem] xl:text-[3rem] font-extrabold leading-[1.06] md:leading-[1.04] lg:leading-[1.02] text-white tracking-tight drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]">
             <span className="block">COMPETE.</span>
             <span className="block">COLLABORATE.</span>
             <span className="block">CHANGE.</span>
           </h1>
 
-          <p className="mt-4 text-white/95 text-sm md:text-sm max-w-2xl mx-auto">Official R.E.S. merchandise — limited drops and performance-ready apparel for students who compete and lead. A portion of proceeds supports competitions and community programs.</p>
+          <p className="mt-2 text-white/95 text-xs md:text-sm max-w-2xl mx-auto">Official R.E.S. merchandise — limited drops and performance-ready apparel for students who compete and lead. A portion of proceeds supports competitions and community programs.</p>
 
-          <div className="mt-6">
-            <Link href="#products" aria-label="Shop the collection" className="inline-flex items-center gap-3 px-5 py-2.5 bg-white text-black font-semibold uppercase rounded-full hover:opacity-95 transition text-sm">Shop the collection</Link>
+          <div className="mt-4">
+            <Link href="#products" aria-label="Shop the collection" className="inline-flex items-center gap-2 px-4 py-2 bg-white text-black font-semibold uppercase rounded-full hover:opacity-95 transition text-sm">Shop the collection</Link>
           </div>
         </div>
       </div>
