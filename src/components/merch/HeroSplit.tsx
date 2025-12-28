@@ -101,7 +101,18 @@ export default function HeroSplit() {
       <div className="hidden md:grid grid-cols-2 md:h-[92vh] lg:h-[110vh]">
         <div className="relative overflow-hidden">
           <div ref={leftRef} className="absolute inset-0 will-change-transform transition-transform duration-500">
-            <Image src={leftImage} alt="Left hero" fill priority className="object-cover" style={{ objectPosition: isWide ? 'center left' : 'center' }} />
+            <Image
+              src={leftImage}
+              alt="Left hero"
+              fill
+              priority
+              className="object-cover"
+              style={{
+                // nudge and slightly scale on wide desktop to improve subject composition
+                objectPosition: isWide ? 'center 18%' : 'center',
+                transform: isWide ? 'scale(1.02) translateX(-2%)' : undefined,
+              }}
+            />
           </div>
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent" />
         </div>
