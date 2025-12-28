@@ -33,17 +33,18 @@ export default function CartDrawer() {
             <div className="flex-1 flex flex-col justify-between overflow-auto">
               <ul className="space-y-4">
                 {items.map((it) => (
-                  <li key={it.product.id} className="flex items-center justify-between">
+                  <li key={`${it.product.id}:${it.size ?? 'default'}`} className="flex items-center justify-between">
                     <div>
                       <div className="font-semibold">{it.product.name}</div>
+                      {it.size && <div className="text-xs text-white/60">Size: {it.size}</div>}
                       <div className="text-xs text-white/70">R {(it.product.price / 100).toFixed(2)}</div>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <button onClick={() => updateQty(it.product.id, it.qty - 1)} className="px-2">-</button>
+                      <button onClick={() => updateQty(it.product.id, it.qty - 1, it.size)} className="px-2">-</button>
                       <span className="w-6 text-center">{it.qty}</span>
-                      <button onClick={() => updateQty(it.product.id, it.qty + 1)} className="px-2">+</button>
-                      <button onClick={() => remove(it.product.id)} className="ml-2 text-xs underline">Remove</button>
+                      <button onClick={() => updateQty(it.product.id, it.qty + 1, it.size)} className="px-2">+</button>
+                      <button onClick={() => remove(it.product.id, it.size)} className="ml-2 text-xs underline">Remove</button>
                     </div>
                   </li>
                 ))}

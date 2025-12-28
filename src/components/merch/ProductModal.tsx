@@ -1,20 +1,24 @@
 'use client';
 
+import React, { useState } from 'react';
 import Image from 'next/image';
 import type { Product } from '@/data/merch';
 
 type Props = {
   product: Product | null;
   onClose: () => void;
-  onAdd: (product: Product) => void;
+  onAdd: (product: Product, size?: string) => void;
 };
 
 export default function ProductModal({ product, onClose, onAdd }: Props) {
+  const [sizeOpen, setSizeOpen] = useState(false);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+
   if (!product) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
-      <div className="absolute inset-0 bg-black/60" onClick={onClose} />
+      <div className="absolute inset-0 bg-black/60" onClick={() => { setSelectedSize(null); onClose(); }} />
 
       <div className="relative z-10 max-w-4xl w-full bg-black rounded-lg ring-1 ring-white/6 overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -34,16 +38,33 @@ export default function ProductModal({ product, onClose, onAdd }: Props) {
               </div>
             )}
 
-            <p className="text-white/70 mb-4">{product.description}</p>
-
             <div className="flex items-center gap-4 mb-4">
-              {product.sizes && (
+              {product.sizes && product.sizes.length > 0 && (
                 <div>
                   <div className="text-sm text-white/60">Sizes</div>
-                  <div className="mt-1 flex gap-2 flex-wrap">
-                    {product.sizes.map((s) => (
-                      <span key={s} className="text-white text-sm bg-white/5 px-2 py-1">{s}</span>
-                    ))}
+                  <div className="mt-1 relative inline-block">
+                    <button
+                      type="button"
+                      onClick={() => setSizeOpen((s) => !s)}
+                      className="text-white bg-white/5 px-3 py-1 rounded w-36 text-left"
+                    >
+                      {selectedSize ?? 'Select size'}
+                    </button>
+
+                    {sizeOpen && (
+                      <div className="absolute mt-1 bg-black border border-white/5 rounded shadow-md z-20 w-36">
+                        {product.sizes.map((s) => (
+                          <button
+                            key={s}
+                            type="button"
+                            onClick={() => { setSelectedSize(s); setSizeOpen(false); }}
+                            className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-white/5"
+                          >
+                            {s}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -61,15 +82,15 @@ export default function ProductModal({ product, onClose, onAdd }: Props) {
 
             <div className="flex items-center gap-4">
               <button
-                onClick={() => onAdd(product)}
-                disabled={product.stock === 0}
-                aria-disabled={product.stock === 0}
-                className={`bg-brand-yellow text-black px-4 py-2 rounded-full font-semibold hover:bg-yellow-300 transition ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
+                onClick={() => { onAdd(product, selectedSize ?? undefined); setSelectedSize(null); }}
+                disabled={product.stock === 0 || (product.sizes && product.sizes.length > 0 && !selectedSize)}
+                aria-disabled={product.stock === 0 || (product.sizes && product.sizes.length > 0 && !selectedSize)}
+                className={`bg-brand-yellow text-black px-4 py-2 rounded-full font-semibold hover:bg-yellow-300 transition ${product.stock === 0 || (product.sizes && product.sizes.length > 0 && !selectedSize) ? 'opacity-40 cursor-not-allowed' : ''}`}
               >
                 Add to cart
               </button>
 
-              <button onClick={onClose} className="text-white/70 underline">Close</button>
+              <button onClick={() => { setSelectedSize(null); onClose(); }} className="text-white/70 underline">Close</button>
             </div>
           </div>
         </div>

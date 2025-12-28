@@ -4,7 +4,6 @@ export type Product = {
   price: number; // cents
   image: string;
   description: string;
-  slug?: string;
   category?: string; // optional category id (e.g., 'hoodies')
   sizes?: string[]; // available sizes
   stock?: number; // units available
@@ -23,7 +22,7 @@ export const categories: Category[] = [
   {
     id: 'featured',
     name: 'Featured',
-    image: '/Images/playful-women-shopping-together.jpg',
+    image: '/Images/young-japanese-couple.jpg',
     description: 'Limited drops & signature pieces',
     featured: true,
   },
@@ -55,9 +54,7 @@ export const products: Product[] = [
     name: 'RES Heavyweight Hoodie',
     price: 3000,
     image: '/Images/Men Hoodie Mockup, Front View.png',
-    description: 'Comfortable, heavyweight hoodie with RES branding. Available in S-XL.',
-    slug: 'res-hoodie',
-    category: 'hoodies',
+    description: 'Premium heavyweight hoodie with RES branding.',
     sizes: ['S', 'M', 'L', 'XL'],
     stock: 12,
     tag: 'Limited',
@@ -66,9 +63,8 @@ export const products: Product[] = [
     id: 'res-tee-1',
     name: 'RES Logo Tee',
     price: 19900,
-    image: '/Images/Men T-Shirt Mockup Floating Poster Freepik.png',
+    image: '/Images/Women T-Shirt Mockup, Floating.png',
     description: 'Premium cotton T-shirt with bold RES graphic.',
-    slug: 'res-tee',
     category: 'tshirts',
     sizes: ['S', 'M', 'L'],
     stock: 4,
@@ -77,9 +73,8 @@ export const products: Product[] = [
     id: 'res-beanie-1',
     name: 'RES beanie',
     price: 69900,
-    image: '/Images/Beanie Mockup Floating.jpeg',
+    image: '/Images/Beanie Mockup Floating.png',
     description: 'Classic knit beanie; one size fits all.',
-    slug: 'res-beanie',
     category: 'accessories',
     sizes: ['One Size'],
     stock: 0,
@@ -90,7 +85,6 @@ export const products: Product[] = [
     price: 9900,
     image: '/Images/Cap Mockup.png',
     description: 'Unstructured cap with embroidered logo.',
-    slug: 'res-cap',
     category: 'accessories',
     sizes: ['One Size'],
     stock: 7,

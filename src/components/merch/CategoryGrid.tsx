@@ -34,11 +34,6 @@ export default function CategoryGrid({ categories, selected, onSelect }: Props) 
 
             <div className="absolute bottom-4 left-4">
               <h3 className="font-black text-lg">{cat.name}</h3>
-              {cat.description && (
-                <p className="text-xs text-white/70 mt-1">
-                  {cat.description}
-                </p>
-              )}
             </div>
           </button>
         ))}

@@ -84,8 +84,8 @@ export default function MerchPage() {
       <ProductModal
         product={openProduct !== null ? products[openProduct] : null}
         onClose={() => setOpenProduct(null)}
-        onAdd={(p: Product) => {
-          add(p);
+        onAdd={(p: Product, size?: string) => {
+          add(p, size);
           setOpenProduct(null);
         }}
       />

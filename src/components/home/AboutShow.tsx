@@ -392,9 +392,9 @@ export default function AboutShow() {
                 1: '/Images/medium-shot-women-holding-smartphones-min.jpg',
                 2: '/Images/joy-armani-KAK0jPmDLt8-unsplash-min.jpg',
                 3: '/Images/concentrated-young-multiethnic-friends-students-outdoors-studying.jpg',
-                4: '/Images/happy-circle-friends-planning-trip-globe-trotters-inspecting-map-being-home-european-indian-ethnicity.jpg',
-                5: '/Images/high-angle-smiley-women-with-smartphones-min.jpg',
-                6: '/Images/college-students-different-ethnicities-cramming (4).jpg'
+                4: '/Images/JEMA SVA 005-01.jpg',
+                5: '/Images/people-connected-social-media-min.jpg',
+                6: '/Images/people-connected-social-media-min.jpg'
               };
 
               const isEven = index % 2 === 0;

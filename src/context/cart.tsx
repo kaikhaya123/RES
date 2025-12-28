@@ -3,15 +3,15 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { products, Product } from '@/data/merch';
 
-type Entry = { productId: string; qty: number };
-export type CartItem = { product: Product; qty: number };
+type Entry = { productId: string; qty: number; size?: string };
+export type CartItem = { product: Product; qty: number; size?: string };
 
 type CartContextValue = {
   items: CartItem[];
   count: number;
-  add: (product: Product) => void;
-  updateQty: (productId: string, qty: number) => void;
-  remove: (productId: string) => void;
+  add: (product: Product, size?: string) => void;
+  updateQty: (productId: string, qty: number, size?: string) => void;
+  remove: (productId: string, size?: string) => void;
   clear: () => void;
   open: boolean;
   setOpen: (v: boolean) => void;
@@ -24,26 +24,26 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [open, setOpen] = useState(false);
 
-  function add(product: Product) {
+  function add(product: Product, size?: string) {
     setEntries((prev) => {
-      const found = prev.find((p) => p.productId === product.id);
-      if (found) return prev.map((p) => (p.productId === product.id ? { ...p, qty: p.qty + 1 } : p));
-      return [...prev, { productId: product.id, qty: 1 }];
+      const found = prev.find((p) => p.productId === product.id && p.size === size);
+      if (found) return prev.map((p) => (p.productId === product.id && p.size === size ? { ...p, qty: p.qty + 1 } : p));
+      return [...prev, { productId: product.id, qty: 1, size }];
     });
     setOpen(true);
   }
 
-  function updateQty(productId: string, qty: number) {
-    if (qty <= 0) return setEntries((p) => p.filter((i) => i.productId !== productId));
-    setEntries((p) => p.map((it) => (it.productId === productId ? { ...it, qty } : it)));
+  function updateQty(productId: string, qty: number, size?: string) {
+    if (qty <= 0) return setEntries((p) => p.filter((i) => !(i.productId === productId && i.size === size)));
+    setEntries((p) => p.map((it) => (it.productId === productId && it.size === size ? { ...it, qty } : it)));
   }
 
-  function remove(productId: string) {
-    setEntries((p) => p.filter((i) => i.productId !== productId));
+  function remove(productId: string, size?: string) {
+    setEntries((p) => p.filter((i) => !(i.productId === productId && i.size === size)));
   }
 
   const items = entries
-    .map((e) => ({ product: products.find((p) => p.id === e.productId)!, qty: e.qty }))
+    .map((e) => ({ product: products.find((p) => p.id === e.productId)!, qty: e.qty, size: e.size }))
     .filter((i) => i.product);
 
   const count = entries.reduce((s, e) => s + e.qty, 0);

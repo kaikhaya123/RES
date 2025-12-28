@@ -5,7 +5,7 @@ import ProductCard from './ProductCard';
 
 type Props = {
   products: Product[];
-  onAdd: (product: Product) => void;
+  onAdd: (product: Product, size?: string) => void;
   onOpen: (product: Product) => void;
 };
 

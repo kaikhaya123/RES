@@ -66,7 +66,7 @@ export default function HeroSplit() {
   // Mobile uses a single intentional image; desktop swaps left/right based on screen ratio
   const mobileImage = '/Images/portrait-young-beautiful-woman-gesticulating.jpg';
   const leftImage = isWide ? '/Images/portrait-young-beautiful-woman-gesticulating.jpg' : '/Images/playful-women-shopping-together.jpg';
-  const rightImage = isWide ? '/Images/side-view-male-wearing-cap-with-arms-crossed.jpg' : '/Images/portrait-young-adult-wearing-hoodie-mockup.jpg';
+  const rightImage = isWide ? '/Images/waist-up-shot-happy-man-smiles-happily-dressed-orange-hat-sweater-being-good-mood-looks-directly-front-expresses-positive-emotions-stands-studio-against-bright-wall-min.jpg' : '/Images/portrait-young-adult-wearing-hoodie-mockup.jpg';
 
   return (
     <section ref={heroRef} className="relative overflow-hidden bg-black">

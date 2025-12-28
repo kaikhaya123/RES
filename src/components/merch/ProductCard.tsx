@@ -5,7 +5,7 @@ import { Product } from '@/data/merch';
 
 type Props = {
   product: Product;
-  onAdd: (product: Product) => void;
+  onAdd: (product: Product, size?: string) => void;
   onOpen: (product: Product) => void;
   index?: number;
 };
@@ -56,7 +56,7 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
         {/* Quick add / stock indicator */}
         <div className="absolute right-3 bottom-3">
           <button
-            onClick={(e) => { e.stopPropagation(); onAdd(product); }}
+            onClick={(e) => { e.stopPropagation(); if (product.sizes && product.sizes.length > 0) { onOpen(product); } else { onAdd(product); } }}
             disabled={product.stock === 0}
             aria-disabled={product.stock === 0}
             className={`bg-brand-yellow text-black w-9 h-9 flex items-center justify-center rounded-full text-sm font-semibold shadow ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
@@ -81,8 +81,7 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
           {/* SKU metadata - hidden on small screens for compact layout */}
           <div className="mt-2 text-white/60 text-xs hidden md:block">SKU: <span className="text-white/80">{product.id}</span></div>
 
-          {/* Description: full but compact on mobile */}
-          <p className="text-white/70 text-sm mt-3 line-clamp-3 md:line-clamp-none">{product.description}</p>
+
 
           <div className="mt-3 flex items-center gap-3 flex-wrap text-sm text-white/60">
             {product.sizes && <div>Sizes: <span className="text-white/80">{product.sizes.join(', ')}</span></div>}
@@ -97,7 +96,7 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
 
           <div className="flex items-center gap-3">
             <button
-              onClick={(e) => { e.stopPropagation(); onAdd(product); }}
+              onClick={(e) => { e.stopPropagation(); if (product.sizes && product.sizes.length > 0) { onOpen(product); } else { onAdd(product); } }}
               disabled={product.stock === 0}
               aria-disabled={product.stock === 0}
               className={`bg-brand-yellow text-black px-3 py-1 rounded-full text-sm font-semibold hover:bg-yellow-300 transition ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
