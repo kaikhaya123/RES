@@ -24,7 +24,13 @@ export default function HeroSplit() {
 
     updateRatio();
     window.addEventListener('resize', updateRatio);
-    return () => window.removeEventListener('resize', updateRatio);
+    // Some mobile browsers send orientationchange instead of resize
+    window.addEventListener('orientationchange', updateRatio);
+
+    return () => {
+      window.removeEventListener('resize', updateRatio);
+      window.removeEventListener('orientationchange', updateRatio);
+    };
   }, []);
 
   // scroll-based parallax for split hero on desktop
@@ -57,6 +63,8 @@ export default function HeroSplit() {
     };
   }, [isWide]);
 
+  // Mobile uses a single intentional image; desktop swaps left/right based on screen ratio
+  const mobileImage = '/Images/portrait-young-beautiful-woman-gesticulating.jpg';
   const leftImage = isWide ? '/Images/portrait-young-beautiful-woman-gesticulating.jpg' : '/Images/playful-women-shopping-together.jpg';
   const rightImage = isWide ? '/Images/side-view-male-wearing-cap-with-arms-crossed.jpg' : '/Images/portrait-young-adult-wearing-hoodie-mockup.jpg';
 
@@ -64,7 +72,7 @@ export default function HeroSplit() {
     <section ref={heroRef} className="relative overflow-hidden bg-black">
       {/* MOBILE HERO: single image and separate safe zone for text */}
       <div className="relative h-[82vh] md:hidden">
-        <Image src={leftImage} alt="Hero mobile" fill priority className="object-cover" style={{ objectPosition: 'center 40%' }} />
+        <Image src={mobileImage} alt="Hero mobile" fill priority className="object-cover" style={{ objectPosition: 'center 40%' }} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30" />
 
         <div className="relative z-10 h-full flex flex-col justify-end px-6 pb-12">
