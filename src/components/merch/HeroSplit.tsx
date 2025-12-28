@@ -25,7 +25,7 @@ export default function HeroSplit() {
             <span className="block">CHANGE.</span>
           </h1>
 
-          <p className="mt-2 text-white/95 text-xs md:text-sm max-w-2xl mx-auto">Official R.E.S. merchandise — limited drops and performance-ready apparel for students who compete and lead. A portion of proceeds supports competitions and community programs.</p>
+          <p className="mt-1 text-white/95 text-xs md:text-sm max-w-md mx-auto leading-[1.02] tracking-normal">Official R.E.S. merchandise — limited drops and performance-ready apparel for students who compete and lead. A portion of proceeds supports competitions and community programs.</p>
 
           <div className="mt-4">
             <Link href="#products" aria-label="Shop the collection" className="inline-flex items-center gap-2 px-4 py-2 bg-white text-black font-semibold uppercase rounded-full hover:opacity-95 transition text-sm">Shop the collection</Link>
