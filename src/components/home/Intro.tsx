@@ -251,7 +251,7 @@ export default function IntroStorySections() {
                   fill
                   sizes="100vw"
                   quality={75}
-                  className="object-cover"
+                  className="object-cover img-lighten"
                   priority={index === 0}
                 />
                 <div className="absolute inset-0 bg-black/50" />

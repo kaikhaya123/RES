@@ -12,6 +12,17 @@
 /* Global smooth scrolling for anchor links */
 html { scroll-behavior: smooth; }
 
+/* Image lighting utility: subtle brighten for image-heavy sections */
+.img-lighten {
+  filter: brightness(1.06) contrast(1.03) saturate(1.05);
+  transition: filter 180ms ease;
+}
+
+/* Hero-specific slight lift (stronger but still subtle) */
+.hero-img {
+  filter: brightness(1.08) contrast(1.04) saturate(1.06);
+}
+
 /* Roomza Merch Command Center styles */
 @keyframes wireframeDraw {
   0% { stroke-dashoffset: 200; opacity: 0.2; }

@@ -104,7 +104,7 @@ export default function ContestantsPage() {
                 src={c.image}
                 alt={c.name}
                 fill
-                className="object-cover"
+                className="object-cover img-lighten"
               />
             </div>
 

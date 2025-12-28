@@ -56,7 +56,7 @@ export default function Sponsors() {
                 src="/Images/MTN Group_id6u4FvWmZ_1.png"
                 alt="MTN Spotlight Sponsor"
                 fill
-                className="object-cover"
+                className="object-cover img-lighten"
               />
             </motion.div>
           </motion.div>

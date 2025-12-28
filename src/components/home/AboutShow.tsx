@@ -183,7 +183,7 @@ export default function AboutShow() {
                     src="/Images/college-students-different-ethnicities-cramming%20(3)-min.jpg"
                     alt="R.E.S. Students"
                     fill
-                    className="object-cover"
+                    className="object-cover img-lighten"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     priority={true}
                   />

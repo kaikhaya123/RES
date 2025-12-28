@@ -35,16 +35,9 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
           src={product.image}
           alt={product.name}
           fill
-          className="object-contain md:object-cover transition-transform duration-700 md:group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 25vw"
+          className="object-contain md:object-cover transition-transform duration-700 md:group-hover:scale-105 img-lighten"
         />
 
-        {/* Top-left tag */}
-        {product.tag && (
-          <div className="absolute left-3 top-3 bg-black/60 text-white text-xs font-bold uppercase px-2 py-1 rounded">{product.tag}</div>
-        )}
-
-        {/* Wishlist */}
         <button
           aria-label="Add to wishlist"
           className="absolute right-3 top-3 bg-white/5 w-8 h-8 flex items-center justify-center rounded-full text-white hover:bg-white/10 transition"

@@ -181,7 +181,7 @@ export default function ImpactPage() {
               src="/Images/friends-learning-study-group-min.jpg"
               alt="Student impact"
               fill
-              className="object-cover"
+              className="object-cover img-lighten"
             />
             <div className="absolute inset-0 bg-black/40" />
             <div className="absolute bottom-6 left-6 lg:bottom-10 lg:left-10">

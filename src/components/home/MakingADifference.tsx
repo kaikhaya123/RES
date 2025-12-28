@@ -66,7 +66,7 @@ export default function MakingADifference() {
           <div className="hidden lg:block">
             <div className="sticky top-24">
               <div className="rounded-2xl overflow-hidden shadow-md">
-                <Image src="/Images/photo-smiling-woman-with-happy-expression-rejoices-something-good-life-dressed-casual-clothes.jpg" alt="Students on campus" width={560} height={720} className="object-cover" />
+                <Image src="/Images/photo-smiling-woman-with-happy-expression-rejoices-something-good-life-dressed-casual-clothes.jpg" alt="Students on campus" width={560} height={720} className="object-cover img-lighten" />
               </div>
               <p className="text-xs text-gray-400 mt-4">Real students, real stories — powered by R.E.S.</p>
             </div>

@@ -103,7 +103,7 @@ export default function AboutPage() {
                 src="/Images/college-students-different-ethnicities-cramming0.jpg"
                 alt="Students collaborating"
                 fill
-                className="object-cover"
+                className="object-cover img-lighten"
               />
             </motion.div>
           </div>

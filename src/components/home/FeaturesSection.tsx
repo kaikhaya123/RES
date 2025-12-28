@@ -202,7 +202,7 @@ export default function FeaturesSection() {
               src={active.image}
               alt={active.title}
               fill
-              className="object-cover"
+              className="object-cover img-lighten"
               priority
               quality={80}
             />

@@ -24,7 +24,7 @@ export default function FeaturedCollections() {
                     src={c.image}
                     alt={c.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition duration-500"
+                    className="object-cover group-hover:scale-105 transition duration-500 img-lighten"
                   />
                 ) : (
                   <div className="w-full h-full bg-white/6" />

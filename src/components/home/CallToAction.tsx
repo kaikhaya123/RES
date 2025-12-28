@@ -13,7 +13,7 @@ export default function CallToAction() {
         src="/Images/porter-raab-Ucr4Yp-t364-unsplash-min.jpg"
         alt="R.E.S. Experience"
         fill
-        className="object-cover"
+        className="object-cover img-lighten"
         quality={80}
         sizes="100vw"
         priority={false}

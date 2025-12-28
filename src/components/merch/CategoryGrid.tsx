@@ -26,7 +26,7 @@ export default function CategoryGrid({ categories, selected, onSelect }: Props) 
                 src={cat.image}
                 alt={cat.name}
                 fill
-                className="object-cover"
+                className="object-cover img-lighten"
               />
             )}
 

@@ -114,7 +114,7 @@ export default function JourneyPage() {
                     src={step.image}
                     alt={step.title}
                     fill
-                    className="object-cover"
+                    className="object-cover img-lighten"
                   />
                   <div className="absolute inset-0 bg-black/40" />
                 </div>
