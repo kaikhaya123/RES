@@ -64,15 +64,22 @@ export default function HeroSplit() {
   }, [isWide]);
 
   // Mobile uses a single intentional image; desktop swaps left/right based on screen ratio
-  const mobileImage = '/Images/portrait-young-beautiful-woman-gesticulating.jpg';
+  // Use the left image on mobile so the focal subject (left side) fits better when cropped
   const leftImage = isWide ? '/Images/portrait-young-beautiful-woman-gesticulating.jpg' : '/Images/playful-women-shopping-together.jpg';
   const rightImage = isWide ? '/Images/waist-up-shot-happy-man-smiles-happily-dressed-orange-hat-sweater-being-good-mood-looks-directly-front-expresses-positive-emotions-stands-studio-against-bright-wall-min.jpg' : '/Images/portrait-young-adult-wearing-hoodie-mockup.jpg';
 
   return (
     <section ref={heroRef} className="relative overflow-hidden bg-black">
-      {/* MOBILE HERO: single image and separate safe zone for text */}
+      {/* MOBILE HERO: single image using the left image to preserve subject composition */}
       <div className="relative h-[82vh] md:hidden">
-        <Image src={mobileImage} alt="Hero mobile" fill priority className="object-cover" style={{ objectPosition: 'center 40%' }} />
+        <Image
+          src={leftImage}
+          alt="Hero mobile"
+          fill
+          priority
+          className="object-cover"
+          style={{ objectPosition: isWide ? 'left center' : 'center 28%' }}
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30" />
 
         <div className="relative z-10 h-full flex flex-col justify-end px-6 pb-12">
