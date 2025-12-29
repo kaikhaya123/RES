@@ -73,15 +73,14 @@ export default function ContactPage() {
 
         {/* HERO WITH RESPONSIVE IMAGE */}
         <section className="overflow-hidden border-b border-black/10">
-          {/* Mobile: stacked image above content */}
-          <div className="block md:hidden w-full h-56 sm:h-72 relative">
-            <Image
+          {/* Mobile: stacked image above content (plain <img> fallback for reliability) */}
+          <div className="block md:hidden w-full h-56 sm:h-72 relative overflow-hidden">
+            <img
               src="/Images/cheerful-young-dark-skinned-feminine-girl-has-mobile-phone-conversation-wears-round-transparent-glasses-has-charming-smile-hears-good-news-isolated-purple-studio-wall-copy-space-area.jpg"
               alt="Person smiling while on a call"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center sm:object-contain"
+              className="w-full h-full object-cover sm:object-contain"
+              loading="eager"
+              onError={(e) => { console.warn('mobile hero image failed to load', e); (e.target as HTMLImageElement).style.display = 'none'; }}
             />
           </div>
 
@@ -249,6 +248,15 @@ export default function ContactPage() {
 
         {/* CTA */}
         <section className="relative h-[40vh] min-h-[260px] flex items-center justify-center text-center">
+          {/* mobile fallback img in case CSS bg does not render on some devices */}
+          <img
+            src="/Images/3d-render-concept-old-telephone-3d-art-design-illustration.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover block md:hidden"
+            loading="eager"
+            onError={(e) => { console.warn('mobile CTA image failed to load', e); (e.target as HTMLImageElement).style.display = 'none'; }}
+          />
+
           <div className="absolute inset-0 bg-[url('/Images/3d-render-concept-old-telephone-3d-art-design-illustration.jpg')] bg-cover bg-center" />
 
           <div className="relative z-10 px-6 w-full max-w-xl mx-auto md:mx-0 md:ml-auto md:mr-12 text-center md:text-right">
