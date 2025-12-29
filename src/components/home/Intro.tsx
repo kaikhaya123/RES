@@ -55,8 +55,11 @@ export default function IntroStorySections() {
 
     const attemptPlay = async () => {
       try {
+        // Ensure muted and playsinline flags (important for mobile/autoplay policies)
         video.muted = true; // ensure muted for autoplay policies
+        video.defaultMuted = true;
         video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
         await video.play();
         setShowPlayButton(false);
         setIsPlaying(!video.paused);
@@ -133,9 +136,12 @@ export default function IntroStorySections() {
             ref={videoRef}
             loop
             muted
+            defaultMuted
             playsInline
             autoPlay
-            preload="auto"
+            preload="metadata"
+            poster="/Images/bottom-view-four-schoolkids-min.jpg"
+            controls={showPlayButton}
             className="w-full h-full object-cover scale-[1.08]"
             aria-hidden="true"
           >
@@ -148,7 +154,7 @@ export default function IntroStorySections() {
 
           {/* Mobile-only play button overlay when autoplay is blocked */}
           {showPlayButton && (
-            <div className="absolute inset-0 flex items-center justify-center sm:hidden z-20">
+            <div className="absolute inset-0 flex items-center justify-center z-20">
               <button
                 type="button"
                 aria-label={isPlaying ? 'Pause video' : 'Play video'}
@@ -157,6 +163,11 @@ export default function IntroStorySections() {
                   const video = videoRef.current;
                   if (!video) return;
                   try {
+                    // Ensure muted and playsinline flags are set (important on iOS)
+                    video.muted = true;
+                    video.defaultMuted = true;
+                    video.setAttribute('playsinline', '');
+                    video.setAttribute('webkit-playsinline', '');
                     await video.play();
                     setIsPlaying(true);
                     setShowPlayButton(false);
@@ -175,7 +186,7 @@ export default function IntroStorySections() {
                 </svg>
               </button>
             </div>
-          )}
+          )} 
         </div>
 
         <div className="relative z-10 max-w-xl lg:max-w-2xl px-4 md:px-6 lg:px-0 space-y-6 text-left mx-4 md:mx-0 md:ml-8 lg:ml-20">
