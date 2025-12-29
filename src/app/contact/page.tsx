@@ -108,28 +108,27 @@ export default function ContactPage() {
             <div className="mx-auto lg:mx-0 w-full max-w-lg relative bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-12 backdrop-blur-xl shadow-[0_0_50px_rgba(255,255,255,0.04)]" role="region" aria-labelledby="contact-form-heading">
 
               <div className="mb-10">
-                <h2 className="text-3xl font-black tracking-tight">
-                  Get in touch
+        <h2 id="contact-form-heading" className="text-3xl font-black tracking-tight">
                 </h2>
                 <p className="mt-2 text-white/60 max-w-md">
                   Send us a message and our team will respond within 24 hours.
                 </p>
               </div>
 
-              <form className="space-y-6" onSubmit={handleSubmit} aria-label="Contact form">
+              <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit} aria-labelledby="contact-form-heading">
 
                 {/* Status */}
-                {status === 'success' && (
-                  <div role="status" aria-live="polite" className="rounded-md bg-emerald-800/80 border border-emerald-600 p-3 text-emerald-100 text-sm">
-                    Thanks! We received your message and will get back soon.
-                  </div>
-                )}
+                <div className="md:col-span-2">
+                  {status === 'success' && (
+                    <div role="status" aria-live="polite" className="rounded-md bg-emerald-800/80 border border-emerald-600 p-3 text-emerald-100 text-sm mb-2">
+                      Thanks! We received your message and will get back soon.
+                    </div>
+                  )}
+                </div>
 
                 {/* Name */}
-                <div className="relative">
-                  <span className="absolute left-3 top-4 text-white/50">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zM4 20c0-3.866 3.134-7 7-7h2c3.866 0 7 3.134 7 7v1H4v-1z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  </span>
+                <div className="md:col-span-1">
+                  <label htmlFor="name" className="block text-sm font-medium text-white/70 mb-2">Full name</label>
                   <input
                     id="name"
                     name="name"
@@ -138,17 +137,14 @@ export default function ContactPage() {
                     autoComplete="name"
                     type="text"
                     required
-                    placeholder=" "
-                    className="peer w-full bg-black/40 border border-white/15 rounded-lg pl-12 px-4 py-4 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow ring-offset-2 transition-shadow"
+                    aria-required="true"
+                    className="w-full h-12 bg-black/40 border border-white/15 rounded-md px-4 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow ring-offset-2 transition-shadow"
                   />
-                  <label htmlFor="name" className="absolute left-12 top-4 text-sm text-white/60 transition-all peer-placeholder-shown:top-4 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-brand-yellow bg-black px-1">Full name</label>
                 </div>
 
                 {/* Email */}
-                <div className="relative">
-                  <span className="absolute left-3 top-4 text-white/50">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/><path d="M22 7l-10 6L2 7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                  </span>
+                <div className="md:col-span-1">
+                  <label htmlFor="email" className="block text-sm font-medium text-white/70 mb-2">Email address</label>
                   <input
                     id="email"
                     name="email"
@@ -157,14 +153,14 @@ export default function ContactPage() {
                     autoComplete="email"
                     type="email"
                     required
-                    placeholder=" "
-                    className="peer w-full bg-black/40 border border-white/15 rounded-lg pl-12 px-4 py-4 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow ring-offset-2 transition-shadow"
+                    aria-required="true"
+                    className="w-full h-12 bg-black/40 border border-white/15 rounded-md px-4 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow ring-offset-2 transition-shadow"
                   />
-<label htmlFor="email" className="absolute left-12 top-4 text-sm text-white/60 transition-all peer-placeholder-shown:top-4 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-brand-yellow bg-black px-1">Email address</label>
                 </div>
 
                 {/* Message */}
-                <div className="relative">
+                <div className="md:col-span-2">
+                  <label htmlFor="message" className="block text-sm font-medium text-white/70 mb-2">Message</label>
                   <textarea
                     id="message"
                     name="message"
@@ -172,25 +168,25 @@ export default function ContactPage() {
                     onChange={handleChange}
                     rows={6}
                     required
-                    placeholder=" "
-                    className="peer w-full bg-black/40 border border-white/15 rounded-lg px-4 py-4 text-white resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow ring-offset-2 transition-shadow"
+                    aria-required="true"
+                    className="w-full min-h-[140px] bg-black/40 border border-white/15 rounded-md px-4 py-3 text-white resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow ring-offset-2 transition-shadow"
                   />
-<label htmlFor="message" className="absolute left-4 top-4 text-sm text-white/60 transition-all peer-placeholder-shown:top-4 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-brand-yellow bg-black px-1">Message</label>
                 </div>
 
                 {/* Submit */}
-                <button
-                  type="submit"
-                  disabled={status === 'sending'}
-                  aria-disabled={status === 'sending'}
-                  className="w-full mt-4 bg-brand-yellow text-black font-black py-3 md:py-4 rounded-lg uppercase tracking-wider hover:brightness-110 transition disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-brand-yellow ring-offset-2"
-                >
-                  {status === 'sending' ? 'Sending…' : 'Send message'}
-                </button>
+                <div className="md:col-span-2 flex items-center justify-between gap-4">
+                  <button
+                    type="submit"
+                    disabled={status === 'sending'}
+                    aria-disabled={status === 'sending'}
+                    className="inline-flex items-center justify-center gap-3 bg-brand-yellow text-black font-black py-3 px-6 rounded-lg uppercase tracking-wider hover:brightness-110 transition disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-brand-yellow ring-offset-2"
+                  >
+                    {status === 'sending' ? 'Sending…' : 'Send message'}
+                  </button>
 
-                <p className="text-xs text-white/40 text-center">
-                  We usually reply within 24 hours.
-                </p>
+                  <p className="text-xs text-white/40 hidden md:block">We usually reply within 24 hours.</p>
+                </div>
+
               </form>
             </div>
 
