@@ -37,6 +37,9 @@ export default function IntroStorySections() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
+  // mobile fallback src (smaller/responsive mp4 to improve chance of playing on older devices)
+  const MOBILE_VIDEO_SRC = '/Videos/PinDown.io_@zarooza_1764838825.mp4';
+
   // Ensure safe area padding is applied on mobile (notch devices)
   const heroStyle = { paddingTop: 'env(safe-area-inset-top, 16px)' } as const;
   const [showPlayButton, setShowPlayButton] = useState(false);
@@ -73,6 +76,22 @@ export default function IntroStorySections() {
     // Try on mount first (helps desktop and some mobile browsers)
     attemptPlay();
 
+    // If on a narrow screen / touch device, prefer a smaller MP4 to improve play reliability
+    const isTouch = typeof navigator !== 'undefined' && (/(iPhone|iPod|iPad|Android)/i).test(navigator.userAgent || '') || window.innerWidth <= 768;
+    if (isTouch && video) {
+      // Swap to a mobile-optimized source if available
+      try {
+        // only swap when different
+        if (!video.src || !video.src.includes(MOBILE_VIDEO_SRC)) {
+          video.src = MOBILE_VIDEO_SRC;
+          // Ensure sources are reloaded
+          video.load();
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+
     // Observe visibility and try to play when the hero becomes visible
     if (typeof window !== 'undefined' && 'IntersectionObserver' in window && containerRef.current) {
       observer = new IntersectionObserver((entries) => {
@@ -85,6 +104,15 @@ export default function IntroStorySections() {
 
       observer.observe(containerRef.current);
     }
+
+    // Add a touchstart on the container to try play on first user interaction (helps older iOS devices)
+    const onTouchStart = () => {
+      attemptPlay();
+      // Remove immediately after first touch
+      if (containerRef.current) containerRef.current.removeEventListener('touchstart', onTouchStart as EventListener);
+    };
+
+    if (containerRef.current) containerRef.current.addEventListener('touchstart', onTouchStart as EventListener, { passive: true });
 
     const checkAutoplay = () => {
       try {
@@ -144,6 +172,7 @@ export default function IntroStorySections() {
             controls={showPlayButton}
             className="w-full h-full object-cover scale-[1.08]"
             aria-hidden="true"
+            {...{'webkit-playsinline': ''}}
           >
             <source src="/Videos/1166555_Environment_Man_3840x2160 (1).webm" type="video/webm" />
             <source src="/Videos/1166555_Environment_Man_3840x2160 (1).mp4" type="video/mp4" />
@@ -168,12 +197,19 @@ export default function IntroStorySections() {
                     video.defaultMuted = true;
                     video.setAttribute('playsinline', '');
                     video.setAttribute('webkit-playsinline', '');
+
                     await video.play();
                     setIsPlaying(true);
                     setShowPlayButton(false);
                   } catch (e) {
-                    // If still fails, keep showing the button
-                    setShowPlayButton(true);
+                    // If still fails, try to open the mp4 directly in the native player as a fallback
+                    try {
+                      const fallback = video.src && video.src.length ? video.src : MOBILE_VIDEO_SRC;
+                      // open in same tab to trigger native player on iOS
+                      window.location.href = fallback;
+                    } catch (err) {
+                      setShowPlayButton(true);
+                    }
                   }
                 }}
               >
