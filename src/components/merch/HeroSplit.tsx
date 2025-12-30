@@ -72,7 +72,7 @@ export default function HeroSplit() {
     <section ref={heroRef} className="relative overflow-hidden bg-black">
       {/* MOBILE HERO: single image and separate safe zone for text */}
       <div className="relative h-[82vh] md:hidden">
-        <Image src={leftImage} alt="Hero mobile" fill priority className="object-cover hero-img img-lighten" style={{ objectPosition: 'center 40%' }} />
+        <Image src={leftImage} alt="Hero mobile" fill sizes="100vw" priority className="object-cover hero-img img-lighten" style={{ objectPosition: 'center 40%' }} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30" />
 
         <div className="relative z-10 h-full flex flex-col justify-end px-6 pb-12">
@@ -98,6 +98,7 @@ export default function HeroSplit() {
               src={leftImage}
               alt="Left hero"
               fill
+              sizes="100vw"
               priority
               className="object-cover hero-img img-lighten"
               style={{
@@ -116,6 +117,7 @@ export default function HeroSplit() {
               src={rightImage}
               alt="Right hero"
               fill
+              sizes="100vw"
               priority
               className="object-cover img-lighten"
               style={{

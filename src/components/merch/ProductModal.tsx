@@ -23,7 +23,7 @@ export default function ProductModal({ product, onClose, onAdd }: Props) {
       <div className="relative z-10 max-w-4xl w-full bg-black rounded-lg ring-1 ring-white/6 overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <div className="relative overflow-hidden" style={{ aspectRatio: '4 / 3' }}>
-            <Image src={product.image} alt={product.name} fill className="object-contain bg-black/5 img-lighten" />
+            <Image src={product.image} alt={product.name} fill sizes="(max-width: 768px) 100vw, 40vw" className="object-contain bg-black/5 img-lighten" />
           </div>
 
           <div className="p-6 lg:p-8">

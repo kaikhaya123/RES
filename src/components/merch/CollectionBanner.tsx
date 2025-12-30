@@ -25,7 +25,7 @@ export default function CollectionBanner({
           <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
             {/* Full-bleed image column */}
             <div className="relative w-full h-80 md:h-[560px] lg:h-[720px]">
-              <Image src={image} alt={title} fill className="object-cover object-center w-full h-full" />
+              <Image src={image} alt={title} fill sizes="100vw" className="object-cover object-center w-full h-full" />
               <div className="absolute inset-0 bg-black/10" />
             </div>
 

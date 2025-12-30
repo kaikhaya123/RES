@@ -37,7 +37,7 @@ export default function CartDrawer() {
                   <li key={`${it.product.id}:${it.size ?? 'default'}`} className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-14 h-14 relative rounded overflow-hidden bg-white/5 flex-shrink-0">
-                        <Image src={it.product.image} alt={it.product.name} fill className="object-cover img-lighten" />
+                        <Image src={it.product.image} alt={it.product.name} fill sizes="80px" className="object-cover img-lighten" />
                       </div>
 
                       <div>

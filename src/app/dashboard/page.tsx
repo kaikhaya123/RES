@@ -123,7 +123,7 @@ export default function DashboardPage() {
               <div className="w-full lg:w-80 flex-shrink-0">
                 <div className="bg-white/5 rounded-xl p-4 border border-white/8">
                   <div className="relative w-full h-40 rounded-lg overflow-hidden">
-                    <Image src="/images/hero-profile.jpg" alt="hero" fill className="object-cover img-lighten" />
+                    <Image src="/images/hero-profile.jpg" alt="hero" fill sizes="100vw" className="object-cover img-lighten" />
                   </div>
                   <div className="mt-3 text-white/90 font-semibold">Your live snapshot</div>
                   <div className="text-sm text-white/70">Quick overview of activity and rewards</div>

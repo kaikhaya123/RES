@@ -200,7 +200,7 @@ export default function ContestantsPage() {
                 className="bg-white rounded-2xl overflow-hidden shadow-sm border"
               >
                 <div className="relative aspect-[4/5]">
-                  <Image src={c.image} alt={c.name} fill className="object-cover img-lighten" />
+                  <Image src={c.image} alt={c.name} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover img-lighten" />
                   <div className="absolute left-3 top-3 bg-black/60 text-white px-3 py-1 rounded-full text-xs font-semibold">
                     #{c.votes.toLocaleString()}
                   </div>
@@ -332,7 +332,7 @@ function AnimateDetail({ active, onClose, onDelete }: any) {
       <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="w-full max-w-3xl bg-white rounded-2xl overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-3">
           <div className="relative lg:col-span-1 h-64 lg:h-auto">
-            <Image src={active.image} alt={active.name} fill className="object-cover img-lighten" />
+            <Image src={active.image} alt={active.name} fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover img-lighten" />
           </div>
 
           <div className="p-6 lg:col-span-2">
