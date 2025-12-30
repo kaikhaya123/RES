@@ -105,7 +105,7 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
               View
             </button>
           </div>
-        </div>
+        </div> 
       </div>
     </article>
   );

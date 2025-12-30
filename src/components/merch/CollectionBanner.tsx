@@ -11,9 +11,9 @@ type Props = {
 };
 
 export default function CollectionBanner({
-  image = '/Images/portrait-young-japanese-woman-with-jacket.jpg',
-  title = 'SPORTSWEAR COLLECTION',
-  subtitle = 'Elevate your training and downtime with pieces that perform and last.',
+  image = '/Images/people-making-grimace-expression-with-their-faces-min.jpg',
+  title = "ROOMZA'S EDUCATED WEAR COLLECTION",
+  subtitle = 'Elevate your wear and downtime with pieces that perform and last.',
   cta = 'Shop Now',
 }: Props) {
   return (

@@ -7,7 +7,6 @@ import HeroSplit from '@/components/merch/HeroSplit';
 import ProductGrid from '@/components/merch/ProductGrid';
 import ProductModal from '@/components/merch/ProductModal';
 import CategoryGrid from '@/components/merch/CategoryGrid';
-import PromoBanner from '@/components/merch/PromoBanner';
 import CollectionBanner from '@/components/merch/CollectionBanner';
 import NewsletterCTA from '@/components/merch/NewsletterCTA';
 import Footer from '@/components/layout/Footer';
@@ -82,7 +81,6 @@ export default function MerchPage() {
 
       <CollectionBanner />
 
-      <PromoBanner />
       <NewsletterCTA />
 
       <ProductModal

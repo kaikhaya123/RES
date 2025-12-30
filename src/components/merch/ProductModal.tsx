@@ -39,35 +39,37 @@ export default function ProductModal({ product, onClose, onAdd }: Props) {
             )}
 
             <div className="flex items-center gap-4 mb-4">
-              {product.sizes && product.sizes.length > 0 && (
-                <div>
-                  <div className="text-sm text-white/60">Sizes</div>
-                  <div className="mt-1 relative inline-block">
-                    <button
-                      type="button"
-                      onClick={() => setSizeOpen((s) => !s)}
-                      className="text-white bg-white/5 px-3 py-1 rounded w-36 text-left"
-                    >
-                      {selectedSize ?? 'Select size'}
-                    </button>
+              <div className="flex-1">
+                {product.sizes && product.sizes.length > 0 && (
+                  <div>
+                    <div className="text-sm text-white/60">Sizes</div>
+                    <div className="mt-1 relative inline-block">
+                      <button
+                        type="button"
+                        onClick={() => setSizeOpen((s) => !s)}
+                        className="text-white bg-white/5 px-3 py-1 rounded w-36 text-left"
+                      >
+                        {selectedSize ?? 'Select size'}
+                      </button>
 
-                    {sizeOpen && (
-                      <div className="absolute mt-1 bg-black border border-white/5 rounded shadow-md z-20 w-36">
-                        {product.sizes.map((s) => (
-                          <button
-                            key={s}
-                            type="button"
-                            onClick={() => { setSelectedSize(s); setSizeOpen(false); }}
-                            className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-white/5"
-                          >
-                            {s}
-                          </button>
-                        ))}
-                      </div>
-                    )}
+                      {sizeOpen && (
+                        <div className="absolute mt-1 bg-black border border-white/5 rounded shadow-md z-20 w-36">
+                          {product.sizes.map((s) => (
+                            <button
+                              key={s}
+                              type="button"
+                              onClick={() => { setSelectedSize(s); setSizeOpen(false); }}
+                              className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-white/5"
+                            >
+                              {s}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
 
               <div className="ml-auto text-sm">
                 {product.stock && product.stock > 0 ? (

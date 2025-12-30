@@ -16,7 +16,7 @@ export type Category = {
   image?: string;
   description?: string;
   featured?: boolean;
-};
+}; 
 
 export const categories: Category[] = [
   {
@@ -56,8 +56,7 @@ export const products: Product[] = [
     image: '/Images/Men Hoodie Mockup, Front View.png',
     description: 'Premium heavyweight hoodie with RES branding.',
     sizes: ['S', 'M', 'L', 'XL'],
-    stock: 12,
-    tag: 'Limited',
+    stock: 0,
   },
   {
     id: 'res-tee-1',
@@ -67,7 +66,7 @@ export const products: Product[] = [
     description: 'Premium cotton T-shirt with bold RES graphic.',
     category: 'tshirts',
     sizes: ['S', 'M', 'L'],
-    stock: 4,
+    stock: 0,
   },
   {
     id: 'res-beanie-1',
@@ -87,6 +86,26 @@ export const products: Product[] = [
     description: 'Unstructured cap with embroidered logo.',
     category: 'accessories',
     sizes: ['One Size'],
-    stock: 7,
-  }
+    stock: 0,
+  },
+  {
+    id: 'res-bag-1',
+    name: 'RES Tote Bag',
+    price: 15900,
+    image: '/Images/Tote Bag Mockup Hanging.png',
+    description: 'Durable canvas tote bag with RES logo print.',
+    category: 'accessories',
+    sizes: ['One Size'],
+    stock: 0,
+  },
+  {
+    id: 'res-tee-2',
+    name: 'RES Middle Logo Tee',
+    price: 19900,
+    image: '/Images/Men T Shirt Mockup, Front View .png',
+    description: 'Premium cotton T-shirt with bold RES graphic.',
+    category: 'tshirts',
+    sizes: ['S', 'M', 'L'],
+    stock: 0,
+  },
 ];

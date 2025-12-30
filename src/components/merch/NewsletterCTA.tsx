@@ -11,7 +11,6 @@ export default function NewsletterCTA() {
               Early access to drops, private discounts, and exclusive merch.
             </p>
           </div>
-
           <form className="flex w-full md:w-auto">
             <input
               type="email"

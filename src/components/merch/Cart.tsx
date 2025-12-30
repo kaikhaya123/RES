@@ -44,7 +44,7 @@ export default function Cart({ items, onUpdateQty, onRemove }: Props) {
                 <li key={it.product.id} className="flex items-center justify-between">
                   <div>
                     <div className="font-semibold">{it.product.name}</div>
-                    <div className="text-xs text-white/70">R {(it.product.price / 100).toFixed(2)}</div>
+                    <div className="text-xs text-white/70">R {(it.product.price / 100).toFixed(2)}</div> 
                   </div>
 
                   <div className="flex items-center gap-2">
