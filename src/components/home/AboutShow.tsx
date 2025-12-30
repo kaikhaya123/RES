@@ -372,16 +372,15 @@ export default function AboutShow() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="inline-block text-xs font-bold uppercase tracking-widest text-white/60 mb-6"
+              className="inline-block text-sm md:text-base lg:text-lg font-extrabold uppercase tracking-widest text-white/80 mb-6"
+              style={{ letterSpacing: '0.45em' }}
             >
               The Platform Edge
             </motion.span>
-            <h2 className="text-6xl lg:text-7xl font-black mb-6 tracking-tighter text-white">
-              What Makes
-              <br />
-              <span className="text-white">R.E.S.</span>
-              <br />
-              <span className="text-white/40">Unique</span>
+            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-black mb-6 tracking-tight leading-[0.95] text-white">
+              <span className="block">What Makes</span>
+              <span className="block text-white">R.E.S.</span>
+              <span className="block text-white/40">Unique</span>
             </h2>
           </div>
           
@@ -469,10 +468,9 @@ export default function AboutShow() {
           className="mb-40 relative"
         >
           <div className="max-w-4xl">
-            <h2 className="text-6xl lg:text-7xl font-black mb-12 tracking-tighter text-white">
-              Why It
-              <br />
-              <span className="text-white/30">Matters</span>
+            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-black mb-12 tracking-tight leading-[0.95] text-white">
+              <span className="block">Why It</span>
+              <span className="block text-white/30">Matters</span>
             </h2>
 
             <motion.p

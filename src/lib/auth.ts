@@ -20,6 +20,8 @@ import bcrypt from 'bcryptjs';
 // Use JWT strategy for reliability - database adapter can cause fetch errors
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-change-in-production',
+  // Enable debug logs in non-production to capture server-side NextAuth errors
+  debug: process.env.NODE_ENV !== 'production',
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
