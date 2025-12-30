@@ -167,12 +167,10 @@ export default function IntroStorySections() {
             playsInline
             autoPlay
             preload="metadata"
-            poster="/Images/bottom-view-four-schoolkids-min.jpg"
             controls={showPlayButton}
             className="w-full h-full object-cover scale-[1.08]"
             aria-hidden="true"
           >
-            <source src="/Videos/1166555_Environment_Man_3840x2160 (1).webm" type="video/webm" />
             <source src="/Videos/1166555_Environment_Man_3840x2160 (1).mp4" type="video/mp4" />
           </video>
 
