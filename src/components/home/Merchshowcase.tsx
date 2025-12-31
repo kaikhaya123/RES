@@ -135,7 +135,7 @@ export default function ShopRoomzaEducatedWear({ dragSpeed = 1 }: { dragSpeed?: 
 
         {/* Section header */}
         <div className="mb-10">
-         <p className="text-[clamp(1.375rem,6vw,4rem)] md:text-[clamp(1.75rem,4.2vw,5rem)] font-extrabold leading-tight text-[#1C1C1C] uppercase tracking-[0.3em] mb-3">
+         <p style={{ fontFamily: '"Work Sans", system-ui, sans-serif' }} className="text-[clamp(1.375rem,6vw,4rem)] md:text-[clamp(1.75rem,4.2vw,5rem)] font-extrabold leading-tight text-[#1C1C1C] uppercase tracking-[0.3em] mb-3">
             Shop Roomza’s Educated Wear
           </p>
           <h2 className="text-3xl md:text-4xl font-black text-[#0B0B0B] mb-2">
