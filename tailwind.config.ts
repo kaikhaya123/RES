@@ -119,8 +119,7 @@ const config: Config = {
   				'var(--font-rubik)',
 					'Rubik',
 					'Poppins',
-				// Work Sans for headings (fallbacks included)
-				'"Work Sans"',
+
   				'system-ui',
   				'sans-serif'
   			],
@@ -130,13 +129,13 @@ const config: Config = {
 				'system-ui',
 				'sans-serif'
 			],
-			mono: [
-  			work: [
+			work: [
 				'"Work Sans"',
 				'var(--font-manrope)',
 				'system-ui',
 				'sans-serif'
 			],
+			mono: [
 				'JetBrains Mono',
   				'monospace'
   			]

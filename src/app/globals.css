@@ -21,4 +21,15 @@
 	.section-subtitle {
 		@apply text-sm md:text-base lg:text-lg leading-relaxed max-w-3xl mx-auto;
 	}
+
+	/* Hero readability helpers (non-layout) */
+	.hero-heading {
+		text-shadow: 0 12px 24px rgba(0, 0, 0, 0.65);
+	}
+
+	.hero-paragraph {
+		background-color: rgba(0, 0, 0, 0.36);
+		backdrop-filter: blur(6px);
+	}
 }
+

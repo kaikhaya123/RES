@@ -16,15 +16,18 @@ export default function AboutPage() {
         {/* HERO */}
         <section className="relative w-full px-6 py-32 lg:px-12 overflow-hidden min-h-[600px] lg:min-h-[700px]">
           <Image
-            src="/Images/students-rehashing.jpg"
+            src="/Images/college-students-different-ethnicities-cramming (7).jpg"
             alt="Background"
             fill
-            className="object-cover object-center absolute inset-0"
+            className="object-cover object-center absolute inset-0 brightness-50"
             priority
             quality={100}
             sizes="100vw"
             style={{ zIndex: 0 }}
           />
+
+          {/* subtle gradient overlay to improve text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/50 pointer-events-none" />
 
           <div className="relative z-10">
         <motion.h1
@@ -36,7 +39,7 @@ export default function AboutPage() {
         >
           About
           <br />
-          <span className="text-white/40">Roomza's educated Secret</span>
+          <span className="text-white">Roomza's educated Secret</span>
         </motion.h1>
 
         <motion.p
@@ -100,7 +103,7 @@ export default function AboutPage() {
               className="relative aspect-[4/5] overflow-hidden"
             >
               <Image
-                src="/Images/college-students-different-ethnicities-cramming0.jpg"
+                src="/Images/college-students-different-ethnicities-cramming (2)-min.jpg"
                 alt="Students collaborating"
                 fill
                 className="object-cover img-lighten"

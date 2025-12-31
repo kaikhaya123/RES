@@ -40,7 +40,7 @@ const services: Service[] = [
     id: 5,
     title: 'Test Knowledge',
     description: 'Answer quizzes. Win advantages.',
-    image: '/Images/college-students-different-ethnicities-cramming%20(2).jpg',
+    image: '/Images/college-students-different-ethnicities-cramming (2)-min.jpg',
   },
   {
     id: 6,
