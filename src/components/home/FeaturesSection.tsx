@@ -1,239 +1,130 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import dynamic from 'next/dynamic';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
-// Lazy load DotLottieReact to reduce initial bundle size (589 KiB savings)
-const DotLottieReact = dynamic(
-  () => import('@lottiefiles/dotlottie-react').then(mod => mod.DotLottieReact),
+type Service = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+};
+
+const services: Service[] = [
   {
-    loading: () => <div className="w-full h-full bg-gray-100 rounded animate-pulse" />,
-    ssr: false
-  }
-);
+    id: 1,
+    title: 'Vote & Influence',
+    description: 'Real-time voting that directly shapes outcomes.',
+    image: '/Images/VOTE%20(1).jpg',
+  },
+  {
+    id: 2,
+    title: 'Watch Live',
+    description: 'Experience every moment as it happens.',
+    image: '/Images/medium-shot-woman-holding-remote.jpg',
+  },
+  {
+    id: 3,
+    title: 'Daily Challenges',
+    description: 'Compete, score points, and climb the leaderboard.',
+    image: '/Images/teenager-spending-time-together-outdoors.jpg',
+  },
+  {
+    id: 4,
+    title: 'Refer Leaders',
+    description: 'Nominate exceptional students for recognition.',
+    image: '/Images/KSENIIA%20FAST.png',
+  },
+  {
+    id: 5,
+    title: 'Test Knowledge',
+    description: 'Answer quizzes. Win advantages.',
+    image: '/Images/college-students-different-ethnicities-cramming%20(2).jpg',
+  },
+  {
+    id: 6,
+    title: 'Earn Rewards',
+    description: 'Bursaries, exposure, and opportunities.',
+    image: '/Images/portrait-young-woman-with-curly-hair-min.jpg',
+  },
+];
 
-export default function FeaturesSection() {
-  const participationPhase = [
-    {
-      id: 1,
-      title: 'Cast Your Vote',
-      description: 'Your choice matters. Vote in real time and directly influence the competition.',
-      image: '/Images/VOTE%20(1).jpg',
-      lottie: 'Election concept Lottie JSON animation.lottie',
-      isPrimary: true
-    },
-    {
-      id: 2,
-      title: 'Watch Live',
-      description: 'Catch the action as it unfolds. Every moment, live.',
-      image: '/Images/medium-shot-woman-holding-remote.jpg',
-      lottie: 'Live Streaming.lottie',
-      isPrimary: false
-    },
-    {
-      id: 3,
-      title: 'Compete Daily',
-      description: 'Quizzes, challenges, leaderboards. Engagement rewarded.',
-      image: '/Images/teenager-spending-time-together-outdoors.jpg',
-      lottie: 'Rewards Programme.lottie',
-      isPrimary: false
-    }
-  ];
+export default function ServiceHoverReveal() {
+  const [active, setActive] = useState<Service | null>(services[0]);
 
-  const progressionPhase = [
-    {
-      id: 4,
-      title: 'Refer a Leader',
-      description: 'Know someone exceptional? Nominate them directly.',
-      image: '/Images/KSENIIA%20FAST.png',
-      lottie: 'referral.lottie',
-      isPrimary: false
-    },
-    {
-      id: 5,
-      title: 'Test Your Knowledge',
-      description: 'Brain power wins prizes. Prove your edge.',
-      image: '/Images/college-students-different-ethnicities-cramming%20(2).jpg',
-      lottie: 'Funny brain.lottie',
-      isPrimary: false
-    },
-    {
-      id: 6,
-      title: 'Win the Prize',
-      description: 'Bursaries. Recognition. Opportunity. The reward for impact.',
-      image: '/Images/portrait-young-woman-with-curly-hair-min.jpg',
-      lottie: 'Champion.lottie',
-      isPrimary: false
-    }
-  ];
-
-  const allFeatures = [...participationPhase, ...progressionPhase];
-  const [active, setActive] = useState(allFeatures[0]);
-
-  const FeatureButton = ({ feature, isPhaseStart }: { feature: (typeof allFeatures)[0]; isPhaseStart?: boolean }) => (
-    <motion.button
-      onClick={() => setActive(feature)}
-      className={`w-full text-left p-3 md:p-4 rounded-lg md:rounded-xl transition-all border relative group ${
-        active.id === feature.id
-          ? 'border-black bg-gradient-to-r from-black/5 to-transparent shadow-md'
-          : 'border-gray-300 hover:border-gray-400'
-      } ${feature.isPrimary ? 'ring-2 ring-black/10' : ''}`}
-      whileHover={{ x: 4 }}
-      transition={{ duration: 0.2 }}
-    >
-      {/* Vertical progress line connector - visible when active or next */}
-      {!feature.isPrimary && active.id >= feature.id && (
-        <div className="absolute -left-7 top-0 bottom-0 hidden lg:block">
-          <div className="w-0.5 h-full bg-gradient-to-b from-black to-transparent" />
-        </div>
-      )}
-
-      <div className="flex items-start gap-2 md:gap-3">
-        {/* Icon - Static, animate on hover only */}
-        <div className={`${feature.isPrimary ? 'w-12 h-12 md:w-11 md:h-11' : 'w-10 h-10 md:w-9 md:h-9'} flex-shrink-0 relative`}>
-          <div className={feature.isPrimary ? 'absolute inset-0 bg-black/5 rounded-full blur-lg' : ''} />
-          <DotLottieReact
-            src={`/lottie-files/${feature.lottie}`}
-            autoplay={active.id === feature.id}
-            loop
-            style={{
-              width: '100%',
-              height: '100%',
-              filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.08))'
-            }}
-          />
-        </div>
-
-        <div className="min-w-0 flex-1 pt-0.5">
-          <h3 className={`font-bold leading-tight ${
-            feature.isPrimary
-              ? 'text-base md:text-lg text-black'
-              : 'text-sm md:text-base text-gray-900'
-          }`}>
-            {feature.title}
-          </h3>
-          <p className={`leading-snug mt-0.5 ${
-            feature.isPrimary
-              ? 'text-xs md:text-sm text-gray-700'
-              : 'text-[11px] md:text-xs text-gray-600'
-          }`}>
-            {feature.description}
+  return (
+    <section className="w-full py-16 px-6 lg:px-12 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-12">
+          <h2 className="text-4xl md:text-5xl font-black mb-4">
+            Your Impact Starts Here
+          </h2>
+          <p className="text-gray-700 max-w-2xl">
+            Hover to explore how participation turns into progress.
           </p>
         </div>
 
-        {/* Active indicator */}
-        {active.id === feature.id && (
-          <motion.div
-            layoutId="indicator"
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 bg-black rounded-full"
-            transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-          />
-        )}
-      </div>
-    </motion.button>
-  );
-
-  return (
-    <section className="w-full py-8 md:py-12 lg:py-16 px-4 md:px-6 lg:px-12 bg-white">
-      <div className="max-w-7xl mx-auto">
-      <div className="mb-6 md:mb-8 lg:mb-12">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-2 md:mb-3 lg:mb-4">
-          YOUR IMPACT STARTS HERE
-        </h2>
-        <p className="text-gray-700 text-xs sm:text-sm md:text-base lg:text-lg max-w-3xl leading-relaxed">
-          From first vote to lasting impact. Three phases. One movement.
-        </p>
-      </div>
-
-      {/* Desktop: Flex layout | Mobile: Stacked */}
-      <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-16 items-stretch">
-        
-        {/* LEFT SIDE - FEATURE LIST WITH PHASES */}
-        <div className="flex-1 order-2 lg:order-1">
-          
-          {/* PARTICIPATION PHASE */}
-          <div className="mb-12 md:mb-16">
-            <div className="flex items-center gap-3 mb-6 md:mb-8">
-              <div className="w-1 h-6 bg-black rounded-full" />
-              <h3 className="text-sm font-black uppercase tracking-widest text-gray-900">
-                Phase 1: Participate
-              </h3>
-            </div>
-            <div className="space-y-3 md:space-y-4 relative">
-              {participationPhase.map((feature, idx) => (
-                <div key={feature.id}>
-                  <FeatureButton feature={feature} isPhaseStart={idx === 0} />
-                </div>
-              ))}
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+          {/* LEFT LIST */}
+          <div className="space-y-2">
+            {services.map(service => (
+              <button
+                key={service.id}
+                onMouseEnter={() => setActive(service)}
+                onFocus={() => setActive(service)}
+                className={`w-full text-left p-4 rounded-xl border transition-all ${
+                  active?.id === service.id
+                    ? 'border-black bg-black/5'
+                    : 'border-gray-200 hover:border-gray-400'
+                }`}
+              >
+                <h3 className="font-bold text-lg">{service.title}</h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  {service.description}
+                </p>
+              </button>
+            ))}
           </div>
 
-          {/* PROGRESSION PHASE */}
-          <div>
-            <div className="flex items-center gap-3 mb-6 md:mb-8">
-              <div className="w-1 h-6 bg-black/40 rounded-full" />
-              <h3 className="text-sm font-black uppercase tracking-widest text-gray-600">
-                Phase 2: Progress
-              </h3>
-            </div>
-            <div className="space-y-3 md:space-y-4 relative">
-              {progressionPhase.map((feature, idx) => (
-                <div key={feature.id}>
-                  <FeatureButton feature={feature} isPhaseStart={idx === 0} />
-                </div>
-              ))}
-            </div>
+          {/* RIGHT PREVIEW */}
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl min-h-[420px]">
+            <AnimatePresence mode="wait">
+              {active && (
+                <motion.div
+                  key={active.id}
+                  initial={{ opacity: 0, scale: 1.04 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={active.image}
+                    alt={active.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+
+                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <h4 className="text-3xl font-black mb-2">
+                      {active.title}
+                    </h4>
+                    <p className="text-white/90 max-w-md">
+                      {active.description}
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Accent frame */}
+            <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-white/40 rounded-tr-xl pointer-events-none" />
           </div>
         </div>
-
-        {/* RIGHT SIDE IMAGE - ENHANCED MOTION */}
-        <div className="flex-1 h-72 md:h-[500px] lg:h-auto lg:min-h-[700px] rounded-3xl overflow-hidden order-1 lg:order-2 relative shadow-xl">
-          <motion.div 
-            key={active.id}
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-            className="w-full h-full relative"
-          >
-            <Image
-              src={active.image}
-              alt={active.title}
-              fill
-              className="object-cover img-lighten"
-              priority
-              quality={80}
-            />
-            
-            {/* Overlay gradient + label on image */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.3 }}
-              className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent"
-            />
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.4 }}
-              className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white"
-            >
-              <p className="text-xs md:text-sm font-bold uppercase tracking-wider text-white/80 mb-2">
-                {active.isPrimary ? '★ Primary Action' : 'Secondary'}
-              </p>
-              <h4 className="text-2xl md:text-3xl font-black leading-tight">
-                {active.title}
-              </h4>
-            </motion.div>
-          </motion.div>
-
-          {/* Corner accent */}
-          <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-white/30 rounded-tr-lg pointer-events-none" />
-        </div>
-      </div>
       </div>
     </section>
   );

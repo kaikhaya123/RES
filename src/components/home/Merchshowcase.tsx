@@ -1,127 +1,184 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingCart } from "lucide-react";
+import { useRef, useState } from 'react';
+import Image from 'next/image';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Link from 'next/link';
+import ProductivitySlider from './ProductivitySlider';
 
-type Product = {
+type Item = {
   id: string;
-  title: string;
-  price: string;
-  img: string;
-  };
+  name: string;
+  collection: string;
+  image: string;
+};
 
-const products: Product[] = [
-  {     id: "p1",     title: "R.E.S. Hoodie",     price: "R450",     img: "/Images/modern-loose-fit-hoodie-mockup-for-fashion-brands-and-online-stores-promo-use-01452.png"   },
-  {     id: "p2",     title: "R.E.S. Cap",     price: "R150",     img: "/Images/high-res-image.png" }
+const items: Item[] = [
+  {
+    id: '1',
+    name: 'R.E.S Hoodie',
+    collection: 'Educated Core',
+    image: '/Images/men-hoodie-front-view.png',
+  },
+  {
+    id: '2',
+    name: 'R.E.S Cap',
+    collection: 'Everyday Leaders',
+    image: '/Images/Cap_Mockup-removebg-preview(1).png',
+  },
+  {
+    id: '3',
+    name: 'R.E.S T-Shirt',
+    collection: 'Campus Edition',
+    image: '/Images/men-t-shirt-front-view.png',
+  },
+  {
+    id: '4',
+    name: 'R.E.S Tote',
+    collection: 'Student Utility',
+    image: '/Images/Tote Bag Mockup, Front View.png',
+  },
 ];
 
-export default function Merch() {
-  const [toasts, setToasts] = useState<    Array<{ id: string; message: string }>  >([]);
+/**
+ * Merch showcase carousel
+ * @param {object} props
+ * @param {number} [props.dragSpeed=1] - Multiplier for drag sensitivity (increase for faster scroll, decrease for slower)
+ */
+export default function ShopRoomzaEducatedWear({ dragSpeed = 1 }: { dragSpeed?: number }) {
+  const trackRef = useRef<HTMLDivElement | null>(null);
 
-  function addToast(message: string) {
-    const id = String(Date.now());
-    setToasts((t) => [...t, { id, message }]);
-    setTimeout(() => {
-      setToasts((t) => t.filter((x) => x.id !== id));
-    }, 1800);
-  }
+  const { scrollXProgress } = useScroll({
+    container: trackRef,
+  });
 
-  function handleAdd(p: Product) {
-    addToast(`${p.title} added to cart`);
-  }
+  // Drag-to-scroll state & refs
+  const [isDown, setIsDown] = useState(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  // Multiplier for drag speed (tunable via prop `dragSpeed`)
+  const MULTIPLIER = Math.max(0.1, dragSpeed); // clamp to avoid 0 or negative values
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (!trackRef.current) return;
+    setIsDown(true);
+    startX.current = e.pageX - trackRef.current.offsetLeft;
+    scrollLeft.current = trackRef.current.scrollLeft;
+  };
+
+  const onMouseLeave = () => {
+    if (!trackRef.current) return;
+    setIsDown(false);
+  };
+
+  const onMouseUp = () => {
+    if (!trackRef.current) return;
+    setIsDown(false);
+  };
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDown || !trackRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - trackRef.current.offsetLeft;
+    const walk = (x - startX.current) * MULTIPLIER; // multiplier for speed
+    trackRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    if (!trackRef.current) return;
+    setIsDown(true);
+    startX.current = e.touches[0].pageX - trackRef.current.offsetLeft;
+    scrollLeft.current = trackRef.current.scrollLeft;
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (!isDown || !trackRef.current) return;
+    const x = e.touches[0].pageX - trackRef.current.offsetLeft;
+    const walk = (x - startX.current) * MULTIPLIER;
+    trackRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
+  const onTouchEnd = () => {
+    setIsDown(false);
+  };
+
+  // Smooth scroll helper for keyboard navigation
+  const scrollByOffset = (amount: number) => {
+    if (!trackRef.current) return;
+    trackRef.current.scrollBy({ left: amount, behavior: 'smooth' });
+  };
+
+  // Keyboard navigation: left/right arrows scroll the carousel
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (!trackRef.current) return;
+    const containerWidth = trackRef.current.clientWidth;
+
+    switch (e.key) {
+      case 'ArrowRight':
+        // scroll by ~60% of container width
+        scrollByOffset(containerWidth * 0.6);
+        e.preventDefault();
+        break;
+      case 'ArrowLeft':
+        scrollByOffset(-containerWidth * 0.6);
+        e.preventDefault();
+        break;
+      default:
+        break;
+    }
+  }; 
 
   return (
-    <section className="relative bg-gradient-to-br from-[#070812] via-[#0b0f17] to-[#071025] pt-24 pb-32 overflow-hidden">
-      {/* Accents */}
-      <div className="absolute -top-28 -left-28 w-80 h-80 bg-brand-yellow/8 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-32 -right-24 w-96 h-96 bg-pink-500/6 rounded-full blur-3xl pointer-events-none" />
+    <section className="bg-[#F2F2F2] py-24 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-                <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+        {/* Section header */}
+        <div className="mb-10">
+          <p className="text-xs uppercase tracking-[0.3em] text-[#1C1C1C] mb-3">
+            Shop Roomza’s Educated Wear
+          </p>
+          <h2 className="text-3xl md:text-4xl font-black text-[#0B0B0B] mb-2">
+            Designed for thinkers
+          </h2>
+          <p className="text-sm text-[#1C1C1C]/70">
+            Built for movement.
+          </p>
+        </div>
+
+        {/* Horizontal slider */}
+        <div
+          ref={trackRef}
+          className={`relative overflow-x-auto no-scrollbar snap-x snap-mandatory pl-6 md:pl-12 pr-6 md:pr-12 ${isDown ? 'cursor-grabbing select-none' : 'cursor-grab'}`}
+          onMouseDown={onMouseDown}
+          onMouseLeave={onMouseLeave}
+          onMouseUp={onMouseUp}
+          onMouseMove={onMouseMove}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          onKeyDown={(e) => onKeyDown(e)}
+          role="list"
+          tabIndex={0}
+          aria-roledescription="carousel"
+          aria-label="Merchandise carousel, swipe or drag to scroll"
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white drop-shadow-lg">R.E.S. Premium Merch</h2>
-          <p className="text-gray-300 max-w-2xl mx-auto mt-3">Limited styles, bold designs, premium quality. Shop limited drops curated for the R.E.S. movement.          </p>
-        </motion.div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          {products.map((p, idx) => (
-            <motion.article
-              key={p.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-transition={{ duration: 0.6, delay: idx * 0.06 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.02 }}
-              className="group relative rounded-2xl overflow-hidden shadow-2xl bg-white/6 backdrop-blur-sm border border-white/6 transition-transform duration-300"
-            >
-              <div className="relative aspect-[4/5] bg-gradient-to-br from-[#0b0f14] to-[#0b0f17]">
-                <Image
-                  src={p.img}
-                  alt={p.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  quality={90}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-black/10 mix-blend-overlay pointer-events-none" />
-<div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-brand-yellow text-black font-bold text-xs shadow-sm">Limited</div>
-
-                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 justify-between bg-black/30 backdrop-blur-sm px-3 py-2 rounded-lg">
-                  <div className="flex flex-col">
-                    <span className="text-xs text-gray-200">R.E.S. Exclusive</span>
-                    <span className="text-sm font-bold text-white truncate">{p.title}</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="block text-xs text-gray-300">From</span>
-                    <span className="text-lg font-extrabold text-brand-yellow">{p.price}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 flex items-center justify-between gap-4">
-                <div className="flex-1">
-                <h3 className="text-lg md:text-xl font-black text-white">{p.title}</h3>
-                  <p className="text-sm text-gray-300 mt-1">Premium materials, sustainable production. Perfect fit and feel.</p>
-                </div>
-
-                  <motion.button
-                    onClick={() => handleAdd(p)}
-                  aria-label={`Add ${p.title} to cart`}
-                    whileTap={{ scale: 0.96 }}
-whileHover={{ scale: 1.03 }}
-                    className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-yellow to-yellow-400 text-black px-4 py-2 rounded-xl font-bold shadow-lg"
-                  >
-                    <ShoppingCart size={16} />
-                    Add
-                  </motion.button>
-                              </div>
-            </motion.article>
-          ))}
+          <ProductivitySlider items={items} initialIndex={0} dragSpeed={1.1} autoplay autoplayInterval={8000} slideTransitionDuration={1200} showProgress />
         </div>
 
-                <div className="fixed right-6 bottom-6 z-50 flex flex-col gap-3">
-          <AnimatePresence>
-            {toasts.map((t) => (
-              <motion.div
-                key={t.id}
-                initial={{ opacity: 0, x: 8, scale: 0.95 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: 8, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-                className="bg-white/95 border border-brand-yellow shadow-lg px-4 py-3 rounded-xl"
-              >
-                <p className="text-sm text-black font-semibold">{t.message}</p>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+
+
+        {/* CTA */}
+        <div className="mt-12">
+          <Link
+            href="/merch"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#0B0B0B] hover:opacity-70 transition"
+          >
+            View full collection
+            <span className="w-6 h-[1px] bg-[#0B0B0B]" />
+          </Link>
         </div>
+
       </div>
     </section>
   );
