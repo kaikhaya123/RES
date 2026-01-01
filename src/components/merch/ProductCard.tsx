@@ -15,6 +15,13 @@ import useInView from '@/hooks/useInView';
 export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props) {
   const { ref, inView } = useInView<HTMLElement>({ once: true, threshold: 0.12 });
 
+  // Compact size hint for small screens: show single size, two-size pair, or range like S–XL
+  const sizeHint = product.sizes ? (
+    product.sizes.length === 1 ? product.sizes[0] :
+    product.sizes.length === 2 ? `${product.sizes[0]}–${product.sizes[1]}` :
+    `${product.sizes[0]}–${product.sizes[product.sizes.length - 1]}`
+  ) : null;
+
   return (
     <article
       ref={ref as any}
@@ -38,6 +45,15 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
           className="object-contain md:object-cover transition-transform duration-700 md:group-hover:scale-105 img-lighten"
         />
 
+        {/* Top-left status badge (stock or tag) */}
+        {product.stock === 0 ? (
+          <span className="absolute left-3 top-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full">Out of stock</span>
+        ) : product.stock && product.stock <= 3 ? (
+          <span className="absolute left-3 top-3 bg-yellow-500 text-black text-xs font-semibold px-2 py-1 rounded-full">Low stock</span>
+        ) : product.tag ? (
+          <span className="absolute left-3 top-3 bg-white/5 text-white text-xs font-semibold px-2 py-1 rounded-full">{product.tag}</span>
+        ) : null}
+
         <button
           aria-label="Add to wishlist"
           className="absolute right-3 top-3 bg-white/5 w-8 h-8 flex items-center justify-center rounded-full text-white hover:bg-white/10 transition"
@@ -49,6 +65,7 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
         {/* Quick add / stock indicator */}
         <div className="absolute right-3 bottom-3">
           <button
+            aria-label="Quick add to cart"
             onClick={(e) => { e.stopPropagation(); if (product.sizes && product.sizes.length > 0) { onOpen(product); } else { onAdd(product); } }}
             disabled={product.stock === 0}
             aria-disabled={product.stock === 0}
@@ -56,7 +73,7 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
           >
             +
           </button>
-        </div>
+        </div> 
       </div>
 
       {/* Info block */}
@@ -64,9 +81,9 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
         <div>
           <h3 className="text-white font-semibold text-sm md:text-base leading-tight line-clamp-2 md:line-clamp-none">{product.name}</h3>
 
-          {/* moved category label directly under title */}
+          {/* moved category label directly under title (hidden on small screens to reduce clutter) */}
           {product.category && (
-            <div className="mt-2">
+            <div className="mt-2 hidden sm:block">
               <span className="text-xs uppercase tracking-wider text-white/80 bg-white/5 px-2 py-1">{product.category}</span>
             </div>
           )}
@@ -77,22 +94,25 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
 
 
           <div className="mt-3 flex items-center gap-3 flex-wrap text-sm text-white/60">
-            {product.sizes && <div>Sizes: <span className="text-white/80">{product.sizes.join(', ')}</span></div>}
-            <div className={`ml-auto font-medium ${product.stock && product.stock > 0 ? 'text-white/90' : 'text-red-400'}`}>
-              {product.stock && product.stock > 0 ? `In stock ${product.stock}` : 'Out of stock'}
-            </div>
+            {/* Compact size hint on small screens, full list on sm+ */}
+            {product.sizes && <div className="block sm:hidden text-xs text-white/70">{sizeHint}</div>}
+            {product.sizes && <div className="hidden sm:block">Sizes: <span className="text-white/80">{product.sizes.join(', ')}</span></div>}
+            {/* Only show verbose in-grid stock when available; don't duplicate 'Out of stock' (badge used) */}
+            {product.stock && product.stock > 0 && (
+              <div className="ml-auto font-medium text-white/90 hidden sm:block">In stock {product.stock}</div>
+            )}
           </div>
         </div>
 
-        <div className="mt-4 flex items-center justify-between">
+        <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between">
           <span className="text-white font-black text-xl">R {(product.price / 100).toFixed(2)}</span>
 
-          <div className="flex items-center gap-3">
+          <div className="w-full sm:w-auto mt-3 sm:mt-0 flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
             <button
               onClick={(e) => { e.stopPropagation(); if (product.sizes && product.sizes.length > 0) { onOpen(product); } else { onAdd(product); } }}
               disabled={product.stock === 0}
               aria-disabled={product.stock === 0}
-              className={`bg-brand-yellow text-black px-3 py-1 rounded-full text-sm font-semibold hover:bg-yellow-300 transition ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
+              className={`bg-brand-yellow text-black px-3 py-2 rounded-full text-sm font-semibold hover:bg-yellow-300 transition w-full sm:w-auto ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
             >
               Add
             </button>
@@ -100,7 +120,7 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
             <button
               type="button"
               onClick={(e) => { e.stopPropagation(); onOpen(product); }}
-              className="border border-white/10 px-3 py-1 rounded-none text-white text-sm hover:bg-white/5 transition"
+              className="border border-white/10 px-3 py-2 rounded-full text-white text-sm hover:bg-white/5 transition w-full sm:w-auto"
             >
               View
             </button>

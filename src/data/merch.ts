@@ -52,7 +52,7 @@ export const products: Product[] = [
   {
     id: 'res-hoodie-1',
     name: 'RES Heavyweight Hoodie',
-    price: 3000,
+    price: 19900,
     image: '/Images/men-hoodie-front-view.png',
     description: 'Premium heavyweight hoodie with RES branding.',
     sizes: ['S', 'M', 'L', 'XL'],
@@ -71,7 +71,7 @@ export const products: Product[] = [
   {
     id: 'res-beanie-1',
     name: 'RES beanie',
-    price: 69900,
+    price: 19900,
     image: '/Images/beanie-mockup-floating.png',
     description: 'Classic knit beanie; one size fits all.',
     category: 'accessories',
@@ -81,7 +81,7 @@ export const products: Product[] = [
   {
     id: 'res-cap-1',
     name: 'RES Cap',
-    price: 9900,
+    price: 19900,
     image: '/Images/cap-mockup.png',
     description: 'Unstructured cap with embroidered logo.',
     category: 'accessories',
@@ -91,7 +91,7 @@ export const products: Product[] = [
   {
     id: 'res-bag-1',
     name: 'RES Tote Bag',
-    price: 15900,
+    price: 19900,
     image: '/Images/tote-bag-mockup-hanging.png',
     description: 'Durable canvas tote bag with RES logo print.',
     category: 'accessories',
