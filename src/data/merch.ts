@@ -56,7 +56,7 @@ export const products: Product[] = [
     image: '/Images/men-hoodie-front-view.png',
     description: 'Premium heavyweight hoodie with RES branding.',
     sizes: ['S', 'M', 'L', 'XL'],
-    stock: 1,
+    stock: 100,
   },
   {
     id: 'res-tee-1',
@@ -66,7 +66,7 @@ export const products: Product[] = [
     description: 'Premium cotton T-shirt with bold RES graphic.',
     category: 'tshirts',
     sizes: ['S', 'M', 'L'],
-    stock: 0,
+    stock: 100,
   },
   {
     id: 'res-beanie-1',
@@ -76,7 +76,7 @@ export const products: Product[] = [
     description: 'Classic knit beanie; one size fits all.',
     category: 'accessories',
     sizes: ['One Size'],
-    stock: 0,
+    stock: 100,
   },
   {
     id: 'res-cap-1',
@@ -86,7 +86,7 @@ export const products: Product[] = [
     description: 'Unstructured cap with embroidered logo.',
     category: 'accessories',
     sizes: ['One Size'],
-    stock: 0,
+    stock: 100,
   },
   {
     id: 'res-bag-1',
