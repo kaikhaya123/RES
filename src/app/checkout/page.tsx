@@ -123,55 +123,55 @@ export default function CheckoutPage() {
       
       {/* Progress Steps */}
       <div className="bg-white border-b border-gray-200 mt-20">
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-center gap-4 md:gap-8">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
-                <Check className="w-4 h-4 text-white" />
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-8">
+            <div className="flex items-center gap-1 sm:gap-2">
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-500 flex items-center justify-center">
+                <Check className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
               </div>
-              <span className="text-sm font-medium text-gray-900">Cart</span>
+              <span className="text-xs sm:text-sm font-medium text-gray-900 hidden sm:inline">Cart</span>
             </div>
-            <div className="w-12 md:w-20 h-0.5 bg-gray-300"></div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
-                <Check className="w-4 h-4 text-white" />
+            <div className="w-8 sm:w-12 md:w-20 h-0.5 bg-gray-300"></div>
+            <div className="flex items-center gap-1 sm:gap-2">
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-500 flex items-center justify-center">
+                <Check className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
               </div>
-              <span className="text-sm font-medium text-gray-900">Review</span>
+              <span className="text-xs sm:text-sm font-medium text-gray-900 hidden sm:inline">Review</span>
             </div>
-            <div className="w-12 md:w-20 h-0.5 bg-gray-300"></div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-amber-600 flex items-center justify-center text-white text-xs font-bold">
+            <div className="w-8 sm:w-12 md:w-20 h-0.5 bg-gray-300"></div>
+            <div className="flex items-center gap-1 sm:gap-2">
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-amber-600 flex items-center justify-center text-white text-xs font-bold">
                 3
               </div>
-              <span className="text-sm font-medium text-amber-600">Checkout</span>
+              <span className="text-xs sm:text-sm font-medium text-amber-600">Checkout</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8 md:py-12">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">Checkout</h1>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 md:py-12">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6 md:mb-8">Checkout</h1>
 
         {/* Layout */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
           {/* Left Form */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               {/* Shipping Information Card */}
-              <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-200">
-                <h2 className="text-xl font-bold text-gray-900 mb-6">Shipping Information</h2>
+              <div className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-sm border border-gray-200">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Shipping Information</h2>
 
                 {/* Delivery/Pickup Toggle */}
-                <div className="flex gap-3 mb-6">
+                <div className="flex gap-2 sm:gap-3 mb-6">
                   <button
                     type="button"
                     onClick={() => setDeliveryType('delivery')}
-                    className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg border-2 transition-all ${
+                    className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 py-3 px-2 sm:px-4 rounded-lg border-2 transition-all text-sm sm:text-base ${
                       deliveryType === 'delivery'
                         ? 'border-amber-600 bg-amber-50 text-amber-700'
                         : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
@@ -184,7 +184,7 @@ export default function CheckoutPage() {
                   <button
                     type="button"
                     onClick={() => setDeliveryType('pickup')}
-                    className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg border-2 transition-all ${
+                    className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 py-3 px-2 sm:px-4 rounded-lg border-2 transition-all text-sm sm:text-base ${
                       deliveryType === 'pickup'
                         ? 'border-amber-600 bg-amber-50 text-amber-700'
                         : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
@@ -206,7 +206,7 @@ export default function CheckoutPage() {
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
+                    className="w-full px-3 sm:px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
                   />
                 </div>
 
@@ -221,7 +221,7 @@ export default function CheckoutPage() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
+                    className="w-full px-3 sm:px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
                   />
                 </div>
 
@@ -229,7 +229,7 @@ export default function CheckoutPage() {
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-2">Phone number *</label>
                   <div className="flex gap-2">
-                    <select className="px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all w-24">
+                    <select className="px-2 sm:px-3 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all w-20 sm:w-24">
                       <option value="+27">🇿🇦</option>
                       <option value="+1">🇺🇸</option>
                       <option value="+44">🇬🇧</option>
@@ -241,7 +241,7 @@ export default function CheckoutPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
+                      className="flex-1 px-3 sm:px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
                     />
                   </div>
                 </div>
@@ -254,7 +254,7 @@ export default function CheckoutPage() {
                     value={formData.country}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
+                    className="w-full px-3 sm:px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
                   >
                     <option value="South Africa">South Africa</option>
                     <option value="United States">United States</option>
@@ -263,7 +263,7 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* City, State, ZIP */}
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
                     <input
@@ -273,7 +273,7 @@ export default function CheckoutPage() {
                       value={formData.city}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
+                      className="w-full px-3 sm:px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
                     />
                   </div>
                   <div>
@@ -283,7 +283,7 @@ export default function CheckoutPage() {
                       value={formData.state}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
+                      className="w-full px-3 sm:px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
                     >
                       <option value="Gauteng">Gauteng</option>
                       <option value="Western Cape">Western Cape</option>
@@ -299,21 +299,21 @@ export default function CheckoutPage() {
                       value={formData.zipCode}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
+                      className="w-full px-3 sm:px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all"
                     />
                   </div>
                 </div>
 
                 {/* Terms Checkbox */}
                 <div className="mt-6">
-                  <label className="flex items-start gap-3 cursor-pointer group">
+                  <label className="flex items-start gap-2 sm:gap-3 cursor-pointer group">
                     <input
                       type="checkbox"
                       checked={agreeTerms}
                       onChange={(e) => setAgreeTerms(e.target.checked)}
-                      className="mt-1 w-4 h-4 accent-amber-600"
+                      className="mt-1 w-4 h-4 sm:w-5 sm:h-5 accent-amber-600 shrink-0"
                     />
-                    <span className="text-sm text-gray-600 group-hover:text-gray-900">
+                    <span className="text-xs sm:text-sm text-gray-600 group-hover:text-gray-900">
                       I have read and agree to the{' '}
                       <Link href="/terms" className="text-amber-600 hover:underline">
                         Terms and Conditions
@@ -325,122 +325,118 @@ export default function CheckoutPage() {
 
               {/* Shipping Method */}
               {deliveryType === 'delivery' && (
-                <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-200">
-                  <h2 className="text-xl font-bold text-gray-900 mb-6">Shipping Method</h2>
+                <div className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-sm border border-gray-200">
+                  <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Shipping Method</h2>
 
                   <div className="space-y-3">
-                    <label className="flex items-center gap-4 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-500 transition-all has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
+                    <label className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 p-3 sm:p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-500 transition-all has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
                       <input
                         type="radio"
                         name="shippingMethod"
                         value="standard"
                         checked={formData.shippingMethod === 'standard'}
                         onChange={handleChange}
-                        className="w-5 h-5 accent-amber-600"
+                        className="w-5 h-5 accent-amber-600 shrink-0 mt-0.5 sm:mt-0"
                       />
-                      <div className="flex-1">
-                        <div className="font-semibold text-gray-900">Standard Shipping</div>
-                        <div className="text-sm text-gray-600">5–7 business days</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-semibold text-gray-900 text-sm sm:text-base">Standard Shipping</div>
+                        <div className="text-xs sm:text-sm text-gray-600">5–7 business days</div>
                       </div>
-                      <div className="font-bold text-gray-900">R50</div>
+                      <div className="font-bold text-gray-900 text-base sm:text-lg shrink-0">R50</div>
                     </label>
 
-                    <label className="flex items-center gap-4 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-500 transition-all has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
+                    <label className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 p-3 sm:p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-500 transition-all has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
                       <input
                         type="radio"
                         name="shippingMethod"
                         value="courier-guy"
                         checked={formData.shippingMethod === 'courier-guy'}
                         onChange={handleChange}
-                        className="w-5 h-5 accent-amber-600"
+                        className="w-5 h-5 accent-amber-600 shrink-0 mt-0.5 sm:mt-0"
                       />
-                      <div className="flex-1">
-                        <div className="font-semibold text-gray-900">The Courier Guy</div>
-                        <div className="text-sm text-gray-600">3–4 business days • Tracking included</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-semibold text-gray-900 text-sm sm:text-base">The Courier Guy</div>
+                        <div className="text-xs sm:text-sm text-gray-600">3–4 business days • Tracking included</div>
                       </div>
-                      <div className="font-bold text-gray-900">R85</div>
+                      <div className="font-bold text-gray-900 text-base sm:text-lg shrink-0">R85</div>
                     </label>
 
-                    <label className="flex items-center gap-4 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-500 transition-all has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
+                    <label className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 p-3 sm:p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-500 transition-all has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
                       <input
                         type="radio"
                         name="shippingMethod"
                         value="express"
                         checked={formData.shippingMethod === 'express'}
                         onChange={handleChange}
-                        className="w-5 h-5 accent-amber-600"
+                        className="w-5 h-5 accent-amber-600 shrink-0 mt-0.5 sm:mt-0"
                       />
-                      <div className="flex-1">
-                        <div className="font-semibold text-gray-900">Express Shipping</div>
-                        <div className="text-sm text-gray-600">2–3 business days</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-semibold text-gray-900 text-sm sm:text-base">Express Shipping</div>
+                        <div className="text-xs sm:text-sm text-gray-600">2–3 business days</div>
                       </div>
-                      <div className="font-bold text-gray-900">R120</div>
+                      <div className="font-bold text-gray-900 text-base sm:text-lg shrink-0">R120</div>
                     </label>
                   </div>
                 </div>
               )}
 
               {/* Payment Method */}
-              <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-200">
-                <h2 className="text-xl font-bold text-gray-900 mb-6">Payment Method</h2>
+              <div className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-sm border border-gray-200">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Payment Method</h2>
 
                 <div className="space-y-3">
-                  <label className="flex items-center gap-4 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-500 transition-all has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
+                  <label className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 p-3 sm:p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-500 transition-all has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="card"
                       checked={formData.paymentMethod === 'card'}
                       onChange={handleChange}
-                      className="w-5 h-5 accent-amber-600"
+                      className="w-5 h-5 accent-amber-600 shrink-0 mt-0.5 sm:mt-0"
                     />
-                    <div className="flex items-center gap-3 flex-1">
-                      {/* Add your card payment icons here */}
-                      <Image src="/Icons/256px-Mastercard-logo.svg.png" alt="Visa" width={40} height={25} />
-                      <Image src="/Images/mastercard-icon.png" alt="Mastercard" width={40} height={25} />
-                      <Image src="/Icons/amex.png" alt="Amex" width={40} height={25} />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-gray-900">Credit/Debit Card</div>
-                      <div className="text-sm text-gray-600">Pay securely with your card</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-2">
+                        {/* Add your card payment icons here */}
+                        <Image src="/Icons/256px-Mastercard-logo.svg.png" alt="Visa" width={32} height={20} className="sm:w-[40px] sm:h-[25px]" />
+                        <Image src="/Images/mastercard-icon.png" alt="Mastercard" width={32} height={20} className="sm:w-[40px] sm:h-[25px]" />
+                        <Image src="/Icons/amex.png" alt="Amex" width={32} height={20} className="sm:w-[40px] sm:h-[25px]" />
+                      </div>
+                      <div className="font-semibold text-gray-900 text-sm sm:text-base">Credit/Debit Card</div>
+                      <div className="text-xs sm:text-sm text-gray-600">Pay securely with your card</div>
                     </div>
                   </label>
 
-                  <label className="flex items-center gap-4 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-500 transition-all has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
+                  <label className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 p-3 sm:p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-500 transition-all has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="eft"
                       checked={formData.paymentMethod === 'eft'}
                       onChange={handleChange}
-                      className="w-5 h-5 accent-amber-600"
+                      className="w-5 h-5 accent-amber-600 shrink-0 mt-0.5 sm:mt-0"
                     />
-                    <div className="flex items-center gap-3 flex-1">
+                    <div className="flex-1 min-w-0">
                       {/* Add your EFT/Bank Transfer icon here */}
-                      {/* <Image src="/Images/bank-icon.png" alt="Bank Transfer" width={40} height={40} /> */}
-                      <div>
-                        <div className="font-semibold text-gray-900">EFT / Bank Transfer</div>
-                        <div className="text-sm text-gray-600">Direct bank payment</div>
-                      </div>
+                      {/* <Image src="/Images/bank-icon.png" alt="Bank Transfer" width={32} height={32} className="sm:w-[40px] sm:h-[40px] mb-2" /> */}
+                      <div className="font-semibold text-gray-900 text-sm sm:text-base">EFT / Bank Transfer</div>
+                      <div className="text-xs sm:text-sm text-gray-600">Direct bank payment</div>
                     </div>
                   </label>
 
-                  <label className="flex items-center gap-4 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-500 transition-all has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
+                  <label className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 p-3 sm:p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-500 transition-all has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="ozow"
                       checked={formData.paymentMethod === 'ozow'}
                       onChange={handleChange}
-                      className="w-5 h-5 accent-amber-600"
+                      className="w-5 h-5 accent-amber-600 shrink-0 mt-0.5 sm:mt-0"
                     />
-                    <div className="flex items-center gap-3 flex-1">
+                    <div className="flex-1 min-w-0">
                       {/* Add your Ozow icon here */}
-                      <Image src="/Icons/ozow-pty-ltd-seeklogo.png" alt="Ozow" width={80} height={30} />
-                      <div>
-                        <div className="font-semibold text-gray-900">Ozow</div>
-                        <div className="text-sm text-gray-600">Instant EFT payment</div>
-                      </div>
+                      <Image src="/Icons/ozow-pty-ltd-seeklogo.png" alt="Ozow" width={64} height={24} className="sm:w-[80px] sm:h-[30px] mb-2" />
+                      <div className="font-semibold text-gray-900 text-sm sm:text-base">Ozow</div>
+                      <div className="text-xs sm:text-sm text-gray-600">Instant EFT payment</div>
                     </div>
                   </label>
                 </div>
@@ -455,11 +451,11 @@ export default function CheckoutPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:sticky lg:top-32 h-fit"
           >
-            <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-200">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Review your cart</h2>
+            <div className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-sm border border-gray-200">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Review your cart</h2>
 
               {/* Cart Items */}
-              <div className="space-y-4 mb-6 max-h-[400px] overflow-y-auto">
+              <div className="space-y-4 mb-6 max-h-[300px] sm:max-h-[400px] overflow-y-auto">
                 {cartEntries.map((entry, index) => (
                   <div key={`${entry.item.id}-${entry.size}-${index}`} className="flex gap-4">
                     <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
@@ -490,12 +486,12 @@ export default function CheckoutPage() {
                     placeholder="Discount code"
                     value={discountCode}
                     onChange={(e) => setDiscountCode(e.target.value)}
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
+                    className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
                   />
                   <button
                     type="button"
                     onClick={applyDiscount}
-                    className="px-6 py-3 text-amber-600 font-semibold hover:text-amber-700 border border-amber-600 rounded-lg hover:bg-amber-50 transition-all"
+                    className="px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base text-amber-600 font-semibold hover:text-amber-700 border border-amber-600 rounded-lg hover:bg-amber-50 transition-all whitespace-nowrap"
                   >
                     Apply
                   </button>
@@ -504,21 +500,21 @@ export default function CheckoutPage() {
 
               {/* Price Breakdown */}
               <div className="space-y-3 py-4 border-t border-gray-200">
-                <div className="flex justify-between text-gray-700">
+                <div className="flex justify-between text-gray-700 text-sm sm:text-base">
                   <span>Subtotal</span>
                   <span className="font-semibold">R{subtotal.toFixed(2)}</span>
                 </div>
                 {savings > 0 && (
-                  <div className="flex justify-between text-green-600">
+                  <div className="flex justify-between text-green-600 text-sm sm:text-base">
                     <span>Saving</span>
                     <span className="font-semibold">-R{savings.toFixed(2)}</span>
                   </div>
                 )}
-                <div className="flex justify-between text-gray-700">
+                <div className="flex justify-between text-gray-700 text-sm sm:text-base">
                   <span>Shipping</span>
                   <span className="font-semibold">{shippingCost === 0 ? 'Free' : `R${shippingCost.toFixed(2)}`}</span>
                 </div>
-                <div className="flex justify-between text-lg font-bold text-gray-900 pt-3 border-t border-gray-200">
+                <div className="flex justify-between text-base sm:text-lg font-bold text-gray-900 pt-3 border-t border-gray-200">
                   <span>Total</span>
                   <span>R{total.toFixed(2)}</span>
                 </div>
@@ -528,7 +524,7 @@ export default function CheckoutPage() {
               <button
                 onClick={handleSubmit}
                 disabled={loading || !agreeTerms}
-                className="w-full bg-amber-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-amber-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl mt-6"
+                className="w-full bg-amber-600 text-white py-3.5 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-amber-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl mt-6 min-h-[48px]"
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
@@ -541,12 +537,12 @@ export default function CheckoutPage() {
               </button>
 
               {/* Security Badge */}
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
-                  <Lock className="w-4 h-4 text-green-600" />
+              <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200">
+                <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-600">
+                  <Lock className="w-3 h-3 sm:w-4 sm:h-4 text-green-600 shrink-0" />
                   <span>Secure Checkout - SSL Encrypted</span>
                 </div>
-                <p className="text-xs text-center text-gray-500 mt-2">
+                <p className="text-xs text-center text-gray-500 mt-2 px-2">
                   Ensuring your financial and personal details are secure during every transaction
                 </p>
               </div>
