@@ -14,7 +14,7 @@ export default function CallToAction() {
         alt="R.E.S. Experience"
         fill
         className="object-cover img-lighten"
-        quality={80}
+        quality={75}
         sizes="100vw"
         priority={false}
       />

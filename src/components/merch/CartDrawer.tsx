@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { X } from 'lucide-react';
 import { useCart } from '@/context/cart';
 
@@ -10,10 +11,10 @@ export default function CartDrawer() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-60">
+    <div className="fixed inset-0 z-50">
       <div className="absolute inset-0 bg-black/60" onClick={() => setOpen(false)} />
 
-      <aside className="absolute top-0 right-0 h-full w-full sm:w-96 bg-black text-white z-70 p-6">
+      <aside className="absolute top-0 right-0 h-full w-full sm:w-96 bg-black text-white z-50 p-6 shadow-2xl border-l border-white/10">
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between mb-6 pl-6 sm:pl-0">
             <h3 className="text-xl font-black">Your Cart</h3>
@@ -28,7 +29,7 @@ export default function CartDrawer() {
           {items.length === 0 ? (
             <div className="flex-1 flex flex-col items-center justify-center gap-4">
               <p className="text-sm text-white/70">No items yet.</p>
-              <a href="#" className="block text-center bg-brand-yellow text-black px-6 py-2 rounded font-bold">Checkout</a>
+              <Link href="/merch" className="block text-center bg-brand-yellow text-black px-6 py-2 rounded font-bold">Shop Now</Link>
             </div>
           ) : (
             <div className="flex-1 flex flex-col justify-between overflow-auto">
@@ -58,7 +59,11 @@ export default function CartDrawer() {
               </ul>
 
               <div className="mt-6 border-t border-white/5 pt-4">
-                <a href="#" className="block text-center bg-brand-yellow text-black px-4 py-2 rounded font-bold">Checkout</a>
+                <div className="flex items-center justify-between mb-3 font-semibold">
+                  <span>Total</span>
+                  <span>R {(items.reduce((sum, it) => sum + it.product.price * it.qty, 0) / 100).toFixed(2)}</span>
+                </div>
+                <Link href="/checkout" className="block text-center bg-brand-yellow text-black px-4 py-3 rounded-full font-bold hover:bg-yellow-300 transition">Checkout</Link>
               </div>
             </div>
           )}

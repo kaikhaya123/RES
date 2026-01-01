@@ -56,7 +56,7 @@ export const products: Product[] = [
     image: '/Images/men-hoodie-front-view.png',
     description: 'Premium heavyweight hoodie with RES branding.',
     sizes: ['S', 'M', 'L', 'XL'],
-    stock: 0,
+    stock: 1,
   },
   {
     id: 'res-tee-1',

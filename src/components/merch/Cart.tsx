@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { Product } from '@/data/merch';
 
 type CartItem = { product: Product; qty: number };
@@ -60,7 +61,7 @@ export default function Cart({ items, onUpdateQty, onRemove }: Props) {
 
           <div className="mt-4 border-t border-white/5 pt-3">
             <div className="flex items-center justify-between font-semibold mb-3">Total <span>R {(total / 100).toFixed(2)}</span></div>
-            <a href="#" className="block text-center bg-brand-yellow text-black px-4 py-2 rounded font-bold">Checkout</a>
+            <Link href="/checkout" className="block text-center bg-brand-yellow text-black px-4 py-3 rounded-full font-bold hover:bg-yellow-300 transition">Checkout</Link>
           </div>
         </div>
       )}

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { products, Product } from '@/data/merch';
 
 type Entry = { productId: string; qty: number; size?: string };
@@ -23,6 +23,27 @@ const CartContext = createContext<CartContextValue | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [open, setOpen] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem('cart-entries');
+    if (stored) {
+      try {
+        setEntries(JSON.parse(stored));
+      } catch (e) {
+        console.error('Failed to parse cart from localStorage', e);
+      }
+    }
+    setIsHydrated(true);
+  }, []);
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    if (isHydrated) {
+      localStorage.setItem('cart-entries', JSON.stringify(entries));
+    }
+  }, [entries, isHydrated]);
 
   function add(product: Product, size?: string) {
     setEntries((prev) => {

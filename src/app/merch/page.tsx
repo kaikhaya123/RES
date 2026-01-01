@@ -9,6 +9,7 @@ import ProductModal from '@/components/merch/ProductModal';
 import CategoryGrid from '@/components/merch/CategoryGrid';
 import CollectionBanner from '@/components/merch/CollectionBanner';
 import NewsletterCTA from '@/components/merch/NewsletterCTA';
+import CartDrawer from '@/components/merch/CartDrawer';
 import Footer from '@/components/layout/Footer';
 import { products, categories, type Product } from '@/data/merch';
 import { useCart } from '@/context/cart';
@@ -91,6 +92,8 @@ export default function MerchPage() {
           setOpenProduct(null);
         }}
       />
+
+      <CartDrawer />
 
       <Footer />
     </div>
