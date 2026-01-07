@@ -187,7 +187,7 @@ export default function IntroStorySections() {
             aria-hidden="true"
             crossOrigin="anonymous"
           >
-            <source src="/Videos/1166555_Environment_Man_3840x2160.mp4" type="video/mp4" />
+            <source src="/Videos/ezgif-6d293576e354cd85.webm" type="video/webm" />
             Your browser does not support the video tag.
           </video>
 
