@@ -50,31 +50,49 @@ export default function IntroStorySections() {
 
     const attemptPlay = async () => {
       try {
+        // Ensure all mobile attributes are set
         video.muted = true;
+        video.defaultMuted = true;
         video.playsInline = true;
-        video.preload = 'metadata';
+        video.preload = 'auto';
+        
+        // Set mobile-specific attributes
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', 'true');
+        video.setAttribute('x5-playsinline', 'true');
+        
+        // Force load if needed
+        if (video.readyState < 2) {
+          video.load();
+        }
+        
         const playPromise = video.play();
-        if (playPromise) await playPromise;
-        setIsPlaying(true);
-        setShowPlayButton(false);
-      } catch {
+        if (playPromise) {
+          await playPromise;
+          setIsPlaying(true);
+          setShowPlayButton(false);
+        }
+      } catch (error) {
+        console.warn('Autoplay failed:', error);
         setShowPlayButton(true);
         setIsPlaying(false);
       }
     };
 
-    attemptPlay();
+    // Wait a bit for video to be ready
+    const timer = setTimeout(() => attemptPlay(), 200);
 
-    const onUserInteract = () => {
-      attemptPlay();
+    const onUserInteract = async () => {
+      await attemptPlay();
       document.removeEventListener('click', onUserInteract);
       document.removeEventListener('touchstart', onUserInteract);
     };
 
-    document.addEventListener('click', onUserInteract);
-    document.addEventListener('touchstart', onUserInteract);
+    document.addEventListener('click', onUserInteract, { passive: true });
+    document.addEventListener('touchstart', onUserInteract, { passive: true });
 
     return () => {
+      clearTimeout(timer);
       document.removeEventListener('click', onUserInteract);
       document.removeEventListener('touchstart', onUserInteract);
     };
@@ -91,11 +109,13 @@ export default function IntroStorySections() {
             playsInline
             autoPlay
             loop
-            preload="metadata"
+            preload="auto"
             className={`w-full h-full object-cover transition-transform duration-1000 ${
               isPlaying ? 'scale-[1.08]' : 'scale-100'
             }`}
             aria-hidden="true"
+            webkit-playsinline="true"
+            x5-playsinline="true"
           >
             <source src="/Videos/1166555_Environment_Man_3840x2160.mp4" type="video/mp4" />
             <source src="/Videos/ezgif-6d293576e354cd85.webm" type="video/webm" />
@@ -107,8 +127,25 @@ export default function IntroStorySections() {
           {showPlayButton && (
             <div className="absolute inset-0 z-20 flex items-center justify-center">
               <button
-                onClick={() => videoRef.current?.play()}
-                className="bg-black/60 p-4 rounded-full text-white"
+                onClick={async () => {
+                  const video = videoRef.current;
+                  if (!video) return;
+                  try {
+                    video.muted = true;
+                    video.defaultMuted = true;
+                    video.setAttribute('playsinline', '');
+                    video.setAttribute('webkit-playsinline', 'true');
+                    video.setAttribute('x5-playsinline', 'true');
+                    video.preload = 'auto';
+                    const playPromise = video.play();
+                    if (playPromise) await playPromise;
+                    setIsPlaying(true);
+                    setShowPlayButton(false);
+                  } catch (error) {
+                    console.error('Manual play failed:', error);
+                  }
+                }}
+                className="bg-black/60 p-4 rounded-full text-white hover:bg-black/80 transition"
                 aria-label="Play video"
               >
                 ▶
