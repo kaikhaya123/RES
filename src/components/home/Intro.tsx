@@ -37,13 +37,11 @@ export default function IntroStorySections() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  // mobile fallback src (smaller/responsive mp4 to improve chance of playing on older devices)
-  const MOBILE_VIDEO_SRC = '/Videos/PinDown.io_@zarooza_1764838825.mp4';
-
   // Ensure safe area padding is applied on mobile (notch devices)
   const heroStyle = { paddingTop: 'env(safe-area-inset-top, 16px)' } as const;
   const [showPlayButton, setShowPlayButton] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -55,66 +53,70 @@ export default function IntroStorySections() {
     if (!video) return;
 
     let observer: IntersectionObserver | null = null;
+    let playPromise: Promise<void> | null = null;
 
     const attemptPlay = async () => {
       try {
-        // Ensure muted and playsinline flags (critical for mobile autoplay)
+        // Set all critical mobile attributes
         video.muted = true;
         video.defaultMuted = true;
         video.setAttribute('playsinline', '');
         video.setAttribute('webkit-playsinline', '');
         video.setAttribute('x5-playsinline', '');
+        video.setAttribute('crossorigin', 'anonymous');
         
-        await video.play();
-        setShowPlayButton(false);
-        setIsPlaying(!video.paused);
-      } catch (e) {
-        // Autoplay blocked — show play affordance
+        // Ensure video is loaded before attempting play
+        if (video.readyState < 2) {
+          video.load();
+        }
+        
+        playPromise = video.play();
+        if (playPromise !== undefined) {
+          await playPromise;
+          setShowPlayButton(false);
+          setIsPlaying(true);
+        }
+      } catch (e: any) {
+        // Log specific error for debugging
+        console.warn('Video play error:', e?.name, e?.message);
         setShowPlayButton(true);
         setIsPlaying(false);
       }
     };
 
-    // Try on mount first
-    attemptPlay();
+    // Attempt play on mount
+    const mountTimeout = setTimeout(() => {
+      attemptPlay();
+    }, 100);
 
-    // Observe visibility and try to play when visible
+    // Observe visibility - restart attempts if video element comes into view
     if (typeof window !== 'undefined' && 'IntersectionObserver' in window && containerRef.current) {
       observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
-            attemptPlay();
+          if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+            // Give a moment for video to be ready
+            setTimeout(() => attemptPlay(), 150);
           }
         });
-      }, { threshold: [0.4] });
+      }, { threshold: [0.3] });
 
       observer.observe(containerRef.current);
     }
 
-    // Mobile: trigger play on first user interaction
-    const onTouchStart = async () => {
+    // Mobile: Enable play on any user interaction
+    const handleUserInteraction = async () => {
       await attemptPlay();
-      if (containerRef.current) {
-        containerRef.current.removeEventListener('touchstart', onTouchStart as EventListener);
-      }
+      // Remove listener after first interaction
+      document.removeEventListener('click', handleUserInteraction);
+      document.removeEventListener('touchstart', handleUserInteraction);
     };
 
-    if (containerRef.current) {
-      containerRef.current.addEventListener('touchstart', onTouchStart as EventListener, { passive: true });
-    }
+    document.addEventListener('click', handleUserInteraction, { passive: true });
+    document.addEventListener('touchstart', handleUserInteraction, { passive: true });
 
-    const checkAutoplay = () => {
-      try {
-        if (video.paused) {
-          setShowPlayButton(true);
-          setIsPlaying(false);
-        } else {
-          setShowPlayButton(false);
-          setIsPlaying(true);
-        }
-      } catch (e) {
-        setShowPlayButton(true);
-      }
+    // Event listeners for video state
+    const onLoadedData = () => {
+      setVideoLoaded(true);
     };
 
     const onPlay = () => {
@@ -127,29 +129,42 @@ export default function IntroStorySections() {
     };
 
     const onError = (e: Event) => {
-      console.warn('Video playback error:', e);
+      console.error('Video error event:', {
+        error: video.error,
+        networkState: video.networkState,
+        readyState: video.readyState,
+      });
       setShowPlayButton(true);
+      setIsPlaying(false);
     };
 
-    // Check autoplay after a delay
-    const timeoutId = window.setTimeout(checkAutoplay, 300);
+    // Check autoplay policy after a slight delay
+    const autoplayCheckTimeout = setTimeout(() => {
+      if (video.paused) {
+        setShowPlayButton(true);
+      } else {
+        setShowPlayButton(false);
+      }
+    }, 500);
 
+    video.addEventListener('loadeddata', onLoadedData);
     video.addEventListener('play', onPlay);
     video.addEventListener('playing', onPlay);
     video.addEventListener('pause', onPause);
     video.addEventListener('error', onError);
 
     return () => {
-      clearTimeout(timeoutId);
+      clearTimeout(mountTimeout);
+      clearTimeout(autoplayCheckTimeout);
+      video.removeEventListener('loadeddata', onLoadedData);
       video.removeEventListener('play', onPlay);
       video.removeEventListener('playing', onPlay);
       video.removeEventListener('pause', onPause);
       video.removeEventListener('error', onError);
+      document.removeEventListener('click', handleUserInteraction);
+      document.removeEventListener('touchstart', handleUserInteraction);
       if (observer && containerRef.current) {
         observer.disconnect();
-      }
-      if (containerRef.current) {
-        containerRef.current.removeEventListener('touchstart', onTouchStart as EventListener);
       }
     };
   }, []);
@@ -167,12 +182,12 @@ export default function IntroStorySections() {
             muted
             playsInline
             autoPlay
-            preload="auto"
-            controls={showPlayButton}
+            preload="metadata"
             className="w-full h-full object-cover scale-[1.08]"
             aria-hidden="true"
+            crossOrigin="anonymous"
           >
-            <source src="/Videos/1166555_Environment_Man_3840x2160 (1).mp4" type="video/mp4" />
+            <source src="/Videos/1166555_Environment_Man_3840x2160%20(1).mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
 
@@ -190,24 +205,21 @@ export default function IntroStorySections() {
                   const video = videoRef.current;
                   if (!video) return;
                   try {
-                    // Ensure muted and playsinline flags are set (important on iOS)
                     video.muted = true;
                     video.defaultMuted = true;
                     video.setAttribute('playsinline', '');
                     video.setAttribute('webkit-playsinline', '');
+                    video.setAttribute('x5-playsinline', '');
 
-                    await video.play();
-                    setIsPlaying(true);
-                    setShowPlayButton(false);
-                  } catch (e) {
-                    // If still fails, try to open the mp4 directly in the native player as a fallback
-                    try {
-                      const fallback = video.src && video.src.length ? video.src : MOBILE_VIDEO_SRC;
-                      // open in same tab to trigger native player on iOS
-                      window.location.href = fallback;
-                    } catch (err) {
-                      setShowPlayButton(true);
+                    const playPromise = video.play();
+                    if (playPromise !== undefined) {
+                      await playPromise;
+                      setIsPlaying(true);
+                      setShowPlayButton(false);
                     }
+                  } catch (e: any) {
+                    console.error('Manual play failed:', e?.name, e?.message);
+                    setShowPlayButton(true);
                   }
                 }}
               >
