@@ -90,7 +90,7 @@ const totalSteps = 6;
       </TextParallaxContent>
 
       <TextParallaxContent
-        imgUrl="/Images/front-view-women-pressing-buzzer-min.jpg"
+        imgUrl="/Images/side-view-fist-hitting-buzzer.jpg"
         subheading="Step 3"
         heading="Vote and Play Daily"
         stepNumber={3}

@@ -65,7 +65,7 @@ export default function RootLayout({
         {/* DNS Prefetch for external resources */}
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
       </head>
-      <body suppressHydrationWarning className="antialiased font-futura scroll-smooth">
+      <body suppressHydrationWarning className="antialiased font-sans scroll-smooth">
         <ErrorBoundary>
           <Providers>
             {/* Site-wide smooth scrolling */}

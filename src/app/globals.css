@@ -1,8 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700;800&display=swap');
 
+/* Rethink Sans font-face */
+@font-face {
+	font-family: 'Rethink Sans';
+	src: url('/font/rethink-sans/RethinkSans[wght].ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Rethink Sans';
+	src: url('/font/rethink-sans/RethinkSans-Italic[wght].ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: italic;
+	font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	html, body {
+		@apply font-sans;
+	}
+}
 
 /* Fallback Futura font for sections that request it */
 .font-futura {

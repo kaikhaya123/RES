@@ -102,13 +102,14 @@ const config: Config = {
   				'5': 'hsl(var(--chart-5))'
   			}
   		},
-  		fontFamily: {
-  			sans: [
-  				'var(--font-manrope)',
-  				'Manrope',
-  				'system-ui',
-  				'sans-serif'
-  			],
+		fontFamily: {
+			sans: [
+				'Rethink Sans',
+				'var(--font-manrope)',
+				'Manrope',
+				'system-ui',
+				'sans-serif'
+			],
   			inter: [
   				'var(--font-inter)',
   				'Inter',
