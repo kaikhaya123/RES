@@ -8,9 +8,9 @@ import { Iphone } from '../../registry/magicui/iphone';
 
 export default function LiveStream() {
   const platforms = [
-    { name: 'TikTok', image: '/Images/tiktok.png', viewers: '3.2M+' },
-    { name: 'Facebook', image: '/Images/facebook.png', viewers: '1.2M+' },
-    { name: 'YouTube', image: '/Images/youtube.png', viewers: '2.8M+' }
+    { name: 'TikTok', image: '/Images/tiktok.png', viewers: '' },
+    { name: 'Facebook', image: '/Images/facebook.png', viewers: '' },
+    { name: 'YouTube', image: '/Images/youtube.png', viewers: '' }
   ];
 
   return (

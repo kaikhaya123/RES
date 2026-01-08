@@ -33,9 +33,9 @@ export default function MerchPage() {
       <main id="products" className="py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <header className="mb-10">
-            <h2 className="text-4xl font-black">New Arrivals</h2>
+            <h2 className="text-4xl font-black">Shop Roomza's Latest Wear</h2>
             <p className="mt-2 text-white/60 max-w-xl">
-              Hoodies, caps, and sweaters engineered for comfort and confidence.
+              Hoodies, caps, and accessories engineered for comfort and confidence.
             </p>
           </header> 
 
