@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { supabase } from '@/lib/supabase';
 import bcrypt from 'bcryptjs';
 import { studentRegistrationSchema, publicRegistrationSchema } from '@/lib/validations';
 import { generateRandomString } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { randomUUID } from 'crypto';
 
 export async function POST(request: NextRequest) {
   try {
@@ -41,7 +42,21 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user or admin already exists
-    const existingUser = await prisma.user.findUnique({ where: { email: validatedData.email } });
+    const { data: existingUser, error: existingError } = await supabase
+      .from('User')
+      .select('id')
+      .eq('email', validatedData.email)
+      .maybeSingle();
+
+    if (existingError && existingError.code !== 'PGRST116') {
+      // PGRST116 = no rows found for single
+      logger.error('Registration', 'Lookup failed', { message: existingError.message, code: existingError.code });
+      return NextResponse.json(
+        { error: 'Unable to check existing user' },
+        { status: 500 }
+      );
+    }
+
     if (existingUser) {
       return NextResponse.json(
         { error: 'User with this email already exists' },
@@ -56,13 +71,14 @@ export async function POST(request: NextRequest) {
     let user;
     try {
       const createData: any = {
+        id: randomUUID(),
         email: validatedData.email,
         password: hashedPassword,
         userType: (validatedData as any).userType ?? 'PUBLIC',
         firstName: validatedData.firstName,
         lastName: validatedData.lastName,
         phone: validatedData.phone,
-        dateOfBirth: new Date(validatedData.dateOfBirth), // Convert string to DateTime
+        dateOfBirth: validatedData.dateOfBirth,
         province: validatedData.province,
         homeAddress: validatedData.homeAddress,
       };
@@ -75,7 +91,21 @@ export async function POST(request: NextRequest) {
         }
       }
 
-      user = await prisma.user.create({ data: createData });
+      const { data: inserted, error: insertError } = await supabase
+        .from('User')
+        .insert(createData)
+        .select('id,email,firstName')
+        .single();
+
+      if (insertError) {
+        logger.error('Registration', 'Database error', { message: insertError.message, code: insertError.code });
+        return NextResponse.json(
+          { error: 'Failed to create account', details: insertError.message },
+          { status: 400 }
+        );
+      }
+
+      user = inserted;
       logger.info('Registration', 'User created successfully', { userId: user.id, email: user.email });
     } catch (err: any) {
       logger.error('Registration', 'Database error', { message: err.message, code: err.code });
