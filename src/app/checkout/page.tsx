@@ -8,7 +8,7 @@ import Image from 'next/image';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Lock, Check } from 'lucide-react';
+import { ShieldCheck, Lock, Check, ShoppingCart } from 'lucide-react';
 
 export default function CheckoutPage() {
   const { items, clear } = useCart();
@@ -127,7 +127,7 @@ export default function CheckoutPage() {
           <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-8">
             <div className="flex items-center gap-1 sm:gap-2">
               <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-500 flex items-center justify-center">
-                <Check className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+                <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
               </div>
               <span className="text-xs sm:text-sm font-medium text-gray-900 hidden sm:inline">Cart</span>
             </div>

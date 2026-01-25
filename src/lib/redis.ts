@@ -1,37 +1,21 @@
-import { createClient } from 'redis';
+import { Redis } from '@upstash/redis';
 
 const globalForRedis = globalThis as unknown as {
-  redis: ReturnType<typeof createClient> | undefined
+  redis: Redis | null | undefined
 }
 
 // Skip Redis connection during build time to avoid ECONNREFUSED errors
-const isBuildTime = process.env.NEXT_PHASE === 'phase-production-build' || 
-                    process.env.NODE_ENV === 'production' && !process.env.REDIS_URL;
+const isBuildTime = process.env.NEXT_PHASE === 'phase-production-build';
 
-export const redis = globalForRedis.redis ?? createClient({
-  url: process.env.REDIS_URL || 'redis://localhost:6379',
-  socket: {
-    reconnectStrategy: (retries) => {
-      if (retries > 3) {
-        console.log('Redis reconnection failed after 3 attempts');
-        return false; // Stop reconnecting
-      }
-      return Math.min(retries * 100, 3000);
-    }
-  }
-});
-
-if (!isBuildTime && !redis.isOpen) {
-  redis.connect().catch((error) => {
-    console.error('Redis connection failed:', error.message);
-    console.log('Continuing without Redis cache...');
-  });
-}
-
-// Handle Redis errors gracefully
-redis.on('error', (error) => {
-  console.error('Redis error:', error.message);
-});
+// Use Upstash Redis if available, otherwise skip
+export const redis = globalForRedis.redis ?? (
+  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+    ? new Redis({
+        url: process.env.UPSTASH_REDIS_REST_URL,
+        token: process.env.UPSTASH_REDIS_REST_TOKEN,
+      })
+    : null
+);
 
 if (process.env.NODE_ENV !== 'production') globalForRedis.redis = redis;
 
@@ -53,9 +37,9 @@ export const CACHE_TTL = {
 
 export async function cacheGet<T>(key: string): Promise<T | null> {
   try {
-    if (isBuildTime || !redis.isOpen) return null;
+    if (isBuildTime || !redis) return null;
     const data = await redis.get(key);
-    return data ? JSON.parse(data) : null;
+    return data ? (typeof data === 'string' ? JSON.parse(data) : data as T) : null;
   } catch (error) {
     console.error('Cache get error:', error);
     return null;
@@ -64,8 +48,8 @@ export async function cacheGet<T>(key: string): Promise<T | null> {
 
 export async function cacheSet(key: string, value: any, ttl: number = CACHE_TTL.MEDIUM): Promise<void> {
   try {
-    if (isBuildTime || !redis.isOpen) return;
-    await redis.setEx(key, ttl, JSON.stringify(value));
+    if (isBuildTime || !redis) return;
+    await redis.set(key, JSON.stringify(value), { ex: ttl });
   } catch (error) {
     console.error('Cache set error:', error);
   }
@@ -73,7 +57,7 @@ export async function cacheSet(key: string, value: any, ttl: number = CACHE_TTL.
 
 export async function cacheDelete(key: string): Promise<void> {
   try {
-    if (isBuildTime || !redis.isOpen) return;
+    if (isBuildTime || !redis) return;
     await redis.del(key);
   } catch (error) {
     console.error('Cache delete error:', error);
@@ -82,10 +66,10 @@ export async function cacheDelete(key: string): Promise<void> {
 
 export async function cacheDeletePattern(pattern: string): Promise<void> {
   try {
-    if (isBuildTime) return;
+    if (isBuildTime || !redis) return;
     const keys = await redis.keys(pattern);
     if (keys.length > 0) {
-      await redis.del(keys);
+      await redis.del(...keys);
     }
   } catch (error) {
     console.error('Cache delete pattern error:', error);
