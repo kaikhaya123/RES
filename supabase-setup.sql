@@ -1,24 +1,43 @@
 -- Roomza's Educated Secret - PostgreSQL Database Setup for Supabase
 -- Run this script in Supabase SQL Editor
 
--- Create ENUMs
-CREATE TYPE "UserType" AS ENUM ('STUDENT', 'PUBLIC', 'ADMIN');
-CREATE TYPE "Province" AS ENUM (
-  'EASTERN_CAPE',
-  'FREE_STATE',
-  'GAUTENG',
-  'KWAZULU_NATAL',
-  'LIMPOPO',
-  'MPUMALANGA',
-  'NORTHERN_CAPE',
-  'NORTH_WEST',
-  'WESTERN_CAPE'
-);
-CREATE TYPE "VoteStatus" AS ENUM ('ACTIVE', 'EXPIRED', 'USED');
-CREATE TYPE "QuizDifficulty" AS ENUM ('EASY', 'MEDIUM', 'HARD');
+-- Create ENUMs (IF NOT EXISTS)
+DO $$ BEGIN
+  CREATE TYPE "UserType" AS ENUM ('STUDENT', 'PUBLIC', 'ADMIN');
+EXCEPTION
+  WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+  CREATE TYPE "Province" AS ENUM (
+    'EASTERN_CAPE',
+    'FREE_STATE',
+    'GAUTENG',
+    'KWAZULU_NATAL',
+    'LIMPOPO',
+    'MPUMALANGA',
+    'NORTHERN_CAPE',
+    'NORTH_WEST',
+    'WESTERN_CAPE'
+  );
+EXCEPTION
+  WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+  CREATE TYPE "VoteStatus" AS ENUM ('ACTIVE', 'EXPIRED', 'USED');
+EXCEPTION
+  WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+  CREATE TYPE "QuizDifficulty" AS ENUM ('EASY', 'MEDIUM', 'HARD');
+EXCEPTION
+  WHEN duplicate_object THEN null;
+END $$;
 
 -- Create User table
-CREATE TABLE "User" (
+CREATE TABLE IF NOT EXISTS "User" (
   "id" TEXT PRIMARY KEY,
   "email" TEXT UNIQUE NOT NULL,
   "emailVerified" TIMESTAMP,
@@ -41,7 +60,7 @@ CREATE TABLE "User" (
 );
 
 -- Create Contestant table
-CREATE TABLE "Contestant" (
+CREATE TABLE IF NOT EXISTS "Contestant" (
   "id" TEXT PRIMARY KEY,
   "firstName" TEXT NOT NULL,
   "lastName" TEXT NOT NULL,
@@ -63,7 +82,7 @@ CREATE TABLE "Contestant" (
 );
 
 -- Create Vote table
-CREATE TABLE "Vote" (
+CREATE TABLE IF NOT EXISTS "Vote" (
   "id" TEXT PRIMARY KEY,
   "userId" TEXT NOT NULL,
   "contestantId" TEXT NOT NULL,
@@ -79,7 +98,7 @@ CREATE TABLE "Vote" (
 );
 
 -- Create Nomination table
-CREATE TABLE "Nomination" (
+CREATE TABLE IF NOT EXISTS "Nomination" (
   "id" TEXT PRIMARY KEY,
   "userId" TEXT NOT NULL,
   "contestantId" TEXT,
@@ -102,7 +121,7 @@ CREATE TABLE "Nomination" (
 );
 
 -- Create Sponsor table
-CREATE TABLE "Sponsor" (
+CREATE TABLE IF NOT EXISTS "Sponsor" (
   "id" TEXT PRIMARY KEY,
   "name" TEXT NOT NULL,
   "tier" TEXT NOT NULL,
@@ -119,7 +138,7 @@ CREATE TABLE "Sponsor" (
 );
 
 -- Create Quiz table
-CREATE TABLE "Quiz" (
+CREATE TABLE IF NOT EXISTS "Quiz" (
   "id" TEXT PRIMARY KEY,
   "title" TEXT NOT NULL,
   "description" TEXT,
@@ -133,7 +152,7 @@ CREATE TABLE "Quiz" (
 );
 
 -- Create QuizQuestion table
-CREATE TABLE "QuizQuestion" (
+CREATE TABLE IF NOT EXISTS "QuizQuestion" (
   "id" TEXT PRIMARY KEY,
   "quizId" TEXT NOT NULL,
   "question" TEXT NOT NULL,
@@ -146,7 +165,7 @@ CREATE TABLE "QuizQuestion" (
 );
 
 -- Create QuizAttempt table
-CREATE TABLE "QuizAttempt" (
+CREATE TABLE IF NOT EXISTS "QuizAttempt" (
   "id" TEXT PRIMARY KEY,
   "userId" TEXT NOT NULL,
   "quizId" TEXT NOT NULL,
@@ -160,7 +179,7 @@ CREATE TABLE "QuizAttempt" (
 );
 
 -- Create Achievement table
-CREATE TABLE "Achievement" (
+CREATE TABLE IF NOT EXISTS "Achievement" (
   "id" TEXT PRIMARY KEY,
   "name" TEXT NOT NULL,
   "description" TEXT NOT NULL,
@@ -171,7 +190,7 @@ CREATE TABLE "Achievement" (
 );
 
 -- Create UserAchievement table
-CREATE TABLE "UserAchievement" (
+CREATE TABLE IF NOT EXISTS "UserAchievement" (
   "id" TEXT PRIMARY KEY,
   "userId" TEXT NOT NULL,
   "achievementId" TEXT NOT NULL,
@@ -182,7 +201,7 @@ CREATE TABLE "UserAchievement" (
 );
 
 -- Create LiveStream table
-CREATE TABLE "LiveStream" (
+CREATE TABLE IF NOT EXISTS "LiveStream" (
   "id" TEXT PRIMARY KEY,
   "title" TEXT NOT NULL,
   "description" TEXT,
@@ -200,7 +219,7 @@ CREATE TABLE "LiveStream" (
 );
 
 -- Create Analytics table
-CREATE TABLE "Analytics" (
+CREATE TABLE IF NOT EXISTS "Analytics" (
   "id" TEXT PRIMARY KEY,
   "eventType" TEXT NOT NULL,
   "eventData" JSONB NOT NULL,
@@ -211,7 +230,7 @@ CREATE TABLE "Analytics" (
 );
 
 -- Create SystemConfig table
-CREATE TABLE "SystemConfig" (
+CREATE TABLE IF NOT EXISTS "SystemConfig" (
   "id" TEXT PRIMARY KEY,
   "key" TEXT UNIQUE NOT NULL,
   "value" TEXT NOT NULL,
@@ -219,30 +238,30 @@ CREATE TABLE "SystemConfig" (
   "updatedAt" TIMESTAMP NOT NULL
 );
 
--- Create Indexes
-CREATE INDEX "Vote_userId_votingRound_idx" ON "Vote"("userId", "votingRound");
-CREATE INDEX "Vote_contestantId_idx" ON "Vote"("contestantId");
-CREATE INDEX "Vote_createdAt_idx" ON "Vote"("createdAt");
+-- Create Indexes (IF NOT EXISTS)
+CREATE INDEX IF NOT EXISTS "Vote_userId_votingRound_idx" ON "Vote"("userId", "votingRound");
+CREATE INDEX IF NOT EXISTS "Vote_contestantId_idx" ON "Vote"("contestantId");
+CREATE INDEX IF NOT EXISTS "Vote_createdAt_idx" ON "Vote"("createdAt");
 
-CREATE INDEX "Contestant_isActive_isEliminated_idx" ON "Contestant"("isActive", "isEliminated");
+CREATE INDEX IF NOT EXISTS "Contestant_isActive_isEliminated_idx" ON "Contestant"("isActive", "isEliminated");
 
-CREATE INDEX "Nomination_status_idx" ON "Nomination"("status");
-CREATE INDEX "Nomination_createdAt_idx" ON "Nomination"("createdAt");
+CREATE INDEX IF NOT EXISTS "Nomination_status_idx" ON "Nomination"("status");
+CREATE INDEX IF NOT EXISTS "Nomination_createdAt_idx" ON "Nomination"("createdAt");
 
-CREATE INDEX "Sponsor_tier_isActive_idx" ON "Sponsor"("tier", "isActive");
+CREATE INDEX IF NOT EXISTS "Sponsor_tier_isActive_idx" ON "Sponsor"("tier", "isActive");
 
-CREATE INDEX "Quiz_isActive_scheduledFor_idx" ON "Quiz"("isActive", "scheduledFor");
+CREATE INDEX IF NOT EXISTS "Quiz_isActive_scheduledFor_idx" ON "Quiz"("isActive", "scheduledFor");
 
-CREATE INDEX "QuizQuestion_quizId_idx" ON "QuizQuestion"("quizId");
+CREATE INDEX IF NOT EXISTS "QuizQuestion_quizId_idx" ON "QuizQuestion"("quizId");
 
-CREATE INDEX "QuizAttempt_quizId_score_idx" ON "QuizAttempt"("quizId", "score");
+CREATE INDEX IF NOT EXISTS "QuizAttempt_quizId_score_idx" ON "QuizAttempt"("quizId", "score");
 
-CREATE INDEX "UserAchievement_userId_idx" ON "UserAchievement"("userId");
+CREATE INDEX IF NOT EXISTS "UserAchievement_userId_idx" ON "UserAchievement"("userId");
 
-CREATE INDEX "LiveStream_isLive_scheduledStart_idx" ON "LiveStream"("isLive", "scheduledStart");
+CREATE INDEX IF NOT EXISTS "LiveStream_isLive_scheduledStart_idx" ON "LiveStream"("isLive", "scheduledStart");
 
-CREATE INDEX "Analytics_eventType_timestamp_idx" ON "Analytics"("eventType", "timestamp");
-CREATE INDEX "Analytics_userId_idx" ON "Analytics"("userId");
+CREATE INDEX IF NOT EXISTS "Analytics_eventType_timestamp_idx" ON "Analytics"("eventType", "timestamp");
+CREATE INDEX IF NOT EXISTS "Analytics_userId_idx" ON "Analytics"("userId");
 
 -- Create function to update updatedAt timestamp
 CREATE OR REPLACE FUNCTION update_updated_at_column()
