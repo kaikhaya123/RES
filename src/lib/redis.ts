@@ -9,12 +9,29 @@ const isBuildTime = process.env.NEXT_PHASE === 'phase-production-build' ||
                     process.env.NODE_ENV === 'production' && !process.env.REDIS_URL;
 
 export const redis = globalForRedis.redis ?? createClient({
-  url: process.env.REDIS_URL || 'redis://localhost:6379'
+  url: process.env.REDIS_URL || 'redis://localhost:6379',
+  socket: {
+    reconnectStrategy: (retries) => {
+      if (retries > 3) {
+        console.log('Redis reconnection failed after 3 attempts');
+        return false; // Stop reconnecting
+      }
+      return Math.min(retries * 100, 3000);
+    }
+  }
 });
 
 if (!isBuildTime && !redis.isOpen) {
-  redis.connect().catch(console.error);
+  redis.connect().catch((error) => {
+    console.error('Redis connection failed:', error.message);
+    console.log('Continuing without Redis cache...');
+  });
 }
+
+// Handle Redis errors gracefully
+redis.on('error', (error) => {
+  console.error('Redis error:', error.message);
+});
 
 if (process.env.NODE_ENV !== 'production') globalForRedis.redis = redis;
 
@@ -36,7 +53,7 @@ export const CACHE_TTL = {
 
 export async function cacheGet<T>(key: string): Promise<T | null> {
   try {
-    if (isBuildTime) return null;
+    if (isBuildTime || !redis.isOpen) return null;
     const data = await redis.get(key);
     return data ? JSON.parse(data) : null;
   } catch (error) {
@@ -47,7 +64,7 @@ export async function cacheGet<T>(key: string): Promise<T | null> {
 
 export async function cacheSet(key: string, value: any, ttl: number = CACHE_TTL.MEDIUM): Promise<void> {
   try {
-    if (isBuildTime) return;
+    if (isBuildTime || !redis.isOpen) return;
     await redis.setEx(key, ttl, JSON.stringify(value));
   } catch (error) {
     console.error('Cache set error:', error);
@@ -56,7 +73,7 @@ export async function cacheSet(key: string, value: any, ttl: number = CACHE_TTL.
 
 export async function cacheDelete(key: string): Promise<void> {
   try {
-    if (isBuildTime) return;
+    if (isBuildTime || !redis.isOpen) return;
     await redis.del(key);
   } catch (error) {
     console.error('Cache delete error:', error);
