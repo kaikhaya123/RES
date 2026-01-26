@@ -53,22 +53,22 @@ export default function ContestantsPage() {
       <Navbar />
       
       {/* HERO */}
-      <section className="w-full h-[70vh] relative flex items-center justify-center bg-black mt-24">
+      <section className="w-screen h-screen relative flex items-end justify-center bg-black">
         <Image 
           src="/Images/adobe-69386156c98ae%20(1).jpg"
           alt="Contestants"
           fill
           className="object-cover opacity-60"
         />
-        <div className="relative z-10 text-center px-6">
+        <div className="relative z-10 text-center px-6 pb-12 lg:pb-16 w-full">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-white text-4xl md:text-5xl font-extrabold"
+            className="text-white text-xl md:text-2xl lg:text-3xl font-extrabold"
           >
             MEET THE CONTESTANTS
           </motion.h1>
-          <p className="text-gray-200 text-sm md:text-base mt-3 max-w-xl mx-auto">
+          <p className="text-gray-200 text-xs md:text-sm mt-2 max-w-xl mx-auto">
             Learn about every contestant who shapes the show. Vote. Engage. Support your favorite student.
           </p>
         </div>

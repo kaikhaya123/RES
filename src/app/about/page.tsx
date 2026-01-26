@@ -14,7 +14,7 @@ export default function AboutPage() {
 
       <main className="flex-1">
         {/* HERO */}
-        <section className="relative w-full px-6 py-32 lg:px-12 overflow-hidden min-h-[600px] lg:min-h-[700px]">
+        <section className="relative w-full h-screen overflow-hidden">
           <Image
             src="/Images/college-students-different-ethnicities-cramming (7).jpg"
             alt="Background"
@@ -29,13 +29,13 @@ export default function AboutPage() {
           {/* subtle gradient overlay to improve text contrast */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/50 pointer-events-none" />
 
-          <div className="relative z-10">
+          <div className="relative z-10 h-full flex flex-col justify-end px-6 pb-12 lg:px-12 lg:pb-16">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="max-w-5xl text-6xl font-black tracking-tighter leading-tight lg:text-7xl"
+          className="max-w-5xl text-2xl md:text-3xl lg:text-4xl font-black tracking-tighter leading-tight"
         >
           About
           <br />

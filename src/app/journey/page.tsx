@@ -56,7 +56,7 @@ export default function JourneyPage() {
       <main className="flex-1">
         {/* HERO WITH BACKGROUND IMAGE */}
         <section 
-          className="relative min-h-screen flex items-center overflow-hidden"
+          className="relative h-screen w-screen flex items-end overflow-hidden"
           style={{
             backgroundImage: "url('/Images/6759-min.jpg')",
             backgroundSize: 'cover',
@@ -70,12 +70,12 @@ export default function JourneyPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60" />
           
           {/* Content */}
-          <div className="absolute bottom-0 left-0 z-10 px-6 py-8 lg:px-12 lg:py-12 w-full">
+          <div className="absolute bottom-0 left-0 z-10 px-6 pb-12 lg:px-12 lg:pb-16 w-full">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-black text-white drop-shadow-xl m-0"
+              className="text-xl md:text-2xl lg:text-3xl font-black text-white drop-shadow-xl m-0"
             >
               THE JOURNEY
             </motion.h1>
@@ -84,7 +84,7 @@ export default function JourneyPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-4 text-white text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl drop-shadow-lg m-0"
+              className="mt-2 text-white text-xs md:text-sm lg:text-base leading-relaxed max-w-2xl drop-shadow-lg m-0"
             >
               From application to national recognition.  
               Every step is designed to unlock real opportunity.

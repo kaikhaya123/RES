@@ -229,7 +229,7 @@ export default function IntroStorySections() {
             <motion.section
               key={slide.id}
               style={{ opacity }}
-              className="sticky top-0 h-screen flex items-center justify-center overflow-hidden"
+              className="sticky top-0 h-screen w-screen flex items-end justify-center overflow-hidden"
             >
               <motion.div style={{ scale }} className="absolute inset-0">
                 <Image
@@ -242,11 +242,11 @@ export default function IntroStorySections() {
                 <div className="absolute inset-0 bg-black/50" />
               </motion.div>
 
-              <div className="relative z-10 max-w-3xl px-6 text-center space-y-6">
-                <h2 className="text-4xl lg:text-6xl font-black">
+              <div className="relative z-10 w-full px-6 pb-12 text-center space-y-2">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-black">
                   {slide.title}
                 </h2>
-                <p className="text-lg text-white/80">{slide.subtitle}</p>
+                <p className="text-xs sm:text-sm text-white/80">{slide.subtitle}</p>
               </div>
             </motion.section>
           );
