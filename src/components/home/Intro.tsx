@@ -132,7 +132,7 @@ export default function IntroStorySections() {
           >
             {/* IMPORTANT: Use a smaller video for mobile if possible */}
             <source
-              src="/Videos/1166555_Environment_Man_1920x1080.mp4"
+              src="/Videos/1166555_Environment_Man_3840x2160.mp4"
               type="video/mp4"
             />
             Your browser does not support the video tag.
