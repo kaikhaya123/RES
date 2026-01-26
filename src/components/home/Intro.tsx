@@ -115,66 +115,19 @@ export default function IntroStorySections() {
 
   return (
     <section ref={containerRef} className="relative bg-black text-white">
-      {/* HERO VIDEO */}
+      {/* HERO IMAGE */}
       <section className="relative min-h-screen overflow-hidden flex items-center">
         <div className="absolute inset-0">
-          <video
-            ref={videoRef}
-            muted
-            playsInline
-            autoPlay
-            loop
-            preload="auto"
-            className={`w-full h-full object-cover transition-transform duration-1000 ${
-              isPlaying ? 'scale-[1.08]' : 'scale-100'
-            }`}
-            aria-hidden="true"
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
-            onError={(e) => {
-              console.error('Video error:', e.currentTarget.error);
-              setShowPlayButton(true);
-            }}
-          >
-            <source
-              src="/Videos/7683446-hd_1080_1920_30fps.mp4"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
+          <Image
+            src="/Images/pexels-keira-burton-6146978.jpg"
+            alt="Hero image"
+            fill
+            className="w-full h-full object-cover"
+            priority
+          />
 
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/40" />
           <div className="absolute inset-0 bg-black/30" />
-
-          {showPlayButton && (
-            <div className="absolute inset-0 z-20 flex items-center justify-center">
-              <button
-                onClick={async () => {
-                  const video = videoRef.current;
-                  if (!video) return;
-
-                  try {
-                    video.muted = true;
-                    video.playsInline = true;
-                    video.setAttribute('playsinline', '');
-                    video.setAttribute('webkit-playsinline', 'true');
-                    video.setAttribute('x5-playsinline', 'true');
-
-                    await video.play();
-
-                    setIsPlaying(true);
-                    setShowPlayButton(false);
-                  } catch (error) {
-                    console.error('Manual play failed:', error);
-                  }
-                }}
-                className="bg-black/60 p-4 rounded-full text-white hover:bg-black/80 transition"
-                aria-label="Play video"
-              >
-                ▶
-              </button>
-            </div>
-          )}
         </div>
 
         {/* HERO CONTENT */}

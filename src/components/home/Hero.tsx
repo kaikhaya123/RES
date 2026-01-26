@@ -38,7 +38,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 md:mb-8 leading-tight tracking-tight drop-shadow-lg overflow-hidden"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold text-yellow-500 mb-6 md:mb-8 leading-tight tracking-tight drop-shadow-lg overflow-hidden"
             style={{ WebkitLineClamp: 3, display: '-webkit-box', WebkitBoxOrient: 'vertical' as any }}
           >
             ROOMZA'S{" "}

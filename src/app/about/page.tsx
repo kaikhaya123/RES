@@ -39,7 +39,7 @@ export default function AboutPage() {
         >
           About
           <br />
-          <span className="text-white">Roomza's educated Secret</span>
+          <span className="text-yellow-500">Roomza's educated Secret</span>
         </motion.h1>
 
         <motion.p
