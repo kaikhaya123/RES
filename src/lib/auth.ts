@@ -47,25 +47,43 @@ export const authOptions: NextAuthOptions = {
           const { data: users, error } = await supabase
             .from('User')
             .select('id, email, password, firstName, lastName, userType, phone')
-            .or(`email.eq.${credentials.identifier},phone.eq.${credentials.identifier}`);
+            .eq('email', credentials.identifier);
 
           if (error) {
             console.error('Supabase auth lookup error:', error);
             throw new Error('Authentication failed');
           }
 
-          const user = users?.[0];
+          let user = users?.[0];
+
+          // If not found by email, try phone
+          if (!user) {
+            const { data: phoneUsers, error: phoneError } = await supabase
+              .from('User')
+              .select('id, email, password, firstName, lastName, userType, phone')
+              .eq('phone', credentials.identifier);
+
+            if (phoneError) {
+              console.error('Supabase phone lookup error:', phoneError);
+              throw new Error('Authentication failed');
+            }
+
+            user = phoneUsers?.[0];
+          }
 
           if (!user || !user.password) {
+            console.error('User not found or missing password:', { identifier: credentials.identifier });
             throw new Error('Invalid credentials');
           }
 
+          console.log('Attempting password comparison for user:', user.email);
           const isPasswordValid = await bcrypt.compare(
             credentials.password,
             user.password
           );
 
           if (!isPasswordValid) {
+            console.error('Password comparison failed for user:', user.email);
             throw new Error('Invalid credentials');
           }
 

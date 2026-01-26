@@ -22,7 +22,39 @@ async function sendSMS(phone: string, code: string): Promise<boolean> {
     // Check if using real SMS provider
     const provider = process.env.SMS_PROVIDER || 'development';
     
-    if (provider === 'twilio' && process.env.TWILIO_ACCOUNT_SID) {
+    if (provider === 'infobip' && process.env.INFOBIP_API_KEY) {
+      // Infobip SMS integration
+      const baseUrl = (process.env.INFOBIP_BASE_URL || '').replace(/\/$/, '');
+      const apiUrl = `${baseUrl.startsWith('http') ? baseUrl : `https://${baseUrl}`}/sms/2/text/advanced`;
+      const sender = process.env.INFOBIP_SENDER || 'RES';
+
+      const res = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          Authorization: `App ${process.env.INFOBIP_API_KEY}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [
+            {
+              destinations: [{ to: phone }],
+              text: `Your R.E.S. verification code is: ${code}. Valid for 10 minutes.`,
+              from: sender,
+            },
+          ],
+        }),
+      });
+
+      if (!res.ok) {
+        const errText = await res.text();
+        logger.error('SMS', 'Infobip send failed', { phone, status: res.status, body: errText });
+        return false;
+      }
+
+      logger.info('SMS', 'Sent via Infobip', { phone });
+      return true;
+    } else if (provider === 'twilio' && process.env.TWILIO_ACCOUNT_SID) {
       // Twilio integration
       const twilio = require('twilio');
       const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);

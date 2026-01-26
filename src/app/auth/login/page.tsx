@@ -7,17 +7,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff, AlertCircle, X } from "lucide-react";
-import ReCAPTCHA from "react-google-recaptcha";
 
 export default function LoginPage() {
   const router = useRouter();
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState<"user" | "admin">("user");
   const [showPassword, setShowPassword] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -25,12 +22,6 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    const recaptchaEnabled = !!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-    if (recaptchaEnabled && !captchaToken) {
-      setError("Please verify reCAPTCHA");
-      return;
-    }
 
     setIsLoading(true);
 
@@ -43,8 +34,6 @@ export default function LoginPage() {
 
     if (result?.error) {
       setError(result.error);
-      recaptchaRef.current?.reset();
-      setCaptchaToken(null);
       setIsLoading(false);
       return;
     }
@@ -177,19 +166,6 @@ export default function LoginPage() {
               Forgot password
             </Link>
           </div>
-
-          {/* reCAPTCHA */}
-          {!!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
-            <div className="flex justify-center">
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                theme="dark"
-                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                onChange={(t) => setCaptchaToken(t)}
-                onExpired={() => setCaptchaToken(null)}
-              />
-            </div>
-          )}
 
           {/* Login Button */}
           <motion.button

@@ -5,7 +5,7 @@ export const studentRegistrationSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
   lastName: z.string().min(2, 'Last name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
-  phone: z.string().regex(/^0[0-9]{9}$/, 'Invalid South African phone number'),
+  phone: z.string().regex(/^(0[0-9]{9}|\+27[0-9]{9})$/, 'Invalid South African phone number'),
   dateOfBirth: z.string().refine((date) => {
     const age = new Date().getFullYear() - new Date(date).getFullYear();
     return age >= 18 && age <= 35;
@@ -50,7 +50,7 @@ export const publicRegistrationSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
   lastName: z.string().min(2, 'Last name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
-  phone: z.string().regex(/^0[0-9]{9}$/, 'Invalid South African phone number'),
+  phone: z.string().regex(/^(0[0-9]{9}|\+27[0-9]{9})$/, 'Invalid South African phone number'),
   dateOfBirth: z.string().refine((date) => {
     const age = new Date().getFullYear() - new Date(date).getFullYear();
     return age >= 18;
@@ -96,7 +96,7 @@ export const nominationSchema = z.object({
   nomineeFirstName: z.string().min(2, 'First name is required'),
   nomineeLastName: z.string().min(2, 'Last name is required'),
   nomineeEmail: z.string().email('Invalid email address'),
-  nomineePhone: z.string().regex(/^0[0-9]{9}$/, 'Invalid phone number'),
+  nomineePhone: z.string().regex(/^(0[0-9]{9}|\+27[0-9]{9})$/, 'Invalid phone number'),
   nomineeInstitution: z.string().min(2, 'Institution is required'),
   nomineeCampus: z.string().min(2, 'Campus is required'),
   nomineeProvince: z.enum([

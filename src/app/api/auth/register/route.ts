@@ -70,6 +70,7 @@ export async function POST(request: NextRequest) {
     // Create user or admin
     let user;
     try {
+      const now = new Date().toISOString();
       const createData: any = {
         id: randomUUID(),
         email: validatedData.email,
@@ -81,6 +82,8 @@ export async function POST(request: NextRequest) {
         dateOfBirth: validatedData.dateOfBirth,
         province: validatedData.province,
         homeAddress: validatedData.homeAddress,
+        createdAt: now,
+        updatedAt: now,
       };
 
       // Add optional fields only if they exist in validatedData

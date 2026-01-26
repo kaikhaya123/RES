@@ -22,6 +22,8 @@ export default function RegisterPage() {
     homeAddress: "",
     province: "",
     userType: "public",
+    municipality: "",
+    town: "",
     institution: "",
     campus: "",
     residence: "",
@@ -34,6 +36,21 @@ export default function RegisterPage() {
   const [toast, setToast] = useState({ show: false, message: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [codeSent, setCodeSent] = useState(false);
+
+  // Normalize phone number to international format
+  const normalizePhone = (phone: string) => {
+    const cleaned = phone.replace(/\s+/g, '');
+    // If starts with 0, replace with +27 (South Africa)
+    if (cleaned.startsWith('0')) {
+      return '+27' + cleaned.substring(1);
+    }
+    // If already has +, return as is
+    if (cleaned.startsWith('+')) {
+      return cleaned;
+    }
+    // Otherwise, assume SA and add +27
+    return '+27' + cleaned;
+  };
 
   const handleChange = (e: any) => {
     const { name, value, type } = e.target;
@@ -52,11 +69,12 @@ export default function RegisterPage() {
     setToast({ show: true, message: "Sending verification code..." });
 
     try {
+      const normalizedPhone = normalizePhone(formData.phone);
       const response = await fetch("/api/auth/verify-phone", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          phone: formData.phone,
+          phone: normalizedPhone,
           action: "verify",
         }),
       });
@@ -95,6 +113,7 @@ export default function RegisterPage() {
     setIsLoading(true);
 
     try {
+      const normalizedPhone = normalizePhone(formData.phone);
       const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -104,12 +123,14 @@ export default function RegisterPage() {
           email: formData.email,
           firstName: formData.firstName,
           lastName: formData.lastName,
-          phone: formData.phone,
+          phone: normalizedPhone,
           password: formData.password,
           confirmPassword: formData.confirmPassword,
           dateOfBirth: formData.dateOfBirth,
           homeAddress: formData.homeAddress,
           province: formData.province,
+          municipality: formData.municipality,
+          town: formData.town,
           institution: formData.institution,
           campus: formData.campus,
           residence: formData.residence,
@@ -283,6 +304,21 @@ export default function RegisterPage() {
               <option value="KWAZULU_NATAL">KwaZulu-Natal</option>
               <option value="WESTERN_CAPE">Western Cape</option>
             </select>
+
+            {/* PUBLIC FIELDS */}
+            <AnimatePresence>
+              {formData.userType === "public" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  className="grid grid-cols-1 gap-4"
+                >
+                  <InputField name="municipality" label="Municipality" value={formData.municipality} onChange={handleChange} />
+                  <InputField name="town" label="Town/Suburb/Township/Village" value={formData.town} onChange={handleChange} />
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* STUDENT FIELDS */}
             <AnimatePresence>
