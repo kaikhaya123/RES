@@ -39,6 +39,7 @@ export default function IntroStorySections() {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [showPlayButton, setShowPlayButton] = useState(false);
+  const [videoSource, setVideoSource] = useState('/Videos/1166555_Environment_Man_3840x2160.mp4');
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -48,6 +49,14 @@ export default function IntroStorySections() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    // Detect device and set appropriate video source
+    const isMobile = window.innerWidth < 768;
+    setVideoSource(
+      isMobile 
+        ? '/Videos/1166555_Environment_Man_1280x720.mp4'
+        : '/Videos/1166555_Environment_Man_3840x2160.mp4'
+    );
 
     const isMobileDevice =
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -114,14 +123,8 @@ export default function IntroStorySections() {
   }, []);
 
   const getVideoSource = () => {
-    const isMobile = window.innerWidth < 768;
-    return isMobile 
-      ? '/Videos/1166555_Environment_Man_1280x720.mp4'
-      : '/Videos/1166555_Environment_Man_3840x2160.mp4';
+    return videoSource;
   };
-
-  const connection = (navigator as any).connection?.effectiveType;
-  const isSlowNetwork = ['slow-2g', '2g', '3g'].includes(connection);
 
   return (
     <section ref={containerRef} className="relative bg-black text-white">
