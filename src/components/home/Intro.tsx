@@ -48,11 +48,12 @@ export default function IntroStorySections() {
     const video = videoRef.current;
     if (!video) return;
 
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
     const attemptPlay = async () => {
       try {
         // Ensure all mobile attributes are set
         video.muted = true;
-        video.defaultMuted = true;
         video.playsInline = true;
         video.preload = 'auto';
         
@@ -74,13 +75,16 @@ export default function IntroStorySections() {
         }
       } catch (error) {
         console.warn('Autoplay failed:', error);
-        setShowPlayButton(true);
+        // Only show play button if on mobile, otherwise it will play after user interaction
+        if (isMobileDevice) {
+          setShowPlayButton(true);
+        }
         setIsPlaying(false);
       }
     };
 
     // Wait a bit for video to be ready
-    const timer = setTimeout(() => attemptPlay(), 200);
+    const timer = setTimeout(() => attemptPlay(), 300);
 
     const onUserInteract = async () => {
       await attemptPlay();
@@ -88,6 +92,7 @@ export default function IntroStorySections() {
       document.removeEventListener('touchstart', onUserInteract);
     };
 
+    // Add user interaction listeners for mobile
     document.addEventListener('click', onUserInteract, { passive: true });
     document.addEventListener('touchstart', onUserInteract, { passive: true });
 
@@ -118,7 +123,7 @@ export default function IntroStorySections() {
             x5-playsinline="true"
           >
             <source src="/Videos/1166555_Environment_Man_3840x2160.mp4" type="video/mp4" />
-            <source src="/Videos/ezgif-6d293576e354cd85.webm" type="video/webm" />
+            Your browser does not support the video tag.
           </video>
 
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/40" />
@@ -132,7 +137,6 @@ export default function IntroStorySections() {
                   if (!video) return;
                   try {
                     video.muted = true;
-                    video.defaultMuted = true;
                     video.setAttribute('playsinline', '');
                     video.setAttribute('webkit-playsinline', 'true');
                     video.setAttribute('x5-playsinline', 'true');
