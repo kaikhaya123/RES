@@ -202,7 +202,7 @@ export default function ImpactPage() {
             <motion.div variants={revealItem}>
               <Link
                 href="/auth/register"
-                className="inline-flex items-center gap-3 bg-brand-yellow px-10 py-5 text-sm font-black uppercase tracking-widest text-black"
+                className="inline-flex items-center gap-3 bg-honey-tan px-10 py-5 text-sm font-black uppercase tracking-widest text-black"
               >
                 Get Involved
                 <ArrowRight className="h-4 w-4" />

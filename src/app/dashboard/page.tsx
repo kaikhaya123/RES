@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Trophy, User, Settings, LogOut } from 'lucide-react'
+import { Trophy, Users, Activity, TrendingUp, ArrowRight } from 'lucide-react'
+import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+import RoleGuard from '@/components/auth/RoleGuard'
 
 interface Stats {
   votesCast: number
@@ -14,159 +16,284 @@ interface Stats {
   leaderboard: { id: string; name: string; votes: number }[]
 }
 
-export default function DashboardPage() {
+function DashboardContent() {
   const [data, setData] = useState<Stats | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     fetch('/api/dashboard/stats')
       .then(res => res.json())
       .then(setData)
       .catch(() => {})
+      .finally(() => setIsLoading(false))
   }, [])
 
   return (
     <>
-      <div className="min-h-screen bg-black text-white relative pb-10">
+      <Navbar />
+      <div className="min-h-screen bg-jet-black-pure text-white pt-24 md:pt-32">
         
-        {/* Header Section with Image Placeholder */}
-        <div className="bg-black pt-6 pb-12">
-          <div className="max-w-7xl mx-auto px-6">
-            {/* Grid layout for title and image placeholder */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              
-              {/* Title Section */}
-              <div>
-                <h1 className="text-4xl font-bold text-white mb-2">Welcome Back!</h1>
-                <p className="text-base text-gray-400">Here's your platform activity summary</p>
-              </div>
-
-              {/* Image Placeholder - Right Side */}
-              <div className="flex flex-col items-center md:items-end">
-                <div className="mb-3">
-                  <img src="/Images/Happy student-pana.png" alt="Dashboard Illustration" className="w-40 h-40 object-cover rounded-lg" />
-                </div>
-              </div>
-            </div>
+        {/* Header Section */}
+        <div className="border-b border-white/10 pb-12 mb-12">
+          <div className="container mx-auto px-6 lg:px-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="max-w-2xl"
+            >
+              <h1 className="text-4xl md:text-5xl font-bold mb-3 text-white">
+                Your Dashboard
+              </h1>
+              <p className="text-lg text-gray-300">
+                Track your activity, votes, and platform performance in real-time
+              </p>
+            </motion.div>
           </div>
         </div>
 
-        <main className="max-w-7xl mx-auto px-6 space-y-10">
+        {/* Main Content */}
+        <main className="container mx-auto px-6 lg:px-12 pb-20">
 
-          {/* STATS */}
-          <section className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {/* Stats Grid */}
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {[
-              { label: 'Votes Cast', value: data?.votesCast },
-              { label: 'Contestants', value: data?.totalContestants },
-              { label: 'Users', value: data?.totalUsers },
-            ].map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-yellow-300 border border-yellow-300-border rounded-xl p-6 text-black"
-              >
-                <p className="text-sm text-slate-600 font-semibold">{stat.label}</p>
-                <p className="text-3xl font-bold mt-2 text-slate-900">
-                  {stat.value?.toLocaleString() || '—'}
-                </p>
-              </motion.div>
-            ))}
+              { 
+                icon: TrendingUp, 
+                label: 'Total Votes', 
+                value: data?.votesCast?.toLocaleString() || '—',
+                color: 'from-honey-tan to-honey-tan-600'
+              },
+              { 
+                icon: Trophy, 
+                label: 'Top Rank', 
+                value: data?.leaderboard?.[0]?.name || '—',
+                color: 'from-honey-tan-400 to-honey-tan-500'
+              },
+              { 
+                icon: Users, 
+                label: 'Total Users', 
+                value: data?.totalUsers?.toLocaleString() || '—',
+                color: 'from-honey-tan-300 to-honey-tan-600'
+              },
+              { 
+                icon: Trophy, 
+                label: 'Contestants', 
+                value: data?.totalContestants?.toLocaleString() || '—',
+                color: 'from-honey-tan-300 to-honey-tan-500'
+              },
+            ].map((stat, i) => {
+              const Icon = stat.icon
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  className="relative group"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-honey-tan/20 to-honey-tan-600/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative bg-dark-bg-matte border border-white/10 rounded-xl p-6 hover:border-honey-tan/30 transition-colors duration-300">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`p-3 rounded-lg bg-gradient-to-br ${stat.color} text-black`}>
+                        <Icon size={20} className="font-bold" />
+                      </div>
+                      <span className="text-xs font-semibold text-gray-500 uppercase">Active</span>
+                    </div>
+                    <p className="text-gray-400 text-sm mb-1">{stat.label}</p>
+                    <p className="text-2xl md:text-3xl font-bold text-white">{stat.value}</p>
+                  </div>
+                </motion.div>
+              )
+            })}
           </section>
 
-          {/* MAIN GRID */}
-          <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Grid - Leaderboard & Activity */}
+          <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
 
-            {/* LEADERBOARD */}
-            <div className="lg:col-span-2 bg-yellow-300 border border-yellow-300 rounded-xl">
-              <div className="p-6 border-b border-yellow-300 flex items-center justify-between">
-                <h2 className="font-bold text-lg text-black">Top Contestants</h2>
-                <Trophy className="text-brand-yellow" size={20} />
+            {/* Leaderboard */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="lg:col-span-2 border border-white/10 rounded-xl bg-dark-bg-matte overflow-hidden hover:border-honey-tan/30 transition-colors duration-300"
+            >
+              <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
+                <div>
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                    <Trophy size={20} className="text-honey-tan" />
+                    Leaderboard
+                  </h2>
+                  <p className="text-sm text-gray-500 mt-1">Top performing contestants</p>
+                </div>
               </div>
 
-              <div className="divide-y divide-white/10">
+              <div className="divide-y divide-white/5">
                 {data?.leaderboard?.length ? (
                   data.leaderboard.map((user, i) => (
-                    <motion.div 
-                      key={user.id} 
+                    <motion.div
+                      key={user.id}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 }}
-                      className="p-5 flex justify-between items-center hover:bg-white/5 transition-colors"
+                      transition={{ delay: 0.3 + i * 0.05, duration: 0.4 }}
+                      className="px-6 py-4 flex items-center justify-between hover:bg-white/5 transition-colors duration-200 group"
                     >
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-yellow to-yellow-600 text-black flex items-center justify-center text-sm font-bold">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-honey-tan to-honey-tan-600 text-black flex items-center justify-center font-bold text-sm">
                           {i + 1}
                         </div>
-                        <span className="font-semibold text-white">{user.name}</span>
+                        <div>
+                          <p className="font-medium text-white">{user.name}</p>
+                          <p className="text-xs text-gray-500">Contestant</p>
+                        </div>
                       </div>
-                      <span className="font-bold text-brand-yellow">{user.votes.toLocaleString()}</span>
+                      <div className="text-right">
+                        <p className="font-bold text-honey-tan text-lg">{user.votes.toLocaleString()}</p>
+                        <p className="text-xs text-gray-500">votes</p>
+                      </div>
                     </motion.div>
                   ))
                 ) : (
-                  <p className="p-6 text-sm text-black">No data available</p>
+                  <div className="px-6 py-12 text-center text-gray-500">
+                    <Activity size={40} className="mx-auto mb-3 opacity-50" />
+                    <p>No leaderboard data available</p>
+                  </div>
                 )}
               </div>
+
+              <Link 
+                href="/leaderboard"
+                className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-white/5 text-honey-tan hover:bg-white/10 transition-colors duration-200 border-t border-white/10 font-medium"
+              >
+                View Full Leaderboard
+                <ArrowRight size={16} />
+              </Link>
+            </motion.div>
+
+            {/* Quick Stats & Actions */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="space-y-6"
+            >
+              {/* Activity Summary */}
+              <div className="border border-white/10 rounded-xl bg-dark-bg-matte p-6 hover:border-honey-tan/30 transition-colors duration-300">
+                <div className="flex items-center gap-2 mb-4">
+                  <Activity size={20} className="text-honey-tan" />
+                  <h3 className="text-lg font-bold text-white">Activity</h3>
+                </div>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3 text-sm">
+                    <div className="w-2 h-2 rounded-full bg-honey-tan mt-1.5 flex-shrink-0" />
+                    <p className="text-gray-300">Platform active with <span className="text-honey-tan font-semibold">{data?.totalUsers?.toLocaleString() || '0'}</span> users</p>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm">
+                    <div className="w-2 h-2 rounded-full bg-honey-tan mt-1.5 flex-shrink-0" />
+                    <p className="text-gray-300"><span className="text-honey-tan font-semibold">{data?.totalContestants?.toLocaleString() || '0'}</span> contestants competing</p>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm">
+                    <div className="w-2 h-2 rounded-full bg-honey-tan mt-1.5 flex-shrink-0" />
+                    <p className="text-gray-300"><span className="text-honey-tan font-semibold">{data?.votesCast?.toLocaleString() || '0'}</span> votes cast</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Quick Actions */}
+              <div className="border border-white/10 rounded-xl bg-dark-bg-matte p-6 hover:border-honey-tan/30 transition-colors duration-300">
+                <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                  <TrendingUp size={20} className="text-honey-tan" />
+                  Quick Actions
+                </h3>
+                <div className="space-y-3">
+                  <Link
+                    href="/vote"
+                    className="flex items-center justify-between px-4 py-3 rounded-lg border border-honey-tan/30 bg-honey-tan/10 hover:bg-honey-tan/20 transition-colors duration-200 group"
+                  >
+                    <span className="font-medium text-white">Vote Now</span>
+                    <ArrowRight size={16} className="text-honey-tan group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  <Link
+                    href="/leaderboard"
+                    className="flex items-center justify-between px-4 py-3 rounded-lg border border-white/20 hover:border-honey-tan/30 hover:bg-white/5 transition-colors duration-200 group"
+                  >
+                    <span className="font-medium text-white">View Leaderboard</span>
+                    <ArrowRight size={16} className="text-gray-400 group-hover:text-honey-tan group-hover:translate-x-1 transition-all" />
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          </section>
+
+          {/* Featured Section */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="border border-white/10 rounded-xl bg-dark-bg-matte p-8 hover:border-honey-tan/30 transition-colors duration-300"
+          >
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="flex-1">
+                <h2 className="text-3xl font-bold text-white mb-3">Stay Updated</h2>
+                <p className="text-gray-400 mb-6 text-lg">
+                  Follow the latest challenges, vote on your favorite contestants, and be part of the movement. Check out the live updates and leaderboard to see who's leading.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link
+                    href="/challenges"
+                    className="px-6 py-3 bg-gradient-to-r from-honey-tan to-honey-tan-600 text-black font-bold rounded-lg hover:shadow-lg hover:shadow-honey-tan/50 transition-all duration-200"
+                  >
+                    View Challenges
+                  </Link>
+                  <Link
+                    href="/vote"
+                    className="px-6 py-3 border font-bold rounded-lg hover:bg-honey-tan/10 transition-colors duration-200"
+                  >
+                    Start Voting
+                  </Link>
+                </div>
+              </div>
+              <div className="flex-1 relative h-64 rounded-lg overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-honey-tan/20 to-transparent" />
+                <Image
+                  src="/Images/5452980.jpg"
+                  alt="Dashboard illustration"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
-
-            {/* PROFILE */}
-            <aside className="bg-yellow-300 border border-white/10 rounded-xl p-6 space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-yellow to-yellow-600 text-black flex items-center justify-center font-bold">
-                  KZ
-                </div>
-                <div>
-                  <p className="font-semibold text-black">Khayalami Z.</p>
-                  <p className="text-sm text-black">Member</p>
-                </div>
-              </div>
-
-              <nav className="space-y-2">
-                <Link href="/dashboard/profile" className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10 transition-colors text-white">
-                  <User size={18} /> Profile
-                </Link>
-
-                <Link href="/dashboard/settings" className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10 transition-colors text-white">
-                  <Settings size={18} /> Settings
-                </Link>
-
-                <button className="flex items-center gap-3 p-3 rounded-lg text-red-400 hover:bg-red-500/10 transition-colors w-full text-left">
-                  <LogOut size={18} /> Logout
-                </button>
-              </nav>
-            </aside>
-          </section>
-
-          {/* QUICK ACTIONS */}
-          <section className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <Link href="/vote" className="bg-dark-bg-charcoal border border-white/10 rounded-xl p-6 hover:bg-white/5 transition-colors group">
-              <div className="w-12 h-12 bg-gray-300 border-2 border-dashed border-gray-400 rounded-lg flex items-center justify-center mb-3">
-                <span className="text-gray-600 text-xs font-semibold">Icon</span>
-              </div>
-              <p className="font-semibold text-white">Vote</p>
-              <p className="text-sm text-slate-400">Support contestants</p>
-            </Link>
-
-            <Link href="/quiz" className="bg-dark-bg-charcoal border border-white/10 rounded-xl p-6 hover:bg-white/5 transition-colors group">
-              <div className="w-12 h-12 bg-gray-300 border-2 border-dashed border-gray-400 rounded-lg flex items-center justify-center mb-3">
-                <span className="text-gray-600 text-xs font-semibold">Icon</span>
-              </div>
-              <p className="font-semibold text-white">Daily Quiz</p>
-              <p className="text-sm text-slate-400">Earn bonus votes</p>
-            </Link>
-
-            <Link href="/stream" className="bg-dark-bg-charcoal border border-white/10 rounded-xl p-6 hover:bg-white/5 transition-colors group">
-              <div className="w-12 h-12 bg-gray-300 border-2 border-dashed border-gray-400 rounded-lg flex items-center justify-center mb-3">
-                <span className="text-gray-600 text-xs font-semibold">Icon</span>
-              </div>
-              <p className="font-semibold text-white">Live Stream</p>
-              <p className="text-sm text-slate-400">Watch and vote live</p>
-            </Link>
-          </section>
+          </motion.section>
 
         </main>
       </div>
       <Footer />
     </>
+  )
+}
+
+export default function DashboardPage() {
+  return (
+    <RoleGuard 
+      requiredRoles={['STUDENT', 'PUBLIC']}
+      redirectTo="/auth/login"
+      fallback={
+        <>
+          <Navbar />
+          <div className="min-h-screen flex items-center justify-center pt-24">
+            <div className="text-center px-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Access Denied</h2>
+              <p className="text-gray-600 mb-6">You must be logged in to access the dashboard</p>
+              <Link href="/auth/login" className="inline-block px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
+                Go to Login
+              </Link>
+            </div>
+          </div>
+          <Footer />
+        </>
+      }
+    >
+      <DashboardContent />
+    </RoleGuard>
   )
 }

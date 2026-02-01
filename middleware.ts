@@ -1,19 +1,41 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { verifyToken } from "./src/lib/auth";
+import { getToken } from "next-auth/jwt";
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
+  // Protect admin routes
   if (pathname.startsWith("/admin")) {
-    const auth = req.cookies.get("admin_token")?.value;
-    if (!auth) return NextResponse.redirect(new URL("/admin/login", req.url));
-    const valid = verifyToken(auth);
-    if (!valid) return NextResponse.redirect(new URL("/admin/login", req.url));
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+
+    // Not authenticated
+    if (!token) {
+      return NextResponse.redirect(new URL("/auth/login", req.url));
+    }
+
+    // Not an admin
+    if (token.userType !== "ADMIN") {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+  }
+
+  // Protect student-only routes
+  if (pathname.startsWith("/apply")) {
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+
+    if (!token) {
+      return NextResponse.redirect(new URL("/auth/login", req.url));
+    }
+
+    if (token.userType !== "STUDENT") {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
   }
 
   return NextResponse.next();
 }
+
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/apply/:path*"],
 };

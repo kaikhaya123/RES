@@ -10,26 +10,45 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
-  			// Warm Stone Palette
+  			// Honey Tan Palette
+  			'honey-tan': {
+  				'50': '#FBF8F3',      // Lightest honey
+  				'100': '#F5F1E8',     // Very light honey
+  				'200': '#E8DFD0',     // Light honey
+  				'300': '#D4C4AD',     // Medium honey
+  				'400': '#C7B89E',     // Honey tan
+  				'500': '#B8A184',     // Standard honey tan
+  				'600': '#A08B6D',     // Medium honey tan
+  				'700': '#8B7455',     // Dark honey tan
+  				'800': '#6F5E47',     // Darker honey tan
+  				DEFAULT: '#B8A184'   // Default honey tan
+  			},
+  			// Jet Black Backgrounds
+  			'jet-black': {
+  				'pure': '#000000',      // Pure Jet Black
+  				'soft': '#0A0A0A',      // Soft Jet Black
+  				'charcoal': '#111111',  // Jet Black with depth
+  				'dark': '#1A1A1A',      // Dark Jet Black
+  				'card': '#1F1F1F'       // Jet Black for cards
+  			},
+  			// Legacy colors (mapping to new scheme)
   			'warm-stone': {
-  				'base': '#F2EFEA',      // Base background
-  				'secondary': '#E7E3DD', // Secondary surface
-  				'border': '#D6D2CB'     // Border and subtle lines
+  				'base': '#F5F1E8',      
+  				'secondary': '#E8DFD0', 
+  				'border': '#D4C4AD'     
   			},
-  			// Dark Backgrounds
   			'dark-bg': {
-  				'pure': '#000000',      // Pure Black - strongest glow effect
-  				'soft': '#0A0A0A',      // Soft Black - smooth look with depth
-  				'charcoal': '#111111',  // Deep Charcoal - good for sections
-  				'warm': '#1A1A1A',      // Warm Charcoal - pairs well with gold
-  				'matte': '#1F1F1F'      // Matte Graphite - useful for cards
+  				'pure': '#000000',      
+  				'soft': '#0A0A0A',      
+  				'charcoal': '#111111',  
+  				'warm': '#1A1A1A',      
+  				'matte': '#1F1F1F'      
   			},
-  			// Yellow Accent
-  			'brand-yellow': '#FBBF24', // Vibrant yellow for logo and accents
-  			// Charcoal Blue
+  			// Primary accent - Honey Tan
+  			'brand-yellow': '#B8A184', 
   			'charcoal-blue': {
-  				'light': '#2C3E50',     // Light Charcoal Blue
-  				'dark': '#1A2533'       // Dark Charcoal Blue for dramatic sections
+  				'light': '#2C3E50',     
+  				'dark': '#1A2533'       
   			},
   			primary: {
   				'50': '#fef2f2',

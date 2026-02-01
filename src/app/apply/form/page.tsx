@@ -217,7 +217,7 @@ export default function ApplyFormPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center justify-center bg-brand-yellow text-black font-bold px-6 py-2 rounded-md hover:opacity-90 transition disabled:opacity-50 text-sm"
+                  className="inline-flex items-center justify-center bg-honey-tan text-black font-bold px-6 py-2 rounded-md hover:opacity-90 transition disabled:opacity-50 text-sm"
                 >
                   {submitting ? 'Submitting...' : 'Submit'}
                 </button>

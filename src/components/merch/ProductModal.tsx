@@ -87,7 +87,7 @@ export default function ProductModal({ product, onClose, onAdd }: Props) {
                 onClick={() => { onAdd(product, selectedSize ?? undefined); setSelectedSize(null); }}
                 disabled={product.stock === 0 || (product.sizes && product.sizes.length > 0 && !selectedSize)}
                 aria-disabled={product.stock === 0 || (product.sizes && product.sizes.length > 0 && !selectedSize)}
-                className={`bg-brand-yellow text-black px-4 py-2 rounded-full font-semibold hover:bg-yellow-300 transition ${product.stock === 0 || (product.sizes && product.sizes.length > 0 && !selectedSize) ? 'opacity-40 cursor-not-allowed' : ''}`}
+                className={`bg-honey-tan text-black px-4 py-2 rounded-full font-semibold hover:bg-honey-tan-600 transition ${product.stock === 0 || (product.sizes && product.sizes.length > 0 && !selectedSize) ? 'opacity-40 cursor-not-allowed' : ''}`}
               >
                 Add to cart
               </button>

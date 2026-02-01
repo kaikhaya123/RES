@@ -1,4 +1,8 @@
-export default function Dashboard() {
+'use client'
+
+import RoleGuard from '@/components/auth/RoleGuard'
+
+function AdminDashboardContent() {
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
@@ -11,3 +15,20 @@ export default function Dashboard() {
     </div>
   );
 }
+
+export default function Dashboard() {
+  return (
+    <RoleGuard 
+      requiredRoles="ADMIN" 
+      redirectTo="/auth/login"
+      fallback={
+        <div className="p-8 text-center">
+          <p className="text-red-600 font-semibold">Access Denied: Admin role required</p>
+        </div>
+      }
+    >
+      <AdminDashboardContent />
+    </RoleGuard>
+  )
+}
+

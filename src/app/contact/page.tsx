@@ -127,7 +127,7 @@ export default function ContactPage() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-start md:items-center">
 
             {/* CONTACT FORM */}
-            <div className="mx-auto lg:mx-0 w-full max-w-lg relative bg-brand-yellow text-black border border-black/10 rounded-2xl p-6 md:p-12 shadow-lg" role="region" aria-labelledby="contact-form-heading">
+            <div className="max-w-xl mx-auto lg:mx-0 w-full max-w-lg relative bg-honey-tan text-black border border-black/10 rounded-2xl p-6 md:p-12 shadow-lg" role="region" aria-labelledby="contact-form-heading">
 
               <div className="mb-10">
         <h2 id="contact-form-heading" className="text-3xl font-black tracking-tight text-black">
@@ -161,7 +161,7 @@ export default function ContactPage() {
                     type="text"
                     required
                     aria-required="true"
-                    className="w-full h-12 bg-white border border-black-200 rounded-md px-4 text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow ring-offset-2 transition-shadow"
+                    className="w-full h-12 bg-white border border-black-200 rounded-md px-4 text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-honey-tan ring-offset-2 transition-shadow"
                   />
                 </div>
 
@@ -177,7 +177,7 @@ export default function ContactPage() {
                     type="email"
                     required
                     aria-required="true"
-                    className="w-full h-12 bg-white border border-gray-200 rounded-md px-4 text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow ring-offset-2 transition-shadow"
+                    className="w-full h-12 bg-white border border-gray-200 rounded-md px-4 text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-honey-tan ring-offset-2 transition-shadow"
                   />
                 </div>
 
@@ -192,7 +192,7 @@ export default function ContactPage() {
                     rows={6}
                     required
                     aria-required="true"
-                    className="w-full min-h-[140px] bg-white border border-gray-200 rounded-md px-4 py-3 text-black resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow ring-offset-2 transition-shadow"
+                    className="w-full min-h-[140px] bg-white border border-gray-200 rounded-md px-4 py-3 text-black resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-honey-tan ring-offset-2 transition-shadow"
                   />
                 </div>
 
@@ -202,7 +202,7 @@ export default function ContactPage() {
                     type="submit"
                     disabled={status === 'sending'}
                     aria-disabled={status === 'sending'}
-                    className="inline-flex items-center justify-center gap-3 bg-black text-brand-yellow font-black py-3 px-6 rounded-lg uppercase tracking-wider hover:brightness-95 transition disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-brand-yellow ring-offset-2"
+                    className="inline-flex items-center justify-center gap-3 bg-black text-honey-tan font-black py-3 px-6 rounded-lg uppercase tracking-wider hover:brightness-95 transition disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-honey-tan ring-offset-2"
                   >
                     {status === 'sending' ? 'Sending…' : 'Send message'}
                   </button>
@@ -216,7 +216,7 @@ export default function ContactPage() {
             {/* INFO PANEL */}
             <aside className="space-y-8 lg:sticky lg:top-28">
 
-              <div className="bg-brand-yellow-50 border border-black-100 rounded-lg p-6">
+              <div className="bg-honey-tan-50 border border-black-100 rounded-lg p-6">
                 <h3 className="text-lg font-black mb-3">Contact details</h3>
                 <div className="flex flex-col gap-4 text-slate-700">
                   <div className="flex items-start gap-3">

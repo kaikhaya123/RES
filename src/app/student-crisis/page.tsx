@@ -23,7 +23,7 @@ export default function StudentCrisisPage() {
             >
               The Student Crisis
               <br />
-              <span className="text-brand-yellow">We're Addressing</span>
+              <span className="text-honey-tan">We're Addressing</span>
             </motion.h1>
 
             <motion.p
@@ -65,7 +65,7 @@ export default function StudentCrisisPage() {
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-black mb-4 text-brand-yellow">R.E.S. Response</h3>
+                <h3 className="text-2xl font-black mb-4 text-honey-tan">R.E.S. Response</h3>
                 <ul className="space-y-3">
                   {[
                     'National awareness campaign',
@@ -75,7 +75,7 @@ export default function StudentCrisisPage() {
                     'Post-show implementation support'
                   ].map((item, i) => (
                     <li key={i} className="flex gap-3 items-start">
-                      <TrendingUp className="w-5 h-5 text-brand-yellow flex-shrink-0 mt-0.5" />
+                      <TrendingUp className="w-5 h-5 text-honey-tan flex-shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -96,8 +96,8 @@ export default function StudentCrisisPage() {
                     { stat: '40%', label: 'Grade impact from poor housing' },
                     { stat: '70%', label: 'NSFAS inadequacy for housing' }
                   ].map((item, i) => (
-                    <div key={i} className="border-l-4 border-brand-yellow pl-6">
-                      <p className="text-3xl font-black text-brand-yellow">{item.stat}</p>
+                    <div key={i} className="border-l-4 border-honey-tan pl-6">
+                      <p className="text-3xl font-black text-honey-tan">{item.stat}</p>
                       <p className="text-sm text-white/70 mt-1">{item.label}</p>
                     </div>
                   ))}
@@ -125,8 +125,8 @@ export default function StudentCrisisPage() {
                     { stat: 'Hidden costs', label: 'Food, transport, books uncovered' },
                     { stat: '60%', label: 'Students earn while studying' }
                   ].map((item, i) => (
-                    <div key={i} className="border-l-4 border-brand-yellow pl-6">
-                      <p className="text-2xl font-black text-brand-yellow">{item.stat}</p>
+                    <div key={i} className="border-l-4 border-honey-tan pl-6">
+                      <p className="text-2xl font-black text-honey-tan">{item.stat}</p>
                       <p className="text-sm text-white/70 mt-1">{item.label}</p>
                     </div>
                   ))}
@@ -148,7 +148,7 @@ export default function StudentCrisisPage() {
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-black mb-4 text-brand-yellow">R.E.S. Response</h3>
+                <h3 className="text-2xl font-black mb-4 text-honey-tan">R.E.S. Response</h3>
                 <ul className="space-y-3">
                   {[
                     'Financial literacy mini-series',
@@ -158,7 +158,7 @@ export default function StudentCrisisPage() {
                     'Post-show job placement support'
                   ].map((item, i) => (
                     <li key={i} className="flex gap-3 items-start">
-                      <TrendingUp className="w-5 h-5 text-brand-yellow flex-shrink-0 mt-0.5" />
+                      <TrendingUp className="w-5 h-5 text-honey-tan flex-shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -198,9 +198,9 @@ export default function StudentCrisisPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 p-8 rounded-lg hover:border-brand-yellow transition-colors"
+                  className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 p-8 rounded-lg hover:border-honey-tan transition-colors"
                 >
-                  <h3 className="text-xl font-black mb-3 text-brand-yellow">{item.title}</h3>
+                  <h3 className="text-xl font-black mb-3 text-honey-tan">{item.title}</h3>
                   <p className="text-white/70">{item.description}</p>
                 </motion.div>
               ))}
@@ -210,7 +210,7 @@ export default function StudentCrisisPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-br from-brand-yellow/20 to-brand-yellow/5 border border-brand-yellow/30 p-12 rounded-lg text-center"
+              className="bg-gradient-to-br from-honey-tan/20 to-honey-tan/5 border border-honey-tan/30 p-12 rounded-lg text-center"
             >
               <p className="text-2xl font-black text-white mb-6">First Season Impact Goals</p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -221,7 +221,7 @@ export default function StudentCrisisPage() {
                   { metric: '2+', label: 'Housing projects funded' }
                 ].map((item, i) => (
                   <div key={i}>
-                    <p className="text-3xl font-black text-brand-yellow">{item.metric}</p>
+                    <p className="text-3xl font-black text-honey-tan">{item.metric}</p>
                     <p className="text-sm text-white/70 mt-1">{item.label}</p>
                   </div>
                 ))}
@@ -276,11 +276,11 @@ export default function StudentCrisisPage() {
                   transition={{ delay: i * 0.1 }}
                   className="bg-white/5 border border-white/10 p-8 rounded-lg"
                 >
-                  <h3 className="text-2xl font-black text-brand-yellow mb-6">{item.role}</h3>
+                  <h3 className="text-2xl font-black text-honey-tan mb-6">{item.role}</h3>
                   <ul className="space-y-3">
                     {item.actions.map((action, j) => (
                       <li key={j} className="flex gap-3 items-start">
-                        <div className="w-2 h-2 bg-brand-yellow rounded-full mt-2 flex-shrink-0" />
+                        <div className="w-2 h-2 bg-honey-tan rounded-full mt-2 flex-shrink-0" />
                         <span className="text-white/70 text-sm">{action}</span>
                       </li>
                     ))}
@@ -300,14 +300,14 @@ export default function StudentCrisisPage() {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/auth/register"
-              className="inline-flex items-center gap-3 bg-brand-yellow px-10 py-5 text-sm font-black uppercase tracking-widest text-black hover:bg-yellow-400 transition-all"
+              className="inline-flex items-center gap-3 bg-honey-tan px-10 py-5 text-sm font-black uppercase tracking-widest text-black hover:bg-honey-tan-400 transition-all"
             >
               Register Now
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/movement"
-              className="inline-flex items-center gap-3 border-2 border-brand-yellow px-10 py-5 text-sm font-black uppercase tracking-widest text-white hover:bg-brand-yellow hover:text-black transition-all"
+              className="inline-flex items-center gap-3 border-2 border-honey-tan px-10 py-5 text-sm font-black uppercase tracking-widest text-white hover:bg-honey-tan hover:text-black transition-all"
             >
               Learn The Movement
             </Link>

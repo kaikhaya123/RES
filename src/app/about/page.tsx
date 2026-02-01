@@ -55,7 +55,7 @@ export default function AboutPage() {
                   </section>
 
         {/* WHAT IT IS */}
-        <section className="bg-brand-yellow text-black px-6 py-28 lg:px-12">
+        <section className="bg-honey-tan text-black px-6 py-28 lg:px-12">
           <div className="mx-auto max-w-5xl">
             <h2 className="mb-10 text-5xl font-black tracking-tight">What R.E.S. Is</h2>
             <div className="space-y-6 text-lg leading-relaxed">
@@ -113,7 +113,7 @@ export default function AboutPage() {
         </section>
 
         {/* VALUES */}
-        <section className="bg-brand-yellow text-black px-6 py-32 lg:px-12">
+        <section className="bg-honey-tan text-black px-6 py-32 lg:px-12">
           <div className="mx-auto max-w-6xl">
             <h2 className="mb-20 text-5xl font-black">What We Stand For</h2>
 
@@ -175,7 +175,7 @@ export default function AboutPage() {
           </p>
           <Link
             href="/auth/register"
-            className="inline-flex items-center gap-3 bg-brand-yellow px-10 py-5 text-sm font-black uppercase tracking-widest text-black"
+            className="inline-flex items-center gap-3 bg-honey-tan px-10 py-5 text-sm font-black uppercase tracking-widest text-black"
           >
             Join R.E.S.
             <ArrowRight className="w-4 h-4" />

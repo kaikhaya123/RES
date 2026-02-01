@@ -35,7 +35,7 @@ export default function ApplyPage() {
                 'Strong communication and commitment'
               ].map(item => (
                 <li key={item} className="flex gap-3 text-white/80">
-                  <CheckCircle className="w-5 h-5 text-brand-yellow" />
+                  <CheckCircle className="w-5 h-5 text-honey-tan" />
                   {item}
                 </li>
               ))}
@@ -55,7 +55,7 @@ export default function ApplyPage() {
           <section>
             <a
               href="/apply/form"
-              className="inline-block bg-brand-yellow text-black font-bold px-10 py-4 rounded-lg hover:opacity-90 transition"
+              className="inline-block bg-honey-tan text-black font-bold px-10 py-4 rounded-lg hover:opacity-90 transition"
             >
               Start Application
             </a>

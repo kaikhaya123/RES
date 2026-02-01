@@ -29,7 +29,7 @@ export default function CartDrawer() {
           {items.length === 0 ? (
             <div className="flex-1 flex flex-col items-center justify-center gap-4">
               <p className="text-sm text-white/70">No items yet.</p>
-              <Link href="/merch" className="block text-center bg-brand-yellow text-black px-6 py-2 rounded font-bold">Shop Now</Link>
+              <Link href="/merch" className="block text-center bg-honey-tan text-black px-6 py-2 rounded font-bold">Shop Now</Link>
             </div>
           ) : (
             <div className="flex-1 flex flex-col justify-between overflow-auto">
@@ -63,7 +63,7 @@ export default function CartDrawer() {
                   <span>Total</span>
                   <span>R {(items.reduce((sum, it) => sum + it.product.price * it.qty, 0) / 100).toFixed(2)}</span>
                 </div>
-                <Link href="/checkout" onClick={() => setOpen(false)} className="block text-center bg-brand-yellow text-black px-4 py-3 rounded-full font-bold hover:bg-yellow-300 transition">Checkout</Link>
+                <Link href="/checkout" onClick={() => setOpen(false)} className="block text-center bg-honey-tan text-black px-4 py-3 rounded-full font-bold hover:bg-honey-tan-600 transition">Checkout</Link>
               </div>
             </div>
           )}

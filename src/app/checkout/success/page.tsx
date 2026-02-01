@@ -66,8 +66,8 @@ export default function CheckoutSuccessPage() {
           {/* Email Confirmation */}
           <div className="bg-white/5 border border-white/10 rounded-lg p-6">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-brand-yellow/20 rounded-full flex items-center justify-center flex-shrink-0">
-                <FiMail className="w-6 h-6 text-brand-yellow" />
+              <div className="w-12 h-12 bg-honey-tan/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <FiMail className="w-6 h-6 text-honey-tan" />
               </div>
               <div>
                 <h3 className="font-bold text-lg mb-2">Check Your Email</h3>
@@ -81,8 +81,8 @@ export default function CheckoutSuccessPage() {
           {/* Shipping Info */}
           <div className="bg-white/5 border border-white/10 rounded-lg p-6">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-brand-yellow/20 rounded-full flex items-center justify-center flex-shrink-0">
-                <FiPackage className="w-6 h-6 text-brand-yellow" />
+              <div className="w-12 h-12 bg-honey-tan/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <FiPackage className="w-6 h-6 text-honey-tan" />
               </div>
               <div>
                 <h3 className="font-bold text-lg mb-2">Shipping Updates</h3>
@@ -95,11 +95,11 @@ export default function CheckoutSuccessPage() {
         </div>
 
         {/* What's Next */}
-        <div className="bg-gradient-to-br from-brand-yellow/10 to-brand-yellow/5 border border-brand-yellow/20 rounded-lg p-8 mb-8">
+        <div className="bg-gradient-to-br from-honey-tan/10 to-honey-tan/5 border border-honey-tan/20 rounded-lg p-8 mb-8">
           <h2 className="text-2xl font-black mb-6">What's Next?</h2>
           <div className="space-y-4">
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-brand-yellow text-black rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
+              <div className="w-6 h-6 bg-honey-tan text-black rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
                 1
               </div>
               <div>
@@ -110,7 +110,7 @@ export default function CheckoutSuccessPage() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-brand-yellow text-black rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
+              <div className="w-6 h-6 bg-honey-tan text-black rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
                 2
               </div>
               <div>
@@ -121,7 +121,7 @@ export default function CheckoutSuccessPage() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-brand-yellow text-black rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
+              <div className="w-6 h-6 bg-honey-tan text-black rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
                 3
               </div>
               <div>
@@ -138,7 +138,7 @@ export default function CheckoutSuccessPage() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onClick={() => router.push('/merch')}
-            className="flex items-center justify-center gap-2 bg-brand-yellow text-black px-8 py-4 rounded-full font-bold hover:bg-yellow-300 transition"
+            className="flex items-center justify-center gap-2 bg-honey-tan text-black px-8 py-4 rounded-full font-bold hover:bg-honey-tan-400 transition"
           >
             Continue Shopping
             <FiArrowRight />
@@ -156,7 +156,7 @@ export default function CheckoutSuccessPage() {
           <p className="text-sm text-white/60 mb-2">Need help with your order?</p>
           <a
             href="/contact"
-            className="text-brand-yellow hover:text-yellow-300 transition font-semibold text-sm"
+            className="text-honey-tan hover:text-honey-tan-400 transition font-semibold text-sm"
           >
             Contact Support
           </a>

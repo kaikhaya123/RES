@@ -1,15 +1,17 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { signIn } from "next-auth/react";
+import { useState, useRef, useEffect } from "react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff, AlertCircle, X } from "lucide-react";
+import { getDefaultRedirectPath } from "@/lib/roleUtils";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { data: session, status } = useSession();
 
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +20,14 @@ export default function LoginPage() {
 
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (status === "authenticated" && session?.user?.userType) {
+      const redirectPath = getDefaultRedirectPath(session.user.userType as any);
+      router.push(redirectPath);
+    }
+  }, [status, session, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +49,8 @@ export default function LoginPage() {
     }
 
     if (result?.ok) {
-      router.push("/");
+      // User will be redirected by the useEffect above
+      // But we'll also do a refresh to be safe
       router.refresh();
     }
 
@@ -68,7 +79,7 @@ export default function LoginPage() {
             title="Back to home"
             aria-label="Back to home"
           >
-            <X size={20} className="text-white group-hover:text-brand-yellow transition-colors" />
+            <X size={20} className="text-white group-hover:text-honey-tan transition-colors" />
           </Link>
         </motion.div>
 

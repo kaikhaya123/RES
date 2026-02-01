@@ -131,7 +131,7 @@ export default function Navbar() {
             >
               <ShoppingCart className="w-7 h-7 md:w-6 md:h-6 text-white" />
               {count > 0 && (
-                <span className="absolute -top-1 -right-1 bg-brand-yellow text-black text-xs rounded-full px-2 py-0.5 font-bold">{count}</span>
+                <span className="absolute -top-1 -right-1 bg-honey-tan text-black text-xs rounded-full px-2 py-0.5 font-bold">{count}</span>
               )}
             </button>
             </div>

@@ -51,7 +51,7 @@ const FlipLink = ({ children, href }: FlipLinkProps) => {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="relative block overflow-hidden whitespace-nowrap text-lg font-bold uppercase sm:text-2xl md:text-3xl text-white hover:text-brand-yellow transition-colors"
+      className="relative block overflow-hidden whitespace-nowrap text-lg font-bold uppercase sm:text-2xl md:text-3xl text-white hover:text-honey-tan transition-colors"
       style={{
         lineHeight: 0.9,
       }}
@@ -95,7 +95,7 @@ const FlipLink = ({ children, href }: FlipLinkProps) => {
               ease: "easeInOut",
               delay: STAGGER * i,
             }}
-            className="inline-block text-brand-yellow"
+            className="inline-block text-honey-tan"
             key={i}
           >
             {l}

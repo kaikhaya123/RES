@@ -184,13 +184,17 @@ export const authOptions: NextAuthOptions = {
       
       return true; // Allow other providers
     },
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account, profile }) {
       if (user) {
         token.id = user.id;
         token.email = user.email;
         token.userType = user.userType;
         token.image = user.image;
         token.provider = user.provider || account?.provider || 'credentials';
+      }
+      // Capture Google profile image
+      if (account?.provider === 'google' && profile?.image) {
+        token.image = profile.image;
       }
       return token;
     },

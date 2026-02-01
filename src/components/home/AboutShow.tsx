@@ -144,14 +144,14 @@ export default function AboutShow() {
             >
               <Link
                 href="/auth/register"
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-brand-yellow text-black font-black text-sm uppercase tracking-[0.15em] hover:bg-yellow-400 transition-all duration-300"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-honey-tan text-black font-black text-sm uppercase tracking-[0.15em] hover:bg-honey-tan-600 transition-all duration-300"
               >
                 <span>Register Now</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/journey"
-                className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-brand-yellow text-white font-black text-sm uppercase tracking-[0.15em] hover:bg-brand-yellow hover:text-black transition-all duration-300"
+                className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-honey-tan text-white font-black text-sm uppercase tracking-[0.15em] hover:bg-honey-tan hover:text-black transition-all duration-300"
               >
                 <span>The Journey</span>
                 <Play className="w-4 h-4" />
@@ -718,14 +718,14 @@ export default function AboutShow() {
           >
             <Link
               href="/auth/register"
-              className="group inline-flex items-center gap-3 px-10 py-5 bg-brand-yellow text-black font-black text-sm uppercase tracking-[0.15em] hover:bg-yellow-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              className="group inline-flex items-center gap-3 px-10 py-5 bg-honey-tan text-black font-black text-sm uppercase tracking-[0.15em] hover:bg-honey-tan-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
             >
               <span>Register Now</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
             </Link>
             <Link
               href="#contestants"
-              className="group inline-flex items-center gap-3 px-10 py-5 border-2 border-brand-yellow text-white font-black text-sm uppercase tracking-[0.15em] hover:bg-brand-yellow hover:text-black transition-all duration-300 hover:scale-105"
+              className="group inline-flex items-center gap-3 px-10 py-5 border-2 border-honey-tan text-white font-black text-sm uppercase tracking-[0.15em] hover:bg-honey-tan hover:text-black transition-all duration-300 hover:scale-105"
             >
               <span>Meet the Contestants</span>
             </Link>

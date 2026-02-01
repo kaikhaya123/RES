@@ -139,8 +139,16 @@ export async function POST(request: NextRequest) {
     logger.error('Registration', 'Unhandled error', { message: error.message, name: error.name });
     
     if (error.name === 'ZodError') {
+      // Extract first error message for user-friendly display
+      const firstError = error.errors[0];
+      const errorMessage = firstError.message || 'Validation failed';
+      
       return NextResponse.json(
-        { error: 'Validation failed', details: error.errors },
+        { 
+          error: errorMessage,
+          field: firstError.path[0] || 'unknown',
+          details: error.errors 
+        },
         { status: 400 }
       );
     }

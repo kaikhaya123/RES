@@ -8,7 +8,6 @@ import Image from 'next/image';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Lock, Check, ShoppingCart } from 'lucide-react';
 
 export default function CheckoutPage() {
   const { items, clear } = useCart();
@@ -98,7 +97,7 @@ export default function CheckoutPage() {
             className="text-center px-6"
           >
             <div className="w-24 h-24 mx-auto bg-amber-500/10 rounded-full flex items-center justify-center mb-6">
-              <ShieldCheck className="w-12 h-12 text-amber-600" />
+              <div className="text-6xl">🛡️</div>
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Your cart is empty</h1>
             <p className="text-gray-600 mb-8 max-w-md mx-auto">
@@ -126,15 +125,15 @@ export default function CheckoutPage() {
         <div className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
           <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-8">
             <div className="flex items-center gap-1 sm:gap-2">
-              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-500 flex items-center justify-center">
-                <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-500 flex items-center justify-center text-white text-xs">
+                🛒
               </div>
               <span className="text-xs sm:text-sm font-medium text-gray-900 hidden sm:inline">Cart</span>
             </div>
             <div className="w-8 sm:w-12 md:w-20 h-0.5 bg-gray-300"></div>
             <div className="flex items-center gap-1 sm:gap-2">
-              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-500 flex items-center justify-center">
-                <Check className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-500 flex items-center justify-center text-white text-xs">
+                ✓
               </div>
               <span className="text-xs sm:text-sm font-medium text-gray-900 hidden sm:inline">Review</span>
             </div>
@@ -539,7 +538,7 @@ export default function CheckoutPage() {
               {/* Security Badge */}
               <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200">
                 <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-600">
-                  <Lock className="w-3 h-3 sm:w-4 sm:h-4 text-green-600 shrink-0" />
+                  <span className="text-green-600 shrink-0">🔒</span>
                   <span>Secure Checkout - SSL Encrypted</span>
                 </div>
                 <p className="text-xs text-center text-gray-500 mt-2 px-2">

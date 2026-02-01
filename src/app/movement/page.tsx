@@ -38,7 +38,7 @@ export default function MovementPage() {
             >
               The Movement
               <br />
-              <span className="text-brand-yellow">Inspired by Robben Island</span>
+              <span className="text-honey-tan">Inspired by Robben Island</span>
             </motion.h1>
 
             <motion.p
@@ -53,7 +53,7 @@ export default function MovementPage() {
         </section>
 
         {/* ROBBEN ISLAND CONNECTION */}
-        <section className="bg-brand-yellow text-black px-6 lg:px-12 py-24 md:py-32">
+        <section className="bg-honey-tan text-black px-6 lg:px-12 py-24 md:py-32">
           <div className="mx-auto max-w-5xl">
             <div className="mb-12 md:mb-16">
               <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">Robben Island's Legacy</h2>
@@ -150,8 +150,8 @@ export default function MovementPage() {
                   {/* Text column */}
                   <div className={`col-span-12 lg:col-span-6 ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'} px-4 lg:px-0` }>
                     <div className="max-w-xl">
-                      <span className="inline-block w-10 h-1 bg-brand-yellow mb-4" />
-                      <p className="text-brand-yellow font-black text-sm md:text-base mb-3 uppercase tracking-wider">{item.week}</p>
+                      <span className="inline-block w-10 h-1 bg-honey-tan mb-4" />
+                      <p className="text-honey-tan font-black text-sm md:text-base mb-3 uppercase tracking-wider">{item.week}</p>
                       <h3 className="text-3xl md:text-4xl font-black mb-3 leading-tight text-white">{item.title}</h3>
                       <p className="text-xs md:text-sm text-white/70 mb-6 uppercase tracking-widest font-semibold">{item.subtitle}</p>
                       <p className="text-white/85 text-base md:text-lg leading-relaxed">{item.description}</p>
@@ -181,7 +181,7 @@ export default function MovementPage() {
         </section>
 
         {/* PURPOSE-DRIVEN SHOW */}
-        <section className="bg-brand-yellow text-black px-6 lg:px-12 py-24 md:py-32">
+        <section className="bg-honey-tan text-black px-6 lg:px-12 py-24 md:py-32">
           <div className="mx-auto max-w-5xl">
             <h2 className="text-4xl md:text-5xl font-black mb-12 tracking-tight">More Than Entertainment</h2>
             
@@ -215,14 +215,14 @@ export default function MovementPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/auth/register"
-                className="inline-flex items-center justify-center gap-3 bg-brand-yellow px-10 md:px-12 py-5 text-base font-black uppercase tracking-widest text-black hover:bg-yellow-300 transition-all duration-300 rounded-lg"
+                className="inline-flex items-center justify-center gap-3 bg-honey-tan px-10 md:px-12 py-5 text-base font-black uppercase tracking-widest text-black hover:bg-honey-tan-600 transition-all duration-300 rounded-lg"
               >
                 Register Now
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
                 href="/how-it-works"
-                className="inline-flex items-center justify-center gap-3 border-2 border-brand-yellow px-10 md:px-12 py-5 text-base font-black uppercase tracking-widest text-white hover:bg-brand-yellow hover:text-black transition-all duration-300 rounded-lg"
+                className="inline-flex items-center justify-center gap-3 border-2 border-honey-tan px-10 md:px-12 py-5 text-base font-black uppercase tracking-widest text-white hover:bg-honey-tan hover:text-black transition-all duration-300 rounded-lg"
               >
                 How It Works
                 <ArrowRight className="w-5 h-5" />

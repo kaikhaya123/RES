@@ -178,7 +178,7 @@ export default function RegisterPage() {
           title="Back to home"
           aria-label="Back to home"
         >
-          <X size={20} className="text-white group-hover:text-brand-yellow transition-colors" />
+          <X size={20} className="text-white group-hover:text-honey-tan transition-colors" />
         </Link>
       </motion.div>
 

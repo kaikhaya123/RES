@@ -56,7 +56,7 @@ export const TextParallaxHowItWorks = () => {
 const totalSteps = 6;
   
   return (
-    <div className="bg-brand-yellow">
+    <div className="bg-honey-tan">
       <TextParallaxContent
         imgUrl="/Images/vertical-shot-curly-haired-millennial-girl-sits-crossed-legs-uses-mobile-phone-laptop-computer-connected-wireless-min.jpg"
         subheading="Step 1"
@@ -298,7 +298,7 @@ const ExampleContent = ({
   return (
     <div className={`mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 ${
       isHeavy ? 'pb-24 pt-16' : 'pb-12 pt-8'
-    } md:grid-cols-12 bg-brand-yellow`}>
+    } md:grid-cols-12 bg-honey-tan`}>
       <motion.h2 
         className={`col-span-1 font-black text-black ${
           isHeavy 
@@ -329,7 +329,7 @@ viewport={{ once: true }}
         {showCTA && (
           <motion.a 
             href="/challenges" 
-            className="inline-flex items-center gap-3 rounded-lg bg-black px-8 py-3 text-base font-semibold text-brand-yellow transition-all hover:bg-black/90 active:scale-95"
+            className="inline-flex items-center gap-3 rounded-lg bg-black px-8 py-3 text-base font-semibold text-honey-tan transition-all hover:bg-black/90 active:scale-95"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -347,13 +347,13 @@ viewport={{ once: true }}
 
 const TrustAndIntegrity = () => (
   <motion.div 
-    className="mx-auto max-w-7xl px-6 py-16 bg-brand-yellow"
+    className="mx-auto max-w-7xl px-6 py-16 bg-honey-tan"
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}
     transition={{ duration: 0.8 }}
     viewport={{ once: true }}
   >
-    <div className="rounded-3xl border border-black/10 p-12 bg-gradient-to-br from-brand-yellow to-brand-yellow">
+    <div className="rounded-3xl border border-black/10 p-12 bg-gradient-to-br from-honey-tan to-honey-tan">
       <motion.h2 
         className="text-3xl md:text-4xl font-black text-black mb-8"
         initial={{ opacity: 0, y: 20 }}

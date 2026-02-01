@@ -51,7 +51,7 @@ export default function VotingSection() {
         >
           <h2 className="text-4xl lg:text-5xl font-black leading-tight">
             Vote for Your
-            <span className="block text-brand-yellow">Favorite Contestant</span>
+            <span className="block text-honey-tan">Favorite Contestant</span>
           </h2>
 
           <p className="text-lg text-white/70 max-w-lg">
@@ -60,7 +60,7 @@ export default function VotingSection() {
 
           <Link
             href="/auth/register"
-            className="inline-flex items-center gap-3 bg-brand-yellow text-black px-8 py-4 font-black uppercase tracking-wider text-sm"
+            className="inline-flex items-center gap-3 bg-honey-tan text-black px-8 py-4 font-black uppercase tracking-wider text-sm"
           >
             Start Voting
             <ArrowRight className="w-4 h-4" />
