@@ -6,7 +6,7 @@ import RippleEffect from '@/components/ui/RippleEffect';
 export default function Hero() {
   return (
     <section 
-      className="relative min-h-screen flex items-center overflow-hidden lg:items-start"
+      className="relative min-h-screen flex items-end overflow-hidden"
       style={{
         paddingTop: 'env(safe-area-inset-top, 16px)',
         backgroundImage: "url('/Images/college-students-different-ethnicities-cramming-min.jpg')",
