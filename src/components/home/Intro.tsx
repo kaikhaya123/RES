@@ -150,20 +150,19 @@ export default function IntroStorySections() {
           </p>
 
           <motion.a
-            href="#story"
+            href="/about"
             whileHover={{ x: 8 }}
             className="inline-flex items-center gap-4 text-sm font-bold tracking-wide"
-          >
+            >
             Explore the Story
-            <span className="w-10 h-px bg-white" />
-          </motion.a>
+            </motion.a>
         </div>
 
         <motion.div
           className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center text-white/50"
           animate={{ y: [0, 12, 0] }}
           transition={{ duration: 2.2, repeat: Infinity }}
-        >
+          >
           <span className="text-[10px] tracking-[0.35em] uppercase">Scroll</span>
           <FiArrowDown />
         </motion.div>

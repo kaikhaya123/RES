@@ -55,7 +55,7 @@ export default function ContestantsPage() {
       {/* HERO */}
       <section className="w-screen h-screen relative flex items-end justify-center bg-black">
         <Image 
-          src="/Images/adobe-69386156c98ae%20(1).jpg"
+          src="/Images/college-students-different-ethnicities-cramming (2) (1).jpg"
           alt="Contestants"
           fill
           className="object-cover opacity-60"
@@ -64,7 +64,7 @@ export default function ContestantsPage() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-white text-xl md:text-2xl lg:text-3xl font-extrabold"
+            className="text-yellow-400 text-xl md:text-2xl lg:text-3xl font-extrabold"
           >
             MEET THE CONTESTANTS
           </motion.h1>

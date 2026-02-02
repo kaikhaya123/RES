@@ -16,7 +16,7 @@ export default function MovementPage() {
         {/* HERO - ROBBEN ISLAND */}
         <section className="relative overflow-hidden w-screen h-screen flex items-end">
           <Image
-            src="/Images/front-view-young-people-hostel-min.jpg"
+            src="/Images/college-students-different-ethnicities-cramming (1).jpg"
             alt="The Movement"
             fill
             className="object-cover object-center"
@@ -150,7 +150,6 @@ export default function MovementPage() {
                   {/* Text column */}
                   <div className={`col-span-12 lg:col-span-6 ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'} px-4 lg:px-0` }>
                     <div className="max-w-xl">
-                      <span className="inline-block w-10 h-1 bg-brand-yellow mb-4" />
                       <p className="text-brand-yellow font-black text-sm md:text-base mb-3 uppercase tracking-wider">{item.week}</p>
                       <h3 className="text-3xl md:text-4xl font-black mb-3 leading-tight text-white">{item.title}</h3>
                       <p className="text-xs md:text-sm text-white/70 mb-6 uppercase tracking-widest font-semibold">{item.subtitle}</p>

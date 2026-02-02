@@ -80,7 +80,7 @@ export default function ImpactPage() {
           {/* Background Image */}
           <div className="absolute inset-0 z-0 overflow-hidden">
             <Image
-              src="/Images/college-students-different-ethnicities-cramming%20(6)-min.jpg"
+              src="/Images/authentic-book-club-scene (1).jpg"
               alt="Students collaborating"
               fill
               className="object-cover object-center"
@@ -97,7 +97,7 @@ export default function ImpactPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="max-w-2xl text-4xl font-black leading-tight tracking-tighter lg:text-5xl text-white m-0"
+              className="max-w-2xl text-4xl font-black leading-tight tracking-tighter lg:text-5xl text-yellow-400 m-0"
             >
               REAL IMPACT.
               <br />
