@@ -13,7 +13,7 @@ export default function HowItWorksPage() {
 
       <main className="flex-1">
         {/* HERO */}
-        <section className="relative px-6 lg:px-12 pt-32 md:pt-40 pb-24 md:pb-32 overflow-hidden bg-gradient-to-b from-honey-tan/10 to-black">
+        <section className="relative px-6 lg:px-12 pt-32 md:pt-40 pb-24 md:pb-32 overflow-hidden bg-gradient-to-b from-brand-yellow/10 to-black">
           <motion.div className="relative z-10 max-w-5xl">
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
@@ -23,7 +23,7 @@ export default function HowItWorksPage() {
             >
               How R.E.S.
               <br />
-              <span className="text-honey-tan">Works</span>
+              <span className="text-brand-yellow">Works</span>
             </motion.h1>
 
             <motion.p
@@ -116,7 +116,7 @@ export default function HowItWorksPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-3xl font-black mb-10 text-honey-tan">How Voting Works</h3>
+                <h3 className="text-3xl font-black mb-10 text-brand-yellow">How Voting Works</h3>
                 <div className="space-y-8">
                   {[
                     { label: 'Daily Allowance', value: '100 votes per user per day' },
@@ -129,7 +129,7 @@ export default function HowItWorksPage() {
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       transition={{ delay: i * 0.1 }}
-                      className="border-l-4 border-honey-tan pl-6 pb-8"
+                      className="border-l-4 border-brand-yellow pl-6 pb-8"
                     >
                       <p className="text-xs text-white/60 uppercase tracking-widest font-black mb-2">{item.label}</p>
                       <p className="text-lg lg:text-xl text-white leading-relaxed">{item.value}</p>
@@ -143,7 +143,7 @@ export default function HowItWorksPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-3xl font-black mb-10 text-honey-tan">Engagement Beyond Voting</h3>
+                <h3 className="text-3xl font-black mb-10 text-brand-yellow">Engagement Beyond Voting</h3>
                 <div className="space-y-8">
                   {[
                     { activity: 'Weekly Competitions', reward: 'Promotional merchandise & prizes' },
@@ -156,7 +156,7 @@ export default function HowItWorksPage() {
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       transition={{ delay: i * 0.1 }}
-                      className="border-l-4 border-white/20 pl-6 pb-8 hover:border-honey-tan transition-colors duration-300"
+                      className="border-l-4 border-white/20 pl-6 pb-8 hover:border-brand-yellow transition-colors duration-300"
                     >
                       <p className="text-lg lg:text-xl font-black text-white mb-2">{item.activity}</p>
                       <p className="text-white/70 leading-relaxed">{item.reward}</p>
@@ -237,7 +237,7 @@ export default function HowItWorksPage() {
               <p className="text-lg text-white/60">Every exit is a learning opportunity</p>
             </div>
             
-            <div className="bg-gradient-to-br from-honey-tan/20 to-honey-tan/5 border border-honey-tan/30 p-8 md:p-12 rounded-xl mb-16">
+            <div className="bg-gradient-to-br from-brand-yellow/20 to-brand-yellow/5 border border-brand-yellow/30 p-8 md:p-12 rounded-xl mb-16">
               <p className="text-lg md:text-xl text-white/90 leading-relaxed">
                 When contestants are evicted, they don't go home—they transition to the Leadership House. This is a critical innovation: eviction becomes an opportunity for intensive leadership development.
               </p>
@@ -308,14 +308,14 @@ export default function HowItWorksPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/auth/register"
-                className="inline-flex items-center justify-center gap-3 bg-honey-tan px-10 md:px-12 py-5 text-base font-black uppercase tracking-widest text-black hover:bg-honey-tan-400 transition-all duration-300 rounded-lg"
+                className="inline-flex items-center justify-center gap-3 bg-brand-yellow px-10 md:px-12 py-5 text-base font-black uppercase tracking-widest text-black hover:bg-yellow-400 transition-all duration-300 rounded-lg"
               >
                 Register Now
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
                 href="/student-crisis"
-                className="inline-flex items-center justify-center gap-3 border-2 border-honey-tan px-10 md:px-12 py-5 text-base font-black uppercase tracking-widest text-white hover:bg-honey-tan hover:text-black transition-all duration-300 rounded-lg"
+                className="inline-flex items-center justify-center gap-3 border-2 border-brand-yellow px-10 md:px-12 py-5 text-base font-black uppercase tracking-widest text-white hover:bg-brand-yellow hover:text-black transition-all duration-300 rounded-lg"
               >
                 Student Crisis Hub
                 <ArrowRight className="w-5 h-5" />

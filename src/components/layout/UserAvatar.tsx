@@ -70,10 +70,10 @@ export function UserAvatar({ session, isScrolled }: UserAvatarProps) {
           <img
             src={session.user.image}
             alt={session.user.name || 'User avatar'}
-            className="w-10 h-10 rounded-full object-cover shadow-lg hover:shadow-xl transition-shadow flex-shrink-0 border border-honey-tan/50"
+            className="w-10 h-10 rounded-full object-cover shadow-lg hover:shadow-xl transition-shadow flex-shrink-0 border border-brand-yellow/50"
           />
         ) : (
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-honey-tan to-honey-tan-500 flex items-center justify-center flex-shrink-0 shadow-lg hover:shadow-xl transition-shadow">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-yellow to-yellow-500 flex items-center justify-center flex-shrink-0 shadow-lg hover:shadow-xl transition-shadow">
             <span className="text-black font-bold text-sm">{getInitials()}</span>
           </div>
         )}
@@ -85,7 +85,7 @@ export function UserAvatar({ session, isScrolled }: UserAvatarProps) {
         </div>
         <ChevronDown 
           size={18} 
-          className="text-white drop-shadow-md group-hover:text-honey-tan transition-all duration-300 group-hover:rotate-180 ml-0.5"
+          className="text-white drop-shadow-md group-hover:text-brand-yellow transition-all duration-300 group-hover:rotate-180 ml-0.5"
         />
       </button>
 
@@ -94,16 +94,16 @@ export function UserAvatar({ session, isScrolled }: UserAvatarProps) {
         <div className="absolute right-0 mt-3 w-80 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-gray-200/50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 z-50">
           
           {/* User Header Section */}
-          <div className="px-6 py-5 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 border-b-3 border-honey-tan">
+          <div className="px-6 py-5 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 border-b-3 border-brand-yellow">
             <div className="flex items-center gap-4 mb-4">
               {session.user?.image ? (
                 <img
                   src={session.user.image}
                   alt={session.user.name || 'User avatar'}
-                  className="w-12 h-12 rounded-full object-cover shadow-lg border-2 border-honey-tan"
+                  className="w-12 h-12 rounded-full object-cover shadow-lg border-2 border-brand-yellow"
                 />
               ) : (
-                <div className="w-12 h-12 rounded-full bg-honey-tan flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 rounded-full bg-brand-yellow flex items-center justify-center shadow-lg">
                   <span className="text-gray-900 font-bold text-sm">{getInitials()}</span>
                 </div>
               )}
@@ -115,7 +115,7 @@ export function UserAvatar({ session, isScrolled }: UserAvatarProps) {
             
             {/* Status Badges */}
             <div className="flex flex-wrap gap-2">
-              <span className="inline-block px-3 py-1.5 bg-honey-tan text-gray-900 text-xs font-black rounded-full shadow-md">
+              <span className="inline-block px-3 py-1.5 bg-brand-yellow text-gray-900 text-xs font-black rounded-full shadow-md">
                 ✓ Active
               </span>
               <span className="inline-block px-3 py-1.5 bg-gray-700 text-white text-xs font-black rounded-full border border-gray-600">
@@ -131,7 +131,7 @@ export function UserAvatar({ session, isScrolled }: UserAvatarProps) {
               onClick={() => setShowDropdown(false)}
               className="flex items-center gap-4 px-5 py-3.5 text-gray-800 hover:bg-gray-100 rounded-lg transition-all duration-200 font-semibold text-base group border-l-4 border-transparent hover:border-honey-tan"
             >
-              <LayoutDashboard size={22} className="text-gray-700 group-hover:text-honey-tan transition-colors flex-shrink-0" />
+              <LayoutDashboard size={22} className="text-gray-700 group-hover:text-brand-yellow transition-colors flex-shrink-0" />
               <span className="group-hover:translate-x-1 transition-transform">Dashboard</span>
             </Link>
 
@@ -140,7 +140,7 @@ export function UserAvatar({ session, isScrolled }: UserAvatarProps) {
               onClick={() => setShowDropdown(false)}
               className="flex items-center gap-4 px-5 py-3.5 text-gray-800 hover:bg-gray-100 rounded-lg transition-all duration-200 font-semibold text-base group border-l-4 border-transparent hover:border-honey-tan"
             >
-              <User size={22} className="text-gray-700 group-hover:text-honey-tan transition-colors flex-shrink-0" />
+              <User size={22} className="text-gray-700 group-hover:text-brand-yellow transition-colors flex-shrink-0" />
               <span className="group-hover:translate-x-1 transition-transform">Profile</span>
             </Link>
 

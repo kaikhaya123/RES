@@ -18,7 +18,7 @@ export default function CategoryGrid({ categories, selected, onSelect }: Props) 
             key={cat.id}
             onClick={() => onSelect(selected === cat.id ? null : cat.id)}
             className={`relative aspect-square overflow-hidden ${
-              selected === cat.id ? 'ring-2 ring-honey-tan' : ''
+              selected === cat.id ? 'ring-2 ring-brand-yellow' : ''
             }`}
           >
             {cat.image && (

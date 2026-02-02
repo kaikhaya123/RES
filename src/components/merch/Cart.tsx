@@ -27,7 +27,7 @@ export default function Cart({ items, onUpdateQty, onRemove }: Props) {
     >
       <button
         onClick={() => setOpen((s) => !s)}
-        className="bg-honey-tan text-black px-4 py-3 rounded-full font-bold"
+        className="bg-brand-yellow text-black px-4 py-3 rounded-full font-bold"
         aria-expanded={open}
         aria-label="Toggle cart"
       >
@@ -61,7 +61,7 @@ export default function Cart({ items, onUpdateQty, onRemove }: Props) {
 
           <div className="mt-4 border-t border-white/5 pt-3">
             <div className="flex items-center justify-between font-semibold mb-3">Total <span>R {(total / 100).toFixed(2)}</span></div>
-            <Link href="/checkout" onClick={() => setOpen(false)} className="block text-center bg-honey-tan text-black px-4 py-3 rounded-full font-bold hover:bg-honey-tan-600 transition">Checkout</Link>
+            <Link href="/checkout" onClick={() => setOpen(false)} className="block text-center bg-brand-yellow text-black px-4 py-3 rounded-full font-bold hover:bg-yellow-600 transition">Checkout</Link>
           </div>
         </div>
       )}

@@ -50,7 +50,7 @@ const steps = [
 
 export default function JourneyPage() {
   return (
-    <div className="w-full min-h-screen flex flex-col bg-honey-tan text-black">
+    <div className="w-full min-h-screen flex flex-col bg-brand-yellow text-black">
       <Navbar />
 
       <main className="flex-1">
@@ -149,7 +149,7 @@ export default function JourneyPage() {
         </section>
 
         {/* FINAL CTA */}
-        <section className="px-6 lg:px-16 py-32 lg:py-40 text-center bg-gradient-to-b from-honey-tan to-honey-tan/90">
+        <section className="px-6 lg:px-16 py-32 lg:py-40 text-center bg-gradient-to-b from-brand-yellow to-brand-yellow/90">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

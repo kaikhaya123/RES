@@ -67,7 +67,7 @@ export default function LeaderboardPage() {
       case 3:
         return 'bg-gradient-to-br from-amber-600 via-amber-700 to-amber-800 text-white shadow-lg shadow-amber-600/50'
       default:
-        return 'bg-dark-bg-charcoal border-2 border-honey-tan/30 text-honey-tan'
+        return 'bg-dark-bg-charcoal border-2 border-brand-yellow/30 text-brand-yellow'
     }
   }
 
@@ -101,13 +101,13 @@ export default function LeaderboardPage() {
         {/* Hero Section */}
         <div className="border-b border-white/10 pb-12 mb-12 relative overflow-hidden">
           {/* Animated Background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-honey-tan/5 to-transparent" />
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-honey-tan/10 rounded-full blur-3xl" />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-yellow/5 to-transparent" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-yellow/10 rounded-full blur-3xl" />
           
           <div className="container mx-auto px-6 lg:px-12 relative z-10">
             <Link 
               href="/dashboard"
-              className="inline-flex items-center gap-2 text-honey-tan hover:text-honey-tan-400 transition-colors mb-6 group"
+              className="inline-flex items-center gap-2 text-brand-yellow hover:text-yellow-400 transition-colors mb-6 group"
             >
               <span className="group-hover:-translate-x-1 transition-transform">←</span>
               <span className="font-semibold">Back to Dashboard</span>
@@ -183,8 +183,8 @@ export default function LeaderboardPage() {
                 onClick={() => setFilter('all')}
                 className={`px-6 py-2.5 rounded-lg font-semibold transition-all ${
                   filter === 'all'
-                    ? 'bg-honey-tan text-black shadow-lg shadow-honey-tan/50'
-                    : 'bg-dark-bg-matte border border-white/20 text-gray-300 hover:border-honey-tan/50'
+                    ? 'bg-brand-yellow text-black shadow-lg shadow-brand-yellow/50'
+                    : 'bg-dark-bg-matte border border-white/20 text-gray-300 hover:border-brand-yellow/50'
                 }`}
               >
                 All Contestants
@@ -193,8 +193,8 @@ export default function LeaderboardPage() {
                 onClick={() => setFilter('top10')}
                 className={`px-6 py-2.5 rounded-lg font-semibold transition-all ${
                   filter === 'top10'
-                    ? 'bg-honey-tan text-black shadow-lg shadow-honey-tan/50'
-                    : 'bg-dark-bg-matte border border-white/20 text-gray-300 hover:border-honey-tan/50'
+                    ? 'bg-brand-yellow text-black shadow-lg shadow-brand-yellow/50'
+                    : 'bg-dark-bg-matte border border-white/20 text-gray-300 hover:border-brand-yellow/50'
                 }`}
               >
                 Top 10
@@ -203,8 +203,8 @@ export default function LeaderboardPage() {
                 onClick={() => setFilter('rising')}
                 className={`px-6 py-2.5 rounded-lg font-semibold transition-all ${
                   filter === 'rising'
-                    ? 'bg-honey-tan text-black shadow-lg shadow-honey-tan/50'
-                    : 'bg-dark-bg-matte border border-white/20 text-gray-300 hover:border-honey-tan/50'
+                    ? 'bg-brand-yellow text-black shadow-lg shadow-brand-yellow/50'
+                    : 'bg-dark-bg-matte border border-white/20 text-gray-300 hover:border-brand-yellow/50'
                 }`}
               >
                 Rising Stars
@@ -229,7 +229,7 @@ export default function LeaderboardPage() {
           >
             {isLoading ? (
               <div className="flex items-center justify-center py-20">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-honey-tan" />
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-yellow" />
               </div>
             ) : (
               <div className="divide-y divide-white/5">
@@ -250,7 +250,7 @@ export default function LeaderboardPage() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.05, duration: 0.4 }}
                         className={`px-6 py-5 flex items-center gap-6 hover:bg-white/5 transition-all duration-200 group ${
-                          rank <= 3 ? 'bg-gradient-to-r from-honey-tan/5 to-transparent' : ''
+                          rank <= 3 ? 'bg-gradient-to-r from-brand-yellow/5 to-transparent' : ''
                         }`}
                       >
                         {/* Rank Badge */}
@@ -271,11 +271,11 @@ export default function LeaderboardPage() {
                             <img
                               src={contestant.image}
                               alt={contestant.name}
-                              className="w-12 h-12 rounded-full object-cover border-2 border-honey-tan/50"
+                              className="w-12 h-12 rounded-full object-cover border-2 border-brand-yellow/50"
                             />
                           ) : (
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-honey-tan/30 to-honey-tan-600/30 flex items-center justify-center border-2 border-honey-tan/50">
-                              <span className="text-honey-tan font-bold text-sm">
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-yellow/30 to-yellow-600/30 flex items-center justify-center border-2 border-brand-yellow/50">
+                              <span className="text-brand-yellow font-bold text-sm">
                                 {contestant.name.split(' ').map(n => n[0]).join('')}
                               </span>
                             </div>
@@ -287,7 +287,7 @@ export default function LeaderboardPage() {
                           <div className="flex items-center gap-3 mb-1">
                             <h3 className="text-lg font-bold text-white truncate">{contestant.name}</h3>
                             {rank <= 3 && (
-                              <span className="px-2 py-0.5 bg-honey-tan/20 text-honey-tan text-xs font-bold rounded">
+                              <span className="px-2 py-0.5 bg-brand-yellow/20 text-brand-yellow text-xs font-bold rounded">
                                 TOP {rank}
                               </span>
                             )}
@@ -302,7 +302,7 @@ export default function LeaderboardPage() {
 
                         {/* Votes */}
                         <div className="text-right flex-shrink-0">
-                          <p className="text-2xl font-bold text-honey-tan">
+                          <p className="text-2xl font-bold text-brand-yellow">
                             {contestant.votes.toLocaleString()}
                           </p>
                           <p className="text-xs text-gray-500 font-semibold">votes</p>
@@ -311,7 +311,7 @@ export default function LeaderboardPage() {
                         {/* Vote Button */}
                         <Link
                           href={`/vote?contestant=${contestant.id}`}
-                          className="flex-shrink-0 px-5 py-2.5 bg-gradient-to-r from-honey-tan to-honey-tan-600 text-black font-bold rounded-lg hover:shadow-lg hover:shadow-honey-tan/50 transition-all duration-200 opacity-0 group-hover:opacity-100"
+                          className="flex-shrink-0 px-5 py-2.5 bg-gradient-to-r from-brand-yellow to-yellow-600 text-black font-bold rounded-lg hover:shadow-lg hover:shadow-brand-yellow/50 transition-all duration-200 opacity-0 group-hover:opacity-100"
                         >
                           Vote
                         </Link>
@@ -327,7 +327,7 @@ export default function LeaderboardPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="mt-16 bg-gradient-to-r from-honey-tan/10 via-honey-tan-600/10 to-honey-tan/10 border border-honey-tan/30 rounded-xl p-8 text-center"
+            className="mt-16 bg-gradient-to-r from-brand-yellow/10 via-yellow-600/10 to-brand-yellow/10 border border-brand-yellow/30 rounded-xl p-8 text-center"
           >
             <img src="/icons/trophy-large.png" alt="Trophy" className="w-16 h-16 mx-auto mb-4 object-contain" />
             <h2 className="text-3xl font-bold text-white mb-3">Support Your Favorite Contestant</h2>
@@ -336,7 +336,7 @@ export default function LeaderboardPage() {
             </p>
             <Link
               href="/vote"
-              className="inline-block px-8 py-4 bg-gradient-to-r from-honey-tan to-honey-tan-600 text-black font-bold rounded-lg hover:shadow-lg hover:shadow-honey-tan/50 transition-all duration-200 text-lg"
+              className="inline-block px-8 py-4 bg-gradient-to-r from-brand-yellow to-yellow-600 text-black font-bold rounded-lg hover:shadow-lg hover:shadow-brand-yellow/50 transition-all duration-200 text-lg"
             >
               Cast Your Vote Now
             </Link>

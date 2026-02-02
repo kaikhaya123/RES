@@ -49,7 +49,7 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
         {product.stock === 0 ? (
           <span className="absolute left-3 top-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full">Out of stock</span>
         ) : product.stock && product.stock <= 3 ? (
-          <span className="absolute left-3 top-3 bg-honey-tan-400 text-black text-xs font-semibold px-2 py-1 rounded-full">Low stock</span>
+          <span className="absolute left-3 top-3 bg-yellow-400 text-black text-xs font-semibold px-2 py-1 rounded-full">Low stock</span>
         ) : product.tag ? (
           <span className="absolute left-3 top-3 bg-white/5 text-white text-xs font-semibold px-2 py-1 rounded-full">{product.tag}</span>
         ) : null}
@@ -69,7 +69,7 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
             onClick={(e) => { e.stopPropagation(); if (product.sizes && product.sizes.length > 0) { onOpen(product); } else { onAdd(product); } }}
             disabled={product.stock === 0}
             aria-disabled={product.stock === 0}
-            className={`bg-honey-tan text-black w-9 h-9 flex items-center justify-center rounded-full text-sm font-semibold shadow ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
+            className={`bg-brand-yellow text-black w-9 h-9 flex items-center justify-center rounded-full text-sm font-semibold shadow ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
           >
             +
           </button>
@@ -112,7 +112,7 @@ export default function ProductCard({ product, onAdd, onOpen, index = 0 }: Props
               onClick={(e) => { e.stopPropagation(); if (product.sizes && product.sizes.length > 0) { onOpen(product); } else { onAdd(product); } }}
               disabled={product.stock === 0}
               aria-disabled={product.stock === 0}
-              className={`bg-honey-tan text-black px-3 py-2 rounded-full text-sm font-semibold hover:bg-honey-tan-600 transition w-full sm:w-auto ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
+              className={`bg-brand-yellow text-black px-3 py-2 rounded-full text-sm font-semibold hover:bg-yellow-600 transition w-full sm:w-auto ${product.stock === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
             >
               Add
             </button>

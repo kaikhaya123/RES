@@ -27,7 +27,7 @@ export default function NewsPage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-block px-5 py-2 border-2 border-honey-tan text-xs font-black tracking-[0.2em] text-honey-tan mb-4"
+              className="inline-block px-5 py-2 border-2 border-brand-yellow text-xs font-black tracking-[0.2em] text-brand-yellow mb-4"
             >
               NEWS & UPDATES
             </motion.div>
@@ -53,7 +53,7 @@ export default function NewsPage() {
             <div className="flex justify-center gap-4">
               <Link
                 href="/subscribe"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-honey-tan text-black font-black uppercase tracking-wide rounded hover:bg-honey-tan-400 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-yellow text-black font-black uppercase tracking-wide rounded hover:bg-yellow-400 transition-all duration-300"
               >
                 <span>Get Notified</span>
                 <ArrowRight className="w-5 h-5" />

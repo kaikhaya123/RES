@@ -18,7 +18,7 @@ export default function NewsletterCTA() {
               className="px-4 py-3 bg-transparent border border-white/20 text-white placeholder-white/70 outline-none w-full rounded-l-md"
               suppressHydrationWarning
             />
-            <button className="px-6 py-3 bg-honey-tan text-black font-black rounded-r-md">
+            <button className="px-6 py-3 bg-brand-yellow text-black font-black rounded-r-md">
               Subscribe
             </button>
           </form>

@@ -122,7 +122,7 @@ function ProfileContent() {
 
               {/* AVATAR */}
               <div className="p-6 flex items-center gap-6">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-honey-tan to-honey-tan-600 flex items-center justify-center text-black font-bold text-xl">
+<div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-yellow to-yellow-600 flex items-center justify-center text-black font-bold text-xl">
                   {session.user.name?.[0] || 'U'}
                 </div>
 
@@ -143,7 +143,7 @@ function ProfileContent() {
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-800 border border-honey-tan rounded-md px-4 py-2 text-white focus:outline-none"
+                    className="w-full bg-neutral-800 border border-brand-yellow rounded-md px-4 py-2 text-white focus:outline-none"
                   />
                 ) : (
                   <div className="bg-neutral-800 border border-white/10 rounded-md px-4 py-2 text-white">
@@ -174,7 +174,7 @@ function ProfileContent() {
                     value={formData.bio}
                     onChange={handleInputChange}
                     placeholder="Tell us about yourself..."
-                    className="w-full bg-neutral-800 border border-honey-tan rounded-md px-4 py-2 text-white focus:outline-none resize-none"
+                    className="w-full bg-neutral-800 border border-brand-yellow rounded-md px-4 py-2 text-white focus:outline-none resize-none"
                     rows={3}
                   />
                 ) : (
@@ -197,7 +197,7 @@ function ProfileContent() {
                       value={formData.institution}
                       onChange={handleInputChange}
                       placeholder="Your university or organization"
-                      className="w-full bg-neutral-800 border border-honey-tan rounded-md px-4 py-2 text-white focus:outline-none"
+                      className="w-full bg-neutral-800 border border-brand-yellow rounded-md px-4 py-2 text-white focus:outline-none"
                     />
                   ) : (
                     <div className="bg-neutral-800 border border-white/10 rounded-md px-4 py-2 text-gray-400">
@@ -220,7 +220,7 @@ function ProfileContent() {
                       value={formData.campus}
                       onChange={handleInputChange}
                       placeholder="Your campus location"
-                      className="w-full bg-neutral-800 border border-honey-tan rounded-md px-4 py-2 text-white focus:outline-none"
+                      className="w-full bg-neutral-800 border border-brand-yellow rounded-md px-4 py-2 text-white focus:outline-none"
                     />
                   ) : (
                     <div className="bg-neutral-800 border border-white/10 rounded-md px-4 py-2 text-gray-400">
@@ -243,7 +243,7 @@ function ProfileContent() {
                       value={formData.municipality}
                       onChange={handleInputChange}
                       placeholder="Your city or municipality"
-                      className="w-full bg-neutral-800 border border-honey-tan rounded-md px-4 py-2 text-white focus:outline-none"
+                      className="w-full bg-neutral-800 border border-brand-yellow rounded-md px-4 py-2 text-white focus:outline-none"
                     />
                   ) : (
                     <div className="bg-neutral-800 border border-white/10 rounded-md px-4 py-2 text-gray-400">
@@ -266,7 +266,7 @@ function ProfileContent() {
                       value={formData.town}
                       onChange={handleInputChange}
                       placeholder="Your town, suburb, township, or village"
-                      className="w-full bg-neutral-800 border border-honey-tan rounded-md px-4 py-2 text-white focus:outline-none"
+                      className="w-full bg-neutral-800 border border-brand-yellow rounded-md px-4 py-2 text-white focus:outline-none"
                     />
                   ) : (
                     <div className="bg-neutral-800 border border-white/10 rounded-md px-4 py-2 text-gray-400">
@@ -288,7 +288,7 @@ function ProfileContent() {
                     value={formData.province}
                     onChange={handleInputChange}
                     placeholder="Your province"
-                    className="w-full bg-neutral-800 border border-honey-tan rounded-md px-4 py-2 text-white focus:outline-none"
+                    className="w-full bg-neutral-800 border border-brand-yellow rounded-md px-4 py-2 text-white focus:outline-none"
                   />
                 ) : (
                   <div className="bg-neutral-800 border border-white/10 rounded-md px-4 py-2 text-gray-400">
@@ -331,7 +331,7 @@ function ProfileContent() {
                       <button
                         onClick={handleSave}
                         disabled={isSaving}
-                        className="px-4 py-2 text-sm font-medium bg-honey-tan text-black rounded-md hover:bg-honey-tan-600 transition disabled:opacity-50"
+                        className="px-4 py-2 text-sm font-medium bg-brand-yellow text-black rounded-md hover:bg-yellow-600 transition disabled:opacity-50"
                       >
                         {isSaving ? 'Saving...' : 'Save Changes'}
                       </button>
@@ -339,7 +339,7 @@ function ProfileContent() {
                   ) : (
                     <button
                       onClick={() => setIsEditing(true)}
-                      className="px-4 py-2 text-sm font-medium bg-honey-tan text-black rounded-md hover:bg-honey-tan-600 transition"
+                      className="px-4 py-2 text-sm font-medium bg-brand-yellow text-black rounded-md hover:bg-yellow-600 transition"
                     >
                       Edit Profile
                     </button>

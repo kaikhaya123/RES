@@ -244,8 +244,8 @@ export default function HoverReveal({
 
               {/* Eyebrow */}
               <div className="flex items-center gap-3">
-                <span className="w-8 h-px bg-honey-tan" />
-                <span className="text-[11px] font-bold tracking-[0.35em] uppercase text-honey-tan">
+                <span className="w-8 h-px bg-brand-yellow" />
+                <span className="text-[11px] font-bold tracking-[0.35em] uppercase text-brand-yellow">
                   Official Merchandise
                 </span>
               </div>
@@ -267,7 +267,7 @@ export default function HoverReveal({
               <div className="flex items-center gap-6 pt-4">
                 <a
                   href="#products"
-                  className="inline-flex items-center justify-center bg-honey-tan text-black px-8 py-4 font-black text-sm uppercase tracking-widest hover:scale-[1.02] transition"
+                  className="inline-flex items-center justify-center bg-brand-yellow text-black px-8 py-4 font-black text-sm uppercase tracking-widest hover:scale-[1.02] transition"
                 >
                   Shop Collection
                 </a>

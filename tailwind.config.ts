@@ -44,8 +44,8 @@ const config: Config = {
   				'warm': '#1A1A1A',      
   				'matte': '#1F1F1F'      
   			},
-  			// Primary accent - Honey Tan
-  			'brand-yellow': '#B8A184', 
+  			// Primary accent - Brand Yellow
+  			'brand-yellow': '#FBBF24', 
   			'charcoal-blue': {
   				'light': '#2C3E50',     
   				'dark': '#1A2533'       

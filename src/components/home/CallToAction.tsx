@@ -29,7 +29,7 @@ export default function CallToAction() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-honey-tan"
+          className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-brand-yellow"
         >
           Roomza's Educated Secret
         </motion.p>
@@ -70,7 +70,7 @@ export default function CallToAction() {
         >
           <Link
             href="/apply"
-            className="group inline-flex items-center gap-3 rounded-full bg-honey-tan px-6 py-3 text-xs font-black uppercase tracking-widest text-black transition hover:bg-honey-tan-600"
+            className="group inline-flex items-center gap-3 rounded-full bg-brand-yellow px-6 py-3 text-xs font-black uppercase tracking-widest text-black transition hover:bg-yellow-600"
           >
             Apply to Compete
             <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
