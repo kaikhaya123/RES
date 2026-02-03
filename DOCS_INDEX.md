@@ -166,6 +166,7 @@ Welcome to the R.E.S. (Roomza's Educated Secret) website documentation! This ind
 - User registration: `src/app/api/auth/register/route.ts`
 - Password hashing: `src/lib/auth.ts`
 - Security measures: [README.md](./README.md#security-features)
+- Apple OAuth setup: [APPLE_OAUTH_SETUP.md](./APPLE_OAUTH_SETUP.md)
 
 ### Database & Data
 - Schema definition: `prisma/schema.prisma`

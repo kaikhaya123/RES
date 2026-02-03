@@ -90,14 +90,14 @@ export default function ImpactPage() {
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
           </div>
 
-          {/* Content */}
-          <div className="absolute bottom-0 left-0 z-10 px-6 py-8 lg:px-12 lg:py-12 w-full">
+            {/* Content */}
+            <div className="absolute bottom-0 left-0 z-10 px-6 py-8 lg:px-12 lg:py-12 w-full">
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="max-w-2xl text-5xl font-black leading-tight tracking-tighter lg:text-6xl text-yellow-400 m-0"
+              className="max-w-2xl text-3xl font-black leading-tight tracking-tighter lg:text-4xl text-yellow-400 m-0"
             >
               REAL IMPACT.
               <br />
@@ -109,12 +109,12 @@ export default function ImpactPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-4 max-w-xl text-base lg:text-lg text-white/90 m-0"
+              className="mt-4 max-w-xl text-sm lg:text-base text-white/90 m-0"
             >
               R.E.S. is designed to move beyond entertainment. Every action on the platform contributes to measurable student and community outcomes.
             </motion.p>
-          </div>
-        </section>
+            </div>
+          </section>
 
         {/* STATS */}
         <section className="bg-white px-6 py-24 text-black lg:px-12">

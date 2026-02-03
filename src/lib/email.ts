@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { randomBytes } from 'crypto';
 
 // Create transporter
 const transporter = nodemailer.createTransport({
@@ -11,23 +12,48 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Token storage (in-memory) - upgrade to Redis in production
+const tokenStore = new Map<string, { email: string; expiresAt: number }>();
+
+// Clean up expired tokens every minute
+setInterval(() => {
+  const now = Date.now();
+  for (const [token, data] of tokenStore.entries()) {
+    if (data.expiresAt < now) {
+      tokenStore.delete(token);
+    }
+  }
+}, 60000);
+
 // Generate verification token
 export async function generateVerificationToken(email: string): Promise<string> {
-  // Generate a simple token for email verification
-  const token = Math.random().toString(36).substring(2) + Date.now().toString(36);
-  // In production, store this token in Redis with expiry
+  const token = randomBytes(32).toString('hex');
+  const expiresAt = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
+  tokenStore.set(token, { email, expiresAt });
   return token;
 }
 
-// Verify token (simplified - in production use Redis)
+// Verify token
 export async function verifyEmailToken(token: string): Promise<string | null> {
-  // For now, just validate token format - in production check Redis
-  if (!token || token.length < 10) {
+  if (!token) {
     return null;
   }
-  // Extract email from token if stored, otherwise use from URL param
-  // This is a placeholder - implement proper Redis storage in production
-  return token;
+
+  const data = tokenStore.get(token);
+  
+  if (!data) {
+    return null;
+  }
+
+  // Check if token has expired
+  if (data.expiresAt < Date.now()) {
+    tokenStore.delete(token);
+    return null;
+  }
+
+  // Token is valid, remove it so it can't be reused
+  tokenStore.delete(token);
+  return data.email;
 }
 
 // Send verification email

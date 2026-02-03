@@ -173,7 +173,7 @@ export default function LoginPage() {
 
           {/* Forgot password */}
           <div className="text-right">
-            <Link href="/auth/forgot-password" className="text-xs text-primary-300">
+            <Link href="/auth/forgot-password" className="text-xs text-white">
               Forgot password
             </Link>
           </div>
@@ -184,7 +184,7 @@ export default function LoginPage() {
             disabled={isLoading}
             whileTap={{ scale: 0.97 }}
             whileHover={{ scale: 1.01 }}
-            className="w-full py-3 bg-primary-500/80 hover:bg-primary-500 transition border border-white/20 rounded-lg text-white font-semibold text-sm"
+            className="w-full py-3 bg-white hover:bg-primary-500 transition border border-white/20 rounded-lg text-black font-semibold text-sm"
           >
             {isLoading ? "Logging in..." : "Log In"}
           </motion.button>
@@ -198,7 +198,7 @@ export default function LoginPage() {
             <div className="h-px flex-1 bg-white/10" />
           </div>
 
-          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="mt-4 grid grid-cols-1 gap-3">
             <button
               type="button"
               onClick={() => signIn('google', { callbackUrl: '/' })}
@@ -208,23 +208,13 @@ export default function LoginPage() {
               <Image src="/Icons/search.png" alt="Google icon" width={20} height={20} />
               <span>Continue with Google</span>
             </button>
-
-            <button
-              type="button"
-              onClick={() => signIn('apple', { callbackUrl: '/' })}
-              className="w-full flex items-center justify-center gap-3 py-3 bg-white hover:bg-white transition border border-white/20 rounded-lg text-black text-sm"
-              aria-label="Continue with Apple"
-            >
-              <Image src="/Icons/apple-logo.png" alt="Apple icon" width={20} height={20} />
-              <span>Continue with Apple</span>
-            </button>
           </div>
         </div>
 
         {/* Sign Up */}
         <p className="text-center text-gray-400 text-xs mt-8">
           Don't have an account?{" "}
-          <Link href="/auth/register" className="text-primary-300">
+          <Link href="/auth/register" className="text-white">
             Sign up
           </Link>
         </p>
