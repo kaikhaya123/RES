@@ -25,7 +25,7 @@ interface Contestant {
 export default function LeaderboardPage() {
   const [contestants, setContestants] = useState<Contestant[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  const [filter, setFilter] = useState<'all' | 'top10' | 'rising'>('all')
+  const [filter, setFilter] = useState<'all' | 'top30' | 'rising'>('all')
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date())
   const [formattedTime, setFormattedTime] = useState<string>('')
   const [mounted, setMounted] = useState(false)
@@ -222,14 +222,14 @@ export default function LeaderboardPage() {
                 All Contestants
               </button>
               <button
-                onClick={() => setFilter('top10')}
+                onClick={() => setFilter('top30')}
                 className={`px-6 py-2.5 rounded-lg font-semibold transition-all ${
-                  filter === 'top10'
-                    ? 'bg-black text-black shadow-lg shadow-brand-yellow/50'
+                  filter === 'top30'
+                    ? 'bg-brand-yellow text-black shadow-lg shadow-brand-yellow/50'
                     : 'bg-black border border-white/20 text-white hover:border-brand-yellow/50'
                 }`}
               >
-                Top 10
+                Top 30
               </button>
               <button
                 onClick={() => setFilter('rising')}
@@ -285,10 +285,11 @@ export default function LeaderboardPage() {
               <div className="divide-y divide-white/5">
                 {contestants
                   .filter(c => {
-                    if (filter === 'top10') return contestants.indexOf(c) < 10
+                    if (filter === 'top30') return contestants.indexOf(c) < 30
                     if (filter === 'rising') return c.trend === 'up'
                     return true
                   })
+                  .slice(0, filter === 'all' ? 30 : undefined)
                   .map((contestant, index) => {
                     const rank = contestants.indexOf(contestant) + 1
                     const rankChange = contestant.previousRank ? Math.abs(contestant.previousRank - rank) : 0
@@ -367,6 +368,21 @@ export default function LeaderboardPage() {
             )}
           </motion.div>
 
+          {/* View full list link */}
+          {contestants.length > 30 && (
+            <div className="mt-6 text-center">
+              <Link
+                href="/leaderboard/full"
+                className="inline-flex items-center gap-2 text-brand-yellow font-black text-sm uppercase tracking-widest hover:text-yellow-500 transition-colors"
+              >
+                View Full Rankings (Top {Math.min(contestants.length, 200)})
+                <span>→</span>
+              </Link>
+            </div>
+          )}
+          {contestants.length > 0 && contestants.length <= 30 && (
+            <p className="mt-6 text-center text-white/30 text-xs">Showing all {contestants.length} contestants. Full rankings available once recruitment opens.</p>
+          )}
         </main>
       </div>
       <Footer />

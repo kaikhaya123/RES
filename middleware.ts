@@ -1,9 +1,30 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { verifyToken } from "@/lib/auth";
 
 export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
+
+  // Protect admin API routes
+  if (pathname.startsWith("/api/admin")) {
+    const adminToken = req.cookies.get('admin-token')?.value;
+    
+    if (!adminToken) {
+      return NextResponse.json(
+        { error: 'Admin authentication required' },
+        { status: 401 }
+      );
+    }
+
+    const decoded = verifyToken(adminToken);
+    if (!decoded) {
+      return NextResponse.json(
+        { error: 'Invalid admin token' },
+        { status: 401 }
+      );
+    }
+  }
 
   // Protect admin routes
   if (pathname.startsWith("/admin")) {
@@ -37,5 +58,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/apply/:path*"],
+  matcher: ["/admin/:path*", "/apply/:path*", "/api/admin/:path*"],
 };

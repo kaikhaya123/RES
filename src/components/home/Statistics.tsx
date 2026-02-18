@@ -109,7 +109,9 @@ export default function Statistics() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black mb-4 md:mb-6 text-black">Participating South African Universities</h2>
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-black/40 mb-2">Around 500 campuses to be engaged</p>
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black mb-1 text-black">Participating South African Universities</h2>
+          <p className="text-sm text-black/50 mb-4 md:mb-6">+/- 2M students to be reached across public universities, TVET colleges and private institutions</p>
           <LogoLoop 
             logos={universityLogos}
             speed={40}

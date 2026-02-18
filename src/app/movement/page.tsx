@@ -111,31 +111,35 @@ export default function MovementPage() {
             <div className="space-y-12 lg:space-y-16">
               {[
                 {
-                  week: 'Week 1-2',
+                  week: 'Weeks 1 & 2 — Part Eight',
+                  codename: 'THE BLUFF WEEK / THE SURVIVAL WEEK',
                   title: 'The Dark Years',
                   subtitle: 'Robben Island: Testing the Foundation',
-                  description: 'Welcome to the house. Ice-breakers, orientation, and initial challenges test character. Like Robben Island prisoners, contestants face discomfort to discover their resilience.',
+                  description: 'Welcome to the house. 20 contestants arrive from across South Africa. Ice-breakers, heritage storytelling, and first business pitches test character. Like Robben Island, discomfort reveals resilience. No evictions — just foundation.',
                   image: '/Images/students-rehashing-theater-class%20(1).jpg'
                 },
                 {
-                  week: 'Week 3',
+                  week: 'Week 3 — Part Nine',
+                  codename: 'ATTACK WEEK',
                   title: 'Beginning to Hope',
-                  subtitle: 'Leadership Emerges',
-                  description: 'Leadership challenges inspire. Contestants design solutions to real student crises. Hope blooms through purpose.',
+                  subtitle: 'Leadership Emerges — First Evictions',
+                  description: 'Innovation and leadership collide. Contestants run a mini-hackathon solving real social crises. The first 2 evictions transition talents to the Leadership House. Hope is born through challenge.',
                   image: '/Images/college-students.jpg'
                 },
                 {
-                  week: 'Week 4-5',
+                  week: 'Weeks 4 & 5 — Part Ten',
+                  codename: "HOLDER'S WEEK / VICTOR VERSTER WEEK",
                   title: 'Talking with the Enemy',
-                  subtitle: 'Innovation & Collaboration',
-                  description: 'Teams pitch business ideas. Cultural talent showcases unite diversity. Understanding across differences becomes the path forward.',
+                  subtitle: 'Innovation, Pitching & Survival',
+                  description: "Design-thinking prototypes, cultural talent showcases, and high-stakes pitches to real entrepreneurs and funders. Judges can save one. Pitch immunity protects the strongest. Understanding across differences becomes the path forward.",
                   image: '/Images/young-adults-meeting-up-study-min.jpg'
                 },
                 {
-                  week: 'Week 6',
+                  week: 'Week 6 — Part Eleven',
+                  codename: 'FREEDOM DAY',
                   title: 'Freedom',
-                  subtitle: 'The Final Push',
-                  description: 'Finalists design implementable community projects. True victory is defined by impact, not elimination. Freedom earned through contribution.',
+                  subtitle: 'Grand Finale — 6 Finalists Compete',
+                  description: 'The biggest vote of the season closes on Day 4. 6 finalists walk into the Grand Finale live event. Community projects, personal branding, and the final chapter. Freedom earned through contribution — not just survival.',
                   image: '/Images/young-black-woman-min.jpg'
                 }
               ].map((item, index) => (
@@ -150,7 +154,8 @@ export default function MovementPage() {
                   {/* Text column */}
                   <div className={`col-span-12 lg:col-span-6 ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'} px-4 lg:px-0` }>
                     <div className="max-w-xl">
-                      <p className="text-brand-yellow font-black text-sm md:text-base mb-3 uppercase tracking-wider">{item.week}</p>
+                      <p className="text-brand-yellow font-black text-[10px] mb-1 uppercase tracking-[0.2em]">{item.week}</p>
+                      <p className="text-white/40 font-black text-xs mb-3 uppercase tracking-widest">{item.codename}</p>
                       <h3 className="text-3xl md:text-4xl font-black mb-3 leading-tight text-white">{item.title}</h3>
                       <p className="text-xs md:text-sm text-white/70 mb-6 uppercase tracking-widest font-semibold">{item.subtitle}</p>
                       <p className="text-white/85 text-base md:text-lg leading-relaxed">{item.description}</p>

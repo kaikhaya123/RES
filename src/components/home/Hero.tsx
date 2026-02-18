@@ -53,7 +53,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-base md:text-lg lg:text-xl text-white/90 font-medium max-w-[90%] sm:max-w-[420px] md:max-w-[600px] leading-relaxed md:leading-loose tracking-tight drop-shadow-md"
           >
-            This is R.E.S. A student reality show that inspires, educates, and rewards. You watch students face real challenges. You see them rise.
+            This is R.E.S. — the game-changing reality show built to inspire, educate and reward. Join the movement and watch the youth tackle real challenges, rise, fall, and level up.
           </motion.p>
 
           {/* Apply CTA removed */}

@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import { randomBytes } from 'crypto';
+import { redis } from './redis';
 
 // Create transporter
 const transporter = nodemailer.createTransport({
@@ -12,7 +13,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Token storage (in-memory) - upgrade to Redis in production
+// Token storage fallback (in-memory) for when Redis is not available
 const tokenStore = new Map<string, { email: string; expiresAt: number }>();
 
 // Clean up expired tokens every minute
@@ -29,7 +30,21 @@ setInterval(() => {
 export async function generateVerificationToken(email: string): Promise<string> {
   const token = randomBytes(32).toString('hex');
   const expiresAt = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
-  tokenStore.set(token, { email, expiresAt });
+  
+  try {
+    if (redis) {
+      // Store in Redis with TTL
+      await redis.set(`email:token:${token}`, email, { ex: 24 * 60 * 60 }); // 24 hours TTL
+    } else {
+      // Fallback to in-memory storage
+      tokenStore.set(token, { email, expiresAt });
+    }
+  } catch (error) {
+    console.error('Error storing verification token:', error);
+    // Fallback to in-memory storage
+    tokenStore.set(token, { email, expiresAt });
+  }
+  
   return token;
 }
 
@@ -39,6 +54,21 @@ export async function verifyEmailToken(token: string): Promise<string | null> {
     return null;
   }
 
+  try {
+    if (redis) {
+      // Try Redis first
+      const email = await redis.get(`email:token:${token}`);
+      if (email) {
+        // Delete token to prevent reuse
+        await redis.del(`email:token:${token}`);
+        return typeof email === 'string' ? email : null;
+      }
+    }
+  } catch (error) {
+    console.error('Error retrieving token from Redis:', error);
+  }
+
+  // Fallback to in-memory storage
   const data = tokenStore.get(token);
   
   if (!data) {
@@ -144,7 +174,7 @@ export async function sendPasswordResetEmail(email: string, name: string): Promi
   const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${token}`;
 
   const mailOptions = {
-    from: `"R.E.S. Platform" <${process.env.EMAIL_USER}>`,
+    from: `"R.E.S. Platform" <${process.env.EMAIL_SERVER_USER}>`,
     to: email,
     subject: 'Reset Your Password - R.E.S. Platform',
     html: `
@@ -208,7 +238,7 @@ export async function sendPasswordResetEmail(email: string, name: string): Promi
 // Send welcome email after verification
 export async function sendWelcomeEmail(email: string, name: string): Promise<void> {
   const mailOptions = {
-    from: `"R.E.S. Platform" <${process.env.EMAIL_USER}>`,
+    from: `"R.E.S. Platform" <${process.env.EMAIL_SERVER_USER}>`,
     to: email,
     subject: 'Welcome to R.E.S. - Let\'s Get Started!',
     html: `

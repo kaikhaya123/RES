@@ -5,63 +5,79 @@ import Footer from '@/components/layout/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import RippleEffect from '@/components/ui/RippleEffect';
 
-function SocialIcon({
-  href,
-  src,
-  alt,
-  label,
-}: {
-  href: string;
-  src: string;
-  alt: string;
-  label: string;
-}) {
-  const [errored, setErrored] = useState(false);
+// Contact info data
+const contactInfo = [
+  {
+    icon: '📧',
+    label: 'Email',
+    value: 'roomzaseducatedsecret@gmail.com',
+    link: 'mailto:roomzaseducatedsecret.com'
+  },
+  {
+    icon: '📱',
+    label: 'Phone',
+    value: '+27 (0) XX XXX XXXX',
+    link: 'tel:+27XXXXXXXXX'
+  },
+  {
+    icon: '📍',
+    label: 'Location',
+    value: 'South Africa',
+    link: null
+  }
+];
 
-  return (
-    <Link
-      href={href}
-      className="flex items-center gap-3 text-slate-700 hover:text-black transition"
-    >
-      {!errored ? (
-        <img
-          src={src}
-          alt={alt}
-          className="w-8 h-8 object-contain"
-          onError={() => setErrored(true)}
-        />
-      ) : (
-        <div className="w-8 h-8 bg-white/10 rounded flex items-center justify-center text-xs">
-          {label[0]}
-        </div>
-      )}
-      <span className="text-sm">{label}</span>
-    </Link>
-  );
-}
+const socialLinks = [
+  {
+    name: 'Instagram',
+    url: '#',
+    icon: '/Icons/instagram(1).png',
+    color: 'from-purple-500 to-pink-500'
+  },
+  {
+    name: 'TikTok',
+    url: '#',
+    icon: '/Icons/video.png',
+    color: 'from-black to-gray-800'
+  },
+  {
+    name: 'Facebook',
+    url: '#',
+    icon: '/Icons/facebook(1).png',
+    color: 'from-blue-600 to-blue-700'
+  }
+];
 
 export default function ContactPage() {
   const [status, setStatus] = useState<'idle'|'sending'|'success'|'error'>('idle');
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ 
+    name: '', 
+        email: '', 
+    subject: '',
+    message: '',
+    inquiryType: 'general'
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target as HTMLInputElement;
-    setFormData((s) => ({ ...s, [name]: value }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((s) => ({       ...s,       [name]: value     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('sending');
     try {
-      // Simulate send (replace with real API call)
-      await new Promise((res) => setTimeout(res, 800));
+      // Simulate API call
+      await new Promise((res) => setTimeout(res, 1500));
       setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-      // Reset success state after short delay
-      setTimeout(() => setStatus('idle'), 3000);
+      setFormData({         name: '',         email: '',         subject: '',         message: '',         inquiryType: 'general'       });
+      setTimeout(() => setStatus('idle'), 4000);
     } catch (err) {
       setStatus('error');
+      setTimeout(() => setStatus('idle'), 4000);
     }
   };
 
@@ -69,228 +85,449 @@ export default function ContactPage() {
     <>
       <Navbar />
 
-      <main className="bg-black text-white">
-
-        {/* HERO WITH RESPONSIVE IMAGE */}
-        <section className="overflow-hidden border-b border-black/10">
-          {/* Mobile: stacked image above content (plain <img> fallback for reliability) */}
-          <div className="block md:hidden w-full h-56 sm:h-72 relative overflow-hidden">
-            <img
-              src="/Images/cheerful-young-dark-skinned-feminine-girl-has-mobile-phone-conversation-wears-round-transparent-glasses-has-charming-smile-hears-good-news-isolated-purple-studio-wall-copy-space-area.jpg"
-              alt="Person smiling while on a call"
-              className="w-full h-full object-cover sm:object-contain"
-              loading="eager"
-              onError={(e) => { console.warn('mobile hero image failed to load', e); (e.target as HTMLImageElement).style.display = 'none'; }}
+      <main className="bg-white text-black overflow-hidden">
+        {/* HERO SECTION */}
+        <section 
+className="relative min-h-[80vh] flex items-center overflow-hidden"
+        >
+          {/* Background with Ripple Effect */}
+            <RippleEffect
+              imageUrl="/Images/cheerful-young-dark-skinned-feminine-girl-has-mobile-phone-conversation-wears-round-transparent-glasses-has-charming-smile-hears-good-news-isolated-purple-studio-wall-copy-space-area.jpg"
+              intensity={0.3}
+              rippleCount={3}
+              rippleSize={100}
+              rippleInterval={4000}
+              interactive={true}
+              className="absolute inset-0 z-0"
             />
-          </div>
-
-          {/* Desktop: absolute background image with content overlay */}
-          <div className="relative h-[50vh] sm:h-[60vh] md:h-[75vh] min-h-[320px] md:min-h-[480px]">
-            <div className="hidden md:block absolute inset-0">
-              <Image
-                src="/Images/3d-render-abstract-particle-design-background.jpg"
-                alt=""
-                fill
-                priority
-                sizes="(max-width: 1024px) 80vw, 60vw"
-                className="object-cover object-center"
-                aria-hidden
-              />
-              {/* Desktop fallback in case Next/Image optimization or CSS prevents rendering */}
-              <img
-                src="/Images/3d-render-abstract-particle-design-background.jpg"
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover"
-                loading="eager"
-                onError={(e) => { console.warn('desktop hero image failed to load', e); (e.target as HTMLImageElement).style.display = 'none'; }}
-              />
-            </div>
-
-            {/* Content */}
-          <div className="relative z-10 h-full flex items-center justify-center">
-            <div className="max-w-6xl mx-auto px-6 lg:px-16 w-full">
-              <div className="max-w-xl mx-auto text-center md:text-center md:rounded-md md:p-6">
-                  <h1 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight leading-tight text-white md:text-white">
-                    Contact Us
-                  </h1>
-                  <p className="mt-3 text-sm sm:text-base md:text-lg text-white/90 max-w-xl">
-                    Questions, partnerships, media, or support. Reach out and our team will respond within 24 hours.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* MAIN CONTENT */}
-        <section className="py-20 sm:py-24">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-start md:items-center">
-
-            {/* CONTACT FORM */}
-            <div className="max-w-xl mx-auto lg:mx-0 w-full max-w-lg relative bg-honey-tan text-black border border-black/10 rounded-2xl p-6 md:p-12 shadow-lg" role="region" aria-labelledby="contact-form-heading">
-
-              <div className="mb-10">
-        <h2 id="contact-form-heading" className="text-3xl font-black tracking-tight text-black">
-                  Get in touch
-                </h2>
-                <p className="mt-2 text-black/70 max-w-md">
-                  Send us a message and our team will respond within 24 hours.
-                </p>
-              </div>
-
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit} aria-labelledby="contact-form-heading">
-
-                {/* Status */}
-                <div className="md:col-span-2">
-                  {status === 'success' && (
-                    <div role="status" aria-live="polite" className="rounded-md bg-emerald-800/80 border border-emerald-600 p-3 text-black-100 text-sm mb-2">
-                      Thanks! We received your message and will get back soon.
-                    </div>
-                  )}
-                </div>
-
-                {/* Name */}
-                <div className="md:col-span-1">
-                  <label htmlFor="name" className="block text-sm font-medium text-black/80 mb-2">Full name</label>
-                  <input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    autoComplete="name"
-                    type="text"
-                    required
-                    aria-required="true"
-                    className="w-full h-12 bg-white border border-black-200 rounded-md px-4 text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-honey-tan ring-offset-2 transition-shadow"
-                  />
-                </div>
-
-                {/* Email */}
-                <div className="md:col-span-1">
-                  <label htmlFor="email" className="block text-sm font-medium text-black/80 mb-2">Email address</label>
-                  <input
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    autoComplete="email"
-                    type="email"
-                    required
-                    aria-required="true"
-                    className="w-full h-12 bg-white border border-gray-200 rounded-md px-4 text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-honey-tan ring-offset-2 transition-shadow"
-                  />
-                </div>
-
-                {/* Message */}
-                <div className="md:col-span-2">
-                  <label htmlFor="message" className="block text-sm font-medium text-black/80 mb-2">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={6}
-                    required
-                    aria-required="true"
-                    className="w-full min-h-[140px] bg-white border border-gray-200 rounded-md px-4 py-3 text-black resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-honey-tan ring-offset-2 transition-shadow"
-                  />
-                </div>
-
-                {/* Submit */}
-                <div className="md:col-span-2 flex items-center justify-between gap-4">
-                  <button
-                    type="submit"
-                    disabled={status === 'sending'}
-                    aria-disabled={status === 'sending'}
-                    className="inline-flex items-center justify-center gap-3 bg-black text-honey-tan font-black py-3 px-6 rounded-lg uppercase tracking-wider hover:brightness-95 transition disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-honey-tan ring-offset-2"
+                    
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/50 to-transparent z-10" />
+          
+          <div className="container mx-auto px-6 lg:px-16 relative z-20">
+            <div className="max-w-3xl">
+                            <motion.div
+                                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                  className="space-y-6"
+>
+                    <motion.h1 
+                  className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-tight text-yellow-500"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.1 }}
                   >
-                    {status === 'sending' ? 'Sending…' : 'Send message'}
-                  </button>
-
-                  <p className="text-xs text-black/60 hidden md:block">We usually reply within 24 hours.</p>
-                </div>
-
-              </form>
-            </div>
-
-            {/* INFO PANEL */}
-            <aside className="space-y-8 lg:sticky lg:top-28">
-
-              <div className="bg-honey-tan-50 border border-black-100 rounded-lg p-6">
-                <h3 className="text-lg font-black mb-3">Contact details</h3>
-                <div className="flex flex-col gap-4 text-slate-700">
-                  <div className="flex items-start gap-3">
-                    <img src="/Icons/contact/hand.png" alt="Email icon" className="w-5 h-5 mt-1" />
-                    <div>
-                      <p className="text-xs uppercase text-slate-500 mb-1">Email</p>
-                      <p className="font-medium">contact@roomzaseducatedsecret.com</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <img src="/Icons/contact/viber.png" alt="Phone icon" className="w-5 h-5 mt-1" />
-                    <div>
-                      <p className="text-xs uppercase text-slate-500 mb-1">Phone</p>
-                      <p className="font-medium">+27 (0) XX XXX XXXX</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 mt-2">
-                    <a href="#" aria-label="Instagram" className="inline-flex items-center justify-center w-9 h-9 rounded bg-transparent hover:bg-gray-100"><img src="/Icons/instagram(1).png" alt="Instagram" className="w-5 h-5"/></a>
-                    <a href="#" aria-label="TikTok" className="inline-flex items-center justify-center w-9 h-9 rounded bg-transparent hover:bg-gray-100"><img src="/Icons/video.png" alt="TikTok" className="w-5 h-5"/></a>
-                    <a href="#" aria-label="Facebook" className="inline-flex items-center justify-center w-9 h-9 rounded bg-transparent hover:bg-gray-100"><img src="/Icons/facebook(1).png" alt="Facebook" className="w-5 h-5"/></a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gray-50 border border-gray-100 rounded-xl p-6">
-                <p className="text-slate-700 text-sm leading-relaxed">
-                  R.E.S. is a national student platform focused on education,
-                  leadership, and opportunity across South Africa.
-                </p>
-              </div>
-
-            </aside>
+                    Let's Connect
+                </motion.h1>
+                <motion.p 
+                  className="text-xl lg:text-2xl text-black/90 font-medium max-w-2xl leading-relaxed"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                                  >
+                  Ready to be part of the movement? Have questions about R.E.S.? We're here to help you every step of the way.
+                </motion.p>
+                    <motion.div
+                                            className="flex flex-wrap gap-4 text-sm text-black/70"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.3 }}
+                    >
+                      <span className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+                    Quick Response
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
+                    24/7 Support
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
+                    Nationwide Reach
+                  </span>
+                </motion.div>
+              </motion.div>
+</div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="relative h-[40vh] min-h-[260px] flex items-center justify-center text-center">
-          {/* mobile fallback img in case CSS bg does not render on some devices */}
-          <img
-            src="/Images/3d-render-concept-old-telephone-3d-art-design-illustration.jpg"
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover block md:hidden"
-            loading="eager"
-            onError={(e) => { console.warn('mobile CTA image failed to load', e); (e.target as HTMLImageElement).style.display = 'none'; }}
-          />
-
-          {/* Desktop explicit img fallback (hidden on mobile) */}
-          <img
-            src="/Images/3d-render-concept-old-telephone-3d-art-design-illustration.jpg"
-            alt=""
-            className="hidden md:block absolute inset-0 w-full h-full object-cover"
-            loading="eager"
-            onError={(e) => { console.warn('desktop CTA image failed to load', e); (e.target as HTMLImageElement).style.display = 'none'; }}
-          />
-
-          <div className="absolute inset-0 bg-[url('/Images/3d-render-concept-old-telephone-3d-art-design-illustration.jpg')] bg-cover bg-center" />
-
-          <div className="relative z-10 px-6 w-full max-w-xl mx-auto md:mx-0 md:ml-auto md:mr-12 text-center md:text-right">
-            <h2 className="text-3xl md:text-4xl font-black mb-4 text-white">
-              We Are Always Ready
-            </h2>
-            <p className="text-white/90 mb-6">
-              Let us help you build something meaningful.
-            </p>
-            <div className="md:flex md:justify-end">
-              <Link
-                href="#"
-                className="inline-block px-6 py-3 bg-white text-black font-semibold rounded-full"
+        {/* MAIN CONTACT SECTION */}
+        <section className="relative py-24 bg-gradient-to-b from-black to-jet-black-charcoal">
+          <div className="container mx-auto px-6 lg:px-16 max-w-7xl">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-20">
+              
+              {/* CONTACT FORM */}
+              <motion.div
+className="lg:col-span-2"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
               >
-                Get Started
-              </Link>
+                <div className="relative bg-yellow-200 rounded-3xl p-8 lg:p-12 shadow-2xl">
+                                    {/* Form Header */}
+                  <div className="mb-8">
+                      <h2 className="text-3xl lg:text-4xl font-black text-black mb-4">
+                        Send us a Message
+                      </h2>
+                                          <p className="text-black/70 text-lg">
+                      Fill out the form below and we'll get back to you within 24 hours.
+                    </p>
+                  </div>
+
+                  {/* Status Messages */}
+                  {status === 'success' && (
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="mb-6 p-4 bg-green-100 border border-green-300 rounded-xl text-green-800"
+                    >
+                      <div className="flex items-center gap-3">
+                                                  <span className="text-2xl">✅</span>
+                                                <div>
+                          <p className="font-semibold">Message Sent Successfully!</p>
+                          <p className="text-sm">We'll get back to you soon.</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {status === 'error' && (
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="mb-6 p-4 bg-red-100 border border-red-300 rounded-xl text-red-800"
+                    >
+                      <div className="flex items-center gap-3">
+                                                  <span className="text-2xl">❌</span>
+                                                <div>
+                          <p className="font-semibold">Something went wrong</p>
+                          <p className="text-sm">Please try again later.</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                                        {/* Inquiry Type */}
+                    <div>
+                      <label htmlFor="inquiryType" className="block text-sm font-semibold text-black/80 mb-2">
+                        What can we help you with?
+                      </label>
+                      <select
+id="inquiryType"
+                        name="inquiryType"
+                        value={formData.inquiryType}
+                        onChange={handleChange}
+                        className="w-full h-12 bg-white border-2 border-black/10 rounded-xl px-4 text-black font-medium focus:outline-none focus:border-black focus:ring-4 focus:ring-black/20 transition-all"
+                      >
+                        <option value="general">General Inquiry</option>
+                        <option value="partnership">Partnership</option>
+                        <option value="media">Media & Press</option>
+                        <option value="technical">Technical Support</option>
+                        <option value="casting">Casting Questions</option>
+                      </select>
+                    </div>
+
+                    {/* Name & Email Row */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-semibold text-black/80 mb-2">
+                          Full Name *
+                        </label>
+                        <input
+id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          type="text"
+                          required
+                          className="w-full h-12 bg-white border-2 border-black/10 rounded-xl px-4 text-black font-medium focus:outline-none focus:border-black focus:ring-4 focus:ring-black/20 transition-all"
+                          placeholder="Enter your full name"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-semibold text-black/80 mb-2">
+                          Email Address *
+                        </label>
+                        <input
+id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          type="email"
+                          required
+                          className="w-full h-12 bg-white border-2 border-black/10 rounded-xl px-4 text-black font-medium focus:outline-none focus:border-black focus:ring-4 focus:ring-black/20 transition-all"
+                          placeholder="your@email.com"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Subject */}
+                    <div>
+                      <label htmlFor="subject" className="block text-sm font-semibold text-black/80 mb-2">
+                        Subject *
+                      </label>
+                      <input
+id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        type="text"
+                        required
+                        className="w-full h-12 bg-white border-2 border-black/10 rounded-xl px-4 text-black font-medium focus:outline-none focus:border-black focus:ring-4 focus:ring-black/20 transition-all"
+                        placeholder="Brief subject line"
+                      />
+                    </div>
+
+                    {/* Message */}
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-semibold text-black/80 mb-2">
+                        Message *
+                      </label>
+                      <textarea
+id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        rows={6}
+                        required
+                        className="w-full bg-white border-2 border-black/10 rounded-xl px-4 py-3 text-black font-medium resize-none focus:outline-none focus:border-black focus:ring-4 focus:ring-black/20 transition-all"
+                        placeholder="Tell us more about your inquiry..."
+                      />
+                    </div>
+
+                    {/* Submit Button */}
+                    <motion.button
+                      type="submit"
+                      disabled={status === 'sending'}
+                      className="w-full bg-black text-honey-tan font-black py-4 px-6 rounded-xl text-lg tracking-wide hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-black/30 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                      whileHover={{ scale: status === 'sending' ? 1 : 1.02 }}
+                      whileTap={{ scale: status === 'sending' ? 1 : 0.98 }}
+                    >
+                      {status === 'sending' ? (
+                        <div className="flex items-center justify-center gap-3">
+                          <div className="w-5 h-5 border-2 border-honey-tan border-t-transparent rounded-full animate-spin"></div>
+                          Sending Message...
+                        </div>
+                      ) : (
+                        'Send Message'
+                      )}
+                    </motion.button>
+                  </form>
+                </div>
+              </motion.div>
+            
+        {/* CONTACT INFO SIDEBAR */}
+              <motion.div
+className="space-y-8"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                >
+                {/* Contact Information */}
+                <div className="bg-jet-black-card rounded-3xl p-8 border border-white/10">
+                  <h3 className="text-2xl font-black text-white mb-6">Get in Touch</h3>
+                <div className="space-y-6">
+                    {contactInfo.map((item, index) => (
+                      <motion.div
+                        key={index}
+                        className="flex items-start gap-4"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.1 * index }}
+                        viewport={{ once: true }}
+>
+                  <div className="w-12 h-12 bg-honey-tan rounded-xl flex items-center justify-center text-xl">
+                          {item.icon}
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm text-white/60 uppercase tracking-wide mb-1">
+                            {item.label}
+                          </p>
+                          {item.link ? (
+                  <a 
+                    href={item.link}
+                    className="text-white font-medium hover:text-honey-tan transition-colors"
+                  >
+                    {item.value}
+                            </a>
+                          ) : (
+                            <p className="text-white font-medium">{item.value}</p>
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              
+                {/* Social Media Links */}
+                <div className="bg-jet-black-card rounded-3xl p-8 border border-white/10">
+                  <h3 className="text-xl font-black text-white mb-6">Follow Our Journey</h3>
+                  <div className="space-y-4">
+                    {socialLinks.map((social, index) => (
+                      <motion.a
+                        key={index}
+                        href={social.url}
+                        className="group flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-300"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
+                viewport={{ once: true }}
+                >
+                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${social.color} flex items-center justify-center`}>
+                          <img 
+                            src={social.icon} 
+                            alt={social.name}
+                            className="w-5 h-5 invert"
+                          />
+                        </div>
+                <div className="flex-1">
+                  <p className="text-white font-medium group-hover:text-honey-tan transition-colors">
+                    {social.name}
+                  </p>
+                  <p className="text-sm text-white/60">
+                            @roomzaseducatedsecret
+                          </p>
+                  </div>
+                        <div className="w-4 h-4 text-white/40 group-hover:text-white/60 transition-colors">
+                          →
+                        </div>
+                      </motion.a>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Quick Stats */}
+                <div className="bg-gradient-to-br from-honey-tan to-honey-tan-600 rounded-3xl p-8 text-black">
+                  <h3 className="text-xl font-black mb-6">Why Choose R.E.S.?</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium">Response Time</span>
+                      <span className="font-black">&lt; 24hrs</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium">Student Focus</span>
+                      <span className="font-black">100%</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium">Nationwide Reach</span>
+                      <span className="font-black">SA Wide</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
+</div>
+        </section>
+
+            {/* FAQ SECTION */}
+        <section className="py-24 bg-jet-black-charcoal">
+          <div className="container mx-auto px-6 lg:px-16 max-w-4xl">
+            <motion.div
+className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              >
+              <h2 className="text-3xl lg:text-4xl font-black text-white mb-4">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-white/70 text-lg">
+                Quick answers to common questions about R.E.S.
+              </p>
+            </motion.div>
+
+            <div className="grid gap-6">
+              {[
+                {
+                  question: "How do I apply to be a contestant on R.E.S.?",
+                  answer: "Applications are typically open during specific periods. Follow our social media or contact us to stay updated on upcoming application windows."
+                },
+                {
+                  question: "What makes R.E.S. different from other shows?",
+                  answer: "R.E.S. is specifically designed for students, focusing on education, personal growth, and real-world challenges that matter to South African youth."
+                },
+                {
+                  question: "Can I partner with R.E.S. as a brand or institution?",
+                  answer: "Absolutely! We welcome partnerships with educational institutions, brands, and organizations that align with our mission. Contact us to discuss opportunities."
+                },
+                {
+                  question: "How can I stay updated on the show?",
+                  answer: "Follow us on all social media platforms and subscribe to our newsletter. We regularly post updates, behind-the-scenes content, and announcements."
+                }
+              ].map((faq, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-jet-black-card rounded-2xl p-6 border border-white/10"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                  viewport={{ once: true }}
+                >
+                  <h3 className="text-lg font-bold text-white mb-3">
+                    {faq.question}
+                  </h3>
+                  <p className="text-white/70 leading-relaxed">
+                    {faq.answer}
+                  </p>
+                    </motion.div>
+                  ))}
+                </div>
+                        </div>
+        </section>
+
+        {/* CALL TO ACTION */}
+        <section className="relative py-24 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-honey-tan via-honey-tan-400 to-honey-tan-600" />
+          
+          <div className="container mx-auto px-6 lg:px-16 relative z-10">
+            <motion.div
+              className="max-w-4xl mx-auto text-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+                              <h2 className="text-4xl lg:text-5xl font-black text-black mb-6">
+                  Ready to Join the Movement?
+                </h2>
+                <p className="text-black/70 text-xl mb-8 max-w-2xl mx-auto">
+                  Be part of South Africa's most inspiring student reality show. Your journey starts here.
+                </p>
+                            
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link
+                    href="/apply"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-black text-honey-tan font-black text-lg rounded-xl hover:bg-gray-800 transition-colors"
+                  >
+                    Apply Now
+                  </Link>
+                </motion.div>
+                
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link
+                    href="/about"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-transparent text-black font-bold text-lg rounded-xl border-2 border-black hover:bg-black hover:text-honey-tan transition-colors"
+                  >
+                    Learn More
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
         </section>
 

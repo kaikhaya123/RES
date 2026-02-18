@@ -35,7 +35,7 @@ export default function AboutShow() {
   ];
 
   const highlights = [
-    { title: 'South Africa\'s first large-scale, interactive student leadership reality platform', description: 'Bringing 20 exceptional students to a national stage where every voice counts.' },
+    { title: 'South Africa\'s first large-scale, interactive student leadership reality platform', description: 'Bringing 20 exceptional students from universities, TVET colleges and private institutions to a national stage.' },
     { title: 'Built on verified voting, daily challenges, quizzes, and live-streamed experiences', description: 'Engagement that rewards participation, knowledge, and community involvement.' },
     { title: 'Open to students from public universities, TVET colleges, and private institutions', description: 'Inclusive by design. Opportunity is not reserved for the few.' },
     { title: 'Designed to develop leadership, innovation, and social responsibility', description: 'Competition that builds character, not just entertainment value.' },
@@ -639,9 +639,10 @@ export default function AboutShow() {
               {[
                 "Register and vote daily using verified accounts",
                 "Participate in quizzes and weekly competitions",
+                "Compete in weekly viewer competitions to win prizes",
                 "Join live streams and real-time decision moments",
                 "Support contestants and community projects",
-                "Win rewards through platform engagement"
+                "Win rewards through platform engagement — weekly draws, monthly prizes and a season grand prize"
               ].map((item, idx) => (
                 <motion.div
                   key={idx}

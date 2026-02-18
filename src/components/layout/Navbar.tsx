@@ -69,7 +69,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Center Navigation */}
+          {/* Center Navigation — 4 primary links only; rest in hamburger menu */}
           <div className="hidden lg:flex items-center space-x-6 lg:space-x-8">
             <Link 
               href="/about" 
@@ -77,13 +77,6 @@ export default function Navbar() {
               aria-label="About the competition"
             >
               About
-            </Link>
-            <Link 
-              href="/movement" 
-              className="font-light text-sm lg:text-base transition-colors focus:outline-none focus:ring-2 focus:ring-amber-300 px-2 py-1 rounded text-white hover:text-amber-300 drop-shadow-md"
-              aria-label="Learn about our movement"
-            >
-              Movement
             </Link>
             <Link 
               href="/challenges" 
@@ -100,18 +93,11 @@ export default function Navbar() {
               Apply
             </Link>
             <Link 
-              href="/news" 
+              href="/competitions" 
               className="font-light text-sm lg:text-base transition-colors focus:outline-none focus:ring-2 focus:ring-amber-300 px-2 py-1 rounded text-white hover:text-amber-300 drop-shadow-md"
-              aria-label="Read latest news"
+              aria-label="Viewer competitions"
             >
-              News
-            </Link>
-            <Link 
-              href="/merch" 
-              className="font-light text-sm lg:text-base transition-colors focus:outline-none focus:ring-2 focus:ring-amber-300 px-2 py-1 rounded text-white hover:text-amber-300 drop-shadow-md"
-              aria-label="Shop merch"
-            >
-              Merch
+              Competitions
             </Link>
           </div>
 
@@ -309,6 +295,14 @@ export default function Navbar() {
                         aria-label="Shop merch"
                       >
                         Merch
+                      </Link>
+                      <Link
+                        href="/competitions"
+                        className="text-4xl lg:text-7xl text-white hover:text-white/70 font-light transition leading-tight focus:outline-none focus:ring-2 focus:ring-amber-300 px-2 py-1 rounded"
+                        onClick={() => requestAnimationFrame(() => setIsMobileMenuOpen(false))}
+                        aria-label="Viewer competitions and prizes"
+                      >
+                        Competitions
                       </Link>
                     </nav>
 
